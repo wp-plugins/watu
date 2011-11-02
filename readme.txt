@@ -19,8 +19,6 @@ Watu for Wordpress is a light version of <a href="http://calendarscripts.info/on
 
 This section describes how to install the plugin and get it working.
 
-e.g.
-
 1. Upload the entire folder `watu` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Go to "Watu Settings" to change the default settings (optional)
