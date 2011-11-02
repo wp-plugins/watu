@@ -4,6 +4,7 @@ Tags: exam, test, quiz, survey
 Requires at least: 2.0.2
 Tested up to: 3.2.1
 Stable tag: trunk
+License: GPLv2 or later
 
 Creates exams with unlimited number of questions and answers. Assigns grade after the exam is taken.
 
@@ -11,7 +12,7 @@ Creates exams with unlimited number of questions and answers. Assigns grade afte
 
 Create exams and quizzes and display the result immediately after the user takes the exam. You can assign grades and point levels for every grade. Then assign points to every answer to a question and Watu will figure out the grade based on the total number of points collected.
 
-Watu for Wordpress is a light version of <a href="http://calendarscripts.info/online-exam-software" target="_blank">Watu Exam</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. 
+Watu for Wordpress is a light version of <a href="http://calendarscripts.info/online-exam-software.html" target="_blank">Watu Exam</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. 
 
 
 == Installation ==
