@@ -35,4 +35,5 @@ Watu computes the number of points in total collected by the answers given by th
 Yes. It's even highly recommended for answers to questions that allow multuple answers. If you just assign 0 points to the wrong answers in such question the visitor could check all the checkboxes and collect all the points to that question.
 
 = How do I show the exam to the visitors of my blog? =
+
 You need to create a post and embed the exam code. The exam code is shown in the green text above the questions table in "Manage questions" page for that exam.

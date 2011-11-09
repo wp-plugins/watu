@@ -87,6 +87,7 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 //print_r($grow); echo '<br>';
 			if( $grow->gfrom <= $achieved and $achieved <= $grow->gto ) {
 				$grade = $grow->gtitle;
+				if(!empty($grow->gdescription)) $grade.="<p>".$grow->gdescription."</p>";
 				//
 				break;
 			}
