@@ -12,7 +12,7 @@ if($action == 'edit') {
 	$grades = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}watu_grading WHERE  exam_id=%d order by ID ", $_REQUEST['quiz']) );
 	$final_screen = stripslashes($dquiz->final_screen);
 } else {
-	$final_screen = t("<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n\n<p>You scored %%SCORE%% out of %%TOTAL%%.</p>\n\n<p>Your performance have been rated as '%%RATING%%'</p>\n\n<p>Your obtained grade is '%%GRADE%%'</p>");
+	$final_screen = t("<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n\n<p>You scored %%SCORE%% points out of %%TOTAL%%.</p>\n\n<p>Your performance have been rated as '%%RATING%%'</p>\n\n<p>Your obtained grade is '%%GRADE%%'</p>");
 }
 
 ?>
@@ -36,6 +36,8 @@ if($action == 'edit') {
 </script>
 <div class="wrap">
 <h2><?php e(ucfirst($action) . " Exam"); ?></h2>
+
+<p><a href="tools.php?page=watu/exam.php">Back to exams</a></p>
 
 <?php
 wpframe_add_editor_js();
@@ -79,9 +81,8 @@ if( count($grades)==0 ){
 <p><strong><?php e('Usable Variables...') ?></strong></p>
 <table>
 <tr><th style="text-align:left;"><?php e('Variable') ?></th><th style="text-align:left;"><?php e('Value') ?></th></tr>
-<tr><td>%%SCORE%%</td><td><?php e('The number of correct answers') ?></td></tr>
-<tr><td>%%TOTAL%%</td><td><?php e('Total number of questions') ?></td></tr>
-<tr><td>%%PERCENTAGE%%</td><td><?php e('Correct answer percentage') ?></td></tr>
+<tr><td>%%SCORE%%</td><td><?php e('The number of points collected.') ?></td></tr>
+<tr><td>%%TOTAL%%</td><td><?php e('Maximum number of points') ?></td></tr>
 <tr><td>%%GRADE%%</td><td><?php e('1-10 value. 1 is 10% or less, 2 is 20% or less, and so on') ?>.</td></tr>
 <tr><td>%%WRONG_ANSWERS%%</td><td><?php e('Number of answers you got wrong') ?></td></tr>
 <tr><td>%%RATING%%</td><td><?php e("A rating of your performance - it could be 'Failed'(0-39%), 'Just Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and 'Unbeatable'(100%)") ?></td></tr>

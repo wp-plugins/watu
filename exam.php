@@ -17,7 +17,7 @@ if($_REQUEST['action'] == 'delete') {
 <div class="wrap">
 <h2><?php e("Manage Exam"); ?></h2>
 
-<p>Watu for Wordpress is a light version of <a href="http://calendarscripts.info/index.php?action=goto&goto=watu" target="_blank">Watu Exam software</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. Watu Exam is standalone PHP application.</p>
+<p><strong>Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. <br />Free support and upgrades are available.</strong></p>
 
 <p>Go to <a href="options-general.php?page=watu.php">Watu Settings</a></p>
 

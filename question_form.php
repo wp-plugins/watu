@@ -16,6 +16,8 @@ if($action == 'edit' and $answer_count < count($all_answers)) $answer_count = co
 <div class="wrap">
 <h2><?php echo t(ucfirst($action) . " Question"); ?></h2>
 
+<p><a href="tools.php?page=watu/exam.php">Back to exams</a></p>
+
 <div id="titlediv">
 <input type="hidden" id="title" name="ignore_me" value="This is here for a workaround for a editor bug" />
 </div>
