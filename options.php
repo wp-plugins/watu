@@ -15,7 +15,7 @@ $answer_display = get_option('watu_show_answers');
 <div class="wrap">
 <h2><?php e("Watu Settings"); ?></h2>
 
-<p>Watu for Wordpress is a light version of <a href="http://calendarscripts.info/index.php?action=goto&goto=watu" target="_blank">Watu Exam software</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. Watu Exam is standalone PHP application.</p>
+<p>Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc.</p>
 
 <p>Go to <a href="tools.php?page=watu/exam.php">Manage Your Exams</a></p>
 
