@@ -1,14 +1,14 @@
 <?php
 
 if(isset($_REQUEST['action']) and $_REQUEST['action']=='show_exam_result' ) { // Initial setup for ajax.
-	
+	if (!function_exists('add_action')) {
 		$wp_root = '../../..';
 		if (file_exists($wp_root.'/wp-load.php')) {
 			require_once($wp_root.'/wp-load.php');
 		} else {
 			require_once($wp_root.'/wp-config.php');
 		}
-	
+	}
 	$exam_id = $_REQUEST['quiz_id'];
 }
 
@@ -153,7 +153,7 @@ $question_ids = preg_replace('/,$/', '', $question_ids );
 var question_ids = "<?php print $question_ids ?>";
 var exam_id = <?php print $exam_id ?>;
 var qArr = question_ids.split(',');
-var url = "<?php print plugins_url('watu/'.basename(__FILE__) ) ?>";
+var watuURL = "<?php print plugins_url('watu/'.basename(__FILE__) ) ?>";
 /* for(x in qArr) {
 	ansgroup = '.answerof-'+qArr[x];
 	jQuery(ansgroup).each(function(){

@@ -86,7 +86,7 @@ function submitResult() {
 	}
 	//var v=''; for(a in data) v+=data[a]+'\n'; alert(v);
 	try{
-	jQuery.ajax({ type: 'POST', url: url, data: data, success: success, error: error  });
+	jQuery.ajax({ type: 'POST', url: watuURL, data: data, success: success, error: error  });
 	}catch(e){ alert(e)}
 }
 
