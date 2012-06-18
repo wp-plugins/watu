@@ -1,14 +1,14 @@
 <?php
 
 if(isset($_REQUEST['action']) and $_REQUEST['action']=='show_exam_result' ) { // Initial setup for ajax.
-	if (!function_exists('add_action')) {
+	
 		$wp_root = '../../..';
 		if (file_exists($wp_root.'/wp-load.php')) {
 			require_once($wp_root.'/wp-load.php');
 		} else {
 			require_once($wp_root.'/wp-config.php');
 		}
-	}
+	
 	$exam_id = $_REQUEST['quiz_id'];
 }
 
