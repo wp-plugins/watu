@@ -29,3 +29,22 @@ form.quiz-form {
 .correct-answer span {
 	background:url(correct.png) no-repeat right top;
 }
+
+
+.watu-sidebox
+{
+	border:1px solid black;
+	padding:10px;
+	margin-bottom: 20px;
+}
+
+#watu-sidebar
+{
+	float:left;
+	width:25%;
+}
+
+#watu-related, #watu-ad
+{
+	background-color: #BBEEDD;
+}

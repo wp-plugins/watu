@@ -28,8 +28,6 @@ if($all_question) {
 	if(!isset($GLOBALS['watu_client_includes_loaded']) and !isset($_REQUEST['action']) ) {
 ?>
 <link type="text/css" rel="stylesheet" href="<?php echo $GLOBALS['wpframe_plugin_folder']?>/style.css" />
-<script type="text/javascript" src="<?php echo $GLOBALS['wpframe_wordpress']?>/wp-includes/js/jquery/jquery.js"></script>
-<script type="text/javascript" src="<?php echo $GLOBALS['wpframe_plugin_folder']?>/script.js"></script>
 <?php
 	$GLOBALS['watu_client_includes_loaded'] = true; // Make sure that this code is not loaded more than once.
 }

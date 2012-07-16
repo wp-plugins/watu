@@ -29,6 +29,7 @@ Create exams and quizzes and display the result immediately after the user takes
 
 Watu for Wordpress is a light Wordpress version of <a href="http://calendarscripts.info/online-exam-software.html" target="_blank">Watu Exam</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. 
 
+<b>Please go to Tools -&gt; Manage Exams to start creating exams.</b>
 
 == Installation ==
 
