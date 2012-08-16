@@ -1,11 +1,14 @@
-var current_question = 1;
-var total_questions = 0;
-var mode = "show";
+// wrap in object to avoid polluting the javascript namespace
+Watu={};
+
+Watu.current_question = 1;
+Watu.total_questions = 0;
+Watu.mode = "show";
 
 function checkAnswer(e) {
 	var answered = false;
 
-	jQuery("#question-" + current_question + " .answer").each(function(i) {
+	jQuery("#question-" + Watu.current_question + " .answer").each(function(i) {
 		if(this.checked) {
 			answered = true;
 			return true;
@@ -24,11 +27,11 @@ function checkAnswer(e) {
 function nextQuestion(e) {
 	if(!checkAnswer(e)) return;
 
-	jQuery("#question-" + current_question).hide();
-	current_question++;
-	jQuery("#question-" + current_question).show();
+	jQuery("#question-" + Watu.current_question).hide();
+	Watu.current_question++;
+	jQuery("#question-" + Watu.current_question).show();
 
-	if(total_questions <= current_question) {
+	if(Watu.total_questions <= Watu.current_question) {
 		jQuery("#next-question").hide();
 		jQuery("#action-button").show();
 	}
@@ -38,21 +41,21 @@ function nextQuestion(e) {
 function showAnswer(e) {
 	if(!checkAnswer(e)) return;
 
-	if(mode == "next") {
-		mode = "show";
+	if(Watu.mode == "next") {
+		Watu.mode = "show";
 
-		jQuery("#question-" + current_question).hide();
-		current_question++;
-		jQuery("#question-" + current_question).show();
+		jQuery("#question-" + Watu.current_question).hide();
+		Watu.current_question++;
+		jQuery("#question-" + Watu.current_question).show();
 
 		jQuery("#show-answer").val("Show Answer");
 		return;
 	}
 
-	mode = "next";
+	Watu.mode = "next";
 
-	jQuery(".correct-answer-label.label-"+current_question).addClass("correct-answer");
-	jQuery(".answer-"+current_question).each(function(i) {
+	jQuery(".correct-answer-label.label-"+Watu.current_question).addClass("correct-answer");
+	jQuery(".answer-"+Watu.current_question).each(function(i) {
 		if(this.checked && this.className.match(/wrong\-answer/)) {
 			var number = this.id.toString().replace(/\D/g,"");
 			if(number) {
@@ -61,7 +64,7 @@ function showAnswer(e) {
 		}
 	});
 
-	if(total_questions <= current_question) {
+	if(Watu.total_questions <= Watu.current_question) {
 		jQuery("#show-answer").hide();
 		jQuery("#action-button").show();
 	} else {
@@ -95,9 +98,9 @@ function error(){ jQuery('#watu_quiz').html('Error Occured');}
 
 function initWatu() {
 	jQuery("#question-1").show();
-	total_questions = jQuery(".watu-question").length;
+	Watu.total_questions = jQuery(".watu-question").length;
 
-	if(total_questions == 1) {
+	if(Watu.total_questions == 1) {
 		jQuery("#action-button").show();
 		jQuery("#next-question").hide();
 		jQuery("#show-answer").hide();

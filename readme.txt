@@ -27,7 +27,7 @@ Creates exams with unlimited number of questions and answers. Assigns grade afte
 
 Create exams and quizzes and display the result immediately after the user takes the exam. You can assign grades and point levels for every grade. Then assign points to every answer to a question and Watu will figure out the grade based on the total number of points collected.
 
-Watu for Wordpress is a light Wordpress version of <a href="http://calendarscripts.info/online-exam-software.html" target="_blank">Watu Exam</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. 
+Watu for Wordpress is a light Wordpress version of <a href="http://calendarscripts.info/watupro/" target="_blank">Watu PRO</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. 
 
 <b>Please go to Tools -&gt; Manage Exams to start creating exams.</b>
 
@@ -53,3 +53,5 @@ Yes. It's even highly recommended for answers to questions that allow multuple a
 = How do I show the exam to the visitors of my blog? =
 
 You need to create a post and embed the exam code. The exam code is shown in the green text above the questions table in "Manage questions" page for that exam.
+
+<strong>Please do not place more than one code in one post or page. Only one exam will be shown at a time. If you wish more exams to be displayed, please give links to them!</strong>

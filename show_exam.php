@@ -82,10 +82,10 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 	$allGrades = $wpdb->get_results(" SELECT * FROM `{$wpdb->prefix}watu_grading` WHERE exam_id=$exam_id ");
 	if( count($allGrades) ){
 		foreach($allGrades as $grow ) {
-//print_r($grow); echo '<br>';
+
 			if( $grow->gfrom <= $achieved and $achieved <= $grow->gto ) {
 				$grade = $grow->gtitle;
-				if(!empty($grow->gdescription)) $grade.="<p>".$grow->gdescription."</p>";
+				if(!empty($grow->gdescription)) $grade.="<p>".stripslashes($grow->gdescription)."</p>";
 				//
 				break;
 			}

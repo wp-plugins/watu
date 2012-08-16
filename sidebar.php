@@ -1,4 +1,4 @@
-<div id="eventy-ad" class="eventy-sidebox">
+<div id="watu-ad" class="watu-sidebox">
 	<h3>Help To Spread The Word!</h3>
 	
 	<p>If you like this plugin you can do some of the following:</p>
@@ -10,7 +10,7 @@
 	</ol>
 </div>
 
-<div id="eventy-help" class="eventy-sidebox">
+<div id="watu-help" class="watu-sidebox">
 	<h3>Need Support?</h3>
 	
 	<p>Please ask your question in the <a href="http://wordpress.org/support/plugin/watu" target="_blank">support forum at Wordpress</a>.</p>
@@ -18,7 +18,7 @@
 	<p>If you don't have an account there you can open a discussion at <a href="http://calendarscripts.info/forum/" target="_blank">CalendarScripts forum</a> as well.</p>
 </div>
 
-<div id="eventy-related" class="eventy-sidebox">
+<div id="watu-related" class="watu-sidebox">
 	<h3>Go PRO!</h3>
 	
 	<p>Get more powerful features by <a href="http://calendarscripts.info/watupro/" target="_blank">upgrading to the PRO version</a>:</p>
