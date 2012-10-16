@@ -1,0 +1,605 @@
+# Copyright (C) 2012 Watu
+# This file is distributed under the same license as the Watu package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Watu 1.6\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
+"POT-Creation-Date: 2012-10-16 16:28:19+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: exam.php:5
+msgid "Test Updated"
+msgstr ""
+
+#: exam.php:6
+msgid "Error occured!!! please try again"
+msgstr ""
+
+#: exam.php:13
+msgid "Test Deleted"
+msgstr ""
+
+#: exam.php:18
+msgid "Manage Exam"
+msgstr ""
+
+#: exam.php:22
+msgid "Watu for Wordpress is a light version of"
+msgstr ""
+
+#: exam.php:24 options.php:21
+msgid "Go to"
+msgstr ""
+
+#: exam.php:24 options.php:17 watu.php:62
+msgid "Watu Settings"
+msgstr ""
+
+#: exam.php:34
+msgid "ID"
+msgstr ""
+
+#: exam.php:35
+msgid "Title"
+msgstr ""
+
+#: exam.php:36
+msgid "Shortcode"
+msgstr ""
+
+#: exam.php:37
+msgid "Number Of Questions"
+msgstr ""
+
+#: exam.php:38
+msgid "Created on"
+msgstr ""
+
+#: exam.php:39 question.php:84
+msgid "Action"
+msgstr ""
+
+#: exam.php:59
+msgid "Manage Questions"
+msgstr ""
+
+#: exam.php:60 question.php:106
+msgid "Edit"
+msgstr ""
+
+#: exam.php:61
+msgid ""
+"You are about to delete this quiz? This will delete all the questions and "
+"answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
+msgstr ""
+
+#: exam.php:68
+msgid "No Test found."
+msgstr ""
+
+#: exam.php:76
+msgid "Create New Exam"
+msgstr ""
+
+#: exam_action.php:51
+msgid "The grading data can not be saved. Pleae try again"
+msgstr ""
+
+#: exam_action.php:52
+msgid "Some grades can not be saved."
+msgstr ""
+
+#: exam_action.php:55
+msgid "The grading data can not be saved. Please try again"
+msgstr ""
+
+#: exam_form.php:15
+msgid ""
+"<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n"
+"\n"
+"<p>You scored %%SCORE%% points out of %%TOTAL%%.</p>\n"
+"\n"
+"<p>Your performance have been rated as '%%RATING%%'</p>\n"
+"\n"
+"<p>Your obtained grade is '%%GRADE%%'</p>"
+msgstr ""
+
+#: exam_form.php:21 exam_form.php:68 exam_form.php:72
+msgid "Grade Title:"
+msgstr ""
+
+#: exam_form.php:21 exam_form.php:68 exam_form.php:72
+msgid "Description:"
+msgstr ""
+
+#: exam_form.php:21
+msgid "From (points):"
+msgstr ""
+
+#: exam_form.php:21
+msgid "To (points):"
+msgstr ""
+
+#: exam_form.php:33
+msgid "Please provide numeric values for the Grade from/to."
+msgstr ""
+
+#: exam_form.php:40 question.php:69 question_form.php:19
+msgid "Back to exams"
+msgstr ""
+
+#: exam_form.php:50
+msgid "Exam Name"
+msgstr ""
+
+#: exam_form.php:56
+msgid "Description"
+msgstr ""
+
+#: exam_form.php:63
+msgid "Grading"
+msgstr ""
+
+#: exam_form.php:68
+msgid "Grade from:"
+msgstr ""
+
+#: exam_form.php:68 exam_form.php:72
+msgid "Grade to:"
+msgstr ""
+
+#: exam_form.php:74
+msgid "Add another grade"
+msgstr ""
+
+#: exam_form.php:77
+msgid "Final Screen"
+msgstr ""
+
+#: exam_form.php:81
+msgid "Usable Variables:"
+msgstr ""
+
+#: exam_form.php:83
+msgid "Variable"
+msgstr ""
+
+#: exam_form.php:83
+msgid "Value"
+msgstr ""
+
+#: exam_form.php:84
+msgid "The number of points collected."
+msgstr ""
+
+#: exam_form.php:85
+msgid "Maximum number of points"
+msgstr ""
+
+#: exam_form.php:86
+msgid "1-10 value. 1 is 10% or less, 2 is 20% or less, and so on"
+msgstr ""
+
+#: exam_form.php:87
+msgid "Number of answers you got wrong"
+msgstr ""
+
+#: exam_form.php:88
+msgid ""
+"A rating of your performance - it could be 'Failed'(0-39%), 'Just "
+"Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and "
+"'Unbeatable'(100%)"
+msgstr ""
+
+#: exam_form.php:89
+msgid "The name of the quiz"
+msgstr ""
+
+#: exam_form.php:90
+msgid "The text entered in the description field."
+msgstr ""
+
+#: exam_form.php:107 question_form.php:217
+msgid "Save"
+msgstr ""
+
+#: options.php:11
+msgid "Options updated"
+msgstr ""
+
+#: options.php:21
+msgid "Manage Your Exams"
+msgstr ""
+
+#: options.php:27
+msgid "Show all questions in a <strong>single page</strong>"
+msgstr ""
+
+#: options.php:30
+msgid "Correct Answer Display"
+msgstr ""
+
+#: options.php:32
+msgid "Don't show answers"
+msgstr ""
+
+#: options.php:33
+msgid "Show answers at the end of the Quiz"
+msgstr ""
+
+#: options.php:34
+msgid ""
+"Show the answer of a question immediately after the user have selected an "
+"answer(Will not work in single page mode)."
+msgstr ""
+
+#: options.php:39
+msgid "Answer Type"
+msgstr ""
+
+#: options.php:46 question_form.php:171
+msgid "Single Answer"
+msgstr ""
+
+#: options.php:48 question_form.php:173
+msgid "Multiple Answers"
+msgstr ""
+
+#: options.php:52
+msgid "Database Option"
+msgstr ""
+
+#: options.php:57
+msgid "Delete stored Watu data when deactivating the plugin"
+msgstr ""
+
+#: options.php:63
+msgid "Save Options"
+msgstr ""
+
+#: question.php:14
+msgid "Question updated."
+msgstr ""
+
+#: question.php:21
+msgid "Question added."
+msgstr ""
+
+#: question.php:53
+msgid "New Exam added"
+msgstr ""
+
+#: question.php:59
+msgid "Question Deleted."
+msgstr ""
+
+#: question.php:65
+msgid "Manage Questions in"
+msgstr ""
+
+#: question.php:76
+msgid "To add this exam to your blog, insert the code "
+msgstr ""
+
+#: question.php:76
+msgid "into any post."
+msgstr ""
+
+#: question.php:82 question_form.php:17
+msgid "Question"
+msgstr ""
+
+#: question.php:83
+msgid "Number Of Answers"
+msgstr ""
+
+#: question.php:107
+msgid ""
+"You are about to delete this question. This will delete the answers to this "
+"question. Press 'OK' to delete and 'Cancel' to stop."
+msgstr ""
+
+#: question.php:107
+msgid "Delete"
+msgstr ""
+
+#: question.php:114
+msgid "No questiones found."
+msgstr ""
+
+#: question.php:122
+msgid "Create New Question"
+msgstr ""
+
+#: question_form.php:44
+msgid "Correct Answer "
+msgstr ""
+
+#: question_form.php:55
+msgid "Points: "
+msgstr ""
+
+#: question_form.php:77
+msgid "Please enter the question"
+msgstr ""
+
+#: question_form.php:90
+msgid "Please enter atleast two answers"
+msgstr ""
+
+#: question_form.php:175
+msgid "Open End (Essay)"
+msgstr ""
+
+#: question_form.php:179
+msgid "Answers"
+msgstr ""
+
+#: question_form.php:184
+msgid "Correct Answer"
+msgstr ""
+
+#: question_form.php:186
+msgid "Points:"
+msgstr ""
+
+#: question_form.php:191
+msgid "Add New Answer"
+msgstr ""
+
+#: question_form.php:219
+msgid "Go to Questions Page"
+msgstr ""
+
+#: show_exam.php:42
+msgid ""
+"All the questions in the exam along with their answers are shown below. Your "
+"answers are bolded. The correct answers have a green background while the "
+"incorrect ones have a red background."
+msgstr ""
+
+#: show_exam.php:68
+msgid "Question was not answered"
+msgstr ""
+
+#: show_exam.php:78
+msgid "Failed"
+msgstr ""
+
+#: show_exam.php:78
+msgid "Just Passed"
+msgstr ""
+
+#: show_exam.php:80
+msgid "Satisfactory"
+msgstr ""
+
+#: show_exam.php:80
+msgid "Competent"
+msgstr ""
+
+#: show_exam.php:80
+msgid "Good"
+msgstr ""
+
+#: show_exam.php:80
+msgid "Very Good"
+msgstr ""
+
+#: show_exam.php:80
+msgid "Excellent"
+msgstr ""
+
+#: show_exam.php:80
+msgid "Unbeatable"
+msgstr ""
+
+#: show_exam.php:80
+msgid "Cheater"
+msgstr ""
+
+#: show_exam.php:150
+msgid "Loading"
+msgstr ""
+
+#: show_exam.php:155
+msgid "Show Answer"
+msgstr ""
+
+#: show_exam.php:157
+msgid "Next"
+msgstr ""
+
+#: show_exam.php:160
+msgid "Show Results"
+msgstr ""
+
+#: sidebar.php:2
+msgid "Help To Spread The Word!"
+msgstr ""
+
+#: sidebar.php:4
+msgid "If you like this plugin you can do some of the following:"
+msgstr ""
+
+#: sidebar.php:7
+msgid "Rate it 5 starts at Wordpress.org"
+msgstr ""
+
+#: sidebar.php:8
+msgid "Let others know about it by blogging or posting"
+msgstr ""
+
+#: sidebar.php:8
+msgid "our home page"
+msgstr ""
+
+#: sidebar.php:8
+msgid "on social networks."
+msgstr ""
+
+#: sidebar.php:9
+msgid "Go PRO"
+msgstr ""
+
+#: sidebar.php:9
+msgid "to empower your site with extra benefits"
+msgstr ""
+
+#: sidebar.php:14
+msgid "Need Support?"
+msgstr ""
+
+#: sidebar.php:16
+msgid "Please ask your question in the"
+msgstr ""
+
+#: sidebar.php:16
+msgid "support forum at Wordpress."
+msgstr ""
+
+#: sidebar.php:18
+msgid "If you don't have an account there you can open a discussion at"
+msgstr ""
+
+#: sidebar.php:18
+msgid "CalendarScripts forum"
+msgstr ""
+
+#: sidebar.php:18
+msgid "as well."
+msgstr ""
+
+#: sidebar.php:22
+msgid "Go PRO!"
+msgstr ""
+
+#: sidebar.php:24
+msgid "Get more powerful features by"
+msgstr ""
+
+#: sidebar.php:24
+msgid "upgrading to the PRO version:"
+msgstr ""
+
+#: sidebar.php:27
+msgid "Randomize questions"
+msgstr ""
+
+#: sidebar.php:27
+msgid "and pull random numbers."
+msgstr ""
+
+#: sidebar.php:28
+msgid "Detailed stats."
+msgstr ""
+
+#: sidebar.php:28
+msgid "You can see who and how has answered to your exam."
+msgstr ""
+
+#: sidebar.php:29
+msgid "Printable certificates"
+msgstr ""
+
+#: sidebar.php:29
+msgid "assigned to the different grades."
+msgstr ""
+
+#: sidebar.php:30
+msgid "Export results and import/export questions"
+msgstr ""
+
+#: sidebar.php:30
+msgid "from/to CSV file."
+msgstr ""
+
+#: sidebar.php:31
+msgid "Students login."
+msgstr ""
+
+#: sidebar.php:31
+msgid "Registered users have a dashboard, can re-take exams etc."
+msgstr ""
+
+#: sidebar.php:32
+msgid "Questions and exam categories."
+msgstr ""
+
+#: sidebar.php:32
+msgid "User groups with different access to them."
+msgstr ""
+
+#: sidebar.php:33
+msgid "Copy exmas"
+msgstr ""
+
+#: sidebar.php:33
+msgid "and their questions into a new or existing exams."
+msgstr ""
+
+#: sidebar.php:34
+msgid "And a lot more - just come to see!"
+msgstr ""
+
+#: sidebar.php:37
+msgid "Just go ahead and"
+msgstr ""
+
+#: sidebar.php:37
+msgid "take the tour"
+msgstr ""
+
+#: sidebar.php:37
+msgid "or check the"
+msgstr ""
+
+#: sidebar.php:37
+msgid "online demo."
+msgstr ""
+
+#: sidebar.php:39
+msgid ""
+"Upgrading to PRO comes with 60 days money-back guarantee, one year free "
+"upgrades and one year free support."
+msgstr ""
+
+#: watu.php:46
+msgid "Manage Exams"
+msgstr ""
+
+#: watu.php:65
+msgid "Your are not allowed to to perform this operation"
+msgstr ""
+
+#: watu.php:66
+msgid "You do not have sufficient permissions to access this page"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Watu"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://calendarscripts.info/watu-wordpress.html"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Create exams and quizzes and display the result immediately after the user "
+"takes the exam. Watu for Wordpress is a light version of <a href=\"http://"
+"calendarscripts.info/watupro/\" target=\"_blank\">WatuPRO</a>. Check it if "
+"you want to run fully featured exams with data exports, student logins, "
+"timers, random questions and more. Free support and upgrades are available. "
+"Go to <a href=\"options-general.php?page=watu.php\">Watu Settings</a> or <a "
+"href=\"tools.php?page=watu/exam.php\">Manage Your Exams</a>"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "CalendarScripts"
+msgstr ""
