@@ -4,12 +4,10 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu/exam.php">Manage Your Exams</a> 
 
-Version: 1.5
+Version: 1.6
 Author: CalendarScripts
 License: GPLv2 or later
-*/
 
-/*
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -28,9 +26,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /// Initialize this plugin. Called by 'init' hook.
 add_action('init', 'watu_init');
+
 function watu_init() {
-	load_plugin_textdomain('watu', 'wp-content/plugins' );
-	//load_plugin_textdomain('watu', false, 'watu' );
+	load_plugin_textdomain('watu', false, dirname( plugin_basename( __FILE__ )).'/langs/' );	
 }
 
 /**
@@ -156,31 +154,25 @@ function watu_deactivate() {
 		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_master ");
 		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_question ");
 		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_answer ");
-		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_grading ");	
-		//$wpdb->show_errors(); $wpdb->print_error();
+		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_grading ");
 	}
 }
 
-/**
- * Add jQuery Validation script on posts.
- */
 function watu_vc_scripts() {
-    // thanks to http://www.problogdesign.com/wordpress/validate-forms-in-wordpress-with-jquery/
-    wp_enqueue_script('jquery');	
+     wp_enqueue_script('jquery');	
 		  
       wp_enqueue_style(
-			'jquery-validate',
+			'watu-style',
 			plugins_url().'/watu/style.css',
 			array(),
 			'1.0'
 		);
 		
 		wp_enqueue_script(
-			'watupro-script',
+			'watu-script',
 			plugins_url().'/watu/script.js',
 			array(),
-			'1.0.0',
-			true
+			'1.0.0'
 		);
 }
 

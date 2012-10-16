@@ -1,11 +1,14 @@
 // wrap in object to avoid polluting the javascript namespace
-Watu={};
+var Watu={};
 
 Watu.current_question = 1;
 Watu.total_questions = 0;
 Watu.mode = "show";
 
-function checkAnswer(e) {
+Watu.checkAnswer = function(e) {	
+	// don't check for textareas	
+	if(jQuery('#questionType' + Watu.current_question).val() == 'textarea') return true; 	
+	
 	var answered = false;
 
 	jQuery("#question-" + Watu.current_question + " .answer").each(function(i) {
@@ -24,8 +27,8 @@ function checkAnswer(e) {
 	return true;
 }
 
-function nextQuestion(e) {
-	if(!checkAnswer(e)) return;
+Watu.nextQuestion = function(e) {
+	if(!Watu.checkAnswer(e)) return;
 
 	jQuery("#question-" + Watu.current_question).hide();
 	Watu.current_question++;
@@ -38,8 +41,8 @@ function nextQuestion(e) {
 }
 
 // This part is used only if the answers are show on a per question basis.
-function showAnswer(e) {
-	if(!checkAnswer(e)) return;
+Watu.showAnswer = function(e) {
+	if(!Watu.checkAnswer(e)) return;
 
 	if(Watu.mode == "next") {
 		Watu.mode = "show";
@@ -72,31 +75,48 @@ function showAnswer(e) {
 	}
 }
 
-function submitResult() {
-	var data = {action:'show_exam_result', quiz_id: exam_id, 'question_id[]': qArr };
-	for(x in qArr) {
-		var ansgroup = '.answerof-'+qArr[x];
-		var fieldName = 'answer-'+qArr[x];
+Watu.submitResult = function() {
+	var data = {action:'show_exam_result', quiz_id: exam_id, 'question_id[]': Watu.qArr };
+	
+	for(x=0; x<Watu.qArr.length; x++) 
+   {
+      // qArr[x] is the question ID
+		var ansgroup = '.answerof-'+Watu.qArr[x];
+		var fieldName = 'answer-'+Watu.qArr[x];
 		var ansvalues= Array();
 		var i=0;
-		jQuery(ansgroup).each(function(){
+        
+	    if(jQuery('#textarea_q_'+Watu.qArr[x]).length>0)
+	    {
+	        // open end question
+	        // console.log(jQuery('#textarea_q_'+qArr[x]).val());
+	        ansvalues[0]=jQuery('#textarea_q_'+Watu.qArr[x]).val();
+	    }
+	    else
+	    {
+	        jQuery(ansgroup).each(function(){
 			if( jQuery(this).is(':checked') ) {
 				ansvalues[i] = this.value;
 				i++;
-			}
-		});
+	  			}
+	  		});    
+	    }
+		
 		data[fieldName+'[]'] = ansvalues;
 	}
+	
+	jQuery('#watu_quiz').html("<p>Loading...</p>");
+    
 	//var v=''; for(a in data) v+=data[a]+'\n'; alert(v);
 	try{
-	jQuery.ajax({ type: 'POST', url: watuURL, data: data, success: success, error: error  });
+	jQuery.ajax({ type: 'POST', url: watuURL, data: data, success: Watu.success, error: Watu.error  });
 	}catch(e){ alert(e)}
 }
 
-function success(r){ jQuery('#watu_quiz').html(r);}
-function error(){ jQuery('#watu_quiz').html('Error Occured');}
+Watu.success = function(r){ jQuery('#watu_quiz').html(r);}
+Watu.error = function(){ jQuery('#watu_quiz').html('Error Occured');}
 
-function initWatu() {
+Watu.initWatu = function() {
 	jQuery("#question-1").show();
 	Watu.total_questions = jQuery(".watu-question").length;
 
@@ -106,10 +126,10 @@ function initWatu() {
 		jQuery("#show-answer").hide();
 
 	} else {
-		jQuery("#next-question").click(nextQuestion);
-		jQuery("#show-answer").click(showAnswer);
+		jQuery("#next-question").click(Watu.nextQuestion);
+		jQuery("#show-answer").click(Watu.showAnswer);
 	}
-	jQuery("#action-button").click(nextQuestion);
+	jQuery("#action-button").click(Watu.nextQuestion);
 }
 
-jQuery(document).ready(initWatu);
+jQuery(document).ready(Watu.initWatu);

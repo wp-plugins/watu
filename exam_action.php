@@ -48,13 +48,13 @@ if(isset($_REQUEST['submit'])) {
 			//echo $sql; exit;
 			$out = $wpdb->query($sql);
 			//$wpdb->show_errors(); $wpdb->print_error();exit;
-			if( $out===false) $wp_redirect .= '&grade='.urlencode('The grading data can not be saved. Pleae try again');
-			else if($errorPartial) $wp_redirect .= '&grade='.urlencode('Some grades can not be saved.');
+			if( $out===false) $wp_redirect .= '&grade='.urlencode(__('The grading data can not be saved. Pleae try again'));
+			else if($errorPartial) $wp_redirect .= '&grade='.urlencode(__('Some grades can not be saved.'));
 			
 		} else{			
-			$wp_redirect .= '&grade='.urlencode('The grading data can not be saved. Pleae try again');
+			$wp_redirect .= '&grade='.urlencode(__('The grading data can not be saved. Please try again'));
 		}
-	}//end grading block
+	} //end grading block
 	
 	wp_redirect($wp_redirect);
 }

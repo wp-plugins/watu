@@ -14,23 +14,22 @@ if($action == 'edit' and $answer_count < count($all_answers)) $answer_count = co
 ?>
 
 <div class="wrap">
-<h2><?php echo t(ucfirst($action) . " Question"); ?></h2>
+<h2><?php echo ucfirst($action) . ' '. __("Question"); ?></h2>
 
-<p><a href="tools.php?page=watu/exam.php">Back to exams</a></p>
+<p><a href="tools.php?page=watu/exam.php"><?php _e('Back to exams')?></a></p>
 
 <div id="titlediv">
 <input type="hidden" id="title" name="ignore_me" value="This is here for a workaround for a editor bug" />
 </div>
 
-<?php
-wpframe_add_editor_js();//defined in wpframe.php
-?>
+
 <style type="text/css">
 .qtrans_title, .qtrans_title_wrap {display:none;}
 </style>
 <script type="text/javascript">
 var answer_count = <?php echo $answer_count?>;
 var ans_type = "<?php print $ans_type?>";
+var exactType = ans_type;
 function newAnswer() {
 	answer_count++;
 	var para = document.createElement("p");
@@ -42,7 +41,7 @@ function newAnswer() {
 	para.appendChild(document.createTextNode(' ') );
 	var label = document.createElement("label");
 	label.setAttribute("for", "correct_answer_" + answer_count);
-	label.appendChild(document.createTextNode("<?php e("Correct Answer "); ?>"));
+	label.appendChild(document.createTextNode("<?php _e('Correct Answer '); ?>"));
 	para.appendChild(label);
 	var input = document.createElement("input");
 	input.setAttribute("type", ans_type);
@@ -53,7 +52,7 @@ function newAnswer() {
 	para.appendChild(input);
 	var label2 = document.createElement("label");
 	label2.setAttribute("style", 'margin-left:10px');
-	label2.appendChild(document.createTextNode("<?php e("Points: "); ?>"));
+	label2.appendChild(document.createTextNode("<?php _e('Points: '); ?>"));
 	var point = document.createElement('input');
 	point.setAttribute("name", "point[]");
 	point.className = 'numeric';
@@ -75,24 +74,28 @@ function init() {
 		}
 
 		if(!contents) {
-			alert("<?php e("Please enter the question"); ?>");
+			alert("<?php _e('Please enter the question'); ?>");
 			e.preventDefault();
 			e.stopPropagation();
 			return true;
 		}
 
-		// We must have atleast 2 answers.
-		var answer_count = 0
-		jQuery(".answer").each(function() {
-			if(this.value) answer_count++;
-		});
-		if(answer_count < 2) {
-			alert("<?php e("Please enter atleast two answers"); ?>");
-			e.preventDefault();
-			e.stopPropagation();
-			return true;
-		}
+		// We must have at least 2 answers.
+		if(exactType!='textarea') {
+			var answer_count = 0;
+			jQuery(".answer").each(function() {
+				if(this.value) answer_count++;
+			});
+			if(answer_count < 2) {
+				alert("<?php _e('Please enter atleast two answers'); ?>");
+				e.preventDefault();
+				e.stopPropagation();
+				return true;
+			}
+		}		
 
+		/* No, why should we require correct answer?!
+		// TBD and probably removed in 1.7
 		//A correct answer must be selected.
 		var correct_answer_selected = false;
 		jQuery(".correct_answer").each(function() {
@@ -101,6 +104,7 @@ function init() {
 				return true;
 			}
 		});
+		
 		if(!correct_answer_selected) {
 			alert("<?php e("Please select a correct answer"); ?>");
 			e.preventDefault();
@@ -108,7 +112,6 @@ function init() {
 			return true;
 		}
 		
-		//The points will be numeric
 		var ret= true;
 		jQuery('.numeric').each(function(){
 			var valid = (this.value>=0 || this.value<0);
@@ -119,16 +122,25 @@ function init() {
 			alert('Please provide numeric values for the Grade from/to.');
 			e.preventDefault();
 			e.stopPropagation();
-		}
+		} */
 	});
 	
 	jQuery('input[name=answer_type]').click(function(){
-		ans_type = this.value;
-		//jQuery('.correct_answer').attr('type', ans_type);
+		// this defines what "correct" input to display
+		if(this.value=='radio') ans_type='radio';
+		else ans_type='checkbox';
+		
+		// and this stores the real answer type 		
+		exactType = this.value; 
+		
 		 jQuery('.correct_answer').each(function(){
 			this.removeAttribute('type');
 			this.setAttribute('type', ans_type);
 		});
+		
+		// for textarea show extra explanation
+		if(this.value=='textarea') jQuery('#questionAnswers').hide();		
+		else jQuery('#questionAnswers').show();
 	});
 }
 jQuery(document).ready(init);
@@ -142,39 +154,43 @@ jQuery(document).ready(init);
 <div class="postbox">
 <h3 class="hndle"><?php e('Question') ?></span></h3>
 <div class="inside">
-<?php the_editor(stripslashes($question->question)); ?>
+<?php wp_editor(stripslashes($question->question), 'content'); ?>
 </div></div>
 
 <div class="postbox" id="atdiv">
 <h3 class="hndle"><span><?php e('Answer Type') ?></span></h3>
 <div class="inside" style="padding:8px">
 <?php 
-	$single = $multi = '';
-	if( $ans_type =='radio') $single='checked="checked"';
-	else $multi = 'checked="checked"';
+	$single = $multi = $essay ='';
+	switch($ans_type) {
+		case 'radio': $single='checked="checked"'; break;
+		case 'textarea': $essay='checked="checked"'; break;
+		case 'checkbox': $multi='checked="checked"'; break;
+	}
 ?>
-<label>&nbsp;<input type='radio' name='answer_type' <?php print $single?> id="answer_type_r" value='radio' />Single Answer </label>
+<label>&nbsp;<input type='radio' name='answer_type' <?php print $single?> id="answer_type_r" value='radio' /> <?php _e('Single Answer')?> </label>
 &nbsp;&nbsp;&nbsp;
-<label>&nbsp;<input type='radio' name='answer_type' <?php print $multi?> id="answer_type_c" value='checkbox' />Multiple Answers</label>
+<label>&nbsp;<input type='radio' name='answer_type' <?php print $multi?> id="answer_type_c" value='checkbox' /> <?php _e('Multiple Answers')?></label>
+&nbsp;&nbsp;&nbsp;
+<label>&nbsp;<input type='radio' name='answer_type' <?php print $essay?> id="answer_type_t" value='textarea' /> <?php _e('Open End (Essay)')?></label>
 </div></div>
 
-<div class="postbox">
-<h3 class="hndle"><span><?php e('Answers') ?></span></h3>
-<div class="inside">
-
-<?php
-for($i=1; $i<=$answer_count; $i++) { ?>
-<p style="border-bottom:1px dotted #ccc"><textarea name="answer[]" class="answer" rows="3" cols="50"><?php if($action == 'edit') echo stripslashes($all_answers[$i-1]->answer); ?></textarea>
-<label for="correct_answer_<?php echo $i?>"><?php e("Correct Answer"); ?></label>
-<input type="<?php print $ans_type?>" class="correct_answer" id="correct_answer_<?php echo $i?>" <?php if($all_answers[$i-1]->correct == 1) echo 'checked="checked"';?> name="correct_answer[]" value="<?php echo $i?>" />
-<label style="margin-left:10px">Points: <input type="text" class="numeric" size="4" name="point[]" value="<?php if($action == 'edit') echo stripslashes($all_answers[$i-1]->point); ?>"></label>
-</p>
-<?php } ?>
-<style>#extra-answers p{border-bottom:1px dotted #ccc;}</style>
-<div id="extra-answers"></div>
-<a href="javascript:newAnswer();"><?php e("Add New Answer"); ?></a>
-
-</div>
+<div class="postbox" style="display:<?php echo ($ans_type=='textarea')?'none':'blocks';?>" id="questionAnswers">
+	<h3 class="hndle"><span><?php _e('Answers') ?></span></h3>
+	<div class="inside">	
+		<?php
+		for($i=1; $i<=$answer_count; $i++) { ?>
+		<p style="border-bottom:1px dotted #ccc"><textarea name="answer[]" class="answer" rows="3" cols="50"><?php if($action == 'edit') echo stripslashes($all_answers[$i-1]->answer); ?></textarea>
+		<label for="correct_answer_<?php echo $i?>"><?php _e("Correct Answer"); ?></label>
+		<input type="<?php print $ans_type?>" class="correct_answer" id="correct_answer_<?php echo $i?>" <?php if($all_answers[$i-1]->correct == 1) echo 'checked="checked"';?> name="correct_answer[]" value="<?php echo $i?>" />
+		<label style="margin-left:10px"><?php _e('Points:')?> <input type="text" class="numeric" size="4" name="point[]" value="<?php if($action == 'edit') echo stripslashes($all_answers[$i-1]->point); ?>"></label>
+		</p>
+		<?php } ?>
+		<style>#extra-answers p{border-bottom:1px dotted #ccc;}</style>
+		<div id="extra-answers"></div>
+		<a href="javascript:newAnswer();"><?php _e("Add New Answer"); ?></a>
+	
+	</div>
 </div>
 
 <?php
@@ -198,9 +214,9 @@ for($i=1; $i<=$answer_count; $i++) { ?>
 <input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
 <input type="hidden" name="action" value="<?php echo $action ?>" />
 <span id="autosave"></span>
-<input type="submit" name="submit" value="<?php e('Save') ?>" style="font-weight: bold;" />
+<input type="submit" name="submit" value="<?php _e('Save') ?>" style="font-weight: bold;" />
 </p>
-<a href="edit.php?page=watu/question.php&amp;quiz=<?php echo $_REQUEST['quiz']?>"><?php e("Go to Questions Page") ?></a>
+<a href="edit.php?page=watu/question.php&amp;quiz=<?php echo $_REQUEST['quiz']?>"><?php _e("Go to Questions Page") ?></a>
 </div>
 </form>
 

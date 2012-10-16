@@ -55,3 +55,14 @@ Yes. It's even highly recommended for answers to questions that allow multuple a
 You need to create a post and embed the exam code. The exam code is shown in the green text above the questions table in "Manage questions" page for that exam.
 
 <strong>Please do not place more than one code in one post or page. Only one exam will be shown at a time. If you wish more exams to be displayed, please give links to them!</strong>
+
+== Change Log ==
+
+Please not change log started being recorded after version 1.5.
+
+= Changes in 1.6 =
+
+- Removed obsolete rich text editor and replaced with wp_editor call
+- Added "Essay" (open-end) question 
+- Resolved possible Javascript conflicts
+- Internationalization ready - find the .pot file in langs/ folder

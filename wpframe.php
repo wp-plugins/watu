@@ -43,7 +43,7 @@ if(!function_exists('wpframe_message')){
 	  elseif($type == 'error') $class = 'updated error';
 	  else $class = $type;
 	  
-	  print '<div id="message" class="'.$class.'"><p>' . __($message, $GLOBALS['wpframe_plugin_name']) . '</p></div>';
+	  print '<div id="message" class="'.$class.'"><p>' . $message . '</p></div>';
   }
 }
 

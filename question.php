@@ -11,14 +11,14 @@ if(isset($_REQUEST['submit'])) {
 		$wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}watu_question SET question=%s, answer_type=%s WHERE ID=%d", $_REQUEST['content'], $_REQUEST['answer_type'], $_REQUEST['question']));
 		$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->prefix}watu_answer WHERE question_id=%d", $_REQUEST['question']));
 //$wpdb->show_errors(); $wpdb->print_error();
-		wpframe_message('Question updated.');
+		wpframe_message(__('Question updated.'));
 
 	} else {
 
 	$sql = $wpdb->prepare("INSERT INTO {$wpdb->prefix}watu_question (exam_id, question, answer_type) VALUES(%d, %s, %s)", $_REQUEST['quiz'], $_REQUEST['content'], $_REQUEST['answer_type']);
 		$wpdb->query($sql);//Inserting the questions
 //$wpdb->show_errors(); $wpdb->print_error();		
-		wpframe_message('Question added.');
+		wpframe_message(__('Question added.'));
 		$_REQUEST['question'] = $wpdb->insert_id;
 		$action='edit';
 	}
@@ -30,54 +30,58 @@ if(isset($_REQUEST['submit'])) {
 		$sort_order_counter = 1;
 		$correctArry = $_REQUEST['correct_answer'];
 		$pointArry = $_REQUEST['point'];
-		foreach ($_REQUEST['answer'] as $key => $answer_text) {
-			$correct=0;
-			if( in_array($counter, $correctArry) ) $correct=1;
-			$point = $pointArry[$key];
-			if($answer_text) {
-				$wpdb->query($wpdb->prepare("INSERT INTO {$wpdb->prefix}watu_answer(question_id,answer,correct,point, sort_order)
-					VALUES(%d, %s, %s, %d, %d)", $question_id, $answer_text, $correct, $point, $sort_order_counter));
-				$sort_order_counter++;
+		
+		if(is_array($_POST['answer']) and !empty($_POST['answer'])) {
+			
+			foreach ($_POST['answer'] as $key => $answer_text) {
+				$correct=0;
+				if( @in_array($counter, $correctArry) ) $correct=1;
+				$point = $pointArry[$key];
+				if($answer_text) {
+					$wpdb->query($wpdb->prepare("INSERT INTO {$wpdb->prefix}watu_answer(question_id,answer,correct,point, sort_order)
+						VALUES(%d, %s, %s, %d, %d)", $question_id, $answer_text, $correct, $point, $sort_order_counter));
+					$sort_order_counter++;
+				}
+				$counter++;
 			}
-			$counter++;
-		}
+		} 	// end if(is_array($_POST['answer']) and !empty($_POST['answer']))
 	}
 }
 
 
 if($_REQUEST['message'] == 'new_quiz') {
-	wpframe_message('New Exam added');
+	wpframe_message(__('New Exam added'));
 }
 
 if($_REQUEST['action'] == 'delete') {
 	$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->prefix}watu_answer WHERE question_id=%d", $_REQUEST['question']));
 	$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->prefix}watu_question WHERE ID=%d", $_REQUEST['question']));
-	wpframe_message('Question Deleted.');
+	wpframe_message(__('Question Deleted.'));
 }
 $exam_name = stripslashes($wpdb->get_var($wpdb->prepare("SELECT name FROM {$wpdb->prefix}watu_master WHERE ID=%d", $_REQUEST['quiz'])));
 ?>
 
 <div class="wrap">
-<h2><?php echo t("Manage Questions in ") . $exam_name; ?></h2>
+<h2><?php echo __("Manage Questions in") . ' ' . $exam_name; ?></h2>
 
 	<div class="postbox-container" style="width:73%;margin-right:2%;">
 	
-	<p><a href="tools.php?page=watu/exam.php">Back to exams</a></p>
+	<p><a href="tools.php?page=watu/exam.php"><?php _e('Back to exams')?></a></p>
 	
 	<?php
 	wp_enqueue_script( 'listman' );
 	wp_print_scripts();
 	?>
 	
-	<p style="color:green;"><?php e('To add this exam to your blog, insert the code ') ?> <b>[WATU <?php echo $_REQUEST['quiz'] ?>]</b> <?php e('into any post.') ?></p>
+	<p style="color:green;"><?php _e('To add this exam to your blog, insert the code ') ?> <b>[WATU <?php echo $_REQUEST['quiz'] ?>]</b> <?php _e('into any post.') ?></p>
 	
 	<table class="widefat">
 		<thead>
 		<tr>
 			<th scope="col"><div style="text-align: center;">#</div></th>
-			<th scope="col"><?php e('Question') ?></th>
-			<th scope="col"><?php e('Number Of Answers') ?></th>
-			<th scope="col" colspan="3"><?php e('Action') ?></th>
+			<th scope="col"><?php _e('Question') ?></th>
+			<th scope="col"><?php _e('Number Of Answers') ?></th>
+			<th scope="col" colspan="3"><?php _e('Action') ?></th>
 		</tr>
 		</thead>
 	
@@ -99,15 +103,15 @@ $exam_name = stripslashes($wpdb->get_var($wpdb->prepare("SELECT name FROM {$wpdb
 			<th scope="row" style="text-align: center;"><?php echo $question_count ?></th>
 			<td><?php echo stripslashes($question->question) ?></td>
 			<td><?php echo $question->answer_count ?></td>
-			<td><a href='edit.php?page=watu/question_form.php&amp;question=<?php echo $question->ID?>&amp;action=edit&amp;quiz=<?php echo $_REQUEST['quiz']?>' class='edit'><?php e('Edit'); ?></a></td>
-			<td><a href='edit.php?page=watu/question.php&amp;action=delete&amp;question=<?php echo $question->ID?>&amp;quiz=<?php echo $_REQUEST['quiz']?>' class='delete' onclick="return confirm('<?php echo addslashes(t("You are about to delete this question. This will delete the answers to this question. Press 'OK' to delete and 'Cancel' to stop."))?>');"><?php e('Delete')?></a></td>
+			<td><a href='edit.php?page=watu/question_form.php&amp;question=<?php echo $question->ID?>&amp;action=edit&amp;quiz=<?php echo $_REQUEST['quiz']?>' class='edit'><?php _e('Edit'); ?></a></td>
+			<td><a href='edit.php?page=watu/question.php&amp;action=delete&amp;question=<?php echo $question->ID?>&amp;quiz=<?php echo $_REQUEST['quiz']?>' class='delete' onclick="return confirm('<?php echo addslashes(__("You are about to delete this question. This will delete the answers to this question. Press 'OK' to delete and 'Cancel' to stop."))?>');"><?php _e('Delete')?></a></td>
 			</tr>
 	<?php
 			}
 		} else {
 	?>
 		<tr style='background-color: <?php echo $bgcolor; ?>;'>
-			<td colspan="4"><?php e('No questiones found.') ?></td>
+			<td colspan="4"><?php _e('No questiones found.') ?></td>
 		</tr>
 	<?php
 	}
@@ -115,7 +119,7 @@ $exam_name = stripslashes($wpdb->get_var($wpdb->prepare("SELECT name FROM {$wpdb
 		</tbody>
 	</table>
 	
-	<a href="edit.php?page=watu/question_form.php&amp;action=new&amp;quiz=<?php echo $_REQUEST['quiz'] ?>"><?php e('Create New Question')?></a>
+	<a href="edit.php?page=watu/question_form.php&amp;action=new&amp;quiz=<?php echo $_REQUEST['quiz'] ?>"><?php _e('Create New Question')?></a>
 	</div>
 	<div id="watu-sidebar">
 			<?php require("sidebar.php");?>

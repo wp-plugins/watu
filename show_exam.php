@@ -1,5 +1,4 @@
 <?php
-
 if(isset($_REQUEST['action']) and $_REQUEST['action']=='show_exam_result' ) { // Initial setup for ajax.
 	if (!function_exists('add_action')) {
 		$wp_root = '../../..';
@@ -40,7 +39,7 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 /* Array ( [p] => 1 [question_id] => Array ( [0] => 1 [1] => 2 ) [answer-1] => Array ( [0] => 12 [1] => 13 [2] => 14 ) [answer-2] => Array ( [0] => 9 ) [action] => Show Results [quiz_id] => 1 )  */
 	//print_r($_REQUEST);	exit;
 	$result = '';
-	$result .= "<p>" . t('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.') . "</p>";
+	$result .= "<p>" . __('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.') . "</p>";
 
 	foreach ($all_question as $ques) {
 		$result .= "<div class='show-question'>";
@@ -58,8 +57,15 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 			if( in_array($ans->ID , $ansArr ) ) $achieved+=$ans->point; 
 			$result .= "<li class='$class'><span class='answer'>" . stripslashes($ans->answer) . "</span></li>\n";
 		}
+
+		// textareas
+		if($ques->answer_type=='textarea')
+		{
+			$result.="<li class='user-answer'>".wpautop($_REQUEST["answer-" . $ques->ID][0])."</li>";
+		}		
+		
 		$result .= "</ul>";
-		if(!$_REQUEST["answer-" . $ques->ID]) $result .= "<p class='unanswered'>" . t('Question was not answered') . "</p>";
+		if(!$_REQUEST["answer-" . $ques->ID]) $result .= "<p class='unanswered'>" . __('Question was not answered') . "</p>";
 
 		$result .= "</div>";
 		//$total++;
@@ -69,9 +75,9 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 	//Find scoring details of this guy.
 	$percent = number_format($score / $total * 100, 2);
 						//0-9			10-19%,	 	20-29%, 	30-39%			40-49%
-	$all_rating = array(t('Failed'), t('Failed'), t('Failed'), t('Failed'), t('Just Passed'),
+	$all_rating = array(__('Failed'), __('Failed'), __('Failed'), __('Failed'), __('Just Passed'),
 						//																			100%			More than 100%?!
-					t('Satisfactory'), t('Competent'), t('Good'), t('Very Good'),t('Excellent'), t('Unbeatable'), t('Cheater'));
+					__('Satisfactory'), __('Competent'), __('Good'), __('Very Good'), __('Excellent'), __('Unbeatable'), __('Cheater'));
 	$rate = intval($percent / 10);
 	if($percent == 100) $rate = 9;
 	if($score == $total) $rate = 10;
@@ -120,6 +126,13 @@ foreach ($all_question as $ques) {
 	$question_ids .= $ques->ID.',';
 	$dans = $wpdb->get_results("SELECT ID,answer,correct FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");
 	$ans_type = $ques->answer_type;
+	
+	// display textarea
+	if($ans_type=='textarea')
+	{
+		echo "<textarea name='answer-{$ques->ID}[]' rows='5' cols='40' id='textarea_q_{$ques->ID}'></textarea>"; 
+	}	
+	
 	foreach ($dans as $ans) {
 		if($answer_display == 2) {
 			$answer_class = 'wrong-answer-label';
@@ -129,6 +142,7 @@ foreach ($all_question as $ques) {
 		echo "&nbsp;<label for='answer-id-{$ans->ID}' id='answer-label-{$ans->ID}' class='$answer_class answer label-$question_count'><span>" . stripslashes($ans->answer) . "</span></label><br />";
 	}
 
+	echo "<input type='hidden' id='questionType".$question_count."' value='{$ques->answer_type}'>";
 	echo "</div>";
 	$question_count++;
 }
@@ -138,26 +152,20 @@ echo "</div>";
 $question_ids = preg_replace('/,$/', '', $question_ids );
 ?><br />
 <?php if($answer_display == 2) { ?>
-<input type="button" id="show-answer" value="<?php e("Show Answer") ?>"  /><br />
+<input type="button" id="show-answer" value="<?php _e('Show Answer') ?>"  /><br />
 <?php } else { ?>
-<input type="button" id="next-question" value="<?php e("Next") ?> &gt;"  /><br />
+<input type="button" id="next-question" value="<?php _e('Next') ?> &gt;"  /><br />
 <?php } ?>
 
-<input type="button" name="action" onclick="submitResult()" id="action-button" value="<?php e("Show Results") ?>"  />
+<input type="button" name="action" onclick="Watu.submitResult()" id="action-button" value="<?php _e('Show Results') ?>"  />
 <input type="hidden" name="quiz_id" value="<?php echo  $exam_id ?>" />
 </form>
 </div>
 <script type="text/javascript">
 var question_ids = "<?php print $question_ids ?>";
 var exam_id = <?php print $exam_id ?>;
-var qArr = question_ids.split(',');
+Watu.qArr = question_ids.split(',');
 var watuURL = "<?php print plugins_url('watu/'.basename(__FILE__) ) ?>";
-/* for(x in qArr) {
-	ansgroup = '.answerof-'+qArr[x];
-	jQuery(ansgroup).each(function(){
-		alert( jQuery(this).is(':checked') );
-	});
-} */
 </script>
 <?php }
 }
