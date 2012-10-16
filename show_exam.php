@@ -39,7 +39,7 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 /* Array ( [p] => 1 [question_id] => Array ( [0] => 1 [1] => 2 ) [answer-1] => Array ( [0] => 12 [1] => 13 [2] => 14 ) [answer-2] => Array ( [0] => 9 ) [action] => Show Results [quiz_id] => 1 )  */
 	//print_r($_REQUEST);	exit;
 	$result = '';
-	$result .= "<p>" . __('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.') . "</p>";
+	$result .= "<p>" . __('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p>";
 
 	foreach ($all_question as $ques) {
 		$result .= "<div class='show-question'>";
@@ -65,7 +65,7 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 		}		
 		
 		$result .= "</ul>";
-		if(!$_REQUEST["answer-" . $ques->ID]) $result .= "<p class='unanswered'>" . __('Question was not answered') . "</p>";
+		if(!$_REQUEST["answer-" . $ques->ID]) $result .= "<p class='unanswered'>" . __('Question was not answered', 'watu') . "</p>";
 
 		$result .= "</div>";
 		//$total++;
@@ -75,9 +75,9 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 	//Find scoring details of this guy.
 	$percent = number_format($score / $total * 100, 2);
 						//0-9			10-19%,	 	20-29%, 	30-39%			40-49%
-	$all_rating = array(__('Failed'), __('Failed'), __('Failed'), __('Failed'), __('Just Passed'),
+	$all_rating = array(__('Failed', 'watu'), __('Failed', 'watu'), __('Failed', 'watu'), __('Failed', 'watu'), __('Just Passed', 'watu'),
 						//																			100%			More than 100%?!
-					__('Satisfactory'), __('Competent'), __('Good'), __('Very Good'), __('Excellent'), __('Unbeatable'), __('Cheater'));
+					__('Satisfactory', 'watu'), __('Competent', 'watu'), __('Good', 'watu'), __('Very Good', 'watu'), __('Excellent', 'watu'), __('Unbeatable', 'watu'), __('Cheater', 'watu'));
 	$rate = intval($percent / 10);
 	if($percent == 100) $rate = 9;
 	if($score == $total) $rate = 10;
@@ -152,12 +152,12 @@ echo "</div>";
 $question_ids = preg_replace('/,$/', '', $question_ids );
 ?><br />
 <?php if($answer_display == 2) { ?>
-<input type="button" id="show-answer" value="<?php _e('Show Answer') ?>"  /><br />
+<input type="button" id="show-answer" value="<?php _e('Show Answer', 'watu') ?>"  /><br />
 <?php } else { ?>
-<input type="button" id="next-question" value="<?php _e('Next') ?> &gt;"  /><br />
+<input type="button" id="next-question" value="<?php _e('Next', 'watu') ?> &gt;"  /><br />
 <?php } ?>
 
-<input type="button" name="action" onclick="Watu.submitResult()" id="action-button" value="<?php _e('Show Results') ?>"  />
+<input type="button" name="action" onclick="Watu.submitResult()" id="action-button" value="<?php _e('Show Results', 'watu') ?>"  />
 <input type="hidden" name="quiz_id" value="<?php echo  $exam_id ?>" />
 </form>
 </div>
