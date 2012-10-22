@@ -65,7 +65,7 @@ wpframe_add_editor_js();
 <?php 
 	foreach($grades as $row ) {
 ?>
-<p><img class="gradeclose" onclick="jQuery(this).parent().remove();" src="<?php echo $GLOBALS['wpframe_plugin_folder'] ?>/close.jpg" alt='close' /><label><?php _e('Grade Title:', 'watu')?></label><input type='text' name='gradetitle[]' id="title" value='<?php echo stripslashes($row->gtitle); ?>' /><br /><label><?php _e('Description:', 'watu')?></label><br /><textarea name='grade_description[]' rows='5'><?php echo stripslashes($row->gdescription); ?></textarea><br /><label><?php _e('Grade from:', 'watu')?> <input type='text' class='numeric' name='grade_from[]' value='<?php echo stripslashes($row->gfrom); ?>' /></label><label><?php _e('Grade to:', 'watu')?> <input type='text' class='numeric' name='grade_to[]' value='<?php echo stripslashes($row->gto); ?>' /></label></p>
+<p><img class="gradeclose" onclick="jQuery(this).parent().remove();" src="<?php echo $GLOBALS['wpframe_plugin_folder'] ?>/close.jpg" alt='close' /><label><?php _e('Grade Title:', 'watu')?></label><input type='text' name='gradetitle[]' id="title" value='<?php echo stripslashes($row->gtitle); ?>' /><br /><label><?php _e('Description:', 'watu')?></label><br /><textarea name='grade_description[]' rows='5'><?php echo stripslashes($row->gdescription); ?></textarea><br /><label><?php _e('From points:', 'watu')?> <input type='text' class='numeric' name='grade_from[]' value='<?php echo stripslashes($row->gfrom); ?>' /></label><label><?php _e('To points:', 'watu')?> <input type='text' class='numeric' name='grade_to[]' value='<?php echo stripslashes($row->gto); ?>' /></label></p>
 <?php }
 if( count($grades)==0 ){
  ?>
