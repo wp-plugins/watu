@@ -72,8 +72,9 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 	}
 	$total = $wpdb->get_var($wpdb->prepare("SELECT sum(point) FROM `{$wpdb->prefix}watu_question` as q inner join `{$wpdb->prefix}watu_answer` as a on question_id=q.ID WHERE `exam_id`=%d and correct='1' ", $exam_id));
 
-	//Find scoring details of this guy.
-	$percent = number_format($score / $total * 100, 2);
+	// Find scoring details
+	if($total == 0) $percent = 0;
+	else $percent = number_format($score / $total * 100, 2);
 						//0-9			10-19%,	 	20-29%, 	30-39%			40-49%
 	$all_rating = array(__('Failed', 'watu'), __('Failed', 'watu'), __('Failed', 'watu'), __('Failed', 'watu'), __('Just Passed', 'watu'),
 						//																			100%			More than 100%?!
