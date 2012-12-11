@@ -36,7 +36,7 @@ $answer_display = get_option('watu_show_answers');
 	</div>
 	
 	<div class="postbox">
-	<h3 class="hndle"><span><?php _e('Answer Type', 'watu') ?></span></h3>
+	<h3 class="hndle"><span><?php _e('Default Answer Type', 'watu') ?></span></h3>
 	<div class="inside" style="padding:8px">
 	<?php 
 		$single = $multi = '';

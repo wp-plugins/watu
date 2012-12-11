@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 1.6\n"
+"Project-Id-Version: Watu 1.7\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2012-10-16 16:28:19+00:00\n"
+"POT-Creation-Date: 2012-12-11 15:51:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +36,7 @@ msgstr ""
 msgid "Go to"
 msgstr ""
 
-#: exam.php:24 options.php:17 watu.php:62
+#: exam.php:24 options.php:17 watu.php:63
 msgid "Watu Settings"
 msgstr ""
 
@@ -86,15 +86,15 @@ msgstr ""
 msgid "Create New Exam"
 msgstr ""
 
-#: exam_action.php:51
+#: exam_action.php:53
 msgid "The grading data can not be saved. Pleae try again"
 msgstr ""
 
-#: exam_action.php:52
+#: exam_action.php:54
 msgid "Some grades can not be saved."
 msgstr ""
 
-#: exam_action.php:55
+#: exam_action.php:57
 msgid "The grading data can not be saved. Please try again"
 msgstr ""
 
@@ -107,105 +107,6 @@ msgid ""
 "<p>Your performance have been rated as '%%RATING%%'</p>\n"
 "\n"
 "<p>Your obtained grade is '%%GRADE%%'</p>"
-msgstr ""
-
-#: exam_form.php:21 exam_form.php:68 exam_form.php:72
-msgid "Grade Title:"
-msgstr ""
-
-#: exam_form.php:21 exam_form.php:68 exam_form.php:72
-msgid "Description:"
-msgstr ""
-
-#: exam_form.php:21
-msgid "From (points):"
-msgstr ""
-
-#: exam_form.php:21
-msgid "To (points):"
-msgstr ""
-
-#: exam_form.php:33
-msgid "Please provide numeric values for the Grade from/to."
-msgstr ""
-
-#: exam_form.php:40 question.php:69 question_form.php:19
-msgid "Back to exams"
-msgstr ""
-
-#: exam_form.php:50
-msgid "Exam Name"
-msgstr ""
-
-#: exam_form.php:56
-msgid "Description"
-msgstr ""
-
-#: exam_form.php:63
-msgid "Grading"
-msgstr ""
-
-#: exam_form.php:68
-msgid "From points:"
-msgstr ""
-
-#: exam_form.php:68 exam_form.php:72
-msgid "To points:"
-msgstr ""
-
-#: exam_form.php:74
-msgid "Add another grade"
-msgstr ""
-
-#: exam_form.php:77
-msgid "Final Screen"
-msgstr ""
-
-#: exam_form.php:81
-msgid "Usable Variables:"
-msgstr ""
-
-#: exam_form.php:83
-msgid "Variable"
-msgstr ""
-
-#: exam_form.php:83
-msgid "Value"
-msgstr ""
-
-#: exam_form.php:84
-msgid "The number of points collected."
-msgstr ""
-
-#: exam_form.php:85
-msgid "Maximum number of points"
-msgstr ""
-
-#: exam_form.php:86
-msgid "1-10 value. 1 is 10% or less, 2 is 20% or less, and so on"
-msgstr ""
-
-#: exam_form.php:87
-msgid "Number of answers you got wrong"
-msgstr ""
-
-#: exam_form.php:88
-msgid ""
-"A rating of your performance - it could be 'Failed'(0-39%), 'Just "
-"Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and "
-"'Unbeatable'(100%)"
-msgstr ""
-
-#: exam_form.php:89
-msgid "The name of the quiz"
-msgstr ""
-
-#: exam_form.php:90
-msgid "The text entered in the description field."
-msgstr ""
-
-#: exam_form.php:107 question_form.php:217
-msgid "Save"
 msgstr ""
 
 #: options.php:11
@@ -239,7 +140,7 @@ msgid ""
 msgstr ""
 
 #: options.php:39
-msgid "Answer Type"
+msgid "Default Answer Type"
 msgstr ""
 
 #: options.php:46 question_form.php:171
@@ -280,6 +181,10 @@ msgstr ""
 
 #: question.php:65
 msgid "Manage Questions in"
+msgstr ""
+
+#: question.php:69 question_form.php:19
+msgid "Back to exams"
 msgstr ""
 
 #: question.php:76
@@ -352,70 +257,74 @@ msgstr ""
 msgid "Add New Answer"
 msgstr ""
 
+#: question_form.php:217
+msgid "Save"
+msgstr ""
+
 #: question_form.php:219
 msgid "Go to Questions Page"
 msgstr ""
 
-#: show_exam.php:42
+#: show_exam.php:49
 msgid ""
 "All the questions in the exam along with their answers are shown below. Your "
 "answers are bolded. The correct answers have a green background while the "
 "incorrect ones have a red background."
 msgstr ""
 
-#: show_exam.php:68
+#: show_exam.php:80
 msgid "Question was not answered"
 msgstr ""
 
-#: show_exam.php:78
+#: show_exam.php:91
 msgid "Failed"
 msgstr ""
 
-#: show_exam.php:78
+#: show_exam.php:91
 msgid "Just Passed"
 msgstr ""
 
-#: show_exam.php:80
+#: show_exam.php:93
 msgid "Satisfactory"
 msgstr ""
 
-#: show_exam.php:80
+#: show_exam.php:93
 msgid "Competent"
 msgstr ""
 
-#: show_exam.php:80
+#: show_exam.php:93
 msgid "Good"
 msgstr ""
 
-#: show_exam.php:80
+#: show_exam.php:93
 msgid "Very Good"
 msgstr ""
 
-#: show_exam.php:80
+#: show_exam.php:93
 msgid "Excellent"
 msgstr ""
 
-#: show_exam.php:80
+#: show_exam.php:93
 msgid "Unbeatable"
 msgstr ""
 
-#: show_exam.php:80
+#: show_exam.php:93
 msgid "Cheater"
 msgstr ""
 
-#: show_exam.php:150
+#: show_exam.php:163
 msgid "Loading"
 msgstr ""
 
-#: show_exam.php:155
+#: show_exam.php:168
 msgid "Show Answer"
 msgstr ""
 
-#: show_exam.php:157
+#: show_exam.php:170
 msgid "Next"
 msgstr ""
 
-#: show_exam.php:160
+#: show_exam.php:173
 msgid "Show Results"
 msgstr ""
 
@@ -565,19 +474,24 @@ msgstr ""
 
 #: sidebar.php:39
 msgid ""
-"Upgrading to PRO comes with 60 days money-back guarantee, one year free "
-"upgrades and one year free support."
+"Upgrading to PRO comes with <strong>60 days money-back guarantee</strong>, "
+"one year <strong>free upgrades</strong> and one year <strong>free support</"
+"strong>."
 msgstr ""
 
-#: watu.php:46
+#: watu.php:47
 msgid "Manage Exams"
 msgstr ""
 
-#: watu.php:65
-msgid "Your are not allowed to to perform this operation"
+#: watu.php:47
+msgid "Watu Exams"
 msgstr ""
 
 #: watu.php:66
+msgid "Your are not allowed to to perform this operation"
+msgstr ""
+
+#: watu.php:67
 msgid "You do not have sufficient permissions to access this page"
 msgstr ""
 

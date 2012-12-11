@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu/exam.php">Manage Your Exams</a> 
 
-Version: 1.6.3
+Version: 1.7
 Author: CalendarScripts
 License: GPLv2 or later
 
@@ -23,6 +23,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+define( 'WATU_PATH', dirname( __FILE__ ) );
 
 /// Initialize this plugin. Called by 'init' hook.
 add_action('init', 'watu_init');
@@ -43,7 +44,7 @@ function watu_add_menu_links() {
 	
 	//add_menu_page('Watu Settings Page', 'Watu Settings', $view_level, 'watu', 'watu_options');	$page = 'watu';
 	
-	add_submenu_page($page, __('Manage Exams', 'watu'), __('Manage Exams', 'watu'), $view_level , 'watu/exam.php');
+	add_submenu_page($page, __('Manage Exams', 'watu'), __('Watu Exams', 'watu'), $view_level , 'watu/exam.php');
 	
 	$code_pages = array('exam_form.php','exam_action.php', 'question_form.php', 'question.php');
 	foreach($code_pages as $code_page) {
@@ -89,16 +90,14 @@ add_action('activate_watu/watu.php','watu_activate');
 function watu_activate() {
 	global $wpdb;
 
-	$table_count = '3';
-	$installed_db = get_option('watu_db_tables');
 	// Initial options.
 	add_option('watu_show_answers', 1);
 	add_option('watu_single_page', 0);
 	add_option('watu_answer_type', 'radio');
+	$version = get_option('watu_version');
 
-	if($table_count != $installed_db) {//to protect reexecution if installed
-		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
+	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+	if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix. "watu_master"."'") != $wpdb->prefix. "watu_master") {
 		$sql = "CREATE TABLE {$wpdb->prefix}watu_master(
 					ID int(11) unsigned NOT NULL auto_increment,
 					name varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -106,8 +105,12 @@ function watu_activate() {
 					final_screen mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
 					added_on datetime NOT NULL,
 					PRIMARY KEY  (ID)
-				);
-				CREATE TABLE {$wpdb->prefix}watu_question (
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8 ";
+		dbDelta($sql);
+	}		
+	
+	if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix. "watu_question"."'") != $wpdb->prefix. "watu_question") {
+		$sql = "CREATE TABLE {$wpdb->prefix}watu_question (
 					ID int(11) unsigned NOT NULL auto_increment,
 					exam_id int(11) unsigned NOT NULL,
 					question mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -115,8 +118,12 @@ function watu_activate() {
 					sort_order int(3) NOT NULL default 0,
 					PRIMARY KEY  (ID),
 					KEY quiz_id (exam_id)
-				);
-				CREATE TABLE {$wpdb->prefix}watu_answer (
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+		dbDelta($sql);
+	}		
+	
+	if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix. "watu_answer"."'") != $wpdb->prefix. "watu_answer") {
+		$sql = "CREATE TABLE {$wpdb->prefix}watu_answer (
 					ID int(11) unsigned NOT NULL auto_increment,
 					question_id int(11) unsigned NOT NULL,
 					answer varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -124,8 +131,12 @@ function watu_activate() {
 					point int(11) NOT NULL,
 					sort_order int(3) NOT NULL default 0,
 					PRIMARY KEY  (ID)
-				);
-				CREATE TABLE `{$wpdb->prefix}watu_grading` (
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+		dbDelta($sql);
+	}					
+			
+	if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix. "watu_grading"."'") != $wpdb->prefix. "watu_grading") {
+		$sql = "CREATE TABLE `{$wpdb->prefix}watu_grading` (
 				 `ID` int(11) NOT NULL AUTO_INCREMENT,
 				 `exam_id` int(11) NOT NULL,
 				 `gtitle` varchar (255) NOT NULL,
@@ -133,14 +144,20 @@ function watu_activate() {
 				 `gfrom` int(11) NOT NULL,
 				 `gto` int(11) NOT NULL,
 				 PRIMARY KEY (`ID`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-		dbDelta($sql); 
-		//$wpdb->show_errors(); $wpdb->print_error();
-		update_option( "watu_db_tables", $table_count );
-		update_option( "watu_delete_db", '' );
-		
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+		dbDelta($sql);
+	}					
+	
+	// db updates in 1.7
+	if(empty($version) or $version < 1.7) {
+		 $sql = "ALTER TABLE {$wpdb->prefix}watu_master ADD randomize TINYINT NOT NULL";
+		 $wpdb->query($sql);
 	}
+						
+	update_option( "watu_delete_db", '' );
+	update_option( "watu_version", '1.7' );
 }
+
 add_action('deactivate_watu/watu.php','watu_deactivate');
 function watu_deactivate() {
 	$delDb = get_option('watu_delete_db');

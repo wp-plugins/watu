@@ -22,8 +22,17 @@ $GLOBALS['wpframe_plugin_name'] = basename(dirname(__FILE__));
 $GLOBALS['wpframe_plugin_folder'] = $GLOBALS['wpframe_wordpress'] . '/wp-content/plugins/' . $GLOBALS['wpframe_plugin_name'];
 
 $answer_display = get_option('watu_show_answers');
-$all_question = $wpdb->get_results($wpdb->prepare("SELECT ID,question, answer_type FROM {$wpdb->prefix}watu_question WHERE exam_id=%d ORDER BY ID", $exam_id));
-if($all_question) {
+
+// select exam
+$exam = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}watu_master WHERE ID=%d", $exam_id));
+
+$order_sql = $exam->randomize?"ORDER BY RAND()":"ORDER BY ID";
+
+$questions = $wpdb->get_results($wpdb->prepare("SELECT ID,question, answer_type 
+		FROM {$wpdb->prefix}watu_question 
+		WHERE exam_id=%d $order_sql", $exam_id));
+		
+if($questions) {
 	if(!isset($GLOBALS['watu_client_includes_loaded']) and !isset($_REQUEST['action']) ) {
 ?>
 <link type="text/css" rel="stylesheet" href="<?php echo $GLOBALS['wpframe_plugin_folder']?>/style.css" />
@@ -36,14 +45,17 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 	$score = 0;
 	$achieved = 0;
 	$total = 0;
-/* Array ( [p] => 1 [question_id] => Array ( [0] => 1 [1] => 2 ) [answer-1] => Array ( [0] => 12 [1] => 13 [2] => 14 ) [answer-2] => Array ( [0] => 9 ) [action] => Show Results [quiz_id] => 1 )  */
-	//print_r($_REQUEST);	exit;
 	$result = '';
 	$result .= "<p>" . __('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p>";
 
-	foreach ($all_question as $ques) {
+	// we should reorder the questions in the same way they came from POST because exam might be randomized
+	require_once(WATU_PATH."/models/exam.php");
+	$_exam = new WatuExam();
+	$questions = $_exam->reorder_questions($questions, $_POST['question_id']);
+
+	foreach ($questions as $ques) {
 		$result .= "<div class='show-question'>";
-		$result .= "<div class='show-question-content'>". stripslashes($ques->question) . "</div>\n";
+		$result .= "<div class='show-question-content'>". stripslashes(wpautop($ques->question)) . "</div>\n";
 		$all_answers = $wpdb->get_results("SELECT ID,answer,correct, point FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");
 
 		$correct = false;
@@ -120,9 +132,9 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 <?php
 $question_count = 1;
 $question_ids = '';
-foreach ($all_question as $ques) {
+foreach ($questions as $ques) {
 	echo "<div class='watu-question' id='question-$question_count'>";
-	echo "<div class='question-content'>". stripslashes($ques->question) . "</div><br />";
+	echo "<div class='question-content'>". stripslashes(wpautop($ques->question)) . "</div><br />";
 	echo "<input type='hidden' name='question_id[]' value='{$ques->ID}' />";
 	$question_ids .= $ques->ID.',';
 	$dans = $wpdb->get_results("SELECT ID,answer,correct FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");

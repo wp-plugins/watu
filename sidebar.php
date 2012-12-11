@@ -36,5 +36,5 @@
 	
 	<p><?php _e('Just go ahead and', 'watu')?> <a href="http://calendarscripts.info/watupro/tour.html" target="_blank"><?php _e('take the tour', 'watu')?></a> <?php _e('or check the', 'watu')?> <a href="http://calendarscripts.info/watupro/demo.html" target="_blank"><?php _e('online demo.', 'watu')?></a></p>
 	
-	<p><?php _e('Upgrading to PRO comes with 60 days money-back guarantee, one year free upgrades and one year free support.', 'watu')?></p>
+	<p><?php _e('Upgrading to PRO comes with <strong>60 days money-back guarantee</strong>, one year <strong>free upgrades</strong> and one year <strong>free support</strong>.', 'watu')?></p>
 </div>

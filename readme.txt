@@ -56,9 +56,15 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 <strong>Please do not place more than one code in one post or page. Only one exam will be shown at a time. If you wish more exams to be displayed, please give links to them!</strong>
 
-== Change Log ==
+== Changelog ==
 
-Please not change log started being recorded after version 1.5.
+Please note change log started being recorded after version 1.5.
+
+= Changes in 1.7 =
+
+- You can now randomize the questions in a quiz
+- Fixed issues with the DB tables during upgrade
+- Removed more obsolete code, fixed code issues. More on this to come.
 
 = Changes in 1.6 =
 
