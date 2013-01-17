@@ -9,72 +9,82 @@
 		return ret;
 	}
 </script>
+
 <div class="wrap">
 <h2><?php _e(ucfirst($action) . " Exam", 'watu'); ?></h2>
 
-<p><a href="tools.php?page=watu/exam.php"><?php _e('Back to exams', 'watu')?></a></p>
+<div class="postbox-container" style="width:73%;margin-right:2%;">	
 
-<form name="post" action="<?php echo $GLOBALS['wpframe_plugin_folder'] ?>/exam_action.php" method="post" id="post" onsubmit="return validate()">
-<div id="poststuff">
-
-<div class="postbox" id="titlediv">
-	<h3 class="hndle"><span><?php _e('Exam Name', 'watu') ?></span></h3>
-	<div class="inside">
-		<input type='text' name='name' id="title" value='<?php echo stripslashes($dquiz->name); ?>' />
+	<p><a href="tools.php?page=watu_exams"><?php _e('Back to exams', 'watu')?></a></p>
+	
+	<form name="post" action="admin.php?page=watu_exam" method="post" id="post" onsubmit="return validate()">
+	<div id="poststuff">
+	
+	<div class="postbox" id="titlediv">
+		<h3 class="hndle"><span><?php _e('Exam Name', 'watu') ?></span></h3>
+		<div class="inside">
+			<input type='text' name='name' id="title" value='<?php echo stripslashes($dquiz->name); ?>' />
+		</div>
+		<div class="inside">
+			<p><input id="watuRandomize" type="checkbox" name="randomize" value="1" <?php if(!empty($dquiz->randomize)) echo 'checked'?>> <label for="watuRandomize"><?php _e("Randomize questions", 'watu');?></label></p>
+			
+			<p><input id="watuSingle" type="checkbox" name="single_page" value="1" <?php if(!empty($dquiz->single_page)) echo 'checked'?>> <label for="watuSingle"><?php _e("Show all questions on single page", 'watu');?></label></p>
+		</div>
 	</div>
+	
+	<div class="postbox">
+	<h3 class="hndle"><span><?php _e('Description', 'watu') ?></span></h3>
 	<div class="inside">
-		<p><input id="watuRandomize" type="checkbox" name="randomize" value="1" <?php if(!empty($dquiz->randomize)) echo 'checked'?>> <label for="watuRandomize"><?php _e("Randomize questions", 'watu');?></label></p>
+	<textarea name='description' rows='5' cols='50' style='width:100%'><?php echo stripslashes($dquiz->description); ?></textarea>
+	</div></div>
+	
+	<style type="text/css"> #gradecontent p{border-bottom:1px dotted #ccc;padding-bottom:3px;} #gradecontent label{padding: 5px 10px;} #gradecontent textarea{width:96%;margin-left:10px;} #gradecontent p img.gradeclose{ border:0 none; float:right; } </style>
+	<div class="postbox" id="gradediv">
+	<h3 class="hndle"><span><?php _e('Grading', 'watu') ?></span></h3>
+	<div class="inside" id="gradecontent">
+	<?php foreach($grades as $row ): ?>
+	<p><img class="gradeclose" onclick="jQuery(this).parent().remove();" src="<?php echo $GLOBALS['wpframe_plugin_folder'] ?>/close.jpg" alt='close' /><label><?php _e('Grade Title:', 'watu')?></label><input type='text' name='gradetitle[]' id="title" value='<?php echo stripslashes($row->gtitle); ?>' /><br /><label><?php _e('Description:', 'watu')?></label><br /><textarea name='grade_description[]' rows='5'><?php echo stripslashes($row->gdescription); ?></textarea><br /><label><?php _e('From points:', 'watu')?> <input type='text' class='numeric' name='grade_from[]' value='<?php echo stripslashes($row->gfrom); ?>' /></label><label><?php _e('To points:', 'watu')?> <input type='text' class='numeric' name='grade_to[]' value='<?php echo stripslashes($row->gto); ?>' /></label></p>
+	<?php endforeach;
+	if( count($grades)==0 ){
+	 ?>
+	 <p><img class="gradeclose" onclick="jQuery(this).parent().remove();" src="<?php echo $GLOBALS['wpframe_plugin_folder'] ?>/close.jpg" alt='close' /><label><?php _e('Grade Title:', 'watu')?></label><input type='text' name='gradetitle[]' id="title" value='' /><br /><label><?php _e('Description:', 'watu')?></label><br /><textarea name='grade_description[]' rows='5'></textarea><br /><label>Grade from:<input type='text' class='numeric' name='grade_from[]' value='' /></label><label><?php _e('Grade to:', 'watu')?><input type='text' class='numeric' name='grade_to[]' value='' /></label></p>
+	 <?php } ?>
+	</div><p><a href="javascript:;" onclick="addGrade()" style="padding:4px; margin-left:10px;"><?php _e('Add another grade', 'watu')?></a></p></div>
+	
+	<div id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>" class="postarea postbox">
+	<h3 class="hndle"><span><?php _e('Final Screen', 'watu') ?></span></h3>
+	<div class="inside">
+	<?php wp_editor($final_screen, 'content'); ?>
+	
+	<p><strong><?php _e('Usable Variables:', 'watu') ?></strong></p>
+	<table>
+	<tr><th style="text-align:left;"><?php _e('Variable', 'watu') ?></th><th style="text-align:left;"><?php _e('Value', 'watu') ?></th></tr>
+	<tr><td>%%SCORE%%</td><td><?php _e('The number of points collected.', 'watu') ?></td></tr>
+	<tr><td>%%TOTAL%%</td><td><?php _e('Maximum number of points', 'watu') ?></td></tr>
+	<tr><td>%%GRADE%%</td><td><?php _e('1-10 value. 1 is 10% or less, 2 is 20% or less, and so on', 'watu') ?>.</td></tr>
+	<tr><td>%%WRONG_ANSWERS%%</td><td><?php _e('Number of answers you got wrong', 'watu') ?></td></tr>
+	<tr><td>%%RATING%%</td><td><?php _e("A rating of your performance - it could be 'Failed'(0-39%), 'Just Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and 'Unbeatable'(100%)", 'watu') ?></td></tr>
+	<tr><td>%%QUIZ_NAME%%</td><td><?php _e('The name of the quiz', 'watu') ?></td></tr>
+	<tr><td>%%DESCRIPTION%%</td><td><?php _e('The text entered in the description field.', 'watu') ?></td></tr>
+	</table>
 	</div>
-</div>
-
-<div class="postbox">
-<h3 class="hndle"><span><?php _e('Description', 'watu') ?></span></h3>
-<div class="inside">
-<textarea name='description' rows='5' cols='50' style='width:100%'><?php echo stripslashes($dquiz->description); ?></textarea>
-</div></div>
-
-<style type="text/css"> #gradecontent p{border-bottom:1px dotted #ccc;padding-bottom:3px;} #gradecontent label{padding: 5px 10px;} #gradecontent textarea{width:96%;margin-left:10px;} #gradecontent p img.gradeclose{ border:0 none; float:right; } </style>
-<div class="postbox" id="gradediv">
-<h3 class="hndle"><span><?php _e('Grading', 'watu') ?></span></h3>
-<div class="inside" id="gradecontent">
-<?php foreach($grades as $row ): ?>
-<p><img class="gradeclose" onclick="jQuery(this).parent().remove();" src="<?php echo $GLOBALS['wpframe_plugin_folder'] ?>/close.jpg" alt='close' /><label><?php _e('Grade Title:', 'watu')?></label><input type='text' name='gradetitle[]' id="title" value='<?php echo stripslashes($row->gtitle); ?>' /><br /><label><?php _e('Description:', 'watu')?></label><br /><textarea name='grade_description[]' rows='5'><?php echo stripslashes($row->gdescription); ?></textarea><br /><label><?php _e('From points:', 'watu')?> <input type='text' class='numeric' name='grade_from[]' value='<?php echo stripslashes($row->gfrom); ?>' /></label><label><?php _e('To points:', 'watu')?> <input type='text' class='numeric' name='grade_to[]' value='<?php echo stripslashes($row->gto); ?>' /></label></p>
-<?php endforeach;
-if( count($grades)==0 ){
- ?>
- <p><img class="gradeclose" onclick="jQuery(this).parent().remove();" src="<?php echo $GLOBALS['wpframe_plugin_folder'] ?>/close.jpg" alt='close' /><label><?php _e('Grade Title:', 'watu')?></label><input type='text' name='gradetitle[]' id="title" value='' /><br /><label><?php _e('Description:', 'watu')?></label><br /><textarea name='grade_description[]' rows='5'></textarea><br /><label>Grade from:<input type='text' class='numeric' name='grade_from[]' value='' /></label><label><?php _e('Grade to:', 'watu')?><input type='text' class='numeric' name='grade_to[]' value='' /></label></p>
- <?php } ?>
-</div><p><a href="javascript:;" onclick="addGrade()" style="padding:4px; margin-left:10px;"><?php _e('Add another grade', 'watu')?></a></p></div>
-
-<div id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>" class="postarea postbox">
-<h3 class="hndle"><span><?php _e('Final Screen', 'watu') ?></span></h3>
-<div class="inside">
-<?php wp_editor($final_screen, 'content'); ?>
-
-<p><strong><?php _e('Usable Variables:', 'watu') ?></strong></p>
-<table>
-<tr><th style="text-align:left;"><?php _e('Variable', 'watu') ?></th><th style="text-align:left;"><?php _e('Value', 'watu') ?></th></tr>
-<tr><td>%%SCORE%%</td><td><?php _e('The number of points collected.', 'watu') ?></td></tr>
-<tr><td>%%TOTAL%%</td><td><?php _e('Maximum number of points', 'watu') ?></td></tr>
-<tr><td>%%GRADE%%</td><td><?php _e('1-10 value. 1 is 10% or less, 2 is 20% or less, and so on', 'watu') ?>.</td></tr>
-<tr><td>%%WRONG_ANSWERS%%</td><td><?php _e('Number of answers you got wrong', 'watu') ?></td></tr>
-<tr><td>%%RATING%%</td><td><?php _e("A rating of your performance - it could be 'Failed'(0-39%), 'Just Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and 'Unbeatable'(100%)", 'watu') ?></td></tr>
-<tr><td>%%QUIZ_NAME%%</td><td><?php _e('The name of the quiz', 'watu') ?></td></tr>
-<tr><td>%%DESCRIPTION%%</td><td><?php _e('The text entered in the description field.', 'watu') ?></td></tr>
-</table>
-</div>
-</div>
-
-<p class="submit">
-<?php wp_nonce_field('watu_create_edit_quiz'); ?>
-<input type="hidden" name="action" value="<?php echo $action; ?>" />
-<input type="hidden" name="quiz" value="<?php echo $_REQUEST['quiz']; ?>" />
-<input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
-<span id="autosave"></span>
-<input type="submit" name="submit" value="<?php _e('Save', 'watu') ?>" style="font-weight: bold;" tabindex="4" />
-</p>
-
-</div>
-</form>
-
+	</div>
+	
+	<p class="submit">
+	<?php wp_nonce_field('watu_create_edit_quiz'); ?>
+	<input type="hidden" name="action" value="<?php echo $action; ?>" />
+	<input type="hidden" name="quiz" value="<?php echo $_REQUEST['quiz']; ?>" />
+	<input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
+	<span id="autosave"></span>
+	<input type="submit" name="submit" value="<?php _e('Save', 'watu') ?>" style="font-weight: bold;" tabindex="4" />
+	</p>
+	
+	</div>
+	</form>
+	
+	</div>
+	
+	<div id="watu-sidebar">
+			<?php require(WATU_PATH."/sidebar.php");?>
+	</div>
 </div>

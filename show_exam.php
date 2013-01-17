@@ -124,7 +124,7 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 	exit;// Exit due to ajax call
 
 } else { // Show The Test
-	$single_page = get_option('watu_single_page');
+	$single_page = $exam->single_page;
 ?>
 
 <div id="watu_quiz" class="quiz-area <?php if($single_page) echo 'single-page-quiz'; ?>">

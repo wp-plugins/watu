@@ -66,7 +66,7 @@ $exam_name = stripslashes($wpdb->get_var($wpdb->prepare("SELECT name FROM {$wpdb
 
 	<div class="postbox-container" style="width:73%;margin-right:2%;">
 	
-	<p><a href="tools.php?page=watu/exam.php"><?php _e('Back to exams', 'watu')?></a></p>
+	<p><a href="tools.php?page=watu_exams"><?php _e('Back to exams', 'watu')?></a></p>
 	
 	<?php
 	wp_enqueue_script( 'listman' );

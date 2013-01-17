@@ -2,9 +2,9 @@
 /*
 Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
-Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu/exam.php">Manage Your Exams</a> 
+Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 1.7
+Version: 1.8
 Author: CalendarScripts
 License: GPLv2 or later
 
@@ -24,6 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 define( 'WATU_PATH', dirname( __FILE__ ) );
+include( WATU_PATH.'/controllers/exam.php');
+require_once(WATU_PATH.'/wpframe.php');
 
 /// Initialize this plugin. Called by 'init' hook.
 add_action('init', 'watu_init');
@@ -36,25 +38,25 @@ function watu_init() {
  * Add a new menu under Manage, visible for all users with template viewing level.
  */
 add_action( 'admin_menu', 'watu_add_menu_links' );
+add_action ( 'watu_exam', 'watu_exam' );
 function watu_add_menu_links() {
 	global $wp_version, $_registered_pages;
-	$view_level= 'administrator';
+	$view_level= 'manage_options';
 	$page = 'edit.php';
 	if($wp_version >= '2.7') $page = 'tools.php';
 	
 	//add_menu_page('Watu Settings Page', 'Watu Settings', $view_level, 'watu', 'watu_options');	$page = 'watu';
 	
-	add_submenu_page($page, __('Manage Exams', 'watu'), __('Watu Exams', 'watu'), $view_level , 'watu/exam.php');
+	add_submenu_page($page, __('Manage Exams', 'watu'), __('Watu Exams', 'watu'), $view_level , 'watu_exams', 'watu_exams');
 	
-	$code_pages = array('exam_form.php','exam_action.php', 'question_form.php', 'question.php');
+	// hidden pages
+	add_submenu_page(NULL, __('Manage Exams', 'watu'), __('Watu Exams', 'watu'), $view_level , 'watu_exam', 'watu_exam');
+	
+	$code_pages = array('question_form.php', 'question.php');
 	foreach($code_pages as $code_page) {
 		$hookname = get_plugin_page_hookname("watu/$code_page", '' );
 		$_registered_pages[$hookname] = true;
 	}
-}
-
-function manage_exam() {
-	include 'exam.php';
 }
 
 /// Add an option page for watu
@@ -89,7 +91,8 @@ function watu_shortcode( $attr ) {
 add_action('activate_watu/watu.php','watu_activate');
 function watu_activate() {
 	global $wpdb;
-
+	$wpdb-> show_errors ();
+	
 	// Initial options.
 	add_option('watu_show_answers', 1);
 	add_option('watu_single_page', 0);
@@ -153,9 +156,19 @@ function watu_activate() {
 		 $sql = "ALTER TABLE {$wpdb->prefix}watu_master ADD randomize TINYINT NOT NULL";
 		 $wpdb->query($sql);
 	}
+	
+	// db updates in 1.8
+	if(empty($version) or $version < 1.8) {
+		 $sql = "ALTER TABLE {$wpdb->prefix}watu_master ADD single_page TINYINT NOT NULL";
+		 $wpdb->query($sql);
+		 
+		 // let all existing exams follow the default option
+		 $sql = "UPDATE {$wpdb->prefix}watu_master SET single_page = '".get_option('watu_single_page')."'";
+		 $wpdb->query($sql);
+	}
 						
 	update_option( "watu_delete_db", '' );
-	update_option( "watu_version", '1.7' );
+	update_option( "watu_version", '1.8' );
 }
 
 add_action('deactivate_watu/watu.php','watu_deactivate');

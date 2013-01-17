@@ -18,13 +18,11 @@ $answer_display = get_option('watu_show_answers');
 
 	<div class="postbox-container" style="width:73%;margin-right:2%;">	
 	
-	<p><?php _e('Go to', 'watu')?> <a href="tools.php?page=watu/exam.php"><?php _e('Manage Your Exams', 'watu')?></a></p>
+	<p><?php _e('Go to', 'watu')?> <a href="tools.php?page=watu_exams"><?php _e('Manage Your Exams', 'watu')?></a></p>
 	
 	<form name="post" action="" method="post" id="post">
 	<div id="poststuff">
 	<div id="postdiv" class="postarea">
-	
-	<?php showOption('single_page', __('Show all questions in a <strong>single page</strong>', 'watu')); ?><br />
 	
 	<div class="postbox">
 	<h3 class="hndle"><span><?php _e('Correct Answer Display', 'watu') ?></span></h3>

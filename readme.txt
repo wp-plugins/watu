@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: exam, test, quiz, survey
 Requires at least: 2.0.2
-Tested up to: 3.4.2
+Tested up to: 3.5
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -56,9 +56,20 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 <strong>Please do not place more than one code in one post or page. Only one exam will be shown at a time. If you wish more exams to be displayed, please give links to them!</strong>
 
+== Screenshots ==
+
+1. List of your exams with shortcodes for embedding in posts or pages
+2. The form for creating and editing an exam/test
+3. You can add unlimited number of questions in each exam, and each question can of single-answer, multiple-answer, or open-end type. 
+
 == Changelog ==
 
 Please note change log started being recorded after version 1.5.
+
+= Changes in 1.8 =
+- the exam title links to the post with this exam if exam is already published
+- "show all questions on single page" is now configurable for every exam
+- Improving code continued (more to come)
 
 = Changes in 1.7 =
 
