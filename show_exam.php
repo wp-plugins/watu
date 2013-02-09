@@ -134,7 +134,7 @@ $question_count = 1;
 $question_ids = '';
 foreach ($questions as $ques) {
 	echo "<div class='watu-question' id='question-$question_count'>";
-	echo "<div class='question-content'>". stripslashes(wpautop($ques->question)) . "</div><br />";
+	echo "<div class='question-content'>". stripslashes(wpautop($ques->question)) . "</div>";
 	echo "<input type='hidden' name='question_id[]' value='{$ques->ID}' />";
 	$question_ids .= $ques->ID.',';
 	$dans = $wpdb->get_results("SELECT ID,answer,correct FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");
