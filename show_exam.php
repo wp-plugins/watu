@@ -13,7 +13,7 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']=='show_exam_result' ) { //
 
 require_once('wpframe.php');
 
-if(!is_single() and isset($GLOBALS['watu_client_includes_loaded'])) { #If this is in the listing page - and a quiz is already shown, don't show another.
+if(!is_singular() and isset($GLOBALS['watu_client_includes_loaded'])) { #If this is in the listing page - and a quiz is already shown, don't show another.
 	printf(t("Please go to <a href='%s'>%s</a> to view the test"), get_permalink(), get_the_title());
 } else {
 
