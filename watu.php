@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 1.8.2
+Version: 1.9
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -25,13 +25,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 define( 'WATU_PATH', dirname( __FILE__ ) );
 include( WATU_PATH.'/controllers/exam.php');
+include( WATU_PATH.'/controllers/questions.php');
 require_once(WATU_PATH.'/wpframe.php');
 
 /// Initialize this plugin. Called by 'init' hook.
 add_action('init', 'watu_init');
 
 function watu_init() {
-	load_plugin_textdomain('watu', false, dirname( plugin_basename( __FILE__ )).'/langs/' );	
+	global $wpdb;
+	$wpdb-> show_errors ();
+	load_plugin_textdomain('watu', false, dirname( plugin_basename( __FILE__ )).'/langs/' );
+	
+	// table names as constants
+	define('WATU_EXAMS', $wpdb->prefix.'watu_master');	
+	define('WATU_QUESTIONS', $wpdb->prefix.'watu_question');
+	define('WATU_ANSWERS', $wpdb->prefix.'watu_answer');
+	define('WATU_GRADES', $wpdb->prefix.'watu_grading');
+	define('WATU_TAKINGS', $wpdb->prefix.'watu_takings');
 }
 
 /**
@@ -51,8 +61,9 @@ function watu_add_menu_links() {
 	
 	// hidden pages
 	add_submenu_page(NULL, __('Manage Exams', 'watu'), __('Watu Exams', 'watu'), $view_level , 'watu_exam', 'watu_exam');
+	add_submenu_page(NULL, __('Manage Questions', 'watu'), __('Manage Questions', 'watu'), $view_level , 'watu_questions', 'watu_questions');
 	
-	$code_pages = array('question_form.php', 'question.php');
+	$code_pages = array('question_form.php');
 	foreach($code_pages as $code_page) {
 		$hookname = get_plugin_page_hookname("watu/$code_page", '' );
 		$_registered_pages[$hookname] = true;
@@ -81,7 +92,7 @@ function watu_shortcode( $attr ) {
 	$contents = '';
 	if(is_numeric($exam_id)) { // Basic validiation - more on the show_quiz.php file.
 		ob_start();
-		include(ABSPATH . 'wp-content/plugins/watu/show_exam.php');
+		include(WATU_PATH . '/show_exam.php');
 		$contents = ob_get_contents();
 		ob_end_clean();
 	}
@@ -90,8 +101,8 @@ function watu_shortcode( $attr ) {
 
 add_action('activate_watu/watu.php','watu_activate');
 function watu_activate() {
-	global $wpdb;
-	$wpdb-> show_errors ();
+	global $wpdb;	
+	watu_init();
 	
 	// Initial options.
 	add_option('watu_show_answers', 1);
@@ -99,34 +110,33 @@ function watu_activate() {
 	add_option('watu_answer_type', 'radio');
 	$version = get_option('watu_version');
 
-	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-	if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix. "watu_master"."'") != $wpdb->prefix. "watu_master") {
-		$sql = "CREATE TABLE {$wpdb->prefix}watu_master(
+	if($wpdb->get_var("SHOW TABLES LIKE '".WATU_EXAMS."'") != WATU_EXAMS) {
+		$sql = "CREATE TABLE `".WATU_EXAMS."`(
 					ID int(11) unsigned NOT NULL auto_increment,
-					name varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-					description mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-					final_screen mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-					added_on datetime NOT NULL,
+					name varchar(50) NOT NULL DEFAULT '',
+					description mediumtext NOT NULL,
+					final_screen mediumtext NOT NULL,
+					added_on datetime NOT NULL DEFAULT '1900-01-01',
 					PRIMARY KEY  (ID)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8 ";
-		dbDelta($sql);
+		$wpdb->query($sql);
 	}		
 	
-	if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix. "watu_question"."'") != $wpdb->prefix. "watu_question") {
-		$sql = "CREATE TABLE {$wpdb->prefix}watu_question (
+	if($wpdb->get_var("SHOW TABLES LIKE '".WATU_QUESTIONS."'") != WATU_QUESTIONS) {
+		$sql = "CREATE TABLE ".WATU_QUESTIONS." (
 					ID int(11) unsigned NOT NULL auto_increment,
-					exam_id int(11) unsigned NOT NULL,
-					question mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-					answer_type char(15) COLLATE utf8_unicode_ci NOT NULL,
+					exam_id int(11) unsigned NOT NULL DEFAULT 0,
+					question mediumtext NOT NULL,
+					answer_type char(15)  NOT NULL DEFAULT '',
 					sort_order int(3) NOT NULL default 0,
 					PRIMARY KEY  (ID),
 					KEY quiz_id (exam_id)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8";
-		dbDelta($sql);
+		$wpdb->query($sql);
 	}		
 	
-	if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix. "watu_answer"."'") != $wpdb->prefix. "watu_answer") {
-		$sql = "CREATE TABLE {$wpdb->prefix}watu_answer (
+	if($wpdb->get_var("SHOW TABLES LIKE '".WATU_ANSWERS."'") != WATU_ANSWERS) {
+		$sql = "CREATE TABLE ".WATU_ANSWERS." (
 					ID int(11) unsigned NOT NULL auto_increment,
 					question_id int(11) unsigned NOT NULL,
 					answer varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -135,40 +145,54 @@ function watu_activate() {
 					sort_order int(3) NOT NULL default 0,
 					PRIMARY KEY  (ID)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8";
-		dbDelta($sql);
+		$wpdb->query($sql);
 	}					
 			
-	if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix. "watu_grading"."'") != $wpdb->prefix. "watu_grading") {
-		$sql = "CREATE TABLE `{$wpdb->prefix}watu_grading` (
+	if($wpdb->get_var("SHOW TABLES LIKE '".WATU_GRADES."'") != WATU_GRADES) {
+		$sql = "CREATE TABLE `".WATU_GRADES."` (
 				 `ID` int(11) NOT NULL AUTO_INCREMENT,
-				 `exam_id` int(11) NOT NULL,
-				 `gtitle` varchar (255) NOT NULL,
-				 `gdescription` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-				 `gfrom` int(11) NOT NULL,
-				 `gto` int(11) NOT NULL,
+				 `exam_id` int(11) NOT NULL DEFAULT 0,
+				 `gtitle` varchar (255) NOT NULL DEFAULT '',
+				 `gdescription` mediumtext NOT NULL,
+				 `gfrom` int(11) NOT NULL DEFAULT 0,
+				 `gto` int(11) NOT NULL DEFAULT 0,
 				 PRIMARY KEY (`ID`)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8";
-		dbDelta($sql);
+		$wpdb->query($sql);
 	}					
+	
+	if($wpdb->get_var("SHOW TABLES LIKE '".WATU_TAKINGS."'") != WATU_TAKINGS) {
+		$sql = "CREATE TABLE `".WATU_TAKINGS."` (
+				 `ID` int(11) NOT NULL AUTO_INCREMENT,
+				 `exam_id` int(11) NOT NULL DEFAULT 0,
+				 `user_id` int(11) NOT NULL DEFAULT 0,
+				 `ip` varchar(20) NOT NULL DEFAULT '',
+				 `date` DATE NOT NULL DEFAULT '1900-01-01',
+				 `points` INT NOT NULL DEFAULT 0,
+				 `grade_id` INT UNSIGNED NOT NULL DEFAULT 0,
+				 PRIMARY KEY (`ID`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+		$wpdb->query($sql);
+	}	
 	
 	// db updates in 1.7
 	if(empty($version) or $version < 1.7) {
-		 $sql = "ALTER TABLE {$wpdb->prefix}watu_master ADD randomize TINYINT NOT NULL";
+		 $sql = "ALTER TABLE ".WATU_EXAMS." ADD randomize TINYINT NOT NULL DEFAULT 0";
 		 $wpdb->query($sql);
 	}
 	
 	// db updates in 1.8
 	if(empty($version) or $version < 1.8) {
-		 $sql = "ALTER TABLE {$wpdb->prefix}watu_master ADD single_page TINYINT NOT NULL";
+		 $sql = "ALTER TABLE ".WATU_EXAMS." ADD single_page TINYINT NOT NULL DEFAULT 0";
 		 $wpdb->query($sql);
 		 
 		 // let all existing exams follow the default option
-		 $sql = "UPDATE {$wpdb->prefix}watu_master SET single_page = '".get_option('watu_single_page')."'";
+		 $sql = "UPDATE ".WATU_EXAMS." SET single_page = '".get_option('watu_single_page')."'";
 		 $wpdb->query($sql);
 	}
 						
 	update_option( "watu_delete_db", '' );
-	update_option( "watu_version", '1.8' );
+	update_option( "watu_version", '1.9' );
 }
 
 add_action('deactivate_watu/watu.php','watu_deactivate');
@@ -185,6 +209,7 @@ function watu_deactivate() {
 		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_question ");
 		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_answer ");
 		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_grading ");
+		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_takings ");
 	}
 }
 
@@ -195,14 +220,14 @@ function watu_vc_scripts() {
 			'watu-style',
 			plugins_url().'/watu/style.css',
 			array(),
-			'1.6'
+			'1.9.0'
 		);
 		
 		wp_enqueue_script(
 			'watu-script',
 			plugins_url().'/watu/script.js',
 			array(),
-			'1.6.0'
+			'1.9.0'
 		);
 }
 

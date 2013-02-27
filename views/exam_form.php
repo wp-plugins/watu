@@ -61,7 +61,7 @@
 	<tr><th style="text-align:left;"><?php _e('Variable', 'watu') ?></th><th style="text-align:left;"><?php _e('Value', 'watu') ?></th></tr>
 	<tr><td>%%SCORE%%</td><td><?php _e('The number of points collected.', 'watu') ?></td></tr>
 	<tr><td>%%TOTAL%%</td><td><?php _e('Maximum number of points', 'watu') ?></td></tr>
-	<tr><td>%%GRADE%%</td><td><?php _e('1-10 value. 1 is 10% or less, 2 is 20% or less, and so on', 'watu') ?>.</td></tr>
+	<tr><td>%%GRADE%%</td><td><?php _e('Shows the achieved grade - title and description together. If you want to design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-DESCRIPTION%% for grade description', 'watu') ?>.</td></tr>
 	<tr><td>%%WRONG_ANSWERS%%</td><td><?php _e('Number of answers you got wrong', 'watu') ?></td></tr>
 	<tr><td>%%RATING%%</td><td><?php _e("A rating of your performance - it could be 'Failed'(0-39%), 'Just Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and 'Unbeatable'(100%)", 'watu') ?></td></tr>
 	<tr><td>%%QUIZ_NAME%%</td><td><?php _e('The name of the quiz', 'watu') ?></td></tr>

@@ -98,14 +98,17 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 	$rating = $all_rating[$rate];
 	
 	$grade = 'None';
-	$allGrades = $wpdb->get_results(" SELECT * FROM `{$wpdb->prefix}watu_grading` WHERE exam_id=$exam_id ");
+	$gtitle = $gdescription="";
+	$g_id = 0;
+	$allGrades = $wpdb->get_results(" SELECT * FROM `".WATU_GRADES."` WHERE exam_id=$exam_id ");
 	if( count($allGrades) ){
 		foreach($allGrades as $grow ) {
 
 			if( $grow->gfrom <= $achieved and $achieved <= $grow->gto ) {
-				$grade = $grow->gtitle;
+				$grade = $gtitle = $grow->gtitle;
+				$gdescription = stripslashes($grow->gdescription);
+				$g_id = $grow->ID;
 				if(!empty($grow->gdescription)) $grade.="<p>".stripslashes($grow->gdescription)."</p>";
-				//
 				break;
 			}
 		}
@@ -114,12 +117,17 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 
 	$quiz_details = $wpdb->get_row($wpdb->prepare("SELECT name,final_screen, description FROM {$wpdb->prefix}watu_master WHERE ID=%d", $exam_id));
 
-	$replace_these	= array('%%SCORE%%', '%%TOTAL%%', '%%PERCENTAGE%%', '%%GRADE%%', '%%RATING%%', '%%CORRECT_ANSWERS%%', '%%WRONG_ANSWERS%%', '%%QUIZ_NAME%%',	  '%%DESCRIPTION%%');
-	$with_these		= array($score,		 $total,	  $percent,			$grade,		 $rating,		$score,					$total-$score,	   stripslashes($quiz_details->name), stripslashes($quiz_details->description));
+	$replace_these	= array('%%SCORE%%', '%%TOTAL%%', '%%PERCENTAGE%%', '%%GRADE%%', '%%RATING%%', '%%CORRECT_ANSWERS%%', '%%WRONG_ANSWERS%%', '%%QUIZ_NAME%%',	'%%DESCRIPTION%%', '%%GRADE-TITLE%%', '%%GRADE-DESCRIPTION%%');
+	$with_these		= array($score,		 $total,	  $percent,			$grade,		 $rating,		$score,					$total-$score,	   stripslashes($quiz_details->name), stripslashes($quiz_details->description), $gtitle, $gdescription);
+	
+	// insert taking
+	$uid = $user_ID ? $user_ID : 0;
+	$wpdb->query($wpdb->prepare("INSERT INTO ".WATU_TAKINGS." SET exam_id=%d, user_id=%d, ip=%s, date=CURDATE(), 
+		points=%d, grade_id=%d", $exam_id, $uid, $_SERVER['REMOTE_ADDR'], $achieved, $g_id));
 
 	// Show the results
-
-	print str_replace($replace_these, $with_these, stripslashes($quiz_details->final_screen));
+	$output = str_replace($replace_these, $with_these, stripslashes($quiz_details->final_screen));
+	print apply_filters('the_content', $output);
 	if($answer_display == 1) print '<hr />' . $result;
 	exit;// Exit due to ajax call
 
@@ -132,18 +140,18 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 <?php
 $question_count = 1;
 $question_ids = '';
+$output = '';
 foreach ($questions as $ques) {
-	echo "<div class='watu-question' id='question-$question_count'>";
-	echo "<div class='question-content'>". stripslashes(wpautop($ques->question)) . "</div>";
-	echo "<input type='hidden' name='question_id[]' value='{$ques->ID}' />";
+	$output .= "<div class='watu-question' id='question-$question_count'>";
+	$output .= "<div class='question-content'>". stripslashes(wpautop($ques->question)) . "</div>";
+	$output .= "<input type='hidden' name='question_id[]' value='{$ques->ID}' />";
 	$question_ids .= $ques->ID.',';
 	$dans = $wpdb->get_results("SELECT ID,answer,correct FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");
 	$ans_type = $ques->answer_type;
 	
 	// display textarea
-	if($ans_type=='textarea')
-	{
-		echo "<textarea name='answer-{$ques->ID}[]' rows='5' cols='40' id='textarea_q_{$ques->ID}'></textarea>"; 
+	if($ans_type=='textarea') {
+		$output .= "<textarea name='answer-{$ques->ID}[]' rows='5' cols='40' id='textarea_q_{$ques->ID}'></textarea>"; 
 	}	
 	
 	foreach ($dans as $ans) {
@@ -151,17 +159,18 @@ foreach ($questions as $ques) {
 			$answer_class = 'wrong-answer-label';
 			if($ans->correct) $answer_class = 'correct-answer-label';
 		}
-		echo "<input type='$ans_type' name='answer-{$ques->ID}[]' id='answer-id-{$ans->ID}' class='answer answer-$question_count $answer_class answerof-{$ques->ID}' value='{$ans->ID}' />";
-		echo "&nbsp;<label for='answer-id-{$ans->ID}' id='answer-label-{$ans->ID}' class='$answer_class answer label-$question_count'><span>" . stripslashes($ans->answer) . "</span></label><br />";
+		$output .= "<input type='$ans_type' name='answer-{$ques->ID}[]' id='answer-id-{$ans->ID}' class='answer answer-$question_count $answer_class answerof-{$ques->ID}' value='{$ans->ID}' />";
+		$output .= "&nbsp;<label for='answer-id-{$ans->ID}' id='answer-label-{$ans->ID}' class='$answer_class answer label-$question_count'><span>" . stripslashes($ans->answer) . "</span></label><br />";
 	}
 
-	echo "<input type='hidden' id='questionType".$question_count."' value='{$ques->answer_type}'>";
-	echo "</div>";
+	$output .= "<input type='hidden' id='questionType".$question_count."' value='{$ques->answer_type}'>";
+	$output .= "</div>";
 	$question_count++;
 }
-echo "<div style='display:none' id='question-$question_count'>";
-echo "<br /><div class='question-content'><img src=\"".plugins_url('watu/loading.gif')."\" width=\"16\" height=\"16\" alt=\"".__('Loading', 'watu')." ...\" title=\"".__('Loading', 'watu')." ...\" />&nbsp;".__('Loading', 'watu')." ...</div><br />";
-echo "</div>";
+$output .= "<div style='display:none' id='question-$question_count'>";
+$output .= "<br /><div class='question-content'><img src=\"".plugins_url('watu/loading.gif')."\" width=\"16\" height=\"16\" alt=\"".__('Loading', 'watu')." ...\" title=\"".__('Loading', 'watu')." ...\" />&nbsp;".__('Loading', 'watu')." ...</div><br />";
+$output .= "</div>";
+echo apply_filters('the_content',$output);
 $question_ids = preg_replace('/,$/', '', $question_ids );
 ?><br />
 <?php if($answer_display == 2) { ?>
@@ -181,6 +190,6 @@ Watu.qArr = question_ids.split(',');
 var watuURL = "<?php print plugins_url('watu/'.basename(__FILE__) ) ?>";
 </script>
 <?php }
-}
+	}
 }
 ?>

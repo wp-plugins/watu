@@ -70,7 +70,7 @@ function watu_exams() {
         <td>[WATU <?php echo $quiz->ID ?>]</td>
 				<td><?php echo $quiz->question_count ?></td>
 				<td><?php echo date(get_option('date_format') . ' ' . get_option('time_format'), strtotime($quiz->added_on)) ?></td>
-				<td><a href='edit.php?page=watu/question.php&amp;quiz=<?php echo $quiz->ID?>' class='edit'><?php _e('Manage Questions', 'watu')?></a></td>
+				<td><a href='admin.php?page=watu_questions&amp;quiz=<?php echo $quiz->ID?>' class='edit'><?php _e('Manage Questions', 'watu')?></a></td>
 				<td><a href='admin.php?page=watu_exam&amp;quiz=<?php echo $quiz->ID?>&amp;action=edit' class='edit'><?php _e('Edit', 'watu'); ?></a></td>
 				<td><a href='tools.php?page=watu_exams&amp;action=delete&amp;quiz=<?php echo $quiz->ID?>' class='delete' onclick="return confirm('<?php echo  addslashes(__("You are about to delete this quiz? This will delete all the questions and answers within this quiz. Press 'OK' to delete and 'Cancel' to stop.", 'watu'))?>');"><?php e('Delete')?></a></td>
 				</tr>
@@ -111,7 +111,7 @@ function watu_exam() {
 			$_POST['name'], $_POST['description'], $_POST['content'], $_POST['randomize'], $_POST['single_page']));
 			$exam_id = $wpdb->insert_id;
 			if($exam_id == 0 ) $wp_redirect = 'tools.php?page=watu_exams&message=fail';
-			$wp_redirect = 'edit.php?page=watu/question.php&message=new_quiz&quiz='.$exam_id;
+			$wp_redirect = 'admin.php?page=watu_questions&message=new_quiz&quiz='.$exam_id;
 		}
 		
 		if( $exam_id>0 and isset($_REQUEST['gradetitle']) and is_array($_REQUEST['gradetitle']) ) {
@@ -159,5 +159,5 @@ function watu_exam() {
 		$final_screen = __("<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n\n<p>You scored %%SCORE%% points out of %%TOTAL%%.</p>\n\n<p>Your performance have been rated as '%%RATING%%'</p>\n\n<p>Your obtained grade is '%%GRADE%%'</p>", 'watu');
 	}
 	
-	require(WATU_PATH."/views/exam_form.html");
+	require(WATU_PATH."/views/exam_form.php");
 }

@@ -146,7 +146,7 @@ function init() {
 jQuery(document).ready(init);
 </script>
 
-<form name="post" action="edit.php?page=watu/question.php&amp;quiz=<?php echo $_REQUEST['quiz']; ?>" method="post" id="post">
+<form name="post" action="admin.php?page=watu_questions&amp;quiz=<?php echo $_REQUEST['quiz']; ?>" method="post" id="post">
 <div id="poststuff">
 
 <div id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>" class="postarea">
@@ -216,7 +216,7 @@ jQuery(document).ready(init);
 <span id="autosave"></span>
 <input type="submit" name="submit" value="<?php _e('Save', 'watu') ?>" style="font-weight: bold;" />
 </p>
-<a href="edit.php?page=watu/question.php&amp;quiz=<?php echo $_REQUEST['quiz']?>"><?php _e("Go to Questions Page", 'watu') ?></a>
+<a href="admin.php?page=watu_questions&amp;quiz=<?php echo $_REQUEST['quiz']?>"><?php _e("Go to Questions Page", 'watu') ?></a>
 </div>
 </form>
 
