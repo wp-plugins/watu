@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: exam, test, quiz, survey
 Requires at least: 2.0.2
-Tested up to: 3.5
+Tested up to: 3.5.1
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -65,6 +65,12 @@ You need to create a post and embed the exam code. The exam code is shown in the
 == Changelog ==
 
 Please note change log started being recorded after version 1.5.
+
+= Changes in 1.9 =
+- Grade title and description are now separated
+- Shortcodes will be executed in questions and final screen
+- Code fixes and improvements
+- Localization issues fixed
 
 = Changes in 1.8 =
 - the exam title links to the post with this exam if exam is already published
