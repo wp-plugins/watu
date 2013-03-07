@@ -190,9 +190,15 @@ function watu_activate() {
 		 $sql = "UPDATE ".WATU_EXAMS." SET single_page = '".get_option('watu_single_page')."'";
 		 $wpdb->query($sql);
 	}
+	
+	// db updates in 1.905 - add 'result' column in the taking
+	if(empty($version) or $version < 1.905) {
+		$sql = "ALTER TABLE ".WATU_TAKINGS." ADD result TEXT NOT NULL";
+		$wpdb->query($sql);
+	}
 						
 	update_option( "watu_delete_db", '' );
-	update_option( "watu_version", '1.9' );
+	update_option( "watu_version", '1.905' );
 }
 
 add_action('deactivate_watu/watu.php','watu_deactivate');
