@@ -7,7 +7,7 @@ function watu_exams() {
 	if( isset($_REQUEST['grade']) ) wpframe_message($_REQUEST['grade']);
 	
 	if($_REQUEST['action'] == 'delete') {
-		$wpdb->get_results("DELETE FROM {$wpdb->prefix}watu_master WHERE ID='$_REQUEST[quiz]'");
+		$wpdb->get_results("DELETE FROM ".WATU_EXAMS." WHERE ID='$_REQUEST[quiz]'");
 		$wpdb->get_results("DELETE FROM {$wpdb->prefix}watu_answer WHERE question_id IN (SELECT ID FROM {$wpdb->prefix}watu_question WHERE exam_id='$_REQUEST[quiz]')");
 		$wpdb->get_results("DELETE FROM {$wpdb->prefix}watu_question WHERE exam_id='$_REQUEST[quiz]'");
 		wpframe_message(__("Test Deleted", 'watu'));
@@ -30,15 +30,18 @@ function watu_exams() {
 				<th scope="col"><?php _e('Title', 'watu') ?></th>
 				<th scope="col"><?php _e('Shortcode', 'watu') ?></th>
 				<th scope="col"><?php _e('Number Of Questions', 'watu') ?></th>
-				<th scope="col"><?php _e('Created on', 'watu') ?></th>
+				<th scope="col"><?php _e('Taken', 'watu') ?></th>
 				<th scope="col" colspan="3"><?php _e('Action', 'watu') ?></th>
 			</tr>
 			</thead>
 		
 			<tbody id="the-list">
 		<?php
-		// Retrieve the quizes
-		$exams = $wpdb->get_results("SELECT Q.ID,Q.name,Q.added_on,(SELECT COUNT(*) FROM {$wpdb->prefix}watu_question WHERE exam_id=Q.ID) AS question_count	FROM `{$wpdb->prefix}watu_master` AS Q ");
+		// Retrieve the quizzes
+		$exams = $wpdb->get_results("SELECT Q.ID,Q.name,Q.added_on,
+			(SELECT COUNT(ID) FROM ".WATU_QUESTIONS." WHERE exam_id=Q.ID) AS question_count,
+			(SELECT COUNT(ID) FROM ".WATU_TAKINGS." WHERE exam_id=Q.ID) AS taken
+			FROM `".WATU_EXAMS."` AS Q ");
 		
 		// now select all posts that have watu shortcode in them
 		$posts=$wpdb->get_results("SELECT * FROM {$wpdb->prefix}posts 
@@ -69,7 +72,7 @@ function watu_exams() {
 				if(!empty($quiz->post)) echo "</a>";?></td>
         <td>[WATU <?php echo $quiz->ID ?>]</td>
 				<td><?php echo $quiz->question_count ?></td>
-				<td><?php echo date(get_option('date_format') . ' ' . get_option('time_format'), strtotime($quiz->added_on)) ?></td>
+				<td><a href="admin.php?page=watu_takings&exam_id=<?php echo $quiz->ID?>"><?php echo $quiz->taken?> <?php _e('times', 'watu')?></a></td>
 				<td><a href='admin.php?page=watu_questions&amp;quiz=<?php echo $quiz->ID?>' class='edit'><?php _e('Manage Questions', 'watu')?></a></td>
 				<td><a href='admin.php?page=watu_exam&amp;quiz=<?php echo $quiz->ID?>&amp;action=edit' class='edit'><?php _e('Edit', 'watu'); ?></a></td>
 				<td><a href='tools.php?page=watu_exams&amp;action=delete&amp;quiz=<?php echo $quiz->ID?>' class='delete' onclick="return confirm('<?php echo  addslashes(__("You are about to delete this quiz? This will delete all the questions and answers within this quiz. Press 'OK' to delete and 'Cancel' to stop.", 'watu'))?>');"><?php e('Delete')?></a></td>

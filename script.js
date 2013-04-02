@@ -5,20 +5,39 @@ Watu.current_question = 1;
 Watu.total_questions = 0;
 Watu.mode = "show";
 
-Watu.checkAnswer = function(e) {	
-	// don't check for textareas	
-	if(jQuery('#questionType' + Watu.current_question).val() == 'textarea') return true; 	
+Watu.isAnswered = function() {
+	if(jQuery('#questionType' + Watu.current_question).val() == 'textarea') {
+		if(jQuery('.watu-textarea-'+Watu.current_question).val()!='') return true;
+		else return false;
+	}
 	
 	var answered = false;
-
+	
 	jQuery("#question-" + Watu.current_question + " .answer").each(function(i) {
-		if(this.checked) {
-			answered = true;
-			return true;
-		}
+			if(this.checked) {
+				answered = true;
+				return true;
+			}
 	});
-	if(!answered) {
-		if(!confirm("You did not select any answer. Are you sure you want to continue?")) {
+	
+	return answered;	
+}
+
+Watu.isRequired = function() {
+	if(jQuery('#questionType'+ Watu.current_question).attr('class') == 'required') return true;
+	
+	return false;
+}
+
+Watu.checkAnswer = function(e) {
+	if(!Watu.isAnswered()) {
+		if(Watu.isRequired()) {
+			alert(watu_i18n.missed_required_question);
+			return false;
+		}
+		
+		// not required, so ask
+		if(!confirm(watu_i18n.nothing_selected)) {
 			e.preventDefault();
 			e.stopPropagation();
 			return false;
@@ -51,7 +70,7 @@ Watu.showAnswer = function(e) {
 		Watu.current_question++;
 		jQuery("#question-" + Watu.current_question).show();
 
-		jQuery("#show-answer").val("Show Answer");
+		jQuery("#show-answer").val(watu_i18n.show_answer);
 		return;
 	}
 
@@ -78,26 +97,31 @@ Watu.showAnswer = function(e) {
 Watu.submitResult = function() {
 	var data = {action:'show_exam_result', quiz_id: exam_id, 'question_id[]': Watu.qArr };
 	
-	for(x=0; x<Watu.qArr.length; x++) 
-   {
-      // qArr[x] is the question ID
+	for(x=0; x<Watu.qArr.length; x++) {
+		if(Watu.singlePage) {
+			 Watu.current_question = x+1;
+			 
+			 if(!Watu.isAnswered() && Watu.isRequired()) {
+			 		alert(watu_i18n.missed_required_question);
+			 		return false;
+			 }
+		}		
+		
+    // qArr[x] is the question ID
 		var ansgroup = '.answerof-'+Watu.qArr[x];
 		var fieldName = 'answer-'+Watu.qArr[x];
 		var ansvalues= Array();
 		var i=0;
         
-	    if(jQuery('#textarea_q_'+Watu.qArr[x]).length>0)
-	    {
+	    if(jQuery('#textarea_q_'+Watu.qArr[x]).length>0) {
 	        // open end question
-	        // console.log(jQuery('#textarea_q_'+qArr[x]).val());
 	        ansvalues[0]=jQuery('#textarea_q_'+Watu.qArr[x]).val();
-	    }
-	    else
-	    {
+	    } 
+	    else {
 	        jQuery(ansgroup).each(function(){
-			if( jQuery(this).is(':checked') ) {
-				ansvalues[i] = this.value;
-				i++;
+						if( jQuery(this).is(':checked') ) {
+							ansvalues[i] = this.value;
+							i++;
 	  			}
 	  		});    
 	    }
@@ -129,7 +153,7 @@ Watu.initWatu = function() {
 		jQuery("#next-question").click(Watu.nextQuestion);
 		jQuery("#show-answer").click(Watu.showAnswer);
 	}
-	jQuery("#action-button").click(Watu.nextQuestion);
+	if(!Watu.singlePage) jQuery("#action-button").click(Watu.nextQuestion);
 }
 
 jQuery(document).ready(Watu.initWatu);

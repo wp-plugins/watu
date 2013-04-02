@@ -5,7 +5,7 @@ wpframe_stop_direct_call(__FILE__);
 $action = 'new';
 if($_REQUEST['action'] == 'edit') $action = 'edit';
 
-$question= $wpdb->get_row($wpdb->prepare("SELECT question, answer_type FROM {$wpdb->prefix}watu_question WHERE ID=%d", $_REQUEST['question']));
+$question= $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}watu_question WHERE ID=%d", $_REQUEST['question']));
 $all_answers = $wpdb->get_results($wpdb->prepare("SELECT answer, correct, point FROM {$wpdb->prefix}watu_answer WHERE question_id=%d ORDER BY sort_order", $_REQUEST['question']));
 $ans_type = $action =='new'? get_option('watu_answer_type'): $question->answer_type;
 $answer_count = 4;
@@ -173,6 +173,7 @@ jQuery(document).ready(init);
 <label>&nbsp;<input type='radio' name='answer_type' <?php print $multi?> id="answer_type_c" value='checkbox' /> <?php _e('Multiple Answers', 'watu')?></label>
 &nbsp;&nbsp;&nbsp;
 <label>&nbsp;<input type='radio' name='answer_type' <?php print $essay?> id="answer_type_t" value='textarea' /> <?php _e('Open End (Essay)', 'watu')?></label>
+<p><input type="checkbox" name="is_required" value="1" <?php if($question->is_required) echo 'checked'?>> <?php _e('This is a required question', 'watu')?></p>
 </div></div>
 
 <div class="postbox" style="display:<?php echo ($ans_type=='textarea')?'none':'blocks';?>" id="questionAnswers">

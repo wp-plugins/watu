@@ -28,8 +28,7 @@ $exam = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}watu_master 
 
 $order_sql = $exam->randomize?"ORDER BY RAND()":"ORDER BY ID";
 
-$questions = $wpdb->get_results($wpdb->prepare("SELECT ID,question, answer_type 
-		FROM {$wpdb->prefix}watu_question 
+$questions = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".WATU_QUESTIONS." 
 		WHERE exam_id=%d $order_sql", $exam_id));
 		
 if($questions) {
@@ -71,8 +70,7 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 		}
 
 		// textareas
-		if($ques->answer_type=='textarea')
-		{
+		if($ques->answer_type=='textarea') {
 			$result.="<li class='user-answer'>".wpautop($_REQUEST["answer-" . $ques->ID][0])."</li>";
 		}		
 		
@@ -151,7 +149,7 @@ foreach ($questions as $ques) {
 	
 	// display textarea
 	if($ans_type=='textarea') {
-		$output .= "<textarea name='answer-{$ques->ID}[]' rows='5' cols='40' id='textarea_q_{$ques->ID}'></textarea>"; 
+		$output .= "<textarea name='answer-{$ques->ID}[]' rows='5' cols='40' id='textarea_q_{$ques->ID}' class='watu-textarea-$question_count'></textarea>"; 
 	}	
 	
 	foreach ($dans as $ans) {
@@ -163,7 +161,7 @@ foreach ($questions as $ques) {
 		$output .= "&nbsp;<label for='answer-id-{$ans->ID}' id='answer-label-{$ans->ID}' class='$answer_class answer label-$question_count'><span>" . stripslashes($ans->answer) . "</span></label><br />";
 	}
 
-	$output .= "<input type='hidden' id='questionType".$question_count."' value='{$ques->answer_type}'>";
+	$output .= "<input type='hidden' id='questionType".$question_count."' value='{$ques->answer_type}' class='".($ques->is_required?'required':'')."'>";
 	$output .= "</div>";
 	$question_count++;
 }
@@ -187,6 +185,7 @@ $question_ids = preg_replace('/,$/', '', $question_ids );
 var question_ids = "<?php print $question_ids ?>";
 var exam_id = <?php print $exam_id ?>;
 Watu.qArr = question_ids.split(',');
+Watu.singlePage = '<?php echo $exam->single_page?>';
 var watuURL = "<?php print plugins_url('watu/'.basename(__FILE__) ) ?>";
 </script>
 <?php }

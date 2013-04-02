@@ -64,7 +64,12 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-Please note change log started being recorded after version 1.5.
+= Changes in 2.0 =
+- Required questions (optional)
+- A list of users who took an exam along with their results
+- Localization of the strings in the javascript
+- More flexible function to add new DB fields on update
+- Code fixes and improvements
 
 = Changes in 1.9 =
 - Grade title and description are now separated

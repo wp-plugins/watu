@@ -8,16 +8,19 @@ function watu_questions() {
 	
 	if(isset($_REQUEST['submit'])) {
 		if($action == 'edit'){ //Update goes here
-			$wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}watu_question SET question=%s, answer_type=%s WHERE ID=%d", $_REQUEST['content'], $_REQUEST['answer_type'], $_REQUEST['question']));
+			$wpdb->query($wpdb->prepare("UPDATE ".WATU_QUESTIONS." 
+			SET question=%s, answer_type=%s, is_required=%d 
+			WHERE ID=%d", $_POST['content'], $_POST['answer_type'], $_POST['is_required'], $_POST['question']));
 			$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->prefix}watu_answer WHERE question_id=%d", $_REQUEST['question']));
-	//$wpdb->show_errors(); $wpdb->print_error();
+
 			wpframe_message(__('Question updated.', 'watu'));
 	
 		} else {
 	
-		$sql = $wpdb->prepare("INSERT INTO {$wpdb->prefix}watu_question (exam_id, question, answer_type) VALUES(%d, %s, %s)", $_REQUEST['quiz'], $_REQUEST['content'], $_REQUEST['answer_type']);
+		$sql = $wpdb->prepare("INSERT INTO ".WATU_QUESTIONS." (exam_id, question, answer_type, is_required) 
+		VALUES(%d, %s, %s, %d)", $_GET['quiz'], $_POST['content'], $_POST['answer_type'], $_POST['is_required']);
 			$wpdb->query($sql);//Inserting the questions
-	//$wpdb->show_errors(); $wpdb->print_error();		
+	
 			wpframe_message(__('Question added.', 'watu'));
 			$_REQUEST['question'] = $wpdb->insert_id;
 			$action='edit';

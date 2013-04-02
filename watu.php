@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 1.9
+Version: 2.0
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 define( 'WATU_PATH', dirname( __FILE__ ) );
 include( WATU_PATH.'/controllers/exam.php');
 include( WATU_PATH.'/controllers/questions.php');
+include( WATU_PATH.'/controllers/takings.php');
 require_once(WATU_PATH.'/wpframe.php');
 
 /// Initialize this plugin. Called by 'init' hook.
@@ -74,7 +75,10 @@ function watu_add_menu_links() {
 add_action('admin_menu', 'watu_option_page');
 function watu_option_page() {
 	add_options_page(__('Watu Settings', 'watu'), __('Watu Settings', 'watu'), 'administrator', basename(__FILE__), 'watu_options');
+	
+	add_submenu_page(NULL, __('Exam submissions', 'watu'), __('Exam submissions', 'watu'), 'manage_options', 'watu_takings', 'watu_takings'); 
 }
+
 function watu_options() {
 	if ( function_exists('current_user_can') && !current_user_can('manage_options') ) die(__("Your are not allowed to to perform this operation", 'watu'));
 	if (! user_can_access_admin_page()) wp_die( __('You do not have sufficient permissions to access this page', 'watu') );
@@ -192,13 +196,17 @@ function watu_activate() {
 	}
 	
 	// db updates in 1.905 - add 'result' column in the taking
-	if(empty($version) or $version < 1.905) {
+	if(empty($version) or $version < 1.9) {
 		$sql = "ALTER TABLE ".WATU_TAKINGS." ADD result TEXT NOT NULL";
 		$wpdb->query($sql);
 	}
+	
+	watu_add_db_fields(array(
+		array("name"=>"is_required", "type"=>"TINYINT UNSIGNED NOT NULL DEFAULT 0")	
+	), WATU_QUESTIONS);					
 						
 	update_option( "watu_delete_db", '' );
-	update_option( "watu_version", '1.905' );
+	update_option( "watu_version", '2.0' );
 }
 
 add_action('deactivate_watu/watu.php','watu_deactivate');
@@ -233,9 +241,45 @@ function watu_vc_scripts() {
 			'watu-script',
 			plugins_url().'/watu/script.js',
 			array(),
-			'1.9.0'
+			'1.9.5'
 		);
+		
+		$translation_array = array(
+			'missed_required_question' => __('You have missed to answer a required question', 'watu'),
+			'nothing_selected' => __('You did not select any answer. Are you sure you want to continue?', 'watu'),
+			'show_answer' => __('Show Answer', 'watu')
+			);	
+		wp_localize_script( 'watu-script', 'watu_i18n', $translation_array );	
 }
+
+// function to conditionally add DB fields
+function watu_add_db_fields($fields, $table) {
+		global $wpdb;
+		
+		// check fields
+		$table_fields = $wpdb->get_results("SHOW COLUMNS FROM `$table`");
+		$table_field_names = array();
+		foreach($table_fields as $f) $table_field_names[] = $f->Field;		
+		$fields_to_add=array();
+		
+		foreach($fields as $field) {
+			 if(!in_array($field['name'], $table_field_names)) {
+			 	  $fields_to_add[] = $field;
+			 } 
+		}
+		
+		// now if there are fields to add, run the query
+		if(!empty($fields_to_add)) {
+			 $sql = "ALTER TABLE `$table` ";
+			 
+			 foreach($fields_to_add as $cnt => $field) {
+			 	 if($cnt > 0) $sql .= ", ";
+			 	 $sql .= "ADD $field[name] $field[type]";
+			 } 
+			 
+			 $wpdb->query($sql);
+		}
+	}
 
 add_action('wp_enqueue_scripts', 'watu_vc_scripts');
 add_action('admin_enqueue_scripts', 'watu_vc_scripts');
