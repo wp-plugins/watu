@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.0
+Version: 2.0.1
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -179,31 +179,27 @@ function watu_activate() {
 		$wpdb->query($sql);
 	}	
 	
-	// db updates in 1.7
-	if(empty($version) or $version < 1.7) {
-		 $sql = "ALTER TABLE ".WATU_EXAMS." ADD randomize TINYINT NOT NULL DEFAULT 0";
-		 $wpdb->query($sql);
-	}
 	
 	// db updates in 1.8
 	if(empty($version) or $version < 1.8) {
-		 $sql = "ALTER TABLE ".WATU_EXAMS." ADD single_page TINYINT NOT NULL DEFAULT 0";
-		 $wpdb->query($sql);
-		 
 		 // let all existing exams follow the default option
 		 $sql = "UPDATE ".WATU_EXAMS." SET single_page = '".get_option('watu_single_page')."'";
 		 $wpdb->query($sql);
 	}
 	
-	// db updates in 1.905 - add 'result' column in the taking
-	if(empty($version) or $version < 1.9) {
-		$sql = "ALTER TABLE ".WATU_TAKINGS." ADD result TEXT NOT NULL";
-		$wpdb->query($sql);
-	}
+	watu_add_db_fields(array(
+		array("name"=>"randomize", "type"=>"TINYINT NOT NULL DEFAULT 0"),
+		array("name"=>"single_page", "type"=>"TINYINT NOT NULL DEFAULT 0"),
+		array("name"=>"single_page", "type"=>"TINYINT NOT NULL DEFAULT 0")
+	), WATU_EXAMS);	
 	
 	watu_add_db_fields(array(
 		array("name"=>"is_required", "type"=>"TINYINT UNSIGNED NOT NULL DEFAULT 0")	
-	), WATU_QUESTIONS);					
+	), WATU_QUESTIONS);	
+	
+	watu_add_db_fields(array(
+		array("name"=>"result", "type"=>"TEXT NOT NULL")	
+	), WATU_TAKINGS);					
 						
 	update_option( "watu_delete_db", '' );
 	update_option( "watu_version", '2.0' );
