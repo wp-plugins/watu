@@ -48,11 +48,16 @@ Watu.checkAnswer = function(e) {
 
 Watu.nextQuestion = function(e) {
 	if(!Watu.checkAnswer(e)) return;
+	
+	// change the displayed question number
+	var numQ = jQuery('#numQ').html();
+	numQ++;	
+	jQuery('#numQ').html(numQ);
 
 	jQuery("#question-" + Watu.current_question).hide();
 	Watu.current_question++;
 	jQuery("#question-" + Watu.current_question).show();
-
+	
 	if(Watu.total_questions <= Watu.current_question) {
 		jQuery("#next-question").hide();
 		jQuery("#action-button").show();
@@ -95,7 +100,7 @@ Watu.showAnswer = function(e) {
 }
 
 Watu.submitResult = function() {
-	var data = {action:'show_exam_result', quiz_id: exam_id, 'question_id[]': Watu.qArr };
+	var data = {action:'watu_submit', 'do': 'show_exam_result', quiz_id: exam_id, 'question_id[]': Watu.qArr };
 	
 	for(x=0; x<Watu.qArr.length; x++) {
 		if(Watu.singlePage) {

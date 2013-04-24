@@ -64,6 +64,13 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
+= Changes in 2.1 =
+- Displaying "Question X of Y" so the user knows where they are
+- Fixing incompatibility with Paid Membership PRO
+- Shortcodes on the final screen
+- Starting API (Not yet documented)
+- Code fixes and improvements
+
 = Changes in 2.0 =
 - Required questions (optional)
 - A list of users who took an exam along with their results

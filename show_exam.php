@@ -1,49 +1,32 @@
 <?php
-if(isset($_REQUEST['action']) and $_REQUEST['action']=='show_exam_result' ) { // Initial setup for ajax.
-	if (!function_exists('add_action')) {
-		$wp_root = '../../..';
-		if (file_exists($wp_root.'/wp-load.php')) {
-			require_once($wp_root.'/wp-load.php');
-		} else {
-			require_once($wp_root.'/wp-config.php');
-		}
-	}
-	$exam_id = $_REQUEST['quiz_id'];
-}
-
-require_once('wpframe.php');
+if(isset($_REQUEST['do']) and $_REQUEST['do']=='show_exam_result' ) $exam_id = $_REQUEST['quiz_id'];
 
 if(!is_singular() and isset($GLOBALS['watu_client_includes_loaded'])) { #If this is in the listing page - and a quiz is already shown, don't show another.
-	printf(t("Please go to <a href='%s'>%s</a> to view the test"), get_permalink(), get_the_title());
-} else {
+	printf(t("Please go to <a href='%s'>%s</a> to view the test"), get_permalink(), get_thfe_title());
+	return false;
+} 
 
 global $wpdb;
-$GLOBALS['wpframe_plugin_name'] = basename(dirname(__FILE__));
-$GLOBALS['wpframe_plugin_folder'] = $GLOBALS['wpframe_wordpress'] . '/wp-content/plugins/' . $GLOBALS['wpframe_plugin_name'];
 
 $answer_display = get_option('watu_show_answers');
 
 // select exam
-$exam = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}watu_master WHERE ID=%d", $exam_id));
+$exam = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_EXAMS." WHERE ID=%d", $exam_id));
 
 $order_sql = $exam->randomize?"ORDER BY RAND()":"ORDER BY ID";
 
 $questions = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".WATU_QUESTIONS." 
 		WHERE exam_id=%d $order_sql", $exam_id));
+$num_questions = sizeof($questions);		
 		
 if($questions) {
-	if(!isset($GLOBALS['watu_client_includes_loaded']) and !isset($_REQUEST['action']) ) {
-?>
-<link type="text/css" rel="stylesheet" href="<?php echo $GLOBALS['wpframe_plugin_folder']?>/style.css" />
-<?php
-	$GLOBALS['watu_client_includes_loaded'] = true; // Make sure that this code is not loaded more than once.
-}
+	if(!isset($GLOBALS['watu_client_includes_loaded']) and !isset($_REQUEST['do']) ) {
+		$GLOBALS['watu_client_includes_loaded'] = true; // Make sure that this code is not loaded more than once.
+	}
 
 
-if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
-	$score = 0;
-	$achieved = 0;
-	$total = 0;
+if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
+	$score = $achieved = $total = 0;
 	$result = '';
 	$result .= "<p>" . __('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p>";
 
@@ -52,7 +35,7 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 	$_exam = new WatuExam();
 	$questions = $_exam->reorder_questions($questions, $_POST['question_id']);
 
-	foreach ($questions as $ques) {
+	foreach ($questions as $qct => $ques) {
 		$result .= "<div class='show-question'>";
 		$result .= "<div class='show-question-content'>". stripslashes(wpautop($ques->question)) . "</div>\n";
 		$all_answers = $wpdb->get_results("SELECT ID,answer,correct, point FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");
@@ -125,8 +108,9 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 
 	// Show the results
 	$output = str_replace($replace_these, $with_these, stripslashes($quiz_details->final_screen));
+	
 	print apply_filters('the_content', $output);
-	if($answer_display == 1) print '<hr />' . $result;
+	if($answer_display == 1) print '<hr />' . apply_filters('the_content',$result);
 	exit;// Exit due to ajax call
 
 } else { // Show The Test
@@ -139,7 +123,7 @@ if(isset($_REQUEST['action']) and $_REQUEST['action']) { // Quiz Reuslts.
 $question_count = 1;
 $question_ids = '';
 $output = '';
-foreach ($questions as $ques) {
+foreach ($questions as $qct => $ques) {
 	$output .= "<div class='watu-question' id='question-$question_count'>";
 	$output .= "<div class='question-content'>". stripslashes(wpautop($ques->question)) . "</div>";
 	$output .= "<input type='hidden' name='question_id[]' value='{$ques->ID}' />";
@@ -174,6 +158,7 @@ $question_ids = preg_replace('/,$/', '', $question_ids );
 <?php if($answer_display == 2) { ?>
 <input type="button" id="show-answer" value="<?php _e('Show Answer', 'watu') ?>"  /><br />
 <?php } else { ?>
+<p><?php _e('Question', 'watu')?> <span id='numQ'>1</span> <?php _e('of', 'watu')?> <?php echo $num_questions;?></p>
 <input type="button" id="next-question" value="<?php _e('Next', 'watu') ?> &gt;"  /><br />
 <?php } ?>
 
@@ -186,9 +171,7 @@ var question_ids = "<?php print $question_ids ?>";
 var exam_id = <?php print $exam_id ?>;
 Watu.qArr = question_ids.split(',');
 Watu.singlePage = '<?php echo $exam->single_page?>';
-var watuURL = "<?php print plugins_url('watu/'.basename(__FILE__) ) ?>";
+var watuURL = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
 </script>
 <?php }
-	}
 }
-?>

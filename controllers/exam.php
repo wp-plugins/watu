@@ -8,8 +8,8 @@ function watu_exams() {
 	
 	if($_REQUEST['action'] == 'delete') {
 		$wpdb->get_results("DELETE FROM ".WATU_EXAMS." WHERE ID='$_REQUEST[quiz]'");
-		$wpdb->get_results("DELETE FROM {$wpdb->prefix}watu_answer WHERE question_id IN (SELECT ID FROM {$wpdb->prefix}watu_question WHERE exam_id='$_REQUEST[quiz]')");
-		$wpdb->get_results("DELETE FROM {$wpdb->prefix}watu_question WHERE exam_id='$_REQUEST[quiz]'");
+		$wpdb->get_results("DELETE FROM ".WATU_ANSWERS." WHERE question_id IN (SELECT ID FROM ".WATU_QUESTIONS." WHERE exam_id='$_REQUEST[quiz]')");
+		$wpdb->get_results("DELETE FROM ".WATU_QUESTIONS." WHERE exam_id='$_REQUEST[quiz]'");
 		wpframe_message(__("Test Deleted", 'watu'));
 	}
 	?>
@@ -144,6 +144,8 @@ function watu_exam() {
 		
 		$wp_redirect = admin_url($wp_redirect);
 		
+		do_action('watu_exam_saved', $exam_id);
+		
 		echo "<meta http-equiv='refresh' content='0;url=$wp_redirect' />"; 
 		exit;
 	}
@@ -159,7 +161,7 @@ function watu_exam() {
 		$grades = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}watu_grading WHERE  exam_id=%d order by ID ", $_REQUEST['quiz']) );
 		$final_screen = stripslashes($dquiz->final_screen);
 	} else {
-		$final_screen = __("<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n\n<p>You scored %%SCORE%% points out of %%TOTAL%%.</p>\n\n<p>Your performance have been rated as '%%RATING%%'</p>\n\n<p>Your obtained grade is '%%GRADE%%'</p>", 'watu');
+		$final_screen = __("<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n\n<p>You scored %%SCORE%% points out of %%TOTAL%% points total.</p>\n\n<p>Your performance have been rated as '%%RATING%%'</p>\n\n<p>Your obtained grade is '%%GRADE%%'</p>", 'watu');
 	}
 	
 	require(WATU_PATH."/views/exam_form.php");
