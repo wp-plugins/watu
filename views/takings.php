@@ -14,7 +14,7 @@
 				<tr><td><?php echo $taking->user_id?$taking->user_login:$taking->ip?></td>
 				<td><?php echo date(get_option('date_format'), strtotime($taking->date));?></td>
 				<td><?php echo $taking->points?></td>
-				<td><?php echo apply_filters('the_content', $taking->result)?></td></tr>
+				<td><?php echo apply_filters('watu_content', $taking->result)?></td></tr>
 			<?php endforeach;?>
 		</table>
 		

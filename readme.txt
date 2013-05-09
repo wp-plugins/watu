@@ -64,6 +64,9 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
+= Changes in 2.1.1 =
+- Replaced 'the_content' filter with custom filter to avoid issues with membership plugins
+
 = Changes in 2.1 =
 - Displaying "Question X of Y" so the user knows where they are
 - Fixing incompatibility with Paid Membership PRO
