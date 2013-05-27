@@ -2,7 +2,7 @@
 if(isset($_REQUEST['do']) and $_REQUEST['do']=='show_exam_result' ) $exam_id = $_REQUEST['quiz_id'];
 
 if(!is_singular() and isset($GLOBALS['watu_client_includes_loaded'])) { #If this is in the listing page - and a quiz is already shown, don't show another.
-	printf(t("Please go to <a href='%s'>%s</a> to view the test"), get_permalink(), get_thfe_title());
+	printf(__("Please go to <a href='%s'>%s</a> to view the test", 'watu'), get_permalink(), get_thfe_title());
 	return false;
 } 
 

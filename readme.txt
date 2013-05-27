@@ -64,8 +64,10 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.1.1 = 
+= Changes in 2.1.2 = 
 - Replaced 'the_content' filter with custom filter to avoid issues with membership plugins
+- Cleanup the root folder from show_exam.php
+- Other code fixes and improvements
 
 = Changes in 2.1 =
 - Displaying "Question X of Y" so the user knows where they are
