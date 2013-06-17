@@ -64,9 +64,12 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.1.2 = 
+= Changes in 2.1.3 = 
 - Replaced 'the_content' filter with custom filter to avoid issues with membership plugins
 - Cleanup the root folder from show_exam.php
+- Another method added to the API, see the new docs
+- The answers field changed to TEXT so you can now add long choices/answers to the questions
+- Fixed bug in the list of taken exams
 - Other code fixes and improvements
 
 = Changes in 2.1 =
@@ -106,3 +109,14 @@ You need to create a post and embed the exam code. The exam code is shown in the
 - Added "Essay" (open-end) question 
 - Resolved possible Javascript conflicts
 - Internationalization ready - find the .pot file in langs/ folder
+
+== Developers API ==
+
+In order to allow other plugins to integrate better to Watu we have started working on developers API.
+The following action calls are currently available:
+
+= do_action('watu_exam_submitted', $taking_id)  
+Called when exam is submitted, passes the taken exam ID 
+
+= do_action('watu_exam_saved', $exam_id)
+Called when you add or edit exam (after submitting the changes). Passes the changed exam ID. 

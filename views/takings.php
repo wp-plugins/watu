@@ -11,7 +11,7 @@
 			<th><?php _e('Points', 'watu')?></th><th><?php _e('Result', 'watu')?></th></tr>
 			
 			<?php foreach($takings as $taking):?>
-				<tr><td><?php echo $taking->user_id?$taking->user_login:$taking->ip?></td>
+				<tr><td><?php echo $taking->user_id?'<a href="user-edit.php?user_id='.$taking->user_id.'">'.$taking->user_login.'</a>':$taking->ip?></td>
 				<td><?php echo date(get_option('date_format'), strtotime($taking->date));?></td>
 				<td><?php echo $taking->points?></td>
 				<td><?php echo apply_filters('watu_content', $taking->result)?></td></tr>

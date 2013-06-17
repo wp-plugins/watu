@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.1.2
+Version: 2.1.3
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -155,7 +155,7 @@ function watu_activate() {
 		$sql = "CREATE TABLE ".WATU_ANSWERS." (
 					ID int(11) unsigned NOT NULL auto_increment,
 					question_id int(11) unsigned NOT NULL,
-					answer varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+					answer TEXT,
 					correct enum('0','1') NOT NULL default '0',
 					point int(11) NOT NULL,
 					sort_order int(3) NOT NULL default 0,
@@ -210,10 +210,17 @@ function watu_activate() {
 	
 	watu_add_db_fields(array(
 		array("name"=>"result", "type"=>"TEXT NOT NULL")	
-	), WATU_TAKINGS);					
+	), WATU_TAKINGS);			
+	
+	// let's change choice and answer fields to TEXT instead of VARCHAR - 2.1.3	
+	if(empty($version) or $version < 2.1) {
+		 // let all existing exams follow the default option
+		 $sql = "ALTER TABLE ".WATU_ANSWERS." CHANGE answer answer TEXT";
+		 $wpdb->query($sql);
+	}	
 						
 	update_option( "watu_delete_db", '' );
-	update_option( "watu_version", '2.0' );
+	update_option( "watu_version", '2.1' );
 }
 
 add_action('deactivate_watu/watu.php','watu_deactivate');

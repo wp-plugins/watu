@@ -6,7 +6,7 @@ if(!is_singular() and isset($GLOBALS['watu_client_includes_loaded'])) { #If this
 	return false;
 } 
 
-global $wpdb;
+global $wpdb, $user_ID;
 
 $answer_display = get_option('watu_show_answers');
 
@@ -105,12 +105,15 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	$uid = $user_ID ? $user_ID : 0;
 	$wpdb->query($wpdb->prepare("INSERT INTO ".WATU_TAKINGS." SET exam_id=%d, user_id=%d, ip=%s, date=CURDATE(), 
 		points=%d, grade_id=%d, result=%s", $exam_id, $uid, $_SERVER['REMOTE_ADDR'], $achieved, $g_id, $grade));
+	$taking_id = $wpdb->insert_id;	
 
 	// Show the results
 	$output = str_replace($replace_these, $with_these, stripslashes($quiz_details->final_screen));
 	
 	print apply_filters('watu_content', $output);
 	if($answer_display == 1) print '<hr />' . apply_filters('watu_content',$result);
+	
+	do_action('watu_exam_submitted', $taking_id);
 	exit;// Exit due to ajax call
 
 } else { // Show The Test
