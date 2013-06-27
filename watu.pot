@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.1.2\n"
+"Project-Id-Version: Watu 2.1.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2013-05-27 14:41:41+00:00\n"
+"POT-Creation-Date: 2013-06-27 11:07:21+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -77,9 +77,7 @@ msgid "Edit"
 msgstr ""
 
 #: controllers/exam.php:78
-msgid ""
-"You are about to delete this quiz? This will delete all the questions and "
-"answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
+msgid "You are about to delete this quiz? This will delete all the questions and answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
 msgstr ""
 
 #: controllers/exam.php:83
@@ -94,7 +92,7 @@ msgstr ""
 msgid ""
 "<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n"
 "\n"
-"<p>You scored %%SCORE%% points out of %%TOTAL%% points total.</p>\n"
+"<p>You scored %%POINTS%% points out of %%TOTAL%% points total.</p>\n"
 "\n"
 "<p>Your performance have been rated as '%%RATING%%'</p>\n"
 "\n"
@@ -133,7 +131,7 @@ msgstr ""
 msgid "into any post."
 msgstr ""
 
-#: controllers/questions.php:85 controllers/show_exam.php:161
+#: controllers/questions.php:85 controllers/show_exam.php:165
 #: question_form.php:17
 msgid "Question"
 msgstr ""
@@ -143,9 +141,7 @@ msgid "Number Of Answers"
 msgstr ""
 
 #: controllers/questions.php:110
-msgid ""
-"You are about to delete this question. This will delete the answers to this "
-"question. Press 'OK' to delete and 'Cancel' to stop."
+msgid "You are about to delete this question. This will delete the answers to this question. Press 'OK' to delete and 'Cancel' to stop."
 msgstr ""
 
 #: controllers/questions.php:110
@@ -165,69 +161,66 @@ msgid "Please go to <a href='%s'>%s</a> to view the test"
 msgstr ""
 
 #: controllers/show_exam.php:31
-msgid ""
-"All the questions in the exam along with their answers are shown below. Your "
-"answers are bolded. The correct answers have a green background while the "
-"incorrect ones have a red background."
+msgid "All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background."
 msgstr ""
 
 #: controllers/show_exam.php:61
 msgid "Question was not answered"
 msgstr ""
 
-#: controllers/show_exam.php:72
+#: controllers/show_exam.php:73
 msgid "Failed"
 msgstr ""
 
-#: controllers/show_exam.php:72
+#: controllers/show_exam.php:73
 msgid "Just Passed"
 msgstr ""
 
-#: controllers/show_exam.php:74
+#: controllers/show_exam.php:75
 msgid "Satisfactory"
 msgstr ""
 
-#: controllers/show_exam.php:74
+#: controllers/show_exam.php:75
 msgid "Competent"
 msgstr ""
 
-#: controllers/show_exam.php:74
+#: controllers/show_exam.php:75
 msgid "Good"
 msgstr ""
 
-#: controllers/show_exam.php:74
+#: controllers/show_exam.php:75
 msgid "Very Good"
 msgstr ""
 
-#: controllers/show_exam.php:74
+#: controllers/show_exam.php:75
 msgid "Excellent"
 msgstr ""
 
-#: controllers/show_exam.php:74
+#: controllers/show_exam.php:75
 msgid "Unbeatable"
 msgstr ""
 
-#: controllers/show_exam.php:74
+#: controllers/show_exam.php:75
 msgid "Cheater"
 msgstr ""
 
-#: controllers/show_exam.php:153
+#: controllers/show_exam.php:157
 msgid "Loading"
 msgstr ""
 
-#: controllers/show_exam.php:159 watu.php:257
+#: controllers/show_exam.php:163 watu.php:264
 msgid "Show Answer"
 msgstr ""
 
-#: controllers/show_exam.php:161
+#: controllers/show_exam.php:165
 msgid "of"
 msgstr ""
 
-#: controllers/show_exam.php:162
+#: controllers/show_exam.php:166
 msgid "Next"
 msgstr ""
 
-#: controllers/show_exam.php:165
+#: controllers/show_exam.php:169
 msgid "Show Results"
 msgstr ""
 
@@ -252,9 +245,7 @@ msgid "Show answers at the end of the Quiz"
 msgstr ""
 
 #: options.php:32
-msgid ""
-"Show the answer of a question immediately after the user have selected an "
-"answer(Will not work in single page mode)."
+msgid "Show the answer of a question immediately after the user have selected an answer(Will not work in single page mode)."
 msgstr ""
 
 #: options.php:37
@@ -321,7 +312,7 @@ msgstr ""
 msgid "Add New Answer"
 msgstr ""
 
-#: question_form.php:218 views/exam_form.php:79
+#: question_form.php:218 views/exam_form.php:80
 msgid "Save"
 msgstr ""
 
@@ -418,10 +409,7 @@ msgid "online demo."
 msgstr ""
 
 #: sidebar.php:19
-msgid ""
-"Upgrading to PRO comes with <strong>60 days money-back guarantee</strong>, "
-"one year <strong>free upgrades</strong> and one year <strong>free support</"
-"strong>."
+msgid "Upgrading to PRO comes with <strong>60 days money-back guarantee</strong>, one year <strong>free upgrades</strong> and one year <strong>free support</strong>."
 msgstr ""
 
 #: sidebar.php:24
@@ -545,7 +533,7 @@ msgid "Value"
 msgstr ""
 
 #: views/exam_form.php:62
-msgid "The number of points collected."
+msgid "The number of points collected. (The old %%SCORE%% tag also works)"
 msgstr ""
 
 #: views/exam_form.php:63
@@ -553,28 +541,26 @@ msgid "Maximum number of points"
 msgstr ""
 
 #: views/exam_form.php:64
-msgid ""
-"Shows the achieved grade - title and description together. If you want to "
-"design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-"
-"DESCRIPTION%% for grade description"
+msgid "Shows the achieved grade - title and description together. If you want to design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-DESCRIPTION%% for grade description"
 msgstr ""
 
 #: views/exam_form.php:65
-msgid "Number of answers you got wrong"
+msgid "Number of correct answers. In multiple-select questions even one correct answer makes the question correct. In WatuPRO this is configurable"
 msgstr ""
 
 #: views/exam_form.php:66
-msgid ""
-"A rating of your performance - it could be 'Failed'(0-39%), 'Just "
-"Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and "
-"'Unbeatable'(100%)"
+msgid "Number of answers you got wrong"
 msgstr ""
 
 #: views/exam_form.php:67
-msgid "The name of the quiz"
+msgid "A rating of your performance - it could be 'Failed'(0-39%), 'Just Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and 'Unbeatable'(100%)"
 msgstr ""
 
 #: views/exam_form.php:68
+msgid "The name of the quiz"
+msgstr ""
+
+#: views/exam_form.php:69
 msgid "The text entered in the description field."
 msgstr ""
 
@@ -583,9 +569,7 @@ msgid "Users who submitted the exam '%s'"
 msgstr ""
 
 #: views/takings.php:4
-msgid ""
-"A lot more detailed reports, filters, exports, and other important features "
-"are available in"
+msgid "A lot more detailed reports, filters, exports, and other important features are available in"
 msgstr ""
 
 #: views/takings.php:6
@@ -632,14 +616,13 @@ msgstr ""
 msgid "You do not have sufficient permissions to access this page"
 msgstr ""
 
-#: watu.php:255
+#: watu.php:262
 msgid "You have missed to answer a required question"
 msgstr ""
 
-#: watu.php:256
+#: watu.php:263
 msgid "You did not select any answer. Are you sure you want to continue?"
 msgstr ""
-
 #. Plugin Name of the plugin/theme
 msgid "Watu"
 msgstr ""
@@ -649,14 +632,7 @@ msgid "http://calendarscripts.info/watu-wordpress.html"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid ""
-"Create exams and quizzes and display the result immediately after the user "
-"takes the exam. Watu for Wordpress is a light version of <a href=\"http://"
-"calendarscripts.info/watupro/\" target=\"_blank\">WatuPRO</a>. Check it if "
-"you want to run fully featured exams with data exports, student logins, "
-"timers, random questions and more. Free support and upgrades are available. "
-"Go to <a href=\"options-general.php?page=watu.php\">Watu Settings</a> or <a "
-"href=\"tools.php?page=watu_exams\">Manage Your Exams</a>"
+msgid "Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href=\"http://calendarscripts.info/watupro/\" target=\"_blank\">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href=\"options-general.php?page=watu.php\">Watu Settings</a> or <a href=\"tools.php?page=watu_exams\">Manage Your Exams</a>"
 msgstr ""
 
 #. Author of the plugin/theme

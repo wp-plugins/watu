@@ -64,12 +64,14 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.1.3 = 
+= Changes in 2.1.4 = 
 - Replaced 'the_content' filter with custom filter to avoid issues with membership plugins
 - Cleanup the root folder from show_exam.php
 - Another method added to the API, see the new docs
 - The answers field changed to TEXT so you can now add long choices/answers to the questions
 - Fixed bug in the list of taken exams
+- Fixed issues with correct/wrong answer calculation
+- Added %%CORRECT%% answers variable to display number of correct answers
 - Other code fixes and improvements
 
 = Changes in 2.1 =

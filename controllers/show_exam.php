@@ -26,7 +26,7 @@ if($questions) {
 
 
 if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
-	$score = $achieved = $total = 0;
+	$score = $achieved = $total = $num_correct = 0;
 	$result = '';
 	$result .= "<p>" . __('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p>";
 
@@ -46,7 +46,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		foreach ($all_answers as $ans) {
 			$class = 'answer';
 			if(  in_array($ans->ID , $ansArr) ) $class .= ' user-answer';
-			if($ans->correct == 1) $class .= ' correct-answer';
+			if($ans->correct == 1) {$class .= ' correct-answer';}
 			if( in_array($ans->ID , $ansArr ) and $ans->correct == 1) {$correct = true; $score+=$ans->point;}
 			if( in_array($ans->ID , $ansArr ) ) $achieved+=$ans->point; 
 			$result .= "<li class='$class'><span class='answer'>" . stripslashes($ans->answer) . "</span></li>\n";
@@ -61,6 +61,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		if(!$_REQUEST["answer-" . $ques->ID]) $result .= "<p class='unanswered'>" . __('Question was not answered', 'watu') . "</p>";
 
 		$result .= "</div>";
+		if($correct) $num_correct++;
 		//$total++;
 	}
 	$total = $wpdb->get_var($wpdb->prepare("SELECT sum(point) FROM `{$wpdb->prefix}watu_question` as q inner join `{$wpdb->prefix}watu_answer` as a on question_id=q.ID WHERE `exam_id`=%d and correct='1' ", $exam_id));
@@ -98,8 +99,8 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 
 	$quiz_details = $wpdb->get_row($wpdb->prepare("SELECT name,final_screen, description FROM {$wpdb->prefix}watu_master WHERE ID=%d", $exam_id));
 
-	$replace_these	= array('%%SCORE%%', '%%TOTAL%%', '%%PERCENTAGE%%', '%%GRADE%%', '%%RATING%%', '%%CORRECT_ANSWERS%%', '%%WRONG_ANSWERS%%', '%%QUIZ_NAME%%',	'%%DESCRIPTION%%', '%%GRADE-TITLE%%', '%%GRADE-DESCRIPTION%%');
-	$with_these		= array($score,		 $total,	  $percent,			$grade,		 $rating,		$score,					$total-$score,	   stripslashes($quiz_details->name), stripslashes($quiz_details->description), $gtitle, $gdescription);
+	$replace_these	= array('%%SCORE%%', '%%TOTAL%%', '%%PERCENTAGE%%', '%%GRADE%%', '%%RATING%%', '%%CORRECT%%', '%%WRONG_ANSWERS%%', '%%QUIZ_NAME%%',	'%%DESCRIPTION%%', '%%GRADE-TITLE%%', '%%GRADE-DESCRIPTION%%', '%%POINTS%%');
+	$with_these		= array($score,		 $total,	  $percent,			$grade,		 $rating,		$num_correct,					$num_questions-$num_correct,	   stripslashes($quiz_details->name), stripslashes($quiz_details->description), $gtitle, $gdescription, $score);
 	
 	// insert taking
 	$uid = $user_ID ? $user_ID : 0;
