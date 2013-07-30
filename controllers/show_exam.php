@@ -126,7 +126,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 <?php
 $question_count = 1;
 $question_ids = '';
-$output = '';
+$output = $answer_class = '';
 foreach ($questions as $qct => $ques) {
 	$output .= "<div class='watu-question' id='question-$question_count'>";
 	$output .= "<div class='question-content'>". stripslashes(wpautop($ques->question)) . "</div>";
@@ -171,11 +171,16 @@ $question_ids = preg_replace('/,$/', '', $question_ids );
 </form>
 </div>
 <script type="text/javascript">
-var question_ids = "<?php print $question_ids ?>";
-var exam_id = <?php print $exam_id ?>;
+var exam_id=0;
+var question_ids='';
+var watuURL='';
+jQuery(function($){
+question_ids = "<?php print $question_ids ?>";
+exam_id = <?php print $exam_id ?>;
 Watu.qArr = question_ids.split(',');
 Watu.singlePage = '<?php echo $exam->single_page?>';
-var watuURL = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
+watuURL = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
+});
 </script>
 <?php }
 }

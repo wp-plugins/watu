@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.1.4
+Version: 2.2
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -30,13 +30,17 @@ include( WATU_PATH.'/controllers/takings.php');
 include( WATU_PATH.'/controllers/ajax.php');
 require_once(WATU_PATH.'/wpframe.php');
 
-/// Initialize this plugin. Called by 'init' hook.
-add_action('init', 'watu_init');
-
 function watu_init() {
 	global $wpdb;
 	$wpdb-> show_errors ();
 	load_plugin_textdomain('watu', false, dirname( plugin_basename( __FILE__ )).'/langs/' );
+	
+	$version = get_bloginfo('version');
+	if($version <= 3.3) add_action('wp_enqueue_scripts', 'watu_vc_scripts');
+	add_action('admin_enqueue_scripts', 'watu_vc_scripts');
+	add_action('wp_enqueue_scripts', 'watu_vc_jquery');	
+	
+	add_shortcode( 'WATU', 'watu_shortcode' );
 	
 	// table names as constants
 	define('WATU_EXAMS', $wpdb->prefix.'watu_master');	
@@ -75,6 +79,7 @@ function watu_add_menu_links() {
 	// hidden pages
 	add_submenu_page(NULL, __('Manage Exams', 'watu'), __('Watu Exams', 'watu'), $view_level , 'watu_exam', 'watu_exam');
 	add_submenu_page(NULL, __('Manage Questions', 'watu'), __('Manage Questions', 'watu'), $view_level , 'watu_questions', 'watu_questions');
+	add_submenu_page(NULL, __('Add/Edit Question', 'watu'), __('Add/Edit Question', 'watu'), $view_level , 'watu_question', 'watu_question');
 	
 	$code_pages = array('question_form.php');
 	foreach($code_pages as $code_page) {
@@ -101,17 +106,18 @@ function watu_options() {
 /**
  * This will scan all the content pages that wordpress outputs for our special code. If the code is found, it will replace the requested quiz.
  */
- add_shortcode( 'WATU', 'watu_shortcode' );
 function watu_shortcode( $attr ) {
 	$exam_id = $attr[0];
 
 	$contents = '';
-	if(is_numeric($exam_id)) { // Basic validiation - more on the show_quiz.php file.
-		ob_start();
-		include(WATU_PATH . '/controllers/show_exam.php');
-		$contents = ob_get_contents();
-		ob_end_clean();
-	}
+	if(!is_numeric($exam_id)) return $contents;
+	
+	watu_vc_scripts();
+	ob_start();
+	include(WATU_PATH . '/controllers/show_exam.php');
+	$contents = ob_get_contents();
+	ob_end_clean();
+	
 	return $contents;
 }
 
@@ -253,9 +259,9 @@ function watu_vc_scripts() {
 		
 		wp_enqueue_script(
 			'watu-script',
-			plugins_url().'/watu/script.js',
+			plugins_url('/watu/script.js'),
 			array(),
-			'1.9.7'
+			'2.0'
 		);
 		
 		$translation_array = array(
@@ -264,6 +270,10 @@ function watu_vc_scripts() {
 			'show_answer' => __('Show Answer', 'watu')
 			);	
 		wp_localize_script( 'watu-script', 'watu_i18n', $translation_array );	
+}
+
+function watu_vc_jquery() {
+	wp_enqueue_script('jquery');
 }
 
 // function to conditionally add DB fields
@@ -293,9 +303,8 @@ function watu_add_db_fields($fields, $table) {
 			 
 			 $wpdb->query($sql);
 		}
-	}
+}
 
-add_action('wp_enqueue_scripts', 'watu_vc_scripts');
-add_action('admin_enqueue_scripts', 'watu_vc_scripts');
+add_action('init', 'watu_init');
 add_action('wp_ajax_watu_submit', 'watu_submit');
 add_action('wp_ajax_nopriv_watu_submit', 'watu_submit');

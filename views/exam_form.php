@@ -23,7 +23,7 @@
 	<div class="postbox" id="titlediv">
 		<h3 class="hndle"><span><?php _e('Exam Name', 'watu') ?></span></h3>
 		<div class="inside">
-			<input type='text' name='name' id="title" value='<?php echo stripslashes($dquiz->name); ?>' />
+			<input type='text' name='name' id="title" value='<?php echo stripslashes(@$dquiz->name); ?>' />
 		</div>
 		<div class="inside">
 			<p><input id="watuRandomize" type="checkbox" name="randomize" value="1" <?php if(!empty($dquiz->randomize)) echo 'checked'?>> <label for="watuRandomize"><?php _e("Randomize questions", 'watu');?></label></p>
@@ -35,7 +35,7 @@
 	<div class="postbox">
 	<h3 class="hndle"><span><?php _e('Description', 'watu') ?></span></h3>
 	<div class="inside">
-	<textarea name='description' rows='5' cols='50' style='width:100%'><?php echo stripslashes($dquiz->description); ?></textarea>
+	<textarea name='description' rows='5' cols='50' style='width:100%'><?php echo stripslashes(@$dquiz->description); ?></textarea>
 	</div></div>
 	
 	<style type="text/css"> #gradecontent p{border-bottom:1px dotted #ccc;padding-bottom:3px;} #gradecontent label{padding: 5px 10px;} #gradecontent textarea{width:96%;margin-left:10px;} #gradecontent p img.gradeclose{ border:0 none; float:right; } </style>

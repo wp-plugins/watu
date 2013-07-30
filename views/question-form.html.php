@@ -1,18 +1,3 @@
-<?php
-require('wpframe.php');
-wpframe_stop_direct_call(__FILE__);
-
-$action = 'new';
-if($_REQUEST['action'] == 'edit') $action = 'edit';
-
-$question= $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}watu_question WHERE ID=%d", $_REQUEST['question']));
-$all_answers = $wpdb->get_results($wpdb->prepare("SELECT answer, correct, point FROM {$wpdb->prefix}watu_answer WHERE question_id=%d ORDER BY sort_order", $_REQUEST['question']));
-$ans_type = $action =='new'? get_option('watu_answer_type'): $question->answer_type;
-$answer_count = 4;
-if($action == 'edit' and $answer_count < count($all_answers)) $answer_count = count($all_answers) ;
-
-?>
-
 <div class="wrap">
 <h2><?php echo ucfirst($action) . ' '. __("Question", 'watu'); ?></h2>
 
@@ -146,15 +131,15 @@ function init() {
 jQuery(document).ready(init);
 </script>
 
-<form name="post" action="admin.php?page=watu_questions&amp;quiz=<?php echo $_REQUEST['quiz']; ?>" method="post" id="post">
+<form name="post" action="admin.php?page=watu_questions&amp;quiz=<?php echo $_GET['quiz']; ?>&amp;action=<?php echo empty($question->ID)?'new':'edit'?>" method="post" id="post">
 <div id="poststuff">
 
-<div id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>" class="postarea">
+<div class="postarea">
 
 <div class="postbox">
 <h3 class="hndle"><?php e('Question') ?></span></h3>
 <div class="inside">
-<?php wp_editor(stripslashes($question->question), 'content'); ?>
+<?php wp_editor(stripslashes(@$question->question), 'content'); ?>
 </div></div>
 
 <div class="postbox" id="atdiv">
@@ -173,7 +158,7 @@ jQuery(document).ready(init);
 <label>&nbsp;<input type='radio' name='answer_type' <?php print $multi?> id="answer_type_c" value='checkbox' /> <?php _e('Multiple Answers', 'watu')?></label>
 &nbsp;&nbsp;&nbsp;
 <label>&nbsp;<input type='radio' name='answer_type' <?php print $essay?> id="answer_type_t" value='textarea' /> <?php _e('Open End (Essay)', 'watu')?></label>
-<p><input type="checkbox" name="is_required" value="1" <?php if($question->is_required) echo 'checked'?>> <?php _e('This is a required question', 'watu')?></p>
+<p><input type="checkbox" name="is_required" value="1" <?php if(!empty($question->is_required)) echo 'checked'?>> <?php _e('This is a required question', 'watu')?></p>
 </div></div>
 
 <div class="postbox" style="display:<?php echo ($ans_type=='textarea')?'none':'blocks';?>" id="questionAnswers">
@@ -181,10 +166,10 @@ jQuery(document).ready(init);
 	<div class="inside">	
 		<?php
 		for($i=1; $i<=$answer_count; $i++) { ?>
-		<p style="border-bottom:1px dotted #ccc"><textarea name="answer[]" class="answer" rows="3" cols="50"><?php if($action == 'edit') echo stripslashes($all_answers[$i-1]->answer); ?></textarea>
+		<p style="border-bottom:1px dotted #ccc"><textarea name="answer[]" class="answer" rows="3" cols="50"><?php if($action == 'edit') echo stripslashes(@$all_answers[$i-1]->answer); ?></textarea>
 		<label for="correct_answer_<?php echo $i?>"><?php _e("Correct Answer", 'watu'); ?></label>
-		<input type="<?php print $ans_type?>" class="correct_answer" id="correct_answer_<?php echo $i?>" <?php if($all_answers[$i-1]->correct == 1) echo 'checked="checked"';?> name="correct_answer[]" value="<?php echo $i?>" />
-		<label style="margin-left:10px"><?php _e('Points:', 'watu')?> <input type="text" class="numeric" size="4" name="point[]" value="<?php if($action == 'edit') echo stripslashes($all_answers[$i-1]->point); ?>"></label>
+		<input type="<?php print @$ans_type?>" class="correct_answer" id="correct_answer_<?php echo $i?>" <?php if(@$all_answers[$i-1]->correct == 1) echo 'checked="checked"';?> name="correct_answer[]" value="<?php echo $i?>" />
+		<label style="margin-left:10px"><?php _e('Points:', 'watu')?> <input type="text" class="numeric" size="4" name="point[]" value="<?php if($action == 'edit') echo stripslashes(@$all_answers[$i-1]->point); ?>"></label>
 		</p>
 		<?php } ?>
 		<style>#extra-answers p{border-bottom:1px dotted #ccc;}</style>

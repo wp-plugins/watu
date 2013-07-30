@@ -6,7 +6,7 @@ function watu_exams() {
 	if(isset($_REQUEST['message']) && $_REQUEST['message'] == 'fail') wpframe_message(__('Error occured!!! please try again', 'watu'));
 	if( isset($_REQUEST['grade']) ) wpframe_message($_REQUEST['grade']);
 	
-	if($_REQUEST['action'] == 'delete') {
+	if(!empty($_GET['action']) and $_GET['action'] == 'delete') {
 		$wpdb->get_results("DELETE FROM ".WATU_EXAMS." WHERE ID='$_REQUEST[quiz]'");
 		$wpdb->get_results("DELETE FROM ".WATU_ANSWERS." WHERE question_id IN (SELECT ID FROM ".WATU_QUESTIONS." WHERE exam_id='$_REQUEST[quiz]')");
 		$wpdb->get_results("DELETE FROM ".WATU_QUESTIONS." WHERE exam_id='$_REQUEST[quiz]'");
@@ -62,7 +62,7 @@ function watu_exams() {
 		
 		if(count($exams)):
 			foreach($exams as $quiz):
-				$class = ('alternate' == $class) ? '' : 'alternate';
+				$class = ('alternate' == @$class) ? '' : 'alternate';
 		
 				print "<tr id='quiz-{$quiz->ID}' class='$class'>\n";
 				?>

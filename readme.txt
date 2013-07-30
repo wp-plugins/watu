@@ -64,7 +64,7 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.1.4 = 
+= Changes in 2.2 = 
 - Replaced 'the_content' filter with custom filter to avoid issues with membership plugins
 - Cleanup the root folder from show_exam.php
 - Another method added to the API, see the new docs
@@ -72,6 +72,7 @@ You need to create a post and embed the exam code. The exam code is shown in the
 - Fixed bug in the list of taken exams
 - Fixed issues with correct/wrong answer calculation
 - Added %%CORRECT%% answers variable to display number of correct answers
+- Watu scripts and CSS are now loaded only when you have exams on the page avoiding unnecessary page overload 
 - Other code fixes and improvements
 
 = Changes in 2.1 =
