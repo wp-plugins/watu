@@ -160,7 +160,7 @@ echo apply_filters('watu_content',$output);
 $question_ids = preg_replace('/,$/', '', $question_ids );
 ?><br />
 <?php 
-if($answer_display == 2) : ?>
+if($answer_display == 2 and $single_page != 1) : ?>
 <input type="button" id="show-answer" value="<?php _e('Show Answer', 'watu') ?>"  /><br />
 <?php endif;
 if($single_page != 1): ?>
