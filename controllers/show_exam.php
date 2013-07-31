@@ -163,7 +163,7 @@ $question_ids = preg_replace('/,$/', '', $question_ids );
 if($answer_display == 2 and $single_page != 1) : ?>
 <input type="button" id="show-answer" value="<?php _e('Show Answer', 'watu') ?>"  /><br />
 <?php endif;
-if($single_page != 1): ?>
+if($single_page != 1 and $answer_display!=2): ?>
 <p><?php _e('Question', 'watu')?> <span id='numQ'>1</span> <?php _e('of', 'watu')?> <?php echo $num_questions;?></p>
 <input type="button" id="next-question" value="<?php _e('Next', 'watu') ?> &gt;"  /><br />
 <?php endif; ?>
