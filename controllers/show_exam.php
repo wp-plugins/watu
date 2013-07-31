@@ -159,12 +159,14 @@ $output .= "</div>";
 echo apply_filters('watu_content',$output);
 $question_ids = preg_replace('/,$/', '', $question_ids );
 ?><br />
-<?php if($answer_display == 2) { ?>
+<?php 
+if($answer_display == 2) : ?>
 <input type="button" id="show-answer" value="<?php _e('Show Answer', 'watu') ?>"  /><br />
-<?php } else { ?>
+<?php endif;
+if($single_page != 1): ?>
 <p><?php _e('Question', 'watu')?> <span id='numQ'>1</span> <?php _e('of', 'watu')?> <?php echo $num_questions;?></p>
 <input type="button" id="next-question" value="<?php _e('Next', 'watu') ?> &gt;"  /><br />
-<?php } ?>
+<?php endif; ?>
 
 <input type="button" name="action" onclick="Watu.submitResult()" id="action-button" value="<?php _e('Show Results', 'watu') ?>"  />
 <input type="hidden" name="quiz_id" value="<?php echo  $exam_id ?>" />

@@ -64,6 +64,9 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
+= Changes in 2.2.1 =
+- Fixed bug with "Question X of Y total" showing even for single-page quizzes 
+
 = Changes in 2.2 = 
 - Replaced 'the_content' filter with custom filter to avoid issues with membership plugins
 - Cleanup the root folder from show_exam.php
