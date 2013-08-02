@@ -1,8 +1,8 @@
 === Plugin Name ===
 Contributors: prasunsen
 Tags: exam, test, quiz, survey
-Requires at least: 2.0.2
-Tested up to: 3.5.1
+Requires at least: 3.0
+Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
 
