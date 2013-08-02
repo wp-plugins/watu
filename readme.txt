@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Watu ===
 Contributors: prasunsen
 Tags: exam, test, quiz, survey
 Requires at least: 3.0
