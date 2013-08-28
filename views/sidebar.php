@@ -11,6 +11,7 @@
 		<li><strong><?php _e('Students login.', 'watu')?></strong> <?php _e('Registered users have a dashboard, can re-take exams etc.', 'watu')?></li>
 		<li><strong><?php _e('Questions and exam categories.', 'watu')?></strong> <?php _e('User groups with different access to them.', 'watu')?></li>
 		<li><strong><?php _e('Copy exmas', 'watu')?></strong> <?php _e('and their questions into a new or existing exams.', 'watu')?></li>
+		<li><strong><?php _e('More question types', 'watu')?></strong> <?php _e('and more control on defining correctly answered questions.', 'watu')?></li>
 		<li><?php _e('And a lot more - just come to see!', 'watu')?></li>
 	</ol>
 	

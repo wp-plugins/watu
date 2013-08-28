@@ -8,10 +8,12 @@ if(!is_singular() and isset($GLOBALS['watu_client_includes_loaded'])) { #If this
 
 global $wpdb, $user_ID;
 
-$answer_display = get_option('watu_show_answers');
-
 // select exam
 $exam = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_EXAMS." WHERE ID=%d", $exam_id));
+
+$answer_display = get_option('watu_show_answers');
+if(!isset($exam->show_answers) or $exam->show_answers == 100) $answer_display = $answer_display; // assign the default
+else $answer_display = $exam->show_answers;
 
 $order_sql = $exam->randomize?"ORDER BY RAND()":"ORDER BY ID";
 
@@ -22,7 +24,7 @@ $num_questions = sizeof($questions);
 if($questions) {
 	if(!isset($GLOBALS['watu_client_includes_loaded']) and !isset($_REQUEST['do']) ) {
 		$GLOBALS['watu_client_includes_loaded'] = true; // Make sure that this code is not loaded more than once.
-	}
+}
 
 
 if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
@@ -42,7 +44,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 
 		$correct = false;
 		$result .= "<ul>";
-		$ansArr = is_array( $_REQUEST["answer-" . $ques->ID] )? $_REQUEST["answer-" . $ques->ID] : array();
+		$ansArr = is_array( @$_REQUEST["answer-" . $ques->ID] )? $_REQUEST["answer-" . $ques->ID] : array();
 		foreach ($all_answers as $ans) {
 			$class = 'answer';
 			if(  in_array($ans->ID , $ansArr) ) $class .= ' user-answer';

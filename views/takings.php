@@ -24,6 +24,6 @@
 	</div>
 	
 	<div id="watu-sidebar">
-			<?php require(WATU_PATH."/sidebar.php");?>
+			<?php include(WATU_PATH."/views/sidebar.php");?>
 	</div>
 </div>

@@ -69,7 +69,7 @@ $answer_display = get_option('watu_show_answers');
 	
 	</div>
 	<div id="watu-sidebar">
-			<?php require("sidebar.php");?>
+			<?php include(WATU_PATH."/views/sidebar.php");?>
 	</div>
 </div>	
 

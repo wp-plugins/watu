@@ -89,29 +89,31 @@ function watu_exams() {
 		<a href="admin.php?page=watu_exam&amp;action=new"><?php _e("Create New Exam", 'watu')?></a>
 		</div>
 		<div id="watu-sidebar">
-				<?php require(WATU_PATH."/sidebar.php");?>
+				<?php include(WATU_PATH."/views/sidebar.php");?>
 		</div>
 	</div>	
 <?php } 
 
 function watu_exam() {
 	global $wpdb;
+	$answer_display = get_option('watu_show_answers');
 	
 	if(isset($_REQUEST['submit'])) {
 		if($_REQUEST['action'] == 'edit') { //Update goes here
 			$exam_id = $_REQUEST['quiz'];
-			$wpdb->query("delete from {$wpdb->prefix}watu_grading where exam_id=".$_REQUEST['quiz']);
-			$wpdb->get_results($wpdb->prepare("UPDATE {$wpdb->prefix}watu_master 
-				SET name=%s, description=%s,final_screen=%s, randomize=%d, single_page=%d  
+			$wpdb->query("delete from ".WATU_GRADES." where exam_id=".$_REQUEST['quiz']);
+			$wpdb->get_results($wpdb->prepare("UPDATE ".WATU_EXAMS."
+				SET name=%s, description=%s,final_screen=%s, randomize=%d, single_page=%d, show_answers=%d  
 				WHERE ID=%d", $_POST['name'], $_POST['description'], $_POST['content'], 
-				$_POST['randomize'], $_POST['single_page'], $_REQUEST['quiz']));
+				$_POST['randomize'], @$_POST['single_page'], $_POST['show_answers'], $_POST['quiz']));
 			
 			$wp_redirect = 'tools.php?page=watu_exams&message=updated';
 		
 		} else {
-			$wpdb->get_results($wpdb->prepare("INSERT INTO {$wpdb->prefix}watu_master 
-			(name, description, final_screen,  added_on, randomize, single_page) VALUES(%s, %s, %s, NOW(), %d, %d)", 
-			$_POST['name'], $_POST['description'], $_POST['content'], $_POST['randomize'], $_POST['single_page']));
+			$wpdb->get_results($wpdb->prepare("INSERT INTO ".WATU_EXAMS." 
+			(name, description, final_screen,  added_on, randomize, single_page, show_answers) 
+			VALUES(%s, %s, %s, NOW(), %d, %d, %d)", 
+			$_POST['name'], $_POST['description'], $_POST['content'], $_POST['randomize'], $_POST['single_page'], $_POST['show_answers']));
 			$exam_id = $wpdb->insert_id;
 			if($exam_id == 0 ) $wp_redirect = 'tools.php?page=watu_exams&message=fail';
 			$wp_redirect = 'admin.php?page=watu_questions&message=new_quiz&quiz='.$exam_id;
@@ -125,8 +127,8 @@ function watu_exam() {
 			$toArr = $_REQUEST['grade_to'];
 			
 			foreach($_REQUEST['gradetitle'] as $key=>$title) {			
-				$title = $wpdb->escape($title);
-				$desc = $wpdb->escape( $descArr[$key] );
+				$title = esc_sql($title);
+				$desc = esc_sql( $descArr[$key] );
 				$from =  $fromArr[$key];
 				$to =  $toArr[$key];
 				
@@ -157,12 +159,16 @@ function watu_exam() {
 	$dquiz = array();
 	$grades = array();
 	if($action == 'edit') {
-		$dquiz = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}watu_master WHERE ID=%d", $_REQUEST['quiz']));
-		$grades = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}watu_grading WHERE  exam_id=%d order by ID ", $_REQUEST['quiz']) );
+		$dquiz = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_EXAMS." WHERE ID=%d", $_REQUEST['quiz']));
+		$grades = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".WATU_GRADES." WHERE  exam_id=%d order by ID ", $_REQUEST['quiz']) );
 		$final_screen = stripslashes($dquiz->final_screen);
 	} else {
 		$final_screen = __("<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n\n<p>You scored %%POINTS%% points out of %%TOTAL%% points total.</p>\n\n<p>Your performance have been rated as '%%RATING%%'</p>\n\n<p>Your obtained grade is '%%GRADE%%'</p>", 'watu');
 	}
+	
+	// see what is the show_answers to this exam
+	if(!isset($dquiz->show_answers) or $dquiz->show_answers == 100) $answer_display = $answer_display; // assign the default
+	else $answer_display = $dquiz->show_answers;
 	
 	require(WATU_PATH."/views/exam_form.php");
 }

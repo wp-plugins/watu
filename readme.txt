@@ -6,7 +6,7 @@ Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
 
-Creates exams with unlimited number of questions and answers. Assigns grade after the exam is taken.
+Creates exams with unlimited number of questions and answers. Assigns grade after the exam or quiz is taken.
 
 == License ==
 
@@ -25,11 +25,25 @@ Creates exams with unlimited number of questions and answers. Assigns grade afte
 
 == Description ==
 
-Create exams and quizzes and display the result immediately after the user takes the exam. You can assign grades and point levels for every grade. Then assign points to every answer to a question and Watu will figure out the grade based on the total number of points collected.
+Create exams and quizzes and display the result immediately after the user takes the exam. You can assign grades and point levels for every grade in the exam / quiz. Then assign points to every answer to a question and Watu will figure out the grade based on the total number of points collected.
 
-Watu for Wordpress is a light Wordpress version of <a href="http://calendarscripts.info/watupro/" target="_blank">Watu PRO</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. 
+Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">Watu PRO</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. 
 
-<b>Please go to Tools -&gt; Manage Exams to start creating exams.</b>
+**Please go to Tools -&gt; Manage Exams to start creating exams.**
+
+### Features ###
+
+* Creates quizzes and exams
+* Use shortcodes to embed quizzes in posts or pages
+* Single-choice questions
+* Multiple-choice questions
+* Open-end questions (essays)
+* Required questions
+* Grades
+* Shows answers at the end of the quiz or immediately after selection
+* List of users who took exam along with their results
+* Ajax-based loading of the quiz results.
+
 
 == Installation ==
 
@@ -54,7 +68,7 @@ Yes. It's even highly recommended for answers to questions that allow multuple a
 
 You need to create a post and embed the exam code. The exam code is shown in the green text above the questions table in "Manage questions" page for that exam.
 
-<strong>Please do not place more than one code in one post or page. Only one exam will be shown at a time. If you wish more exams to be displayed, please give links to them!</strong>
+**Please do not place more than one code in one post or page. Only one exam will be shown at a time. If you wish more exams to be displayed, please give links to them!**
 
 == Screenshots ==
 
@@ -64,8 +78,10 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.2.1 =
-- Fixed bug with "Question X of Y total" showing even for single-page quizzes 
+= Changes in 2.2.2 =
+- Fixed bug with "Question X of Y total" showing even for single-page quizzes
+- Each exam / quiz has its own setting about how the answers will be shown
+- Further code improvements 
 
 = Changes in 2.2 = 
 - Replaced 'the_content' filter with custom filter to avoid issues with membership plugins

@@ -115,7 +115,7 @@ function watu_questions() {
 		<a href="admin.php?page=watu_question&amp;action=new&amp;quiz=<?php echo $_REQUEST['quiz'] ?>"><?php _e('Create New Question', 'watu')?></a>
 		</div>
 		<div id="watu-sidebar">
-				<?php require(WATU_PATH."/sidebar.php");?>
+				<?php include(WATU_PATH."/views/sidebar.php");?>
 		</div>
 	</div>	
 <?php } 
