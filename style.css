@@ -48,3 +48,15 @@ form.quiz-form {
 {
 	background-color: #BBEEDD;
 }
+
+.quiz-form label {
+   display: inline !important;
+}
+
+.quiz-form input[type='checkbox'] {
+   display: inline !important;
+}
+
+.quiz-form input[type='radio'] {
+   display: inline !important;
+}

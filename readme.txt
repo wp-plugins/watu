@@ -78,9 +78,11 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.2.2 =
+= Changes in 2.2.3 =
 - Fixed bug with "Question X of Y total" showing even for single-page quizzes
 - Each exam / quiz has its own setting about how the answers will be shown
+- As many themes started showing the choices under radio buttons or checkboxes, added explicit CSS to keep them on the same line
+- Fixed bug with skipping "0" answers 
 - Further code improvements 
 
 = Changes in 2.2 = 

@@ -22,7 +22,7 @@ function watu_questions() {
 			$action='edit';
 		}
 		
-		$question_id = $_REQUEST['question'];
+		$question_id = $_POST['question'];
 		if($question_id>0) {
 			// the $counter will skip over empty answers, $sort_order_counter will track the provided answers order.
 			$counter = 1;
@@ -36,7 +36,7 @@ function watu_questions() {
 					$correct=0;
 					if( @in_array($counter, $correctArry) ) $correct=1;
 					$point = $pointArry[$key];
-					if($answer_text) {
+					if($answer_text!='') {
 						$wpdb->query($wpdb->prepare("INSERT INTO ".WATU_ANSWERS." (question_id,answer,correct,point, sort_order)
 							VALUES(%d, %s, %s, %d, %d)", $question_id, $answer_text, $correct, $point, $sort_order_counter));
 						$sort_order_counter++;
