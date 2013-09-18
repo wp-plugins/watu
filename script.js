@@ -62,6 +62,13 @@ Watu.nextQuestion = function(e) {
 		jQuery("#next-question").hide();
 		jQuery("#action-button").show();
 	}
+	
+	if(jQuery('body').scrollTop() > 250) {	
+		jQuery('html, body').animate({
+	   		scrollTop: jQuery('#watu_quiz').offset().top -100
+	   }, 100);   
+	}   
+
 }
 
 // This part is used only if the answers are show on a per question basis.
@@ -133,6 +140,10 @@ Watu.submitResult = function() {
 		
 		data[fieldName+'[]'] = ansvalues;
 	}
+	
+	jQuery('html, body').animate({
+   		scrollTop: jQuery('#watu_quiz').offset().top - 50
+   	}, 1000); 
 	
 	jQuery('#watu_quiz').html("<p>Loading...</p>");
     
