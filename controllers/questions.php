@@ -18,7 +18,7 @@ function watu_questions() {
 			VALUES(%d, %s, %s, %d)", $_GET['quiz'], $_POST['content'], $_POST['answer_type'], @$_POST['is_required']);
 			$wpdb->query($sql);//Inserting the questions
 	
-			$_REQUEST['question'] = $wpdb->insert_id;
+			$_POST['question'] = $wpdb->insert_id;
 			$action='edit';
 		}
 		

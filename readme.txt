@@ -78,11 +78,12 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.2.5 =
+= Changes in 2.2.6 =
 - Animate back to top when submitting exam, and when clicking "next" after long question. This prevents confusion when user has to see the next screen.
 - Fixed bug with "Question X of Y total" showing even for single-page quizzes
 - Each exam / quiz has its own setting about how the answers will be shown
 - As many themes started showing the choices under radio buttons or checkboxes, added explicit CSS to keep them on the same line
+- Fixed new bug with missing answers when adding question
 - Fixed bug with skipping "0" answers
 - Changed %%TOTAL%% to %%MAX-POINTS%% for clarify and consistency. The old tag will keep working. 
 - Further code improvements 
