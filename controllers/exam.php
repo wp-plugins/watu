@@ -21,8 +21,12 @@ function watu_exams() {
 		
 		<p><strong><?php _e('Watu for Wordpress is a light version of', 'watu')?> <a href="http://calendarscripts.info/watupro" target="_blank">WatuPRO</a>.</strong></p>
 		
-		<p><?php _e('Go to', 'watu')?> <a href="options-general.php?page=watu.php"><?php _e('Watu Settings', 'watu')?></a></p>
+		<p><?php _e('Go to', 'watu')?> <a href="options-general.php?page=watu.php"><?php _e('Watu Settings', 'watu')?></a>
+			&nbsp;|&nbsp;
+		<a href="admin.php?page=watu_exam&amp;action=new"><?php _e("Create New Exam", 'watu')?></a></p>
 		
+		<p><b><?php _e('To publish a quiz copy its shortcode and place it in a post or page. Use only one quiz shortcode in each post or page.','watu')?></b></p>
+			
 		<table class="widefat">
 			<thead>
 			<tr>
@@ -70,7 +74,7 @@ function watu_exams() {
 				<td><?php if(!empty($quiz->post)) echo "<a href='".get_permalink($quiz->post->ID)."' target='_blank'>"; 
 				echo stripslashes($quiz->name);
 				if(!empty($quiz->post)) echo "</a>";?></td>
-        <td>[WATU <?php echo $quiz->ID ?>]</td>
+        <td><input type="text" size="8" readonly onclick="this.select()" value="[WATU <?php echo $quiz->ID ?>]"></td>
 				<td><?php echo $quiz->question_count ?></td>
 				<td><a href="admin.php?page=watu_takings&exam_id=<?php echo $quiz->ID?>"><?php echo $quiz->taken?> <?php _e('times', 'watu')?></a></td>
 				<td><a href='admin.php?page=watu_questions&amp;quiz=<?php echo $quiz->ID?>' class='edit'><?php _e('Manage Questions', 'watu')?></a></td>
@@ -86,7 +90,7 @@ function watu_exams() {
 			</tbody>
 		</table>
 		
-		<a href="admin.php?page=watu_exam&amp;action=new"><?php _e("Create New Exam", 'watu')?></a>
+			<p><a href="admin.php?page=watu_exam&amp;action=new"><?php _e("Create New Exam", 'watu')?></a></p>
 		</div>
 		<div id="watu-sidebar">
 				<?php include(WATU_PATH."/views/sidebar.php");?>

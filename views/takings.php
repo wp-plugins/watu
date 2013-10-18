@@ -3,7 +3,9 @@
 	
 	<p><?php _e("A lot more detailed reports, filters, exports, and other important features are available in", 'watu')?> <a href="http://calendarscripts.info/watupro" target="_blank">WatuPRO</a></p>
 	
-	<p><a href="admin.php?page=watu_exams"><?php _e('Back to exams list', 'watu')?></a></p>	
+	<p><a href="admin.php?page=watu_exams"><?php _e('Back to exams list', 'watu')?></a>
+	&nbsp;|&nbsp;
+	<a href="admin.php?page=watu_takings&exam_id=<?php echo $exam->ID?>&watu_export=1&noheader=1"><?php _e('Export as CSV (semicolon delimited)', 'watu');?></a></p>	
 	
 	<div class="postbox-container" style="width:73%;margin-right:2%;">	
 		<table class="widefat">

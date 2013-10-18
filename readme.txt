@@ -78,7 +78,9 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.2.6 =
+= Changes in 2.2.8 =
+- Export quiz results as CSV file (semicolon delimited)
+- The exam shortcode is now easier to copy 
 - Animate back to top when submitting exam, and when clicking "next" after long question. This prevents confusion when user has to see the next screen.
 - Fixed bug with "Question X of Y total" showing even for single-page quizzes
 - Each exam / quiz has its own setting about how the answers will be shown

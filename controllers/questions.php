@@ -66,7 +66,7 @@ function watu_questions() {
 		wp_print_scripts();
 		?>
 		
-		<p style="color:green;"><?php _e('To add this exam to your blog, insert the code ', 'watu') ?> <b>[WATU <?php echo $_REQUEST['quiz'] ?>]</b> <?php _e('into any post.', 'watu') ?></p>
+		<p style="color:green;"><?php _e('To add this exam to your blog, insert the code ', 'watu') ?> <input type="text" readonly size="8" onclick="this.select();" value="[WATU <?php echo $_REQUEST['quiz'] ?>]"> <?php _e('into any post or page.', 'watu') ?></p>
 		
 		<table class="widefat">
 			<thead>

@@ -12,6 +12,7 @@
 		<li><strong><?php _e('Questions and exam categories.', 'watu')?></strong> <?php _e('User groups with different access to them.', 'watu')?></li>
 		<li><strong><?php _e('Copy exmas', 'watu')?></strong> <?php _e('and their questions into a new or existing exams.', 'watu')?></li>
 		<li><strong><?php _e('More question types', 'watu')?></strong> <?php _e('and more control on defining correctly answered questions.', 'watu')?></li>
+		<li><strong><?php _e('Shortcodes', 'watu')?></strong> <?php _e('for user reports and user dashboard.', 'watu')?></li>
 		<li><?php _e('And a lot more - just come to see!', 'watu')?></li>
 	</ol>
 	
@@ -26,7 +27,7 @@
 	
 	<p><?php _e('Please ask your question in the', 'watu')?> <a href="http://wordpress.org/support/plugin/watu" target="_blank"><?php _e('support forum at Wordpress.', 'watu')?></a></p>
 	
-	<p><?php _e("If you don't have an account there you can open a discussion at", 'watu')?> <a href="http://calendarscripts.info/forum/" target="_blank"><?php _e('CalendarScripts forum', 'watu')?></a> <?php _e('as well.', 'watu')?></p>
+	<p><?php _e("Use the forum only for issues concerning the free version. If you have a pre-sales question about Watu PRO please contact us", 'watu')?> <a href="http://calendarscripts.info/contact.html" target="_blank"><?php _e('through our site', 'watu')?></a> <?php _e('as well.', 'watu')?></p>
 </div>
 
 
