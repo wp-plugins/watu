@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: exam, test, quiz, survey
 Requires at least: 3.0
-Tested up to: 3.6
+Tested up to: 3.6.1
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -78,7 +78,7 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.2.8 =
+= Changes in 2.2.9 =
 - Export quiz results as CSV file (semicolon delimited)
 - The exam shortcode is now easier to copy 
 - Animate back to top when submitting exam, and when clicking "next" after long question. This prevents confusion when user has to see the next screen.
@@ -89,6 +89,7 @@ You need to create a post and embed the exam code. The exam code is shown in the
 - Fixed bug with skipping "0" answers
 - Changed %%TOTAL%% to %%MAX-POINTS%% for clarify and consistency. The old tag will keep working. 
 - Further code improvements 
+- Tested in multisite
 
 = Changes in 2.2 = 
 - Replaced 'the_content' filter with custom filter to avoid issues with membership plugins
