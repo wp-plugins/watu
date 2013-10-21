@@ -44,6 +44,11 @@ Watu for Wordpress is a light version of <a href="http://calendarscripts.info/wa
 * List of users who took exam along with their results
 * Ajax-based loading of the quiz results.
 
+### Online Demo ###
+
+Feel free to check the [live demo here](http://demo.pimteam.net/wp/?p=12 "Live demo"). It should answer most "pre-download" questions.
+If you have more doubts just download the plugin and check out if it works for you. It's free and takes a few seconds to install and activate.
+
 
 == Installation ==
 
@@ -78,7 +83,7 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.2.9 =
+= Changes in 2.3 =
 - Export quiz results as CSV file (semicolon delimited)
 - The exam shortcode is now easier to copy 
 - Animate back to top when submitting exam, and when clicking "next" after long question. This prevents confusion when user has to see the next screen.
@@ -90,6 +95,7 @@ You need to create a post and embed the exam code. The exam code is shown in the
 - Changed %%TOTAL%% to %%MAX-POINTS%% for clarify and consistency. The old tag will keep working. 
 - Further code improvements 
 - Tested in multisite
+- Fixed "headers already sent" message caused by premature update statement
 
 = Changes in 2.2 = 
 - Replaced 'the_content' filter with custom filter to avoid issues with membership plugins
