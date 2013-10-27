@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.3
+Version: 2.2.6
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -28,7 +28,6 @@ include( WATU_PATH.'/controllers/exam.php');
 include( WATU_PATH.'/controllers/questions.php');
 include( WATU_PATH.'/controllers/takings.php');
 include( WATU_PATH.'/controllers/ajax.php');
-include( WATU_PATH.'/lib/functions.php');
 require_once(WATU_PATH.'/wpframe.php');
 
 function watu_init() {
@@ -128,9 +127,9 @@ function watu_activate() {
 	watu_init();
 	
 	// Initial options.
-	update_option('watu_show_answers', 1);
-	update_option('watu_single_page', 0);
-	update_option('watu_answer_type', 'radio');
+	add_option('watu_show_answers', 1);
+	add_option('watu_single_page', 0);
+	add_option('watu_answer_type', 'radio');
 	$version = get_option('watu_version');
 
 	if($wpdb->get_var("SHOW TABLES LIKE '".WATU_EXAMS."'") != WATU_EXAMS) {
@@ -198,12 +197,6 @@ function watu_activate() {
 		$wpdb->query($sql);
 	}	
 	
-	watu_add_db_fields(array(
-		array("name"=>"randomize", "type"=>"TINYINT NOT NULL DEFAULT 0"),		
-		array("name"=>"single_page", "type"=>"TINYINT NOT NULL DEFAULT 0"),
-		array("name"=>"show_answers", "type"=>"TINYINT NOT NULL DEFAULT 100")
-	), WATU_EXAMS);	
-	
 	
 	// db updates in 1.8
 	if(empty($version) or $version < 1.8) {
@@ -211,6 +204,12 @@ function watu_activate() {
 		 $sql = "UPDATE ".WATU_EXAMS." SET single_page = '".get_option('watu_single_page')."'";
 		 $wpdb->query($sql);
 	}
+	
+	watu_add_db_fields(array(
+		array("name"=>"randomize", "type"=>"TINYINT NOT NULL DEFAULT 0"),		
+		array("name"=>"single_page", "type"=>"TINYINT NOT NULL DEFAULT 0"),
+		array("name"=>"show_answers", "type"=>"TINYINT NOT NULL DEFAULT 100")
+	), WATU_EXAMS);	
 	
 	watu_add_db_fields(array(
 		array("name"=>"is_required", "type"=>"TINYINT UNSIGNED NOT NULL DEFAULT 0")	
@@ -240,7 +239,8 @@ function watu_deactivate() {
 	delete_option('watu_single_page');
 	delete_option('watu_answer_type');
 	delete_option( 'watu_db_tables' );
-	if( $delDb == 'checked="checked"' ) {
+	// let's not delete the data, no one really wants this
+	if( $delDb == 'checked="checked"' and false ) {
 		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_master ");
 		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_question ");
 		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_answer ");
@@ -256,14 +256,14 @@ function watu_vc_scripts() {
 			'watu-style',
 			plugins_url().'/watu/style.css',
 			array(),
-			'2.2.0'
+			'1.9.0'
 		);
 		
 		wp_enqueue_script(
 			'watu-script',
 			plugins_url('/watu/script.js'),
 			array(),
-			'2.2'
+			'2.1'
 		);
 		
 		$translation_array = array(
