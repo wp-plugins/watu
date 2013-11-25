@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.3
+Version: 2.3.1
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -29,7 +29,6 @@ include( WATU_PATH.'/controllers/questions.php');
 include( WATU_PATH.'/controllers/takings.php');
 include( WATU_PATH.'/controllers/ajax.php');
 include( WATU_PATH.'/lib/functions.php');
-require_once(WATU_PATH.'/wpframe.php');
 
 function watu_init() {
 	global $wpdb;
@@ -229,24 +228,6 @@ function watu_activate() {
 						
 	update_option( "watu_delete_db", '' );
 	update_option( "watu_version", '2.1' );
-}
-
-add_action('deactivate_watu/watu.php','watu_deactivate');
-function watu_deactivate() {
-	$delDb = get_option('watu_delete_db');
-	
-	global $wpdb;
-	delete_option('watu_show_answers');
-	delete_option('watu_single_page');
-	delete_option('watu_answer_type');
-	delete_option( 'watu_db_tables' );
-	if( $delDb == 'checked="checked"' and false) {
-		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_master ");
-		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_question ");
-		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_answer ");
-		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_grading ");
-		$wpdb->query(" DROP TABLE IF EXISTS {$wpdb->prefix}watu_takings ");
-	}
 }
 
 function watu_vc_scripts() {

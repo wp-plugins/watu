@@ -1,16 +1,18 @@
 <?php
-require('wpframe.php');
-
 if(isset($_REQUEST['submit']) and $_REQUEST['submit']) {
-	if( isset( $_REQUEST['watu_delete_db'] ) ) update_option( "watu_delete_db", 'checked="checked"' );
+	
+	update_option( "watu_delete_db", @$_POST['delete_db'] );
+	update_option('watu_delete_db_confirm', $_POST['delete_db_confirm']);
+		
 	$options = array('show_answers', 'single_page', 'answer_type');
 	foreach($options as $opt) {
 		if(!empty($_POST[$opt])) update_option('watu_' . $opt, $_POST[$opt]);
 		else update_option('watu_' . $opt, 0);
 	}
-	wpframe_message(__("Options updated", 'watu'));
+	print '<div id="message" class="updated fade"><p>' . __('Options updated', 'watu') . '</p></div>';	
 }
 $answer_display = get_option('watu_show_answers');
+$delete_db = get_option('watu_delete_db');
 ?>
 <div class="wrap">
 
@@ -52,7 +54,11 @@ $answer_display = get_option('watu_show_answers');
 	<?php 
 		$check = get_option('watu_delete_db');
 	?>
-	<label>&nbsp;<input type='checkbox' name='watu_delete_db' <?php print get_option('watu_delete_db') ?> value='checked="checked"' />&nbsp;<?php _e('Delete stored Watu data when deactivating the plugin', 'watu')?> </label>
+	<label>&nbsp;<input type='checkbox' value="1" name='delete_db' <?php if($delete_db) echo 'checked'?> onclick="this.checked ? jQuery('#deleteDBConfirm').show() : jQuery('#deleteDBConfirm').hide();" />&nbsp;<?php _e('Delete stored Watu data when deinstalling the plugin.', 'watu')?> </label>
+	
+		<span id="deleteDBConfirm" style="display: <?php echo empty($delete_db) ? 'none' : 'inline';?>">
+			<?php _e('Please confirm by typing "yes" in the box:', 'watu')?> <input type="text" name="delete_db_confirm" value="<?php echo get_option('watu_delete_db_confirm')?>">		
+		</span>
 	</div></div>
 	
 	<p class="submit">

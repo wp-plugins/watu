@@ -1,8 +1,8 @@
 === Watu ===
 Contributors: prasunsen
 Tags: exam, test, quiz, survey
-Requires at least: 3.0
-Tested up to: 3.6.1
+Requires at least: 3.3
+Tested up to: 3.7.1
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -82,6 +82,11 @@ You need to create a post and embed the exam code. The exam code is shown in the
 3. You can add unlimited number of questions in each exam, and each question can of single-answer, multiple-answer, or open-end type. 
 
 == Changelog ==
+
+= Changes in 2.3.1 =
+- Added uninstall script and changed the settings regarding deleting data. Now you have to double confirm deleting your exam. This is to avoid accidential data loss.
+- Removed wpframe and other obsolete code
+- Made small change to the display of radio and checkbox questions to allow easier formatting on one line with CSS
 
 = Changes in 2.3 =
 - Export quiz results as CSV file (semicolon delimited)

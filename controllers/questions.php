@@ -2,7 +2,6 @@
 function watu_questions() {
 	global $wpdb;
 	
-	if( isset($_REQUEST['grade']) ) wpframe_message($_REQUEST['grade']);
 	$action = 'new';
 	if(!empty($_GET['action']) and $_GET['action'] == 'edit') $action = 'edit';
 	

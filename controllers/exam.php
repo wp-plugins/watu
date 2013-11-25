@@ -2,15 +2,15 @@
 function watu_exams() {
 	global $wpdb;
 	
-	if( isset($_REQUEST['message']) && $_REQUEST['message'] == 'updated') wpframe_message(__('Test Updated', 'watu'));
-	if(isset($_REQUEST['message']) && $_REQUEST['message'] == 'fail') wpframe_message(__('Error occured!!! please try again', 'watu'));
-	if( isset($_REQUEST['grade']) ) wpframe_message($_REQUEST['grade']);
+	if( isset($_REQUEST['message']) && $_REQUEST['message'] == 'updated') print '<div id="message" class="updated fade"><p>' . __('Test updated', 'watu') . '</p></div>';
+	if(isset($_REQUEST['message']) && $_REQUEST['message'] == 'fail') print '<div id="message" class="updated error"><p>' . __('Error occured', 'watu') . '</p></div>';
+	if( isset($_REQUEST['grade']) )  print '<div id="message" class="updated fade"><p>' . $_REQUEST['grade']. '</p></div>';
 	
 	if(!empty($_GET['action']) and $_GET['action'] == 'delete') {
 		$wpdb->get_results("DELETE FROM ".WATU_EXAMS." WHERE ID='$_REQUEST[quiz]'");
 		$wpdb->get_results("DELETE FROM ".WATU_ANSWERS." WHERE question_id IN (SELECT ID FROM ".WATU_QUESTIONS." WHERE exam_id='$_REQUEST[quiz]')");
 		$wpdb->get_results("DELETE FROM ".WATU_QUESTIONS." WHERE exam_id='$_REQUEST[quiz]'");
-		wpframe_message(__("Test Deleted", 'watu'));
+		print '<div id="message" class="updated fade"><p>' . __('Test deleted', 'watu') . '</p></div>';
 	}
 	?>
 	
@@ -79,7 +79,7 @@ function watu_exams() {
 				<td><a href="admin.php?page=watu_takings&exam_id=<?php echo $quiz->ID?>"><?php echo $quiz->taken?> <?php _e('times', 'watu')?></a></td>
 				<td><a href='admin.php?page=watu_questions&amp;quiz=<?php echo $quiz->ID?>' class='edit'><?php _e('Manage Questions', 'watu')?></a></td>
 				<td><a href='admin.php?page=watu_exam&amp;quiz=<?php echo $quiz->ID?>&amp;action=edit' class='edit'><?php _e('Edit', 'watu'); ?></a></td>
-				<td><a href='tools.php?page=watu_exams&amp;action=delete&amp;quiz=<?php echo $quiz->ID?>' class='delete' onclick="return confirm('<?php echo  addslashes(__("You are about to delete this quiz? This will delete all the questions and answers within this quiz. Press 'OK' to delete and 'Cancel' to stop.", 'watu'))?>');"><?php e('Delete')?></a></td>
+				<td><a href='tools.php?page=watu_exams&amp;action=delete&amp;quiz=<?php echo $quiz->ID?>' class='delete' onclick="return confirm('<?php echo  addslashes(__("You are about to delete this quiz? This will delete all the questions and answers within this quiz. Press 'OK' to delete and 'Cancel' to stop.", 'watu'))?>');"><?php _e('Delete', 'watu')?></a></td>
 				</tr>
 		<?php endforeach;
 			else:?>
@@ -91,6 +91,8 @@ function watu_exams() {
 		</table>
 		
 			<p><a href="admin.php?page=watu_exam&amp;action=new"><?php _e("Create New Exam", 'watu')?></a></p>
+			
+			<p><?php _e('Get free traffic to your quizzes by submitting them to', 'watu')?> <a href="http://calendarscripts.info/quizzes/" target="_blank"><?php _e('our directory.')?></a></p>
 		</div>
 		<div id="watu-sidebar">
 				<?php include(WATU_PATH."/views/sidebar.php");?>

@@ -77,37 +77,7 @@ function init() {
 				e.stopPropagation();
 				return true;
 			}
-		}		
-
-		/* No, why should we require correct answer?!
-		// TBD and probably removed in 1.7
-		//A correct answer must be selected.
-		var correct_answer_selected = false;
-		jQuery(".correct_answer").each(function() {
-			if(this.checked) {
-				correct_answer_selected = true;
-				return true;
-			}
-		});
-		
-		if(!correct_answer_selected) {
-			alert("<?php e("Please select a correct answer"); ?>");
-			e.preventDefault();
-			e.stopPropagation();
-			return true;
 		}
-		
-		var ret= true;
-		jQuery('.numeric').each(function(){
-			var valid = (this.value>=0 || this.value<0);
-			if(!valid) jQuery(this).css({'background-color': '#fcc'});
-			if(ret) ret=(this.value>=0 || this.value<0);
-		});
-		if(!ret){ 
-			alert('Please provide numeric values for the Grade from/to.');
-			e.preventDefault();
-			e.stopPropagation();
-		} */
 	});
 	
 	jQuery('input[name=answer_type]').click(function(){
@@ -137,13 +107,13 @@ jQuery(document).ready(init);
 <div class="postarea">
 
 <div class="postbox">
-<h3 class="hndle"><?php e('Question') ?></span></h3>
+<h3 class="hndle"><?php _e('Question', 'watu') ?></span></h3>
 <div class="inside">
 <?php wp_editor(stripslashes(@$question->question), 'content'); ?>
 </div></div>
 
 <div class="postbox" id="atdiv">
-<h3 class="hndle"><span><?php e('Answer Type') ?></span></h3>
+<h3 class="hndle"><span><?php _e('Answer Type', 'watu') ?></span></h3>
 <div class="inside" style="padding:8px">
 <?php 
 	$single = $multi = $essay ='';
