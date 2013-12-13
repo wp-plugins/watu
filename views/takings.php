@@ -8,7 +8,7 @@
 	<a href="admin.php?page=watu_takings&exam_id=<?php echo $exam->ID?>&watu_export=1&noheader=1"><?php _e('Export as CSV (semicolon delimited)', 'watu');?></a></p>	
 	
 	<div class="postbox-container" style="width:73%;margin-right:2%;">	
-		<table class="widefat">
+		<table class="widefat wp-list-table">
 			<tr><th><?php _e('User or IP', 'watu')?></th><th><?php _e('Date', 'watu')?></th>
 			<th><?php _e('Points', 'watu')?></th><th><?php _e('Result', 'watu')?></th></tr>
 			

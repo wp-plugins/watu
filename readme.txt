@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: exam, test, quiz, survey
 Requires at least: 3.3
-Tested up to: 3.7.1
+Tested up to: 3.8
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -83,10 +83,11 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.3.1 =
+= Changes in 2.3.2 =
 - Added uninstall script and changed the settings regarding deleting data. Now you have to double confirm deleting your exam. This is to avoid accidential data loss.
 - Removed wpframe and other obsolete code
 - Made small change to the display of radio and checkbox questions to allow easier formatting on one line with CSS
+- Fixed for compatibility with 3.8
 
 = Changes in 2.3 =
 - Export quiz results as CSV file (semicolon delimited)

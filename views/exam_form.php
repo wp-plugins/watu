@@ -18,11 +18,10 @@
 	<p><a href="tools.php?page=watu_exams"><?php _e('Back to exams', 'watu')?></a></p>
 	
 	<form name="post" action="admin.php?page=watu_exam" method="post" id="post" onsubmit="return validate()">
-	<div id="poststuff">
-	
-	<div class="postbox" id="titlediv">
-		<h3 class="hndle"><span><?php _e('Exam Name and Settings', 'watu') ?></span></h3>
-		<div class="inside">
+	<div>	
+	<div class="postbox wrap" id="titlediv">
+		<h3>&nbsp;<?php _e('Exam Name and Settings', 'watu') ?></h3>
+		<div class="inside wrap">
 			<input type='text' name='name' id="title" value='<?php echo stripslashes(@$dquiz->name); ?>' />
 		</div>
 		<div class="inside">
@@ -33,7 +32,7 @@
 	</div>
 	
 	<div class="postbox">
-		<h3 class="hndle"><span><?php _e('Correct Answer Display', 'watu') ?></span></h3>
+		<h3>&nbsp;<?php _e('Correct Answer Display', 'watu') ?></h3>
 		<div class="inside">
 			<input type="radio" name="show_answers" <?php if($answer_display == '0') echo 'checked="checked"'; ?> value="0" id="no-show" /> <label for="no-show"><?php _e("Don't show answers", 'watu') ?></label><br />
 			<input type="radio" name="show_answers" <?php if($answer_display == '1') echo 'checked="checked"'; ?> value="1" id="show-end" /> <label for="show-end"><?php _e("Show answers at the end of the Quiz", 'watu') ?></label><br />
@@ -42,14 +41,14 @@
 	</div>
 	
 	<div class="postbox">
-	<h3 class="hndle"><span><?php _e('Description', 'watu') ?></span></h3>
+	<h3>&nbsp;<?php _e('Description', 'watu') ?></h3>
 	<div class="inside">
 	<textarea name='description' rows='5' cols='50' style='width:100%'><?php echo stripslashes(@$dquiz->description); ?></textarea>
 	</div></div>
 	
 	<style type="text/css"> #gradecontent p{border-bottom:1px dotted #ccc;padding-bottom:3px;} #gradecontent label{padding: 5px 10px;} #gradecontent textarea{width:96%;margin-left:10px;} #gradecontent p img.gradeclose{ border:0 none; float:right; } </style>
 	<div class="postbox" id="gradediv">
-	<h3 class="hndle"><span><?php _e('Grading', 'watu') ?></span></h3>
+	<h3>&nbsp;<?php _e('Grading', 'watu') ?></h3>
 	<div class="inside" id="gradecontent">
 	<?php foreach($grades as $row ): ?>
 	<p><img class="gradeclose" onclick="jQuery(this).parent().remove();" src="<?php echo plugins_url('watu/close.jpg')?>" alt='close' /><label><?php _e('Grade Title:', 'watu')?></label><input type='text' name='gradetitle[]' id="title" value='<?php echo stripslashes($row->gtitle); ?>' /><br /><label><?php _e('Description:', 'watu')?></label><br /><textarea name='grade_description[]' rows='5'><?php echo stripslashes($row->gdescription); ?></textarea><br /><label><?php _e('From points:', 'watu')?> <input type='text' class='numeric' name='grade_from[]' value='<?php echo stripslashes($row->gfrom); ?>' /></label><label><?php _e('To points:', 'watu')?> <input type='text' class='numeric' name='grade_to[]' value='<?php echo stripslashes($row->gto); ?>' /></label></p>
@@ -61,7 +60,7 @@
 	</div><p><a href="javascript:;" onclick="addGrade()" style="padding:4px; margin-left:10px;"><?php _e('Add another grade', 'watu')?></a></p></div>
 	
 	<div id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>" class="postarea postbox">
-	<h3 class="hndle"><span><?php _e('Final Screen', 'watu') ?></span></h3>
+	<h3>&nbsp;<?php _e('Final Screen', 'watu') ?></h3>
 	<div class="inside">
 	<?php wp_editor($final_screen, 'content'); ?>
 	
