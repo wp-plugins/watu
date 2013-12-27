@@ -83,11 +83,12 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.3.2 =
+= Changes in 2.3.3 =
 - Added uninstall script and changed the settings regarding deleting data. Now you have to double confirm deleting your exam. This is to avoid accidential data loss.
 - Removed wpframe and other obsolete code
 - Made small change to the display of radio and checkbox questions to allow easier formatting on one line with CSS
 - Fixed for compatibility with 3.8
+- Quiz description, if entered, shows up on top of the quiz
 
 = Changes in 2.3 =
 - Export quiz results as CSV file (semicolon delimited)

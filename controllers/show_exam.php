@@ -125,6 +125,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 ?>
 
 <div id="watu_quiz" class="quiz-area <?php if($single_page) echo 'single-page-quiz'; ?>">
+<?php if(!empty($exam->description)):?><p><?php echo apply_filters('watu_content',$exam->description);?></p><?php endif;?>
 <form action="" method="post" class="quiz-form" id="quiz-<?php echo $exam_id?>">
 <?php
 $question_count = 1;
