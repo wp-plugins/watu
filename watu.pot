@@ -1,14 +1,14 @@
-# Copyright (C) 2013 Watu
+# Copyright (C) 2014 Watu
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.3.3\n"
+"Project-Id-Version: Watu 2.3.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2013-12-27 10:36:18+00:00\n"
+"POT-Creation-Date: 2014-01-17 15:11:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
@@ -45,9 +45,7 @@ msgid "Create New Exam"
 msgstr ""
 
 #: controllers/exam.php:28
-msgid ""
-"To publish a quiz copy its shortcode and place it in a post or page. Use "
-"only one quiz shortcode in each post or page."
+msgid "To publish a quiz copy its shortcode and place it in a post or page. Use only one quiz shortcode in each post or page."
 msgstr ""
 
 #: controllers/exam.php:33
@@ -87,12 +85,11 @@ msgid "Edit"
 msgstr ""
 
 #: controllers/exam.php:82
-msgid ""
-"You are about to delete this quiz? This will delete all the questions and "
-"answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
+msgid "You are about to delete this quiz? This will delete all the questions and answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
 msgstr ""
 
-#: controllers/exam.php:82 controllers/questions.php:99
+#: controllers/exam.php:82 controllers/questions.php:99 views/takings.php:17
+#: views/takings.php:24
 msgid "Delete"
 msgstr ""
 
@@ -146,9 +143,7 @@ msgid "Number Of Answers"
 msgstr ""
 
 #: controllers/questions.php:99
-msgid ""
-"You are about to delete this question. This will delete the answers to this "
-"question. Press 'OK' to delete and 'Cancel' to stop."
+msgid "You are about to delete this question. This will delete the answers to this question. Press 'OK' to delete and 'Cancel' to stop."
 msgstr ""
 
 #: controllers/questions.php:106
@@ -164,10 +159,7 @@ msgid "Please go to <a href='%s'>%s</a> to view the test"
 msgstr ""
 
 #: controllers/show_exam.php:33
-msgid ""
-"All the questions in the exam along with their answers are shown below. Your "
-"answers are bolded. The correct answers have a green background while the "
-"incorrect ones have a red background."
+msgid "All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background."
 msgstr ""
 
 #: controllers/show_exam.php:63
@@ -230,7 +222,7 @@ msgstr ""
 msgid "Show Results"
 msgstr ""
 
-#: controllers/takings.php:22
+#: controllers/takings.php:33
 msgid "User or IP;Date;Points;Result/Grade"
 msgstr ""
 
@@ -255,9 +247,7 @@ msgid "Show answers at the end of the Quiz"
 msgstr ""
 
 #: options.php:34 views/exam_form.php:39
-msgid ""
-"Show the answer of a question immediately after the user have selected an "
-"answer (Will not work in single page mode)."
+msgid "Show the answer of a question immediately after the user have selected an answer (Will not work in single page mode)."
 msgstr ""
 
 #: options.php:39
@@ -321,9 +311,7 @@ msgid "Description"
 msgstr ""
 
 #: views/exam_form.php:47
-msgid ""
-"If provided, description shows on top of the quiz. It can optionally be "
-"included in the final output as well."
+msgid "If provided, description shows on top of the quiz. It can optionally be included in the final output as well."
 msgstr ""
 
 #: views/exam_form.php:52
@@ -371,16 +359,11 @@ msgid "Maximum number of points"
 msgstr ""
 
 #: views/exam_form.php:73
-msgid ""
-"Shows the achieved grade - title and description together. If you want to "
-"design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-"
-"DESCRIPTION%% for grade description"
+msgid "Shows the achieved grade - title and description together. If you want to design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-DESCRIPTION%% for grade description"
 msgstr ""
 
 #: views/exam_form.php:74
-msgid ""
-"Number of correct answers. In multiple-select questions even one correct "
-"answer makes the question correct. In WatuPRO this is configurable"
+msgid "Number of correct answers. In multiple-select questions even one correct answer makes the question correct. In WatuPRO this is configurable"
 msgstr ""
 
 #: views/exam_form.php:75
@@ -388,10 +371,7 @@ msgid "Number of answers you got wrong"
 msgstr ""
 
 #: views/exam_form.php:76
-msgid ""
-"A rating of your performance - it could be 'Failed'(0-39%), 'Just "
-"Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and "
-"'Unbeatable'(100%)"
+msgid "A rating of your performance - it could be 'Failed'(0-39%), 'Just Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and 'Unbeatable'(100%)"
 msgstr ""
 
 #: views/exam_form.php:77
@@ -555,10 +535,7 @@ msgid "online demo."
 msgstr ""
 
 #: views/sidebar.php:21
-msgid ""
-"Upgrading to PRO comes with <strong>60 days money-back guarantee</strong>, "
-"one year <strong>free upgrades</strong> and one year <strong>free support</"
-"strong>."
+msgid "Upgrading to PRO comes with <strong>60 days money-back guarantee</strong>, one year <strong>free upgrades</strong> and one year <strong>free support</strong>."
 msgstr ""
 
 #: views/sidebar.php:26
@@ -574,9 +551,7 @@ msgid "support forum at Wordpress."
 msgstr ""
 
 #: views/sidebar.php:30
-msgid ""
-"Use the forum only for issues concerning the free version. If you have a pre-"
-"sales question about Watu PRO please contact us"
+msgid "Use the forum only for issues concerning the free version. If you have a pre-sales question about Watu PRO please contact us"
 msgstr ""
 
 #: views/sidebar.php:30
@@ -624,9 +599,7 @@ msgid "Users who submitted the exam '%s'"
 msgstr ""
 
 #: views/takings.php:4
-msgid ""
-"A lot more detailed reports, filters, exports, and other important features "
-"are available in"
+msgid "A lot more detailed reports, filters, exports, and other important features are available in"
 msgstr ""
 
 #: views/takings.php:6
@@ -637,28 +610,44 @@ msgstr ""
 msgid "Export as CSV (semicolon delimited)"
 msgstr ""
 
-#: views/takings.php:12
+#: views/takings.php:10
+msgid "Delete all user-submitted data for this exam"
+msgstr ""
+
+#: views/takings.php:15
 msgid "User or IP"
 msgstr ""
 
-#: views/takings.php:12
+#: views/takings.php:15
 msgid "Date"
 msgstr ""
 
-#: views/takings.php:13
+#: views/takings.php:16
 msgid "Points"
 msgstr ""
 
-#: views/takings.php:13
+#: views/takings.php:16
 msgid "Result"
 msgstr ""
 
-#: views/takings.php:23
+#: views/takings.php:28
 msgid "Previous page"
 msgstr ""
 
-#: views/takings.php:25
+#: views/takings.php:30
 msgid "Next page"
+msgstr ""
+
+#: views/takings.php:33
+msgid "No user has taken this quiz yet."
+msgstr ""
+
+#: views/takings.php:48
+msgid "Are you sure?"
+msgstr ""
+
+#: views/takings.php:54
+msgid "Are you sure? This will delete ALL user results for this quiz!"
 msgstr ""
 
 #: watu.php:77 watu.php:80

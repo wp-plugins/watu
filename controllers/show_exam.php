@@ -60,7 +60,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		}		
 		
 		$result .= "</ul>";
-		if(!$_REQUEST["answer-" . $ques->ID]) $result .= "<p class='unanswered'>" . __('Question was not answered', 'watu') . "</p>";
+		if(empty($_REQUEST["answer-" . $ques->ID])) $result .= "<p class='unanswered'>" . __('Question was not answered', 'watu') . "</p>";
 
 		$result .= "</div>";
 		if($correct) $num_correct++;

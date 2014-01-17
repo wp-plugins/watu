@@ -36,3 +36,8 @@ function watu_get_mime_type()  {
 				: 'application/octet-stream';
 	return $mime_type;
 }
+
+function watu_redirect($url) {
+	echo "<meta http-equiv='refresh' content='0;url=$url' />"; 
+	exit;
+}

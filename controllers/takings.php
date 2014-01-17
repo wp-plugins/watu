@@ -6,6 +6,17 @@ function watu_takings() {
 	// select exam
 	$exam = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_EXAMS." WHERE ID=%d", $_GET['exam_id']));
 	
+	// delete a taking
+	if(!empty($_GET['del_taking'])) {
+		$wpdb->query($wpdb->prepare("DELETE FROM ".WATU_TAKINGS." WHERE ID=%d", $_GET['id']));
+		watu_redirect("admin.php?page=watu_takings&exam_id=".$exam->ID);
+	}
+	
+	// mass cleanup
+	if(!empty($_POST['delete_all_takings'])) {
+		$wpdb->query($wpdb->prepare("DELETE FROM ".WATU_TAKINGS." WHERE exam_id=%d", $exam->ID));
+	}
+	
 	// select taking records
 	$offset = empty($_GET['offset'])?0:intval($_GET['offset']);
 	$limit_sql = empty($_GET['watu_export']) ? "Limit $offset, 10" : "";
