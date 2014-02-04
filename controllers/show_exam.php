@@ -114,13 +114,14 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	// Show the results
 	$output = str_replace($replace_these, $with_these, stripslashes($quiz_details->final_screen));
 	$final_output = apply_filters(WATU_CONTENT_FILTER, $output); 
-	
-	if($answer_display == 1) $final_output .= '<hr />' . apply_filters(WATU_CONTENT_FILTER,$result);
-	
 	echo $final_output;
+	$results_output = '<hr />' . apply_filters(WATU_CONTENT_FILTER,$result);
+	if($answer_display == 1) echo $results_output;
+	
+	$snapshot = $final_output . $results_output;
 		
 	// update snapshot
-	$wpdb->query($wpdb->prepare("UPDATE ".WATU_TAKINGS." SET snapshot=%s WHERE ID=%d", $final_output, $taking_id)); 
+	$wpdb->query($wpdb->prepare("UPDATE ".WATU_TAKINGS." SET snapshot=%s WHERE ID=%d", $snapshot, $taking_id)); 
 	
 	do_action('watu_exam_submitted', $taking_id);
 	exit;// Exit due to ajax call
