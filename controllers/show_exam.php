@@ -113,9 +113,14 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 
 	// Show the results
 	$output = str_replace($replace_these, $with_these, stripslashes($quiz_details->final_screen));
+	$final_output = apply_filters(WATU_CONTENT_FILTER, $output); 
 	
-	print apply_filters('watu_content', $output);
-	if($answer_display == 1) print '<hr />' . apply_filters('watu_content',$result);
+	if($answer_display == 1) $final_output .= '<hr />' . apply_filters(WATU_CONTENT_FILTER,$result);
+	
+	echo $final_output;
+		
+	// update snapshot
+	$wpdb->query($wpdb->prepare("UPDATE ".WATU_TAKINGS." SET snapshot=%s WHERE ID=%d", $final_output, $taking_id)); 
 	
 	do_action('watu_exam_submitted', $taking_id);
 	exit;// Exit due to ajax call
@@ -125,7 +130,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 ?>
 
 <div id="watu_quiz" class="quiz-area <?php if($single_page) echo 'single-page-quiz'; ?>">
-<?php if(!empty($exam->description)):?><p><?php echo apply_filters('watu_content',$exam->description);?></p><?php endif;?>
+<?php if(!empty($exam->description)):?><p><?php echo apply_filters(WATU_CONTENT_FILTER,$exam->description);?></p><?php endif;?>
 <form action="" method="post" class="quiz-form" id="quiz-<?php echo $exam_id?>">
 <?php
 $question_count = 1;
@@ -160,7 +165,7 @@ foreach ($questions as $qct => $ques) {
 $output .= "<div style='display:none' id='question-$question_count'>";
 $output .= "<br /><div class='question-content'><img src=\"".plugins_url('watu/loading.gif')."\" width=\"16\" height=\"16\" alt=\"".__('Loading', 'watu')." ...\" title=\"".__('Loading', 'watu')." ...\" />&nbsp;".__('Loading', 'watu')." ...</div>";
 $output .= "</div>";
-echo apply_filters('watu_content',$output);
+echo apply_filters(WATU_CONTENT_FILTER,$output);
 $question_ids = preg_replace('/,$/', '', $question_ids );
 ?><br />
 <?php 

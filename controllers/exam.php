@@ -50,7 +50,7 @@ function watu_exams() {
 		// now select all posts that have watu shortcode in them
 		$posts=$wpdb->get_results("SELECT * FROM {$wpdb->prefix}posts 
 		WHERE post_content LIKE '%[WATU %]%' 
-		AND (post_type='post' OR post_type='page') AND post_status='publish'
+		AND post_status='publish' AND post_title!=''
 		ORDER BY post_date DESC");	
 		
 		// match posts to exams

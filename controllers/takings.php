@@ -49,6 +49,33 @@ function watu_takings() {
 	}	
 		
 	$count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(ID) FROM ".WATU_TAKINGS." WHERE exam_id=%d", $exam->ID));	
+	
+	wp_enqueue_script('thickbox',null,array('jquery'));
+	wp_enqueue_style('thickbox.css', '/'.WPINC.'/js/thickbox/thickbox.css', null, '1.0');
 		
 	require(WATU_PATH."/views/takings.php");	
+}
+
+// display taking details by ajax
+function watu_taking_details() {
+	global $wpdb, $user_ID;
+	
+	// select taking
+	$taking=$wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_TAKINGS."
+			WHERE id=%d", $_REQUEST['id']));
+			
+	// select user
+	$student=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->users} 
+		WHERE id=%d", $taking->user_id));
+
+	// make sure I'm admin or that's me
+	if(!current_user_can('administrator') and $student->ID!=$user_ID) {
+		wp_die( __('You do not have sufficient permissions to access this page', 'watu') );
+	}
+			
+	// select exam
+	$exam=$wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_EXAMS." WHERE id=%d", $taking->exam_id));
+				
+	require(WATU_PATH. '/views/taking_details.html.php');   
+	exit;			
 }

@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.3.4
+Version: 2.3.6
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 define( 'WATU_PATH', dirname( __FILE__ ) );
+define( 'WATU_URL', plugin_dir_url( __FILE__ ));
 include( WATU_PATH.'/controllers/exam.php');
 include( WATU_PATH.'/controllers/questions.php');
 include( WATU_PATH.'/controllers/takings.php');
@@ -32,7 +33,7 @@ include( WATU_PATH.'/lib/functions.php');
 
 function watu_init() {
 	global $wpdb;
-	$wpdb-> show_errors ();
+	$wpdb-> show_errors();
 	load_plugin_textdomain('watu', false, dirname( plugin_basename( __FILE__ )).'/langs/' );
 	
 	$version = get_bloginfo('version');
@@ -49,12 +50,19 @@ function watu_init() {
 	define('WATU_GRADES', $wpdb->prefix.'watu_grading');
 	define('WATU_TAKINGS', $wpdb->prefix.'watu_takings');
 	
+	// which filter to use
+	$content_filter = get_option('watu_use_the_content') ? 'the_content' : 'watu_content';
+	define('WATU_CONTENT_FILTER', $content_filter);
+	
 	add_filter( 'watu_content', 'watu_autop' );	
 	add_filter( 'watu_content', 'wptexturize' );
 	add_filter( 'watu_content', 'convert_smilies' );
 	add_filter( 'watu_content', 'convert_chars' );
 	add_filter( 'watu_content', 'shortcode_unautop' );
 	add_filter( 'watu_content', 'do_shortcode' );	
+	
+	$version = get_option('watu_version');
+	if($version != '2.35') watu_activate(true);
 }
 
 function watu_autop($content) {
@@ -69,9 +77,7 @@ add_action ( 'watu_exam', 'watu_exam' );
 function watu_add_menu_links() {
 	global $wp_version, $_registered_pages;
 	$view_level= 'manage_options';
-	$page = 'edit.php';
-	if($wp_version >= '2.7') $page = 'tools.php';
-	
+	$page = 'tools.php';
 	//add_menu_page('Watu Settings Page', 'Watu Settings', $view_level, 'watu', 'watu_options');	$page = 'watu';
 	
 	add_submenu_page($page, __('Manage Exams', 'watu'), __('Watu Exams', 'watu'), $view_level , 'watu_exams', 'watu_exams');
@@ -122,16 +128,18 @@ function watu_shortcode( $attr ) {
 }
 
 add_action('activate_watu/watu.php','watu_activate');
-function watu_activate() {
+function watu_activate($update = false) {
 	global $wpdb;
-	watu_init();
+	
+	$version = get_option('watu_version');
+	update_option( "watu_version", '2.35' );
+	if(!$update) watu_init();
 	
 	// Initial options.
 	update_option('watu_show_answers', 1);
 	update_option('watu_single_page', 0);
 	update_option('watu_answer_type', 'radio');
-	$version = get_option('watu_version');
-
+	
 	if($wpdb->get_var("SHOW TABLES LIKE '".WATU_EXAMS."'") != WATU_EXAMS) {
 		$sql = "CREATE TABLE `".WATU_EXAMS."`(
 					ID int(11) unsigned NOT NULL auto_increment,
@@ -216,7 +224,8 @@ function watu_activate() {
 	), WATU_QUESTIONS);	
 	
 	watu_add_db_fields(array(
-		array("name"=>"result", "type"=>"TEXT NOT NULL")	
+		array("name"=>"result", "type"=>"TEXT NOT NULL")	,
+		array("name"=>"snapshot", "type"=>"MEDIUMTEXT NOT NULL")
 	), WATU_TAKINGS);			
 	
 	// let's change choice and answer fields to TEXT instead of VARCHAR - 2.1.3	
@@ -226,8 +235,7 @@ function watu_activate() {
 		 $wpdb->query($sql);
 	}	
 						
-	update_option( "watu_delete_db", '' );
-	update_option( "watu_version", '2.1' );
+	update_option( "watu_delete_db", '' );	
 }
 
 function watu_vc_scripts() {
@@ -291,3 +299,4 @@ function watu_add_db_fields($fields, $table) {
 add_action('init', 'watu_init');
 add_action('wp_ajax_watu_submit', 'watu_submit');
 add_action('wp_ajax_nopriv_watu_submit', 'watu_submit');
+add_action('wp_ajax_watu_taking_details', 'watu_taking_details');

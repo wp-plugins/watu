@@ -14,13 +14,15 @@
 		<table class="widefat wp-list-table">
 			<tr><th><?php _e('User or IP', 'watu')?></th><th><?php _e('Date', 'watu')?></th>
 			<th><?php _e('Points', 'watu')?></th><th><?php _e('Result', 'watu')?></th>
-			<th><?php _e('Delete', 'watu')?></th></tr>
+			<th><?php _e('Details', 'watu')?></th><th><?php _e('Delete', 'watu')?></th></tr>
 			
 			<?php foreach($takings as $taking):?>
 				<tr><td><?php echo $taking->user_id?'<a href="user-edit.php?user_id='.$taking->user_id.'">'.$taking->user_login.'</a>':$taking->ip?></td>
 				<td><?php echo date(get_option('date_format'), strtotime($taking->date));?></td>
 				<td><?php echo $taking->points?></td>
-				<td><?php echo apply_filters('watu_content', $taking->result)?></td>
+				<td><?php echo apply_filters(WATU_CONTENT_FILTER, $taking->result)?></td>
+				<td><?php if(empty($taking->snapshot)): _e('n/a', 'watu');
+				else:?><a href="#" onclick="Watu.takingDetails('<?php echo $taking->ID?>');return false;"><?php _e('view', 'watupro')?></a><?php endif;?></td>
 				<td><a href="#" onclick="WatuDelTaking(<?php echo $taking->ID?>);return false;"><?php _e('Delete', 'watu')?></a></td></tr>
 			<?php endforeach;?>
 		</table>

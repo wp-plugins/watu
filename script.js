@@ -153,6 +153,11 @@ Watu.submitResult = function() {
 	}catch(e){ alert(e)}
 }
 
+Watu.takingDetails = function(id, adminURL) {
+	adminURL = adminURL || "";
+	tb_show("Taking Details", adminURL + "admin-ajax.php?action=watu_taking_details&id="+id, adminURL + "admin-ajax.php");
+}
+
 Watu.success = function(r){ jQuery('#watu_quiz').html(r);}
 Watu.error = function(){ jQuery('#watu_quiz').html('Error Occured');}
 

@@ -83,7 +83,9 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.3.4 =
+= Changes in 2.3.6 =
+- You can now use "the_content" filter instead of "watu_content" to handle nasty problems with plugins like qTranslate. It's not recommended to use this setting unless you have experienced such problems.
+- The full details of the user answers are now recorded and can be seen via popup in the list of results page
 - Added uninstall script and changed the settings regarding deleting data. Now you have to double confirm deleting your exam. This is to avoid accidential data loss.
 - Removed wpframe and other obsolete code
 - Made small change to the display of radio and checkbox questions to allow easier formatting on one line with CSS
