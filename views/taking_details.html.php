@@ -1,7 +1,7 @@
 <link type="text/css" rel="stylesheet" href="<?php echo WATU_URL.'/style.css' ?>" />
 <div class="wrap">
 	<h2><?php _e('Details for taken exam ', 'watu')?>"<?php echo $exam->name?>"</h2>
-	<?php if(current_user_can('administrator')):?>
+	<?php if(current_user_can('manage_options')):?>
 		<p><?php _e('User:', 'watu')?> <?php echo $taking->user_id?"<a href='user-edit.php?user_id=".$taking->user_id."&wp_http_referer=".urlencode("admin.php?page=watu_takings&exam_id=".$exam->ID)."' target='_blank'>".$student->display_name."</a>":__("<b>N/A</b>", 'watu')?></p>
 	<?php endif;?>
 	<p><?php _e('Date:', 'watu')?> <?php echo date(get_option('date_format'), strtotime($taking->date)) ?></p>

@@ -58,7 +58,7 @@ function watu_questions() {
 	
 		<div class="postbox-container" style="width:73%;margin-right:2%;">
 		
-		<p><a href="tools.php?page=watu_exams"><?php _e('Back to exams', 'watu')?></a></p>
+		<p><a href="tools.php?page=watu_exams"><?php _e('Back to quizzes', 'watu')?></a> &nbsp; <a href="admin.php?page=watu_exam&quiz=<?php echo $_GET['quiz']?>&action=edit"><?php _e('Edit this quiz', 'watu')?></a></p>
 		
 		<?php
 		wp_enqueue_script( 'listman' );
@@ -85,10 +85,10 @@ function watu_questions() {
 												WHERE Q.exam_id=$_REQUEST[quiz] ORDER BY Q.ID");
 		
 		if (count($all_question)) {
-			$bgcolor = '';
-			$class = ('alternate' == @$class) ? '' : 'alternate';
+			$bgcolor = '';			
 			$question_count = 0;
 			foreach($all_question as $question) {
+				$class = ('alternate' == @$class) ? '' : 'alternate';
 				$question_count++;
 				print "<tr id='question-{$question->ID}' class='$class'>\n";
 				?>

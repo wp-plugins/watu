@@ -28,7 +28,7 @@ if($questions) {
 
 
 if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
-	$score = $achieved = $total = $num_correct = 0;
+	$achieved = $total = $num_correct = 0;
 	$result = '';
 	$result .= "<p>" . __('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p>";
 
@@ -43,41 +43,50 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		$all_answers = $wpdb->get_results("SELECT ID,answer,correct, point FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");
 
 		$correct = false;
+		$class = 'answer';
 		$result .= "<ul>";
-		$ansArr = is_array( @$_REQUEST["answer-" . $ques->ID] )? $_REQUEST["answer-" . $ques->ID] : array();
+		$ansArr = is_array( @$_REQUEST["answer-" . $ques->ID] )? $_POST["answer-" . $ques->ID] : array();
 		foreach ($all_answers as $ans) {
 			$class = 'answer';
-			if(  in_array($ans->ID , $ansArr) ) $class .= ' user-answer';
+			/*if(  in_array($ans->ID , $ansArr) ) $class .= ' user-answer';
 			if($ans->correct == 1) {$class .= ' correct-answer';}
-			if( in_array($ans->ID , $ansArr ) and $ans->correct == 1) {$correct = true; $score+=$ans->point;}
-			if( in_array($ans->ID , $ansArr ) ) $achieved+=$ans->point; 
-			$result .= "<li class='$class'><span class='answer'>" . stripslashes($ans->answer) . "</span></li>\n";
+			if( in_array($ans->ID , $ansArr ) and $ans->correct == 1) {$correct = true;}
+			if( in_array($ans->ID , $ansArr ) ) $achieved += $ans->point; */
+			
+			$points = WatuQuestion :: calculate($ques, $ans, $ansArr, $correct, $class);			
+			$achieved += $points;
+			if($ques->answer_type != 'textarea') $result .= "<li class='$class'><span class='answer'>" . stripslashes($ans->answer) . "</span></li>\n";
 		}
 
 		// textareas
-		if($ques->answer_type=='textarea') {
-			$result.="<li class='user-answer'>".wpautop($_REQUEST["answer-" . $ques->ID][0])."</li>";
+		if($ques->answer_type=='textarea' and !empty($_POST["answer-" . $ques->ID][0])) {
+			$result .= "<li class='user-answer $class'><span class='answer'>".$_POST["answer-" . $ques->ID][0]."</span></li>";
 		}		
 		
 		$result .= "</ul>";
-		if(empty($_REQUEST["answer-" . $ques->ID])) $result .= "<p class='unanswered'>" . __('Question was not answered', 'watu') . "</p>";
+		if(($ques->answer_type == 'textarea' and empty($_POST["answer-" . $ques->ID][0])) 
+			or ($ques->answer_type != 'textarea' and empty($_POST["answer-" . $ques->ID])) ) 
+			{ $result .= "<p class='unanswered'>" . __('Question was not answered', 'watu') . "</p>";}
 
 		$result .= "</div>";
+	
 		if($correct) $num_correct++;
 		//$total++;
 	}
+	
+	// total points - this needs to be reworked so it takes into account question type
 	$total = $wpdb->get_var($wpdb->prepare("SELECT sum(point) FROM `{$wpdb->prefix}watu_question` as q inner join `{$wpdb->prefix}watu_answer` as a on question_id=q.ID WHERE `exam_id`=%d and correct='1' ", $exam_id));
 
 	// Find scoring details
 	if($total == 0) $percent = 0;
-	else $percent = number_format($score / $total * 100, 2);
+	else $percent = number_format($achieved / $total * 100, 2);
 						//0-9			10-19%,	 	20-29%, 	30-39%			40-49%
 	$all_rating = array(__('Failed', 'watu'), __('Failed', 'watu'), __('Failed', 'watu'), __('Failed', 'watu'), __('Just Passed', 'watu'),
 						//																			100%			More than 100%?!
 					__('Satisfactory', 'watu'), __('Competent', 'watu'), __('Good', 'watu'), __('Very Good', 'watu'), __('Excellent', 'watu'), __('Unbeatable', 'watu'), __('Cheater', 'watu'));
 	$rate = intval($percent / 10);
 	if($percent == 100) $rate = 9;
-	if($score == $total) $rate = 10;
+	if($achieved == $total) $rate = 10;
 	if($percent>100) $rate = 11;
 	$rating = $all_rating[$rate];
 	
@@ -97,13 +106,12 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 			}
 		}
 	}
-	$score = $achieved;
-
+	
 	$quiz_details = $wpdb->get_row($wpdb->prepare("SELECT name,final_screen, description FROM {$wpdb->prefix}watu_master WHERE ID=%d", $exam_id));
 
 	$quiz_details->final_screen = str_replace('%%TOTAL%%', '%%MAX-POINTS%%', $quiz_details->final_screen);
 	$replace_these	= array('%%SCORE%%', '%%MAX-POINTS%%', '%%PERCENTAGE%%', '%%GRADE%%', '%%RATING%%', '%%CORRECT%%', '%%WRONG_ANSWERS%%', '%%QUIZ_NAME%%',	'%%DESCRIPTION%%', '%%GRADE-TITLE%%', '%%GRADE-DESCRIPTION%%', '%%POINTS%%');
-	$with_these		= array($score,		 $total,	  $percent,			$grade,		 $rating,		$num_correct,					$num_questions-$num_correct,	   stripslashes($quiz_details->name), stripslashes($quiz_details->description), $gtitle, $gdescription, $score);
+	$with_these		= array($achieved,		 $total,	  $percent,			$grade,		 $rating,		$num_correct,					$num_questions-$num_correct,	   stripslashes($quiz_details->name), stripslashes($quiz_details->description), $gtitle, $gdescription, $achieved);
 	
 	// insert taking
 	$uid = $user_ID ? $user_ID : 0;
@@ -151,6 +159,7 @@ foreach ($questions as $qct => $ques) {
 	}	
 	
 	foreach ($dans as $ans) {
+		if($ques->answer_type == 'textarea') break;
 		if($answer_display == 2) {
 			$answer_class = 'wrong-answer-label';
 			if($ans->correct) $answer_class = 'correct-answer-label';

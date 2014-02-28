@@ -11,11 +11,11 @@
 </script>
 
 <div class="wrap">
-<h2><?php _e(ucfirst($action) . " Exam", 'watu'); ?></h2>
+<h2><?php _e(ucfirst($action) . " Quiz", 'watu'); ?></h2>
 
 <div class="postbox-container" style="width:73%;margin-right:2%;">	
 
-	<p><a href="tools.php?page=watu_exams"><?php _e('Back to exams', 'watu')?></a></p>
+	<p><a href="tools.php?page=watu_exams"><?php _e('Back to quizzes', 'watu')?></a></p>
 	
 	<form name="post" action="admin.php?page=watu_exam" method="post" id="post" onsubmit="return validate()">
 	<div>	

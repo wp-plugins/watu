@@ -69,7 +69,7 @@ function watu_taking_details() {
 		WHERE id=%d", $taking->user_id));
 
 	// make sure I'm admin or that's me
-	if(!current_user_can('administrator') and $student->ID!=$user_ID) {
+	if(!current_user_can('manage_options') and $student->ID!=$user_ID) {
 		wp_die( __('You do not have sufficient permissions to access this page', 'watu') );
 	}
 			

@@ -1,7 +1,8 @@
 <div class="wrap">
 <h2><?php echo ucfirst($action) . ' '. __("Question", 'watu'); ?></h2>
 
-<p><a href="tools.php?page=watu_exams"><?php _e('Back to exams', 'watu')?></a></p>
+<p><a href="admin.php?page=watu_questions&quiz=<?php echo $_GET['quiz']?>"><?php _e('Back to questions', 'watu')?></a>
+&nbsp; <a href="tools.php?page=watu_exams"><?php _e('Back to quizzes', 'watu')?></a></p>
 
 <div id="titlediv">
 <input type="hidden" id="title" name="ignore_me" value="This is here for a workaround for a editor bug" />
@@ -92,10 +93,6 @@ function init() {
 			this.removeAttribute('type');
 			this.setAttribute('type', ans_type);
 		});
-		
-		// for textarea show extra explanation
-		if(this.value=='textarea') jQuery('#questionAnswers').hide();		
-		else jQuery('#questionAnswers').show();
 	});
 }
 jQuery(document).ready(init);
@@ -123,22 +120,23 @@ jQuery(document).ready(init);
 		case 'checkbox': $multi='checked="checked"'; break;
 	}
 ?>
-<label>&nbsp;<input type='radio' name='answer_type' <?php print $single?> id="answer_type_r" value='radio' /> <?php _e('Single Answer', 'watu')?> </label>
+<label>&nbsp;<input type='radio' name='answer_type' <?php print $single?> id="answer_type_r" value='radio' onclick="jQuery('#watuOpenEndAnswers').hide();" /> <?php _e('Single Answer', 'watu')?> </label>
 &nbsp;&nbsp;&nbsp;
-<label>&nbsp;<input type='radio' name='answer_type' <?php print $multi?> id="answer_type_c" value='checkbox' /> <?php _e('Multiple Answers', 'watu')?></label>
+<label>&nbsp;<input type='radio' name='answer_type' <?php print $multi?> id="answer_type_c" value='checkbox' onclick="jQuery('#watuOpenEndAnswers').hide();" /> <?php _e('Multiple Answers', 'watu')?></label>
 &nbsp;&nbsp;&nbsp;
-<label>&nbsp;<input type='radio' name='answer_type' <?php print $essay?> id="answer_type_t" value='textarea' /> <?php _e('Open End (Essay)', 'watu')?></label>
+<label>&nbsp;<input type='radio' name='answer_type' <?php print $essay?> id="answer_type_t" value='textarea' onclick="jQuery('#watuOpenEndAnswers').show();" /> <?php _e('Open End (Essay)', 'watu')?></label>
 <p><input type="checkbox" name="is_required" value="1" <?php if(!empty($question->is_required)) echo 'checked'?>> <?php _e('This is a required question', 'watu')?></p>
 </div></div>
 
-<div class="postbox" style="display:<?php echo ($ans_type=='textarea')?'none':'blocks';?>" id="questionAnswers">
-	<h3 class="hndle"><span><?php _e('Answers', 'watu') ?></span></h3>
+<div class="postbox" id="questionAnswers">
+	<h3 class="hndle"><span><?php _e('Answers', 'watu') ?></span></h3>	
 	<div class="inside">	
+		<p id="watuOpenEndAnswers" style="display:<?php echo ($ans_type == 'textarea')? 'block' : 'none';?>"><?php printf(__('Answers to open-end questions will be considered matched when there is exact case-insensitive match. For more flexibility check <a href="%s" target="_blank">WatuPRO</a>', 'watu'), 'http://calendarscripts.info/watupro');?></p>
 		<?php
 		for($i=1; $i<=$answer_count; $i++) { ?>
 		<p style="border-bottom:1px dotted #ccc"><textarea name="answer[]" class="answer" rows="3" cols="50"><?php if($action == 'edit') echo stripslashes(@$all_answers[$i-1]->answer); ?></textarea>
 		<label for="correct_answer_<?php echo $i?>"><?php _e("Correct Answer", 'watu'); ?></label>
-		<input type="<?php print @$ans_type?>" class="correct_answer" id="correct_answer_<?php echo $i?>" <?php if(@$all_answers[$i-1]->correct == 1) echo 'checked="checked"';?> name="correct_answer[]" value="<?php echo $i?>" />
+		<input type="<?php print ($ans_type == 'radio') ? 'radio' : 'checkbox'?>" class="correct_answer" id="correct_answer_<?php echo $i?>" <?php if(@$all_answers[$i-1]->correct == 1) echo 'checked="checked"';?> name="correct_answer[]" value="<?php echo $i?>" />
 		<label style="margin-left:10px"><?php _e('Points:', 'watu')?> <input type="text" class="numeric" size="4" name="point[]" value="<?php if($action == 'edit') echo stripslashes(@$all_answers[$i-1]->point); ?>"></label>
 		</p>
 		<?php } ?>
