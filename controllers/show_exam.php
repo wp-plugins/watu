@@ -116,7 +116,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	// insert taking
 	$uid = $user_ID ? $user_ID : 0;
 	$wpdb->query($wpdb->prepare("INSERT INTO ".WATU_TAKINGS." SET exam_id=%d, user_id=%d, ip=%s, date=CURDATE(), 
-		points=%d, grade_id=%d, result=%s", $exam_id, $uid, $_SERVER['REMOTE_ADDR'], $achieved, $g_id, $grade));
+		points=%d, grade_id=%d, result=%s, snapshot=''", $exam_id, $uid, $_SERVER['REMOTE_ADDR'], $achieved, $g_id, $grade));
 	$taking_id = $wpdb->insert_id;	
 
 	// Show the results

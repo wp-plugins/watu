@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.3.7
+Version: 2.3.7.1
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -225,8 +225,8 @@ function watu_activate($update = false) {
 	), WATU_QUESTIONS);	
 	
 	watu_add_db_fields(array(
-		array("name"=>"result", "type"=>"TEXT NOT NULL")	,
-		array("name"=>"snapshot", "type"=>"MEDIUMTEXT NOT NULL")
+		array("name"=>"result", "type"=>"TEXT")	,
+		array("name"=>"snapshot", "type"=>"MEDIUMTEXT")
 	), WATU_TAKINGS);			
 	
 	// let's change choice and answer fields to TEXT instead of VARCHAR - 2.1.3	
