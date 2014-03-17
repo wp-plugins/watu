@@ -161,8 +161,8 @@ foreach ($questions as $qct => $ques) {
 	foreach ($dans as $ans) {
 		if($ques->answer_type == 'textarea') break;
 		if($answer_display == 2) {
-			$answer_class = 'wrong-answer-label';
-			if($ans->correct) $answer_class = 'correct-answer-label';
+			$answer_class = 'js-answer-label';
+			if($ans->correct) $answer_class = 'php-answer-label';
 		}
 		$output .= "<div><input type='$ans_type' name='answer-{$ques->ID}[]' id='answer-id-{$ans->ID}' class='answer answer-$question_count $answer_class answerof-{$ques->ID}' value='{$ans->ID}' />";
 		$output .= "&nbsp;<label for='answer-id-{$ans->ID}' id='answer-label-{$ans->ID}' class='$answer_class answer label-$question_count'><span>" . stripslashes($ans->answer) . "</span></label></div>";

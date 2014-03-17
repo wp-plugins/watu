@@ -88,7 +88,7 @@ Watu.showAnswer = function(e) {
 
 	Watu.mode = "next";
 
-	jQuery(".correct-answer-label.label-"+Watu.current_question).addClass("correct-answer");
+	jQuery(".php-answer-label.label-"+Watu.current_question).addClass("correct-answer");
 	jQuery(".answer-"+Watu.current_question).each(function(i) {
 		if(this.checked && this.className.match(/wrong\-answer/)) {
 			var number = this.id.toString().replace(/\D/g,"");

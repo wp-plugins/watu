@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.3.7\n"
+"Project-Id-Version: Watu 2.3.7.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2014-02-28 15:57:47+00:00\n"
+"POT-Creation-Date: 2014-03-17 11:03:57+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -266,7 +266,9 @@ msgstr ""
 #: options.php:34 views/exam_form.php:39
 msgid ""
 "Show the answer of a question immediately after the user have selected an "
-"answer (Will not work in single page mode)."
+"answer. (Will not work in single page mode and <b>is not secure</b> - use it "
+"only for fun quizzes, not exams. You can handle exams in this mode with "
+"WatuPRO.)"
 msgstr ""
 
 #: options.php:39
