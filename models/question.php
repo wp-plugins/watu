@@ -19,4 +19,37 @@ class WatuQuestion {
 		
 		return $points;
 	}
+	
+	// figure out the maximum number of points the user can get on the question
+	static function max_points($question, $all_answers) {
+		$max_points = 0;
+		
+		// get only the answers of this question
+		$q_answers = array();
+		foreach($all_answers as $answer) {
+			if($answer->question_id == $question->ID) $q_answers[] = $answer;
+		}		
+		
+		if(!sizeof($q_answers)) return 0;
+		
+		switch($question->answer_type) {
+			case 'radio':
+			case 'textarea':
+				// get the answer with most points
+				$max = 0;
+				foreach($q_answers as $answer) {
+					if($answer->point > $max) $max = $answer->point;
+				} 
+				$max_points = $max;
+			break;
+			
+			case 'checkbox':
+				foreach($q_answers as $answer) {
+					if($answer->point > 0) $max_points += $answer->point;
+				}
+			break;
+		}
+		
+		return $max_points;
+	} // end max_points
 }

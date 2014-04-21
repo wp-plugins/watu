@@ -111,7 +111,7 @@ function watu_exam() {
 			$wpdb->get_results($wpdb->prepare("UPDATE ".WATU_EXAMS."
 				SET name=%s, description=%s,final_screen=%s, randomize=%d, single_page=%d, show_answers=%d  
 				WHERE ID=%d", $_POST['name'], $_POST['description'], $_POST['content'], 
-				$_POST['randomize'], @$_POST['single_page'], $_POST['show_answers'], $_POST['quiz']));
+				@$_POST['randomize'], @$_POST['single_page'], $_POST['show_answers'], $_POST['quiz']));
 			
 			$wp_redirect = 'tools.php?page=watu_exams&message=updated';
 		

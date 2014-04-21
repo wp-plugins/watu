@@ -14,7 +14,7 @@
 	
 	<?php if(empty($_GET['export'])):?>
 	<div id="detailsText" style="background:#EEE;padding:5px;">	
-	<p><?php echo wpautop(stripslashes($taking->snapshot)); ?></p>
+	<p><?php echo stripslashes($taking->snapshot); ?></p>
 	</div>
 	<?php endif;?>	
 </div>

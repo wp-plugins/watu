@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: exam, test, quiz, survey
 Requires at least: 3.3
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -83,7 +83,7 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.3.7.2 =
+= Changes in 2.3.8 =
 - You can now use "the_content" filter instead of "watu_content" to handle nasty problems with plugins like qTranslate. It's not recommended to use this setting unless you have experienced such problems.
 - The full details of the user answers are now recorded and can be seen via popup in the list of results page
 - Added uninstall script and changed the settings regarding deleting data. Now you have to double confirm deleting your exam. This is to avoid accidential data loss.
@@ -94,6 +94,9 @@ You need to create a post and embed the exam code. The exam code is shown in the
 - Option to delete single taking and delete all submitted data on a quiz
 - Changed current_user_can('administrator') to current_user_can('manage_options') so you can allow a non-administrator role to use the quizzes
 - Open-end questions can also have answers and be matched to them
+- Replaced wpautop in favor of nl2br to avoid adding <p> tags in unexpected places like hidden fields
+- Did some small styling adjustments
+- Fixed the %%MAX_POINTS%% calculation to take into account the quesiton type
 
 = Changes in 2.3 =
 - Export quiz results as CSV file (semicolon delimited)

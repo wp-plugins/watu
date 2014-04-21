@@ -28,7 +28,7 @@ if($questions) {
 
 
 if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
-	$achieved = $total = $num_correct = 0;
+	$achieved = $max_points = $num_correct = 0;
 	$result = '';
 	$result .= "<p>" . __('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p>";
 
@@ -39,8 +39,9 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 
 	foreach ($questions as $qct => $ques) {
 		$result .= "<div class='show-question'>";
-		$result .= "<div class='show-question-content'>". stripslashes(wpautop($ques->question)) . "</div>\n";
-		$all_answers = $wpdb->get_results("SELECT ID,answer,correct, point FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");
+		$result .= "<div class='show-question-content'>". stripslashes($ques->question) . "</div>";
+		$all_answers = $wpdb->get_results("SELECT ID,answer,correct, point, question_id 
+			FROM ".WATU_ANSWERS." WHERE question_id={$ques->ID} ORDER BY sort_order");
 
 		$correct = false;
 		$class = 'answer';
@@ -55,7 +56,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 			
 			$points = WatuQuestion :: calculate($ques, $ans, $ansArr, $correct, $class);			
 			$achieved += $points;
-			if($ques->answer_type != 'textarea') $result .= "<li class='$class'><span class='answer'>" . stripslashes($ans->answer) . "</span></li>\n";
+			if($ques->answer_type != 'textarea') $result .= "<li class='$class'><span class='answer'>" . stripslashes($ans->answer) . "</span></li> ";
 		}
 
 		// textareas
@@ -71,24 +72,21 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		$result .= "</div>";
 	
 		if($correct) $num_correct++;
-		//$total++;
+		$max_points += WatuQuestion :: max_points($ques, $all_answers);
 	}
 	
-	// total points - this needs to be reworked so it takes into account question type
-	$total = $wpdb->get_var($wpdb->prepare("SELECT sum(point) FROM `{$wpdb->prefix}watu_question` as q inner join `{$wpdb->prefix}watu_answer` as a on question_id=q.ID WHERE `exam_id`=%d and correct='1' ", $exam_id));
-
 	// Find scoring details
-	if($total == 0) $percent = 0;
-	else $percent = number_format($achieved / $total * 100, 2);
+	if($max_points == 0) $percent = 0;
+	else $percent = number_format($achieved / $max_points * 100, 2);
 						//0-9			10-19%,	 	20-29%, 	30-39%			40-49%
 	$all_rating = array(__('Failed', 'watu'), __('Failed', 'watu'), __('Failed', 'watu'), __('Failed', 'watu'), __('Just Passed', 'watu'),
 						//																			100%			More than 100%?!
 					__('Satisfactory', 'watu'), __('Competent', 'watu'), __('Good', 'watu'), __('Very Good', 'watu'), __('Excellent', 'watu'), __('Unbeatable', 'watu'), __('Cheater', 'watu'));
 	$rate = intval($percent / 10);
 	if($percent == 100) $rate = 9;
-	if($achieved == $total) $rate = 10;
+	if($achieved == $max_points) $rate = 10;
 	if($percent>100) $rate = 11;
-	$rating = $all_rating[$rate];
+	$rating = @$all_rating[$rate];
 	
 	$grade = 'None';
 	$gtitle = $gdescription="";
@@ -111,7 +109,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 
 	$quiz_details->final_screen = str_replace('%%TOTAL%%', '%%MAX-POINTS%%', $quiz_details->final_screen);
 	$replace_these	= array('%%SCORE%%', '%%MAX-POINTS%%', '%%PERCENTAGE%%', '%%GRADE%%', '%%RATING%%', '%%CORRECT%%', '%%WRONG_ANSWERS%%', '%%QUIZ_NAME%%',	'%%DESCRIPTION%%', '%%GRADE-TITLE%%', '%%GRADE-DESCRIPTION%%', '%%POINTS%%');
-	$with_these		= array($achieved,		 $total,	  $percent,			$grade,		 $rating,		$num_correct,					$num_questions-$num_correct,	   stripslashes($quiz_details->name), stripslashes($quiz_details->description), $gtitle, $gdescription, $achieved);
+	$with_these		= array($achieved,		 $max_points,	  $percent,			$grade,		 $rating,		$num_correct,					$num_questions-$num_correct,	   stripslashes($quiz_details->name), stripslashes($quiz_details->description), $gtitle, $gdescription, $achieved);
 	
 	// insert taking
 	$uid = $user_ID ? $user_ID : 0;
@@ -147,7 +145,7 @@ $question_ids = '';
 $output = $answer_class = '';
 foreach ($questions as $qct => $ques) {
 	$output .= "<div class='watu-question' id='question-$question_count'>";
-	$output .= "<div class='question-content'>". stripslashes(wpautop($ques->question)) . "</div>";
+	$output .= "<div class='question-content'>". stripslashes($ques->question) . "</div>";
 	$output .= "<input type='hidden' name='question_id[]' value='{$ques->ID}' />";
 	$question_ids .= $ques->ID.',';
 	$dans = $wpdb->get_results("SELECT ID,answer,correct FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");
