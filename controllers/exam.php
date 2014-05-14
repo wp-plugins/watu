@@ -15,7 +15,7 @@ function watu_exams() {
 	?>
 	
 	<div class="wrap">
-	<h2><?php _e("Manage Exams", 'watu'); ?></h2>
+	<h2><?php printf(__("Manage %s", 'watu'), __('Quizzes', 'watu')); ?></h2>
 	
 		<div class="postbox-container" style="width:73%;margin-right:2%;">
 		
@@ -108,18 +108,21 @@ function watu_exam() {
 		if($_REQUEST['action'] == 'edit') { //Update goes here
 			$exam_id = $_REQUEST['quiz'];
 			$wpdb->query("delete from ".WATU_GRADES." where exam_id=".$_REQUEST['quiz']);
-			$wpdb->get_results($wpdb->prepare("UPDATE ".WATU_EXAMS."
-				SET name=%s, description=%s,final_screen=%s, randomize=%d, single_page=%d, show_answers=%d  
+			$wpdb->query($wpdb->prepare("UPDATE ".WATU_EXAMS."
+				SET name=%s, description=%s,final_screen=%s, randomize=%d, single_page=%d, 
+				show_answers=%d, require_login=%d  
 				WHERE ID=%d", $_POST['name'], $_POST['description'], $_POST['content'], 
-				@$_POST['randomize'], @$_POST['single_page'], $_POST['show_answers'], $_POST['quiz']));
+				@$_POST['randomize'], @$_POST['single_page'], $_POST['show_answers'], @$_POST['require_login'], 
+				$_POST['quiz']));
 			
 			$wp_redirect = 'tools.php?page=watu_exams&message=updated';
 		
 		} else {
-			$wpdb->get_results($wpdb->prepare("INSERT INTO ".WATU_EXAMS." 
-			(name, description, final_screen,  added_on, randomize, single_page, show_answers) 
-			VALUES(%s, %s, %s, NOW(), %d, %d, %d)", 
-			$_POST['name'], $_POST['description'], $_POST['content'], $_POST['randomize'], $_POST['single_page'], $_POST['show_answers']));
+			$wpdb->query($wpdb->prepare("INSERT INTO ".WATU_EXAMS." 
+			(name, description, final_screen,  added_on, randomize, single_page, show_answers, require_login) 
+			VALUES(%s, %s, %s, NOW(), %d, %d, %d, %d)", 
+			$_POST['name'], $_POST['description'], $_POST['content'], @$_POST['randomize'], @$_POST['single_page'], 
+			$_POST['show_answers'], @$_POST['require_login']));
 			$exam_id = $wpdb->insert_id;
 			if($exam_id == 0 ) $wp_redirect = 'tools.php?page=watu_exams&message=fail';
 			$wp_redirect = 'admin.php?page=watu_questions&message=new_quiz&quiz='.$exam_id;

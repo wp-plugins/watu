@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.3.7.2\n"
+"Project-Id-Version: Watu 2.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2014-03-17 11:03:57+00:00\n"
+"POT-Creation-Date: 2014-05-14 16:35:57+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,8 +24,12 @@ msgstr ""
 msgid "Test deleted"
 msgstr ""
 
-#: controllers/exam.php:18 watu.php:84 watu.php:87
-msgid "Manage Exams"
+#: controllers/exam.php:18
+msgid "Manage %s"
+msgstr ""
+
+#: controllers/exam.php:18
+msgid "Quizzes"
 msgstr ""
 
 #: controllers/exam.php:22
@@ -36,7 +40,7 @@ msgstr ""
 msgid "Go to"
 msgstr ""
 
-#: controllers/exam.php:24 options.php:19 watu.php:101
+#: controllers/exam.php:24 options.php:19 watu.php:106
 msgid "Watu Settings"
 msgstr ""
 
@@ -78,7 +82,7 @@ msgstr ""
 msgid "times"
 msgstr ""
 
-#: controllers/exam.php:80 watu.php:88
+#: controllers/exam.php:80 watu.php:93
 msgid "Manage Questions"
 msgstr ""
 
@@ -109,7 +113,7 @@ msgstr ""
 msgid "our directory."
 msgstr ""
 
-#: controllers/exam.php:172
+#: controllers/exam.php:175
 msgid ""
 "<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n"
 "\n"
@@ -141,7 +145,7 @@ msgstr ""
 msgid "into any post or page."
 msgstr ""
 
-#: controllers/questions.php:74 controllers/show_exam.php:186
+#: controllers/questions.php:74 controllers/show_exam.php:195
 #: views/question-form.html.php:2 views/question-form.html.php:107
 msgid "Question"
 msgstr ""
@@ -168,70 +172,90 @@ msgstr ""
 msgid "Please go to <a href='%s'>%s</a> to view the test"
 msgstr ""
 
-#: controllers/show_exam.php:33
+#: controllers/show_exam.php:16
+msgid "You need to be registered and logged in to take this %s."
+msgstr ""
+
+#: controllers/show_exam.php:16
+msgid "quiz"
+msgstr ""
+
+#: controllers/show_exam.php:17
+msgid "Log in"
+msgstr ""
+
+#: controllers/show_exam.php:19
+msgid "or"
+msgstr ""
+
+#: controllers/show_exam.php:19
+msgid "Register"
+msgstr ""
+
+#: controllers/show_exam.php:44
 msgid ""
 "All the questions in the exam along with their answers are shown below. Your "
 "answers are bolded. The correct answers have a green background while the "
 "incorrect ones have a red background."
 msgstr ""
 
-#: controllers/show_exam.php:69
+#: controllers/show_exam.php:81
 msgid "Question was not answered"
 msgstr ""
 
-#: controllers/show_exam.php:84
+#: controllers/show_exam.php:93
 msgid "Failed"
 msgstr ""
 
-#: controllers/show_exam.php:84
+#: controllers/show_exam.php:93
 msgid "Just Passed"
 msgstr ""
 
-#: controllers/show_exam.php:86
+#: controllers/show_exam.php:95
 msgid "Satisfactory"
 msgstr ""
 
-#: controllers/show_exam.php:86
+#: controllers/show_exam.php:95
 msgid "Competent"
 msgstr ""
 
-#: controllers/show_exam.php:86
+#: controllers/show_exam.php:95
 msgid "Good"
 msgstr ""
 
-#: controllers/show_exam.php:86
+#: controllers/show_exam.php:95
 msgid "Very Good"
 msgstr ""
 
-#: controllers/show_exam.php:86
+#: controllers/show_exam.php:95
 msgid "Excellent"
 msgstr ""
 
-#: controllers/show_exam.php:86
+#: controllers/show_exam.php:95
 msgid "Unbeatable"
 msgstr ""
 
-#: controllers/show_exam.php:86
+#: controllers/show_exam.php:95
 msgid "Cheater"
 msgstr ""
 
-#: controllers/show_exam.php:176
+#: controllers/show_exam.php:185
 msgid "Loading"
 msgstr ""
 
-#: controllers/show_exam.php:183 watu.php:262
+#: controllers/show_exam.php:192 watu.php:268
 msgid "Show Answer"
 msgstr ""
 
-#: controllers/show_exam.php:186
+#: controllers/show_exam.php:195
 msgid "of"
 msgstr ""
 
-#: controllers/show_exam.php:187
+#: controllers/show_exam.php:196
 msgid "Next"
 msgstr ""
 
-#: controllers/show_exam.php:190
+#: controllers/show_exam.php:199
 msgid "Show Results"
 msgstr ""
 
@@ -239,7 +263,7 @@ msgstr ""
 msgid "User or IP;Date;Points;Result/Grade"
 msgstr ""
 
-#: controllers/takings.php:73 watu.php:108
+#: controllers/takings.php:73 watu.php:113
 msgid "You do not have sufficient permissions to access this page"
 msgstr ""
 
@@ -251,19 +275,19 @@ msgstr ""
 msgid "Manage Your Exams"
 msgstr ""
 
-#: options.php:30 views/exam_form.php:35
+#: options.php:30 views/exam_form.php:37
 msgid "Correct Answer Display"
 msgstr ""
 
-#: options.php:32 views/exam_form.php:37
+#: options.php:32 views/exam_form.php:39
 msgid "Don't show answers"
 msgstr ""
 
-#: options.php:33 views/exam_form.php:38
+#: options.php:33 views/exam_form.php:40
 msgid "Show answers at the end of the Quiz"
 msgstr ""
 
-#: options.php:34 views/exam_form.php:39
+#: options.php:34 views/exam_form.php:41
 msgid ""
 "Show the answer of a question immediately after the user have selected an "
 "answer. (Will not work in single page mode and <b>is not secure</b> - use it "
@@ -309,11 +333,11 @@ msgstr ""
 msgid "Save Options"
 msgstr ""
 
-#: views/exam_form.php:3 views/exam_form.php:55 views/exam_form.php:59
+#: views/exam_form.php:3 views/exam_form.php:57 views/exam_form.php:61
 msgid "Grade Title:"
 msgstr ""
 
-#: views/exam_form.php:3 views/exam_form.php:55 views/exam_form.php:59
+#: views/exam_form.php:3 views/exam_form.php:57 views/exam_form.php:61
 msgid "Description:"
 msgstr ""
 
@@ -326,7 +350,11 @@ msgid "To (points):"
 msgstr ""
 
 #: views/exam_form.php:23
-msgid "Exam Name and Settings"
+msgid "%s Name and Settings"
+msgstr ""
+
+#: views/exam_form.php:23
+msgid "Quiz"
 msgstr ""
 
 #: views/exam_form.php:28 views/sidebar.php:7
@@ -337,93 +365,99 @@ msgstr ""
 msgid "Show all questions on single page"
 msgstr ""
 
-#: views/exam_form.php:44
+#: views/exam_form.php:32
+msgid ""
+"Require user login (displays login and / or register link depending on your "
+"blog settings.)"
+msgstr ""
+
+#: views/exam_form.php:46
 msgid "Description"
 msgstr ""
 
-#: views/exam_form.php:47
+#: views/exam_form.php:49
 msgid ""
 "If provided, description shows on top of the quiz. It can optionally be "
 "included in the final output as well."
 msgstr ""
 
-#: views/exam_form.php:52
+#: views/exam_form.php:54
 msgid "Grading"
 msgstr ""
 
-#: views/exam_form.php:55
+#: views/exam_form.php:57
 msgid "From points:"
 msgstr ""
 
-#: views/exam_form.php:55
+#: views/exam_form.php:57
 msgid "To points:"
 msgstr ""
 
-#: views/exam_form.php:59
+#: views/exam_form.php:61
 msgid "Grade to:"
 msgstr ""
 
-#: views/exam_form.php:61
+#: views/exam_form.php:63
 msgid "Add another grade"
 msgstr ""
 
-#: views/exam_form.php:64
+#: views/exam_form.php:66
 msgid "Final Screen"
 msgstr ""
 
-#: views/exam_form.php:68
+#: views/exam_form.php:70
 msgid "Usable Variables:"
 msgstr ""
 
-#: views/exam_form.php:70
+#: views/exam_form.php:72
 msgid "Variable"
 msgstr ""
 
-#: views/exam_form.php:70
+#: views/exam_form.php:72
 msgid "Value"
 msgstr ""
 
-#: views/exam_form.php:71
+#: views/exam_form.php:73
 msgid "The number of points collected. (The old %%SCORE%% tag also works)"
 msgstr ""
 
-#: views/exam_form.php:72
+#: views/exam_form.php:74
 msgid "Maximum number of points"
 msgstr ""
 
-#: views/exam_form.php:73
+#: views/exam_form.php:75
 msgid ""
 "Shows the achieved grade - title and description together. If you want to "
 "design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-"
 "DESCRIPTION%% for grade description"
 msgstr ""
 
-#: views/exam_form.php:74
+#: views/exam_form.php:76
 msgid ""
 "Number of correct answers. In multiple-select questions even one correct "
 "answer makes the question correct. In WatuPRO this is configurable"
 msgstr ""
 
-#: views/exam_form.php:75
+#: views/exam_form.php:77
 msgid "Number of answers you got wrong"
 msgstr ""
 
-#: views/exam_form.php:76
+#: views/exam_form.php:78
 msgid ""
 "A rating of your performance - it could be 'Failed'(0-39%), 'Just "
 "Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and "
 "'Unbeatable'(100%)"
 msgstr ""
 
-#: views/exam_form.php:77
+#: views/exam_form.php:79
 msgid "The name of the quiz"
 msgstr ""
 
-#: views/exam_form.php:78
+#: views/exam_form.php:80
 msgid "The text entered in the description field."
 msgstr ""
 
-#: views/exam_form.php:89 views/question-form.html.php:171
+#: views/exam_form.php:91 views/question-form.html.php:171
 msgid "Save"
 msgstr ""
 
@@ -752,26 +786,30 @@ msgstr ""
 msgid "Are you sure? This will delete ALL user results for this quiz!"
 msgstr ""
 
-#: watu.php:84 watu.php:87
+#: watu.php:89 watu.php:92
+msgid "Manage Exams"
+msgstr ""
+
+#: watu.php:89 watu.php:92
 msgid "Watu Exams"
 msgstr ""
 
-#: watu.php:89
+#: watu.php:94
 msgid "Add/Edit Question"
 msgstr ""
 
-#: watu.php:103
+#: watu.php:108
 msgid "Exam submissions"
 msgstr ""
 
-#: watu.php:107
+#: watu.php:112
 msgid "Your are not allowed to to perform this operation"
 msgstr ""
 
-#: watu.php:260
+#: watu.php:266
 msgid "You have missed to answer a required question"
 msgstr ""
 
-#: watu.php:261
+#: watu.php:267
 msgid "You did not select any answer. Are you sure you want to continue?"
 msgstr ""

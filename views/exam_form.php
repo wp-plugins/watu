@@ -20,7 +20,7 @@
 	<form name="post" action="admin.php?page=watu_exam" method="post" id="post" onsubmit="return validate()">
 	<div>	
 	<div class="postbox wrap" id="titlediv">
-		<h3>&nbsp;<?php _e('Exam Name and Settings', 'watu') ?></h3>
+		<h3>&nbsp;<?php printf(__('%s Name and Settings', 'watu'), __('Quiz', 'watu'))?></h3>
 		<div class="inside wrap">
 			<input type='text' name='name' id="title" value='<?php echo stripslashes(@$dquiz->name); ?>' />
 		</div>
@@ -28,6 +28,8 @@
 			<p><input id="watuRandomize" type="checkbox" name="randomize" value="1" <?php if(!empty($dquiz->randomize)) echo 'checked'?>> <label for="watuRandomize"><?php _e("Randomize questions", 'watu');?></label></p>
 			
 			<p><input id="watuSingle" type="checkbox" name="single_page" value="1" <?php if(!empty($dquiz->single_page)) echo 'checked'?>> <label for="watuSingle"><?php _e("Show all questions on single page", 'watu');?></label></p>
+			
+			<p><input type="checkbox" name="require_login" value="1" <?php if(!empty($dquiz->require_login)) echo 'checked'?>> <label><?php _e('Require user login (displays login and / or register link depending on your blog settings.)', 'watu')?></label></p>
 		</div>
 	</div>
 	

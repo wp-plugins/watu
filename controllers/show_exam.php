@@ -6,10 +6,21 @@ if(!is_singular() and isset($GLOBALS['watu_client_includes_loaded'])) { #If this
 	return false;
 } 
 
-global $wpdb, $user_ID;
+global $wpdb, $user_ID, $post;
 
 // select exam
 $exam = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_EXAMS." WHERE ID=%d", $exam_id));
+
+// requires login?
+if(!empty($exam->require_login) and !is_user_logged_in()) {
+	 echo "<p><b>".sprintf(__('You need to be registered and logged in to take this %s.', 'watu'), __('quiz', 'watu')). 
+		      	" <a href='".site_url("/wp-login.php?redirect_to=".urlencode(get_permalink( $post->ID )))."'>".__('Log in', 'watu')."</a>";
+		      if(get_option("users_can_register")) {
+						echo " ".__('or', 'watu')." <a href='".site_url("/wp-login.php?watu_register=1&action=register&redirect_to=".urlencode(get_permalink( $post->ID )))."'>".__('Register', 'watu')."</a></b>";        
+					}
+					echo "</p>";
+	return false;
+}
 
 $answer_display = get_option('watu_show_answers');
 if(!isset($exam->show_answers) or $exam->show_answers == 100) $answer_display = $answer_display; // assign the default

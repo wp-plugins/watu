@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.3.8
+Version: 2.4
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -67,7 +67,7 @@ function watu_init() {
 	if(function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) add_filter('watu_content', 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage');
 	
 	$version = get_option('watu_version');
-	if($version != '2.35') watu_activate(true);
+	if($version != '2.38') watu_activate(true);
 }
 
 function watu_autop($content) {
@@ -138,7 +138,6 @@ function watu_activate($update = false) {
 	global $wpdb;
 	
 	$version = get_option('watu_version');
-	update_option( "watu_version", '2.35' );
 	if(!$update) watu_init();
 	
 	// Initial options.
@@ -214,7 +213,8 @@ function watu_activate($update = false) {
 	watu_add_db_fields(array(
 		array("name"=>"randomize", "type"=>"TINYINT NOT NULL DEFAULT 0"),		
 		array("name"=>"single_page", "type"=>"TINYINT NOT NULL DEFAULT 0"),
-		array("name"=>"show_answers", "type"=>"TINYINT NOT NULL DEFAULT 100")
+		array("name"=>"show_answers", "type"=>"TINYINT NOT NULL DEFAULT 100"),
+		array("name"=>"require_login", "type"=>"TINYINT NOT NULL DEFAULT 0")
 	), WATU_EXAMS);	
 	
 	
@@ -242,6 +242,7 @@ function watu_activate($update = false) {
 	}	
 						
 	update_option( "watu_delete_db", '' );	
+	update_option( "watu_version", '2.38' );
 }
 
 function watu_vc_scripts() {

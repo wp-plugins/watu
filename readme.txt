@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: exam, test, quiz, survey
 Requires at least: 3.3
-Tested up to: 3.9
+Tested up to: 3.9.1
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -83,7 +83,8 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.3.8 =
+= Changes in 2.4 =
+- Quizzes can now require user login. Depending on whether "Anyone can register" is selected in your main settings page, a register link will also be shown when non-logged in user tries to access such quiz
 - You can now use "the_content" filter instead of "watu_content" to handle nasty problems with plugins like qTranslate. It's not recommended to use this setting unless you have experienced such problems.
 - The full details of the user answers are now recorded and can be seen via popup in the list of results page
 - Added uninstall script and changed the settings regarding deleting data. Now you have to double confirm deleting your exam. This is to avoid accidential data loss.
