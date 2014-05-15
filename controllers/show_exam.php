@@ -55,7 +55,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 			FROM ".WATU_ANSWERS." WHERE question_id={$ques->ID} ORDER BY sort_order");
 
 		$correct = false;
-		$class = 'answer';
+		$class = $textarea_class = 'answer';
 		$result .= "<ul>";
 		$ansArr = is_array( @$_REQUEST["answer-" . $ques->ID] )? $_POST["answer-" . $ques->ID] : array();
 		foreach ($all_answers as $ans) {
@@ -65,14 +65,16 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 			if( in_array($ans->ID , $ansArr ) and $ans->correct == 1) {$correct = true;}
 			if( in_array($ans->ID , $ansArr ) ) $achieved += $ans->point; */
 			
-			$points = WatuQuestion :: calculate($ques, $ans, $ansArr, $correct, $class);			
+			list($points, $correct, $class) = WatuQuestion :: calculate($ques, $ans, $ansArr, $correct, $class);		
+			if(strstr($class, 'correct-answer')) $textarea_class = $class;	
+			
 			$achieved += $points;
 			if($ques->answer_type != 'textarea') $result .= "<li class='$class'><span class='answer'>" . stripslashes($ans->answer) . "</span></li> ";
 		}
 
 		// textareas
 		if($ques->answer_type=='textarea' and !empty($_POST["answer-" . $ques->ID][0])) {
-			$result .= "<li class='user-answer $class'><span class='answer'>".$_POST["answer-" . $ques->ID][0]."</span></li>";
+			$result .= "<li class='user-answer $textarea_class'><span class='answer'>".$_POST["answer-" . $ques->ID][0]."</span></li>";
 		}		
 		
 		$result .= "</ul>";

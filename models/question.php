@@ -1,7 +1,7 @@
 <?php
 class WatuQuestion {
 	// calculate points, correctness and return the class
-	static function calculate($question, $ans, $ansArr, &$correct, &$class) {
+	static function calculate($question, $ans, $ansArr, $correct, $class) {
 		$points = 0;
 				
 		if($question->answer_type != 'textarea') {
@@ -18,7 +18,7 @@ class WatuQuestion {
 			if( preg_grep("/".trim($ans->answer)."/i" , $ansArr) ) $points = $ans->point;
 		}
 		
-		return $points;
+		return array($points, $correct, $class);
 	}
 	
 	// figure out the maximum number of points the user can get on the question
