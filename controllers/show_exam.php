@@ -99,7 +99,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	if($percent>100) $rate = 11;
 	$rating = @$all_rating[$rate];
 	
-	$grade = 'None';
+	$grade = __('None', 'watu');
 	$gtitle = $gdescription="";
 	$g_id = 0;
 	$allGrades = $wpdb->get_results(" SELECT * FROM `".WATU_GRADES."` WHERE exam_id=$exam_id ");
