@@ -47,3 +47,32 @@ function watu_preg_escape($input) {
 	return str_replace(array('^', '.', '|', '(', ')', '[', ']', '*', '+', '?', '{', '}', '$', '/' ), 
 		array('\^', '\.', '\|', '\(', '\)', '\[', '\]', '\*', '\+', '\?', '\{', '\}', '\$', '\/' ), $input);
 }
+
+// notify admin about taken quiz
+function watu_notify_admin($exam, $uid, $output) {
+	global $user_email;
+	
+	// replace styles in the snapshot with the images
+	$correct_style=' style="padding-right:20px;background:url('.WATU_URL.'correct.png) no-repeat right top;" ';
+	$wrong_style=' style="padding-right:20px;background:url('.WATU_URL.'wrong.png) no-repeat right top;" ';
+	$user_answer_style = ' style="font-weight:bold;" ';	
+	
+	$output=str_replace('><!--WATUEMAILanswerWATUEMAIL--','',$output);
+	$output=str_replace('><!--WATUEMAILanswer correct-answer user-answerWATUEMAIL--', $correct_style,$output);
+	$output=str_replace('><!--WATUEMAILanswer correct-answerWATUEMAIL--',$correct_style,$output);
+	$output=str_replace('><!--WATUEMAILanswer user-answerWATUEMAIL--', $wrong_style,$output);
+	
+	$output = str_replace("<li class='answer user-answer'>", "<li ".$user_answer_style.">", $output);
+	$output = str_replace("<li class='answer user-answer correct-answer'>", "<li ".$user_answer_style.">", $output);	
+	
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+	$headers .= 'From: '. watupro_admin_email() . "\r\n";
+	$subject = sprintf(__('User results on "%s"', 'watu'), $exam->name);	
+	$user_data = empty($uid) ? __('Guest', 'watupro') : $user_email;
+	
+	$message = "Details of $user_data:<br><br>".$output;
+   wp_mail(get_option('admin_email'), $subject, $message, $headers);
+   //echo $message;
+   // echo $message;
+}

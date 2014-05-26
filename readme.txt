@@ -6,7 +6,7 @@ Tested up to: 3.9.1
 Stable tag: trunk
 License: GPLv2 or later
 
-Creates exams with unlimited number of questions and answers. Assigns grade after the exam or quiz is taken.
+Creates exams and quizzes with unlimited number of questions and answers. Assigns grade after the quiz is taken. Moible / touch - friendly.
 
 == License ==
 
@@ -27,6 +27,8 @@ Creates exams with unlimited number of questions and answers. Assigns grade afte
 
 Create exams and quizzes and display the result immediately after the user takes the exam. You can assign grades and point levels for every grade in the exam / quiz. Then assign points to every answer to a question and Watu will figure out the grade based on the total number of points collected.
 
+**This plugin is mobile / touch - friendly.** The quizzes will work on mobile devices and phones.
+
 Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">Watu PRO</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. 
 
 **Please go to Tools -&gt; Manage Exams to start creating exams.**
@@ -43,11 +45,30 @@ Watu for Wordpress is a light version of <a href="http://calendarscripts.info/wa
 * Shows answers at the end of the quiz or immediately after selection
 * List of users who took exam along with their results
 * Ajax-based loading of the quiz results.
+* Mobile / touch - friendly
+* Notify admin when someone takes a quiz
 
 ### Online Demo ###
 
 Feel free to check the [live demo here](http://demo.pimteam.net/wp/?p=12 "Live demo"). It should answer most "pre-download" questions.
 If you have more doubts just download the plugin and check out if it works for you. It's free and takes a few seconds to install and activate.
+
+### Troubleshooting ###
+
+**When opening a support thread please provide URL (link) where we can see your problem.**
+
+A very common problem is not being able to submit the quiz, or the quiz does not displays at all. This is usually a fatal javascript error caused by other plugins or your them. If you are technical you can easily find the error yourself by checking the JavaScript error console in Chrome or Firefox. Disable the offending plugin and everything will start working normally.
+
+### Developers API ###
+
+In order to allow other plugins to integrate better to Watu we have started working on developers API.
+The following action calls are currently available:
+
+= do_action('watu_exam_submitted', $taking_id)  
+Called when exam is submitted, passes the taken exam ID 
+
+= do_action('watu_exam_saved', $exam_id)
+Called when you add or edit exam (after submitting the changes). Passes the changed exam ID. 
 
 
 == Installation ==
@@ -57,7 +78,7 @@ This section describes how to install the plugin and get it working.
 1. Upload the entire folder `watu` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Go to "Watu Settings" to change the default settings (optional)
-1. Go to "Manage Exams" under "Tools" menu to create your exams, add questions, answers and grades. On the "manage questions" page of the created exam page, above the questions table you will see a green text. It shows you the code you need to enter in a post content where you want the exam to appear.
+1. Go to "Watu Quizzes" under "Tools" menu to create your exams, add questions, answers and grades. On the "manage questions" page of the created exam page, above the questions table you will see a green text. It shows you the code you need to enter in a post content where you want the exam to appear.
 
 == Frequently Asked Questions ==
 
@@ -82,6 +103,9 @@ You need to create a post and embed the exam code. The exam code is shown in the
 3. You can add unlimited number of questions in each exam, and each question can of single-answer, multiple-answer, or open-end type. 
 
 == Changelog ==
+
+= Changes in 2.4.1 =
+- You can now be notified by email when someone takes a quiz
 
 = Changes in 2.4 =
 - Quizzes can now require user login. Depending on whether "Anyone can register" is selected in your main settings page, a register link will also be shown when non-logged in user tries to access such quiz
@@ -161,14 +185,3 @@ You need to create a post and embed the exam code. The exam code is shown in the
 - Added "Essay" (open-end) question 
 - Resolved possible Javascript conflicts
 - Internationalization ready - find the .pot file in langs/ folder
-
-== Developers API ==
-
-In order to allow other plugins to integrate better to Watu we have started working on developers API.
-The following action calls are currently available:
-
-= do_action('watu_exam_submitted', $taking_id)  
-Called when exam is submitted, passes the taken exam ID 
-
-= do_action('watu_exam_saved', $exam_id)
-Called when you add or edit exam (after submitting the changes). Passes the changed exam ID. 

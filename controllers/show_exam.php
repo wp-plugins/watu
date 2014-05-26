@@ -60,21 +60,17 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		$ansArr = is_array( @$_REQUEST["answer-" . $ques->ID] )? $_POST["answer-" . $ques->ID] : array();
 		foreach ($all_answers as $ans) {
 			$class = 'answer';
-			/*if(  in_array($ans->ID , $ansArr) ) $class .= ' user-answer';
-			if($ans->correct == 1) {$class .= ' correct-answer';}
-			if( in_array($ans->ID , $ansArr ) and $ans->correct == 1) {$correct = true;}
-			if( in_array($ans->ID , $ansArr ) ) $achieved += $ans->point; */
 			
 			list($points, $correct, $class) = WatuQuestion :: calculate($ques, $ans, $ansArr, $correct, $class);		
 			if(strstr($class, 'correct-answer')) $textarea_class = $class;	
 			
 			$achieved += $points;
-			if($ques->answer_type != 'textarea') $result .= "<li class='$class'><span class='answer'>" . stripslashes($ans->answer) . "</span></li> ";
+			if($ques->answer_type != 'textarea') $result .= "<li class='$class'><span class='answer'><!--WATUEMAIL".$class."WATUEMAIL-->" . stripslashes($ans->answer) . "</span></li> ";
 		}
 
 		// textareas
 		if($ques->answer_type=='textarea' and !empty($_POST["answer-" . $ques->ID][0])) {
-			$result .= "<li class='user-answer $textarea_class'><span class='answer'>".$_POST["answer-" . $ques->ID][0]."</span></li>";
+			$result .= "<li class='user-answer $textarea_class'><span class='answer'><!--WATUEMAIL".$class."WATUEMAIL-->".$_POST["answer-" . $ques->ID][0]."</span></li>";
 		}		
 		
 		$result .= "</ul>";
@@ -141,6 +137,9 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		
 	// update snapshot
 	$wpdb->query($wpdb->prepare("UPDATE ".WATU_TAKINGS." SET snapshot=%s WHERE ID=%d", $snapshot, $taking_id)); 
+	
+	// notify admin
+	if(!empty($exam->notify_admin)) watu_notify_admin($exam, $uid, $snapshot);
 	
 	do_action('watu_exam_submitted', $taking_id);
 	exit;// Exit due to ajax call

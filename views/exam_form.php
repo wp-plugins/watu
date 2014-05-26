@@ -30,6 +30,8 @@
 			<p><input id="watuSingle" type="checkbox" name="single_page" value="1" <?php if(!empty($dquiz->single_page)) echo 'checked'?>> <label for="watuSingle"><?php _e("Show all questions on single page", 'watu');?></label></p>
 			
 			<p><input type="checkbox" name="require_login" value="1" <?php if(!empty($dquiz->require_login)) echo 'checked'?>> <label><?php _e('Require user login (displays login and / or register link depending on your blog settings.)', 'watu')?></label></p>
+			
+			<p><input type="checkbox" name="notify_admin" value="1" <?php if(!empty($dquiz->notify_admin)) echo 'checked'?>> <label><?php _e('Notify me when someone takes this quiz (the email goes to the address given in your WordPress Settings page).', 'watu')?></label></p>
 		</div>
 	</div>
 	
