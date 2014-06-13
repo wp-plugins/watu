@@ -59,6 +59,11 @@ form.quiz-form {
    display: inline !important;
 }
 
+.show-question {
+	border-bottom: 1px dashed #DDD;
+	margin-bottom: 7px;	
+}
+
 .show-question-content {
-	padding-bottom: 10px;
+	font-size:110%;
 }

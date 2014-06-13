@@ -43,14 +43,13 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	$result = '';
 	$result .= "<p>" . __('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p>";
 
-	// we should reorder the questions in the same way they came from POST because exam might be randomized
-	require_once(WATU_PATH."/models/exam.php");
+	// we should reorder the questions in the same way they came from POST because exam might be randomized	
 	$_exam = new WatuExam();
 	$questions = $_exam->reorder_questions($questions, $_POST['question_id']);
 
 	foreach ($questions as $qct => $ques) {
 		$result .= "<div class='show-question'>";
-		$result .= "<div class='show-question-content'>". stripslashes($ques->question) . "</div>";
+		$result .= "<div class='show-question-content'>". wpautop(stripslashes($ques->question), false) . "</div>";
 		$all_answers = $wpdb->get_results("SELECT ID,answer,correct, point, question_id 
 			FROM ".WATU_ANSWERS." WHERE question_id={$ques->ID} ORDER BY sort_order");
 
@@ -65,12 +64,13 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 			if(strstr($class, 'correct-answer')) $textarea_class = $class;	
 			
 			$achieved += $points;
-			if($ques->answer_type != 'textarea') $result .= "<li class='$class'><span class='answer'><!--WATUEMAIL".$class."WATUEMAIL-->" . stripslashes($ans->answer) . "</span></li> ";
+			if($ques->answer_type != 'textarea') $result .= wpautop("<li class='$class'><span class='answer'><!--WATUEMAIL".$class."WATUEMAIL-->" . stripslashes($ans->answer) . "</span></li>");
 		}
 
 		// textareas
 		if($ques->answer_type=='textarea' and !empty($_POST["answer-" . $ques->ID][0])) {
-			$result .= "<li class='user-answer $textarea_class'><span class='answer'><!--WATUEMAIL".$class."WATUEMAIL-->".$_POST["answer-" . $ques->ID][0]."</span></li>";
+			if(!sizeof($all_answers)) $textarea_class = 'correct-answer';
+			$result .= wpautop("<li class='user-answer $textarea_class'><span class='answer'><!--WATUEMAIL".$class."WATUEMAIL-->".$_POST["answer-" . $ques->ID][0]."</span></li>");
 		}		
 		
 		$result .= "</ul>";
@@ -106,9 +106,9 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 
 			if( $grow->gfrom <= $achieved and $achieved <= $grow->gto ) {
 				$grade = $gtitle = $grow->gtitle;
-				$gdescription = stripslashes($grow->gdescription);
+				$gdescription = wpautop(stripslashes($grow->gdescription));
 				$g_id = $grow->ID;
-				if(!empty($grow->gdescription)) $grade.="<p>".stripslashes($grow->gdescription)."</p>";
+				if(!empty($grow->gdescription)) $grade .= wpautop(stripslashes($grow->gdescription));
 				break;
 			}
 		}
@@ -118,7 +118,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 
 	$quiz_details->final_screen = str_replace('%%TOTAL%%', '%%MAX-POINTS%%', $quiz_details->final_screen);
 	$replace_these	= array('%%SCORE%%', '%%MAX-POINTS%%', '%%PERCENTAGE%%', '%%GRADE%%', '%%RATING%%', '%%CORRECT%%', '%%WRONG_ANSWERS%%', '%%QUIZ_NAME%%',	'%%DESCRIPTION%%', '%%GRADE-TITLE%%', '%%GRADE-DESCRIPTION%%', '%%POINTS%%');
-	$with_these		= array($achieved,		 $max_points,	  $percent,			$grade,		 $rating,		$num_correct,					$num_questions-$num_correct,	   stripslashes($quiz_details->name), stripslashes($quiz_details->description), $gtitle, $gdescription, $achieved);
+	$with_these		= array($achieved,		 $max_points,	  $percent,			$grade,		 $rating,		$num_correct,					$num_questions-$num_correct,	   stripslashes($quiz_details->name), wpautop(stripslashes($quiz_details->description)), $gtitle, $gdescription, $achieved);
 	
 	// insert taking
 	$uid = $user_ID ? $user_ID : 0;
@@ -127,7 +127,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	$taking_id = $wpdb->insert_id;	
 
 	// Show the results
-	$output = str_replace($replace_these, $with_these, stripslashes($quiz_details->final_screen));
+	$output = str_replace($replace_these, $with_these, wpautop(stripslashes($quiz_details->final_screen)));
 	$final_output = apply_filters(WATU_CONTENT_FILTER, $output); 
 	echo $final_output;
 	$results_output = '<hr />' . apply_filters(WATU_CONTENT_FILTER,$result);
@@ -149,7 +149,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 ?>
 
 <div id="watu_quiz" class="quiz-area <?php if($single_page) echo 'single-page-quiz'; ?>">
-<?php if(!empty($exam->description)):?><p><?php echo apply_filters(WATU_CONTENT_FILTER,$exam->description);?></p><?php endif;?>
+<?php if(!empty($exam->description)):?><p><?php echo apply_filters(WATU_CONTENT_FILTER,wpautop(stripslashes($exam->description)));?></p><?php endif;?>
 <form action="" method="post" class="quiz-form" id="quiz-<?php echo $exam_id?>">
 <?php
 $question_count = 1;
@@ -157,7 +157,7 @@ $question_ids = '';
 $output = $answer_class = '';
 foreach ($questions as $qct => $ques) {
 	$output .= "<div class='watu-question' id='question-$question_count'>";
-	$output .= "<div class='question-content'>". stripslashes($ques->question) . "</div>";
+	$output .= "<div class='question-content'>". wpautop(stripslashes($ques->question)) . "</div>";
 	$output .= "<input type='hidden' name='question_id[]' value='{$ques->ID}' />";
 	$question_ids .= $ques->ID.',';
 	$dans = $wpdb->get_results("SELECT ID,answer,correct FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");
@@ -174,8 +174,7 @@ foreach ($questions as $qct => $ques) {
 			$answer_class = 'js-answer-label';
 			if($ans->correct) $answer_class = 'php-answer-label';
 		}
-		$output .= "<div><input type='$ans_type' name='answer-{$ques->ID}[]' id='answer-id-{$ans->ID}' class='answer answer-$question_count $answer_class answerof-{$ques->ID}' value='{$ans->ID}' />";
-		$output .= "&nbsp;<label for='answer-id-{$ans->ID}' id='answer-label-{$ans->ID}' class='$answer_class answer label-$question_count'><span>" . stripslashes($ans->answer) . "</span></label></div>";
+		$output .= wpautop("<div><input type='$ans_type' name='answer-{$ques->ID}[]' id='answer-id-{$ans->ID}' class='answer answer-$question_count $answer_class answerof-{$ques->ID}' value='{$ans->ID}' />&nbsp;<label for='answer-id-{$ans->ID}' id='answer-label-{$ans->ID}' class='$answer_class answer label-$question_count'><span>" . stripslashes($ans->answer) . "</span></label></div>");
 	}
 
 	$output .= "<input type='hidden' id='questionType".$question_count."' value='{$ques->answer_type}' class='".($ques->is_required?'required':'')."'>";

@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.4.1.1
+Version: 2.4.3
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -31,6 +31,7 @@ include( WATU_PATH.'/controllers/takings.php');
 include( WATU_PATH.'/controllers/ajax.php');
 include( WATU_PATH.'/models/question.php');
 include( WATU_PATH.'/lib/functions.php');
+include( WATU_PATH."/models/exam.php");
 
 function watu_init() {
 	global $wpdb;
@@ -56,7 +57,7 @@ function watu_init() {
 	$content_filter = get_option('watu_use_the_content') ? 'the_content' : 'watu_content';
 	define('WATU_CONTENT_FILTER', $content_filter);
 	
-	add_filter( 'watu_content', 'watu_autop' );	
+	// add_filter( 'watu_content', 'watu_autop' );	
 	add_filter( 'watu_content', 'wptexturize' );
 	add_filter( 'watu_content', 'convert_smilies' );
 	add_filter( 'watu_content', 'convert_chars' );
@@ -69,6 +70,8 @@ function watu_init() {
 	
 	$version = get_option('watu_version');
 	if($version != '2.39') watu_activate(true);
+	
+	add_action('admin_notices', 'watu_admin_notice');
 }
 
 function watu_autop($content) {
@@ -242,9 +245,23 @@ function watu_activate($update = false) {
 		 $sql = "ALTER TABLE ".WATU_ANSWERS." CHANGE answer answer TEXT";
 		 $wpdb->query($sql);
 	}	
+	
+	$demo_quiz_created = get_option('watu_demo_quiz_created');
+	if($demo_quiz_created != '1') WatuExam :: create_demo();
 						
 	update_option( "watu_delete_db", '' );	
 	update_option( "watu_version", '2.39' );
+	
+	update_option('watu_admin_notice', __('<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href="tools.php?page=watu_exams">Quizzes page</a> to get started! If this is the first time you have activated the plugin there will be a small demo quiz automatically created for you. Feel free to explore it to get better idea how things work.</p>', 'watu'));
+}
+
+function watu_admin_notice() {
+		$notice = get_option('watu_admin_notice');
+		if(!empty($notice)) {
+			echo "<div class='updated'>".stripslashes($notice)."</div>";
+		}
+		// once shown, cleanup
+		update_option('watu_admin_notice', '');
 }
 
 function watu_vc_scripts() {

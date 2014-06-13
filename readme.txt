@@ -1,6 +1,6 @@
 === Watu ===
 Contributors: prasunsen
-Tags: exam, test, quiz, survey
+Tags: exam, test, quiz, survey, wpmu, multisite, touch, mobile
 Requires at least: 3.3
 Tested up to: 3.9.1
 Stable tag: trunk
@@ -27,9 +27,9 @@ Creates exams and quizzes with unlimited number of questions and answers. Assign
 
 Create exams and quizzes and display the result immediately after the user takes the exam. You can assign grades and point levels for every grade in the exam / quiz. Then assign points to every answer to a question and Watu will figure out the grade based on the total number of points collected.
 
-**This plugin is mobile / touch - friendly.** The quizzes will work on mobile devices and phones.
+Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">Watu PRO</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc.
 
-Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">Watu PRO</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc. 
+**This plugin is mobile / touch - friendly.** The quizzes will work on mobile devices and phones. 
 
 **Please go to Tools -&gt; Manage Exams to start creating exams.**
 
@@ -104,8 +104,10 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.4.1 =
+= Changes in 2.4.3 =
 - You can now be notified by email when someone takes a quiz
+- Made the quiz more user-friendly by auto-generating a demo quiz for the new users
+- Fixed number of wpautop() issues. Now the filter is applied manually only where it's needed
 
 = Changes in 2.4 =
 - Quizzes can now require user login. Depending on whether "Anyone can register" is selected in your main settings page, a register link will also be shown when non-logged in user tries to access such quiz
