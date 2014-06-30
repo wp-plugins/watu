@@ -50,9 +50,8 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	foreach ($questions as $qct => $ques) {
 		$result .= "<div class='show-question'>";
 		$result .= "<div class='show-question-content'>". wpautop(stripslashes($ques->question), false) . "</div>";
-		$all_answers = $wpdb->get_results("SELECT ID,answer,correct, point, question_id 
-			FROM ".WATU_ANSWERS." WHERE question_id={$ques->ID} ORDER BY sort_order");
-
+		$all_answers = $ques->answers;
+		
 		$correct = false;
 		$class = $textarea_class = 'answer';
 		$result .= "<ul>";
@@ -155,12 +154,14 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 $question_count = 1;
 $question_ids = '';
 $output = $answer_class = '';
+$answers_orderby = empty($exam->randomize_answers) ? 'sort_order, ID' : 'RAND()';
 foreach ($questions as $qct => $ques) {
 	$output .= "<div class='watu-question' id='question-$question_count'>";
 	$output .= "<div class='question-content'>". wpautop(stripslashes($ques->question)) . "</div>";
 	$output .= "<input type='hidden' name='question_id[]' value='{$ques->ID}' />";
 	$question_ids .= $ques->ID.',';
-	$dans = $wpdb->get_results("SELECT ID,answer,correct FROM {$wpdb->prefix}watu_answer WHERE question_id={$ques->ID} ORDER BY sort_order");
+	$dans = $wpdb->get_results("SELECT ID,answer,correct FROM ".WATU_ANSWERS." 
+		WHERE question_id={$ques->ID} ORDER BY $answers_orderby");
 	$ans_type = $ques->answer_type;
 	
 	// display textarea
@@ -175,6 +176,9 @@ foreach ($questions as $qct => $ques) {
 			if($ans->correct) $answer_class = 'php-answer-label';
 		}
 		$output .= wpautop("<div><input type='$ans_type' name='answer-{$ques->ID}[]' id='answer-id-{$ans->ID}' class='answer answer-$question_count $answer_class answerof-{$ques->ID}' value='{$ans->ID}' />&nbsp;<label for='answer-id-{$ans->ID}' id='answer-label-{$ans->ID}' class='$answer_class answer label-$question_count'><span>" . stripslashes($ans->answer) . "</span></label></div>");
+
+		// add this to track the order		
+		$output .= "<input type='hidden' name='answer_ids[]' class='watu-answer-ids' value='{$ans->ID}' />";
 	}
 
 	$output .= "<input type='hidden' id='questionType".$question_count."' value='{$ques->answer_type}' class='".($ques->is_required?'required':'')."'>";
@@ -207,6 +211,7 @@ var watuURL='';
 jQuery(function($){
 question_ids = "<?php print $question_ids ?>";
 exam_id = <?php print $exam_id ?>;
+Watu.exam_id = exam_id;
 Watu.qArr = question_ids.split(',');
 Watu.singlePage = '<?php echo $exam->single_page?>';
 watuURL = "<?php echo admin_url( 'admin-ajax.php' ); ?>";

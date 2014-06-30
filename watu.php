@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.4.3
+Version: 2.4.4
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -69,7 +69,7 @@ function watu_init() {
 	if(function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) add_filter('watu_content', 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage');
 	
 	$version = get_option('watu_version');
-	if($version != '2.39') watu_activate(true);
+	if($version != '2.4') watu_activate(true);
 	
 	add_action('admin_notices', 'watu_admin_notice');
 }
@@ -220,6 +220,7 @@ function watu_activate($update = false) {
 		array("name"=>"show_answers", "type"=>"TINYINT NOT NULL DEFAULT 100"),
 		array("name"=>"require_login", "type"=>"TINYINT NOT NULL DEFAULT 0"),
 		array("name"=>"notify_admin", "type"=>"TINYINT NOT NULL DEFAULT 0"),
+		array("name"=>"randomize_answers", "type"=>"TINYINT NOT NULL DEFAULT 0"),
 	), WATU_EXAMS);	
 	
 	
@@ -250,7 +251,7 @@ function watu_activate($update = false) {
 	if($demo_quiz_created != '1') WatuExam :: create_demo();
 						
 	update_option( "watu_delete_db", '' );	
-	update_option( "watu_version", '2.39' );
+	update_option( "watu_version", '2.4' );
 	
 	update_option('watu_admin_notice', __('<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href="tools.php?page=watu_exams">Quizzes page</a> to get started! If this is the first time you have activated the plugin there will be a small demo quiz automatically created for you. Feel free to explore it to get better idea how things work.</p>', 'watu'));
 }
@@ -269,16 +270,16 @@ function watu_vc_scripts() {
 		  
       wp_enqueue_style(
 			'watu-style',
-			plugins_url().'/watu/style.css',
+			WATU_URL.'style.css',
 			array(),
 			'2.2.0'
 		);
 		
 		wp_enqueue_script(
 			'watu-script',
-			plugins_url('/watu/script.js'),
+			WATU_URL.'script.js',
 			array(),
-			'2.2'
+			'2.3'
 		);
 		
 		$translation_array = array(

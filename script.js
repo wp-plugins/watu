@@ -107,7 +107,13 @@ Watu.showAnswer = function(e) {
 }
 
 Watu.submitResult = function() {
-	var data = {action:'watu_submit', 'do': 'show_exam_result', quiz_id: exam_id, 'question_id[]': Watu.qArr };
+	var answer_ids = [];
+	jQuery('#quiz-' + this.exam_id + ' .watu-answer-ids').each(function(index, value){
+		answer_ids.push(this.value);
+	});
+ 
+	var data = {action:'watu_submit', 'do': 'show_exam_result', quiz_id: exam_id, 
+	'question_id[]': Watu.qArr, 'answer_ids[]' : answer_ids };
 	
 	for(x=0; x<Watu.qArr.length; x++) {
 		if(Watu.singlePage) {

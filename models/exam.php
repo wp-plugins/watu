@@ -3,13 +3,39 @@ class WatuExam {
 	// keep the questions after submit in the same order they were show to the user
 	// and only the questions that were shown
 	function reorder_questions($questions, $orders) {
+		global $wpdb;
 		$new_questions = array();
 		
+		$qids = array(0);
+		foreach($questions as $question) $qids[] = $question->ID;		
+		
+		// all answers in the quiz
+		$all_answers = $wpdb->get_results("SELECT ID,answer,correct, point, question_id 
+			FROM ".WATU_ANSWERS." WHERE question_id IN (" . implode(',', $qids) . ")");
+		$new_answers = array();
+				
+		// reorder the answers accordingly to POST info		
+		if(!empty($_POST['answer_ids'])) {
+			foreach($_POST['answer_ids'] as $aorder) {
+				foreach($all_answers as $answer) {
+					if($answer->ID == $aorder) $new_answers[] = $answer;
+				} // end foreach answer
+			} // end foreach ID from post
+		} // end reordering answers
+				
+		// reorder the questions accordingly to POST info
 		foreach($orders as $order) {
 			foreach($questions as $question) {
+				// dump answers
+				$question_answers = array();
+				foreach($new_answers as $answer) {
+					if($question->ID == $answer->question_id) $question_answers[] = $answer;
+				}				
+				$question->answers = $question_answers;
+					
 				if($question->ID == $order) $new_questions[] = $question;
-			}
-		}
+			} // end foreach question
+		} // end foreach orders (means question IDs ordered as POST var)
 		
 		return $new_questions;
 	}
