@@ -122,7 +122,7 @@ function watu_exam() {
 			$wpdb->query($wpdb->prepare("INSERT INTO ".WATU_EXAMS." 
 			(name, description, final_screen,  added_on, randomize, single_page, show_answers, require_login, 
 			notify_admin, randomize_answers) 
-			VALUES(%s, %s, %s, NOW(), %d, %d, %d, %d, %d)", 
+			VALUES(%s, %s, %s, NOW(), %d, %d, %d, %d, %d, %d)", 
 			$_POST['name'], $_POST['description'], $_POST['content'], @$_POST['randomize'], @$_POST['single_page'], 
 			$_POST['show_answers'], @$_POST['require_login'], @$_POST['notify_admin'], @$_POST['randomize_answers']));
 			$exam_id = $wpdb->insert_id;
