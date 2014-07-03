@@ -12,7 +12,7 @@ class WatuQuestion {
 		}
 		else {
 			// textareas
-			$ans->answer = watu_preg_escape($ans->answer);
+			$ans->answer = watu_preg_escape($ans->answer);			
 			if( preg_grep("/".trim($ans->answer)."/i" , $ansArr) ) $class .= ' user-answer';
 			if( preg_grep("/".trim($ans->answer)."/i" , $ansArr) and $ans->correct == 1) {$correct = true; $class .= ' correct-answer';}
 			if( preg_grep("/".trim($ans->answer)."/i" , $ansArr) ) $points = $ans->point;

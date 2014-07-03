@@ -170,7 +170,10 @@ foreach ($questions as $qct => $ques) {
 	}	
 	
 	foreach ($dans as $ans) {
-		if($ques->answer_type == 'textarea') break;
+		if($ques->answer_type == 'textarea') {
+			$output .= "<input type='hidden' name='answer_ids[]' class='watu-answer-ids' value='{$ans->ID}' />";
+			break;
+		}
 		if($answer_display == 2) {
 			$answer_class = 'js-answer-label';
 			if($ans->correct) $answer_class = 'php-answer-label';
