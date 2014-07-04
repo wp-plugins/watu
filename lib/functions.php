@@ -44,7 +44,7 @@ function watu_redirect($url) {
 
 // escapes user input to be usable in preg_replace & other preg functions
 function watu_preg_escape($input) {
-	return str_replace(array('^', '.', '|', '(', ')', '[', ']', '*', '+', '?', '{', '}', '$', '/' ), 
+	return str_replace(array('^', '.', '|', '(', ')', '[', ']', '*', '+', '?', '{', '}', '$', '/'), 
 		array('\^', '\.', '\|', '\(', '\)', '\[', '\]', '\*', '\+', '\?', '\{', '\}', '\$', '\/' ), $input);
 }
 

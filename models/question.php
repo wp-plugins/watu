@@ -11,12 +11,18 @@ class WatuQuestion {
 			if( in_array($ans->ID , $ansArr ) ) $points = $ans->point;
 		}
 		else {
-			// textareas
-			$ans->answer = watu_preg_escape($ans->answer);			
-			if( preg_grep("/".trim($ans->answer)."/i" , $ansArr) ) $class .= ' user-answer';
-			if( preg_grep("/".trim($ans->answer)."/i" , $ansArr) and $ans->correct == 1) {$correct = true; $class .= ' correct-answer';}
-			if( preg_grep("/".trim($ans->answer)."/i" , $ansArr) ) $points = $ans->point;
-		}
+			// textareas			
+			$user_answer = $ansArr[0];		
+			
+			if( strtolower(trim($ans->answer)) == strtolower(trim($user_answer)) ) { 
+				$class .= ' user-answer';
+				$points = $ans->point;
+			}
+			if( strtolower(trim($ans->answer)) == strtolower(trim($user_answer)) and $ans->correct == 1) {
+				$correct = true; 
+				$class .= ' correct-answer';
+			}			 
+		} // end working with textareas
 		
 		return array($points, $correct, $class);
 	}

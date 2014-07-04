@@ -69,7 +69,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		// textareas
 		if($ques->answer_type=='textarea' and !empty($_POST["answer-" . $ques->ID][0])) {
 			if(!sizeof($all_answers)) $textarea_class = 'correct-answer';
-			$result .= wpautop("<li class='user-answer $textarea_class'><span class='answer'><!--WATUEMAIL".$class."WATUEMAIL-->".$_POST["answer-" . $ques->ID][0]."</span></li>");
+			$result .= wpautop("<li class='user-answer $textarea_class'><span class='answer'><!--WATUEMAIL".$class."WATUEMAIL-->".stripslashes($_POST["answer-" . $ques->ID][0])."</span></li>");
 		}		
 		
 		$result .= "</ul>";
@@ -170,18 +170,16 @@ foreach ($questions as $qct => $ques) {
 	}	
 	
 	foreach ($dans as $ans) {
-		if($ques->answer_type == 'textarea') {
-			$output .= "<input type='hidden' name='answer_ids[]' class='watu-answer-ids' value='{$ans->ID}' />";
-			break;
-		}
+		// add this to track the order		
+		$output .= "<input type='hidden' name='answer_ids[]' class='watu-answer-ids' value='{$ans->ID}' />";
+		
+		if($ques->answer_type == 'textarea') continue;
+		
 		if($answer_display == 2) {
 			$answer_class = 'js-answer-label';
 			if($ans->correct) $answer_class = 'php-answer-label';
 		}
 		$output .= wpautop("<div><input type='$ans_type' name='answer-{$ques->ID}[]' id='answer-id-{$ans->ID}' class='answer answer-$question_count $answer_class answerof-{$ques->ID}' value='{$ans->ID}' />&nbsp;<label for='answer-id-{$ans->ID}' id='answer-label-{$ans->ID}' class='$answer_class answer label-$question_count'><span>" . stripslashes($ans->answer) . "</span></label></div>");
-
-		// add this to track the order		
-		$output .= "<input type='hidden' name='answer_ids[]' class='watu-answer-ids' value='{$ans->ID}' />";
 	}
 
 	$output .= "<input type='hidden' id='questionType".$question_count."' value='{$ques->answer_type}' class='".($ques->is_required?'required':'')."'>";
