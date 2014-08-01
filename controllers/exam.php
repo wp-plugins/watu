@@ -101,7 +101,7 @@ function watu_exams() {
 <?php } 
 
 function watu_exam() {
-	global $wpdb;
+	global $wpdb, $user_ID;
 	$answer_display = get_option('watu_show_answers');
 	
 	if(isset($_REQUEST['submit'])) {

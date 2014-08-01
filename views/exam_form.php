@@ -81,7 +81,7 @@
 	<tr><td>%%GRADE%%</td><td><?php _e('Shows the achieved grade - title and description together. If you want to design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-DESCRIPTION%% for grade description', 'watu') ?>.</td></tr>
 	<tr><td>%%CORRECT%%</td><td><?php _e('Number of correct answers. In multiple-select questions even one correct answer makes the question correct. In WatuPRO this is configurable', 'watu')?></td></tr>
 	<tr><td>%%WRONG_ANSWERS%%</td><td><?php _e('Number of answers you got wrong', 'watu') ?></td></tr>
-	<tr><td>%%RATING%%</td><td><?php _e("A rating of your performance - it could be 'Failed'(0-39%), 'Just Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and 'Unbeatable'(100%)", 'watu') ?></td></tr>
+	<tr><td>%%RATING%%</td><td><?php _e("A rating of your performance - it could be 'Failed'(0-39%), 'Just Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and 'Unbeatable'(100%).", 'watu') ?> <?php printf(__('The rating can be changed only by <a href="%s" target="_blank">translating the plugin</a>. So we recommend you to use the grades instead. They are fully configurable right from this page.', 'watu'), 'http://blog.calendarscripts.info/how-to-translate-a-wordpress-plugin/')?></td></tr>
 	<tr><td>%%QUIZ_NAME%%</td><td><?php _e('The name of the quiz', 'watu') ?></td></tr>
 	<tr><td>%%DESCRIPTION%%</td><td><?php _e('The text entered in the description field.', 'watu') ?></td></tr>
 	</table>
@@ -92,7 +92,7 @@
 	<?php wp_nonce_field('watu_create_edit_quiz'); ?>
 	<input type="hidden" name="action" value="<?php echo $action; ?>" />
 	<input type="hidden" name="quiz" value="<?php echo $_REQUEST['quiz']; ?>" />
-	<input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
+	<input type="hidden" id="user-id" name="user_ID" value="<?php echo $user_ID ?>" />
 	<span id="autosave"></span>
 	<input type="submit" name="submit" value="<?php _e('Save', 'watu') ?>" style="font-weight: bold;" tabindex="4" />
 	</p>

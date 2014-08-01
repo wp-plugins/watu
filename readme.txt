@@ -104,8 +104,9 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.4.4.3 =
+= Changes in 2.4.5 =
 - Added feature to andomize the answers to the questions. Works together or independent from the question randomization.
+- Added compatibility with WP QuickLaTeX
 - You can now be notified by email when someone takes a quiz
 - Made the quiz more user-friendly by auto-generating a demo quiz for the new users
 - Improvements to open end quesitons: now any special characters are handled and matching is case INSENSITIVE
