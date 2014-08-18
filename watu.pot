@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.4.4\n"
+"Project-Id-Version: Watu 2.4.6\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2014-06-30 13:58:52+00:00\n"
+"POT-Creation-Date: 2014-08-18 13:45:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Go to"
 msgstr ""
 
-#: controllers/exam.php:24 options.php:19 watu.php:110
+#: controllers/exam.php:24 options.php:19 watu.php:112
 msgid "Watu Settings"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 msgid "times"
 msgstr ""
 
-#: controllers/exam.php:80 watu.php:97
+#: controllers/exam.php:80 watu.php:99
 msgid "Manage Questions"
 msgstr ""
 
@@ -96,8 +96,8 @@ msgid ""
 "answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
 msgstr ""
 
-#: controllers/exam.php:82 controllers/questions.php:99 views/takings.php:17
-#: views/takings.php:26
+#: controllers/exam.php:82 controllers/questions.php:99 views/takings.php:57
+#: views/takings.php:67
 msgid "Delete"
 msgstr ""
 
@@ -146,7 +146,7 @@ msgstr ""
 msgid "into any post or page."
 msgstr ""
 
-#: controllers/questions.php:74 controllers/show_exam.php:199
+#: controllers/questions.php:74 controllers/show_exam.php:200
 #: views/question-form.html.php:2 views/question-form.html.php:107
 msgid "Question"
 msgstr ""
@@ -244,31 +244,31 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: controllers/show_exam.php:189
+#: controllers/show_exam.php:190
 msgid "Loading"
 msgstr ""
 
-#: controllers/show_exam.php:196 watu.php:288
+#: controllers/show_exam.php:197 watu.php:290
 msgid "Show Answer"
 msgstr ""
 
-#: controllers/show_exam.php:199
+#: controllers/show_exam.php:200
 msgid "of"
 msgstr ""
 
-#: controllers/show_exam.php:200
+#: controllers/show_exam.php:201
 msgid "Next"
 msgstr ""
 
-#: controllers/show_exam.php:203
+#: controllers/show_exam.php:204
 msgid "Show Results"
 msgstr ""
 
-#: controllers/takings.php:33
+#: controllers/takings.php:116
 msgid "User or IP;Date;Points;Result/Grade"
 msgstr ""
 
-#: controllers/takings.php:73 watu.php:117
+#: controllers/takings.php:162 watu.php:119
 msgid "You do not have sufficient permissions to access this page"
 msgstr ""
 
@@ -543,7 +543,14 @@ msgstr ""
 msgid ""
 "A rating of your performance - it could be 'Failed'(0-39%), 'Just "
 "Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and "
-"'Unbeatable'(100%)"
+"'Unbeatable'(100%)."
+msgstr ""
+
+#: views/exam_form.php:84
+msgid ""
+"The rating can be changed only by <a href=\"%s\" target=\"_blank"
+"\">translating the plugin</a>. So we recommend you to use the grades "
+"instead. They are fully configurable right from this page."
 msgstr ""
 
 #: views/exam_form.php:85
@@ -828,82 +835,155 @@ msgid "Back to exams list"
 msgstr ""
 
 #: views/takings.php:8
+msgid "Filter/search these records"
+msgstr ""
+
+#: views/takings.php:10
 msgid "Export as CSV (semicolon delimited)"
 msgstr ""
 
 #: views/takings.php:10
+msgid "(Filters apply)"
+msgstr ""
+
+#: views/takings.php:12
 msgid "Delete all user-submitted data for this exam"
 msgstr ""
 
-#: views/takings.php:15
-msgid "User or IP"
+#: views/takings.php:19
+msgid "Username"
 msgstr ""
 
-#: views/takings.php:15
-msgid "Date"
+#: views/takings.php:20 views/takings.php:26 views/takings.php:32
+#: views/takings.php:38
+msgid "Equals"
 msgstr ""
 
-#: views/takings.php:16
-msgid "Points"
+#: views/takings.php:21 views/takings.php:27 views/takings.php:33
+msgid "Starts with"
 msgstr ""
 
-#: views/takings.php:16
-msgid "Result"
+#: views/takings.php:22 views/takings.php:28 views/takings.php:34
+msgid "Ends with"
 msgstr ""
 
-#: views/takings.php:17
-msgid "Details"
-msgstr ""
-
-#: views/takings.php:24
-msgid "n/a"
+#: views/takings.php:23 views/takings.php:29 views/takings.php:35
+msgid "Contains"
 msgstr ""
 
 #: views/takings.php:25
-msgid "view"
+msgid "Email"
 msgstr ""
 
-#: views/takings.php:30
-msgid "Previous page"
+#: views/takings.php:31
+msgid "IP Address"
 msgstr ""
 
-#: views/takings.php:32
-msgid "Next page"
+#: views/takings.php:37
+msgid "Date Taken"
 msgstr ""
 
-#: views/takings.php:35
-msgid "No user has taken this quiz yet."
+#: views/takings.php:39
+msgid "Is before"
 msgstr ""
 
-#: views/takings.php:50
-msgid "Are you sure?"
+#: views/takings.php:40
+msgid "Is after"
+msgstr ""
+
+#: views/takings.php:42
+msgid "Points received"
+msgstr ""
+
+#: views/takings.php:43
+msgid "Equal"
+msgstr ""
+
+#: views/takings.php:44
+msgid "Are less than"
+msgstr ""
+
+#: views/takings.php:45
+msgid "Are more than"
+msgstr ""
+
+#: views/takings.php:48
+msgid "Search/Filter"
+msgstr ""
+
+#: views/takings.php:49
+msgid "Clear Filters"
+msgstr ""
+
+#: views/takings.php:55
+msgid "User or IP"
+msgstr ""
+
+#: views/takings.php:55
+msgid "Date"
 msgstr ""
 
 #: views/takings.php:56
+msgid "Points"
+msgstr ""
+
+#: views/takings.php:56
+msgid "Result"
+msgstr ""
+
+#: views/takings.php:57
+msgid "Details"
+msgstr ""
+
+#: views/takings.php:65
+msgid "n/a"
+msgstr ""
+
+#: views/takings.php:66
+msgid "view"
+msgstr ""
+
+#: views/takings.php:71
+msgid "Previous page"
+msgstr ""
+
+#: views/takings.php:73
+msgid "Next page"
+msgstr ""
+
+#: views/takings.php:76
+msgid "No results match your search criteria."
+msgstr ""
+
+#: views/takings.php:91
+msgid "Are you sure?"
+msgstr ""
+
+#: views/takings.php:97
 msgid "Are you sure? This will delete ALL user results for this quiz!"
 msgstr ""
 
-#: watu.php:93 watu.php:96
+#: watu.php:95 watu.php:98
 msgid "Manage Exams"
 msgstr ""
 
-#: watu.php:93 watu.php:96
+#: watu.php:95 watu.php:98
 msgid "Watu Exams"
 msgstr ""
 
-#: watu.php:98
+#: watu.php:100
 msgid "Add/Edit Question"
 msgstr ""
 
-#: watu.php:112
+#: watu.php:114
 msgid "Exam submissions"
 msgstr ""
 
-#: watu.php:116
+#: watu.php:118
 msgid "Your are not allowed to to perform this operation"
 msgstr ""
 
-#: watu.php:256
+#: watu.php:258
 msgid ""
 "<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href=\"tools."
 "php?page=watu_exams\">Quizzes page</a> to get started! If this is the first "
@@ -912,10 +992,10 @@ msgid ""
 "how things work.</p>"
 msgstr ""
 
-#: watu.php:286
+#: watu.php:288
 msgid "You have missed to answer a required question"
 msgstr ""
 
-#: watu.php:287
+#: watu.php:289
 msgid "You did not select any answer. Are you sure you want to continue?"
 msgstr ""

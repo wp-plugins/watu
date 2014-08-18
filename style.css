@@ -67,3 +67,9 @@ form.quiz-form {
 .show-question-content {
 	font-size:110%;
 }
+
+.watu-admin label {
+	min-width: 150px;
+	display:block;
+	float:left;
+}

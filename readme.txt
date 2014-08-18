@@ -104,14 +104,15 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.4.5 =
+= Changes in 2.4.6 =
+- Added filter / search on the "view results" page
 - Added feature to andomize the answers to the questions. Works together or independent from the question randomization.
 - Added compatibility with WP QuickLaTeX
 - You can now be notified by email when someone takes a quiz
 - Made the quiz more user-friendly by auto-generating a demo quiz for the new users
 - Improvements to open end quesitons: now any special characters are handled and matching is case INSENSITIVE
 - Fixed number of wpautop() issues. Now the filter is applied manually only where it's needed
-- Fixed but with calculating points on open-end question (the bug was caused by the latest "randomize answers" feature)
+- Fixed bug with calculating points on open-end question (the bug was caused by the latest "randomize answers" feature)
 
 = Changes in 2.4 =
 - Quizzes can now require user login. Depending on whether "Anyone can register" is selected in your main settings page, a register link will also be shown when non-logged in user tries to access such quiz
