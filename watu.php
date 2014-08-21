@@ -35,7 +35,6 @@ include( WATU_PATH."/models/exam.php");
 
 function watu_init() {
 	global $wpdb;
-	$wpdb-> show_errors();
 	load_plugin_textdomain('watu', false, dirname( plugin_basename( __FILE__ )).'/langs/' );
 	
 	$version = get_bloginfo('version');
@@ -143,6 +142,7 @@ add_action('activate_watu/watu.php','watu_activate');
 function watu_activate($update = false) {
 	global $wpdb;
 	
+	$wpdb-> show_errors();
 	$version = get_option('watu_version');
 	if(!$update) watu_init();
 	
