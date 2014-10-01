@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.4.7\n"
+"Project-Id-Version: Watu 2.4.8\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2014-09-15 13:43:32+00:00\n"
+"POT-Creation-Date: 2014-10-01 13:16:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -101,8 +101,8 @@ msgid ""
 "answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
 msgstr ""
 
-#: controllers/exam.php:83 controllers/questions.php:100 views/takings.php:57
-#: views/takings.php:67
+#: controllers/exam.php:83 controllers/questions.php:100 views/takings.php:64
+#: views/takings.php:74
 msgid "Delete"
 msgstr ""
 
@@ -277,11 +277,11 @@ msgstr ""
 msgid "Show Results"
 msgstr ""
 
-#: controllers/takings.php:116
+#: controllers/takings.php:121
 msgid "User or IP;Date;Points;Result/Grade"
 msgstr ""
 
-#: controllers/takings.php:162 watu.php:120
+#: controllers/takings.php:167 watu.php:120
 msgid "You do not have sufficient permissions to access this page"
 msgstr ""
 
@@ -602,7 +602,7 @@ msgstr ""
 msgid "Please enter To points, numbers only"
 msgstr ""
 
-#: views/grades.html.php:63 views/takings.php:91
+#: views/grades.html.php:63 views/takings.php:98
 msgid "Are you sure?"
 msgstr ""
 
@@ -949,54 +949,66 @@ msgid "Are more than"
 msgstr ""
 
 #: views/takings.php:48
-msgid "Search/Filter"
+msgid "Grade/result equals:"
 msgstr ""
 
 #: views/takings.php:49
+msgid "- Any grade / result -"
+msgstr ""
+
+#: views/takings.php:53
+msgid "(This filter will exclude grades earned prior to Watu version 2.4.7)"
+msgstr ""
+
+#: views/takings.php:55
+msgid "Search/Filter"
+msgstr ""
+
+#: views/takings.php:56
 msgid "Clear Filters"
 msgstr ""
 
-#: views/takings.php:55
+#: views/takings.php:62
 msgid "User or IP"
 msgstr ""
 
-#: views/takings.php:55
+#: views/takings.php:62
 msgid "Date"
 msgstr ""
 
-#: views/takings.php:56
+#: views/takings.php:63
 msgid "Points"
 msgstr ""
 
-#: views/takings.php:56
+#: views/takings.php:63
 msgid "Result"
 msgstr ""
 
-#: views/takings.php:57
+#: views/takings.php:64
 msgid "Details"
 msgstr ""
 
-#: views/takings.php:65
+#: views/takings.php:72
 msgid "n/a"
 msgstr ""
 
-#: views/takings.php:66
+#: views/takings.php:73
 msgid "view"
 msgstr ""
 
-#: views/takings.php:71
+#: views/takings.php:78
 msgid "Previous page"
 msgstr ""
 
-#: views/takings.php:73
+#: views/takings.php:80
 msgid "Next page"
 msgstr ""
 
-#: views/takings.php:76
+#: views/takings.php:83
 msgid "No results match your search criteria."
 msgstr ""
 
-#: views/takings.php:97
+#: views/takings.php:104
 msgid "Are you sure? This will delete ALL user results for this quiz!"
 msgstr ""
 

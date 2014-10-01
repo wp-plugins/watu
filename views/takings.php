@@ -44,6 +44,13 @@
 			<option value="less" <?php if(!empty($_GET['pointsf']) and $_GET['pointsf']=='less') echo "selected"?>><?php _e('Are less than', 'watu')?></option>
 			<option value="more" <?php if(!empty($_GET['pointsf']) and $_GET['pointsf']=='more') echo "selected"?>><?php _e('Are more than', 'watu')?></option>			
 		</select> <input type="text" name="points" value="<?php echo @$_GET['points']?>"></div>
+		
+		<div><label><?php _e('Grade/result equals:', 'watu')?></label> <select name="grade_id">
+				<option value="0"><?php _e('- Any grade / result -', 'watu')?></option>
+				<?php foreach($grades as $grade):?>
+					<option value="<?php echo $grade->ID?>" <?php if(!empty($_GET['grade_id']) and $_GET['grade_id'] == $grade->ID) echo 'selected'?>><?php echo stripslashes($grade->gtitle)?></option>
+				<?php endforeach;?>	
+		</select> <?php _e('(This filter will exclude grades earned prior to Watu version 2.4.7)', 'watu')?></div>
 				
 		<div><input type="submit" value="<?php _e('Search/Filter', 'watu')?>">
 		<input type="button" value="<?php _e('Clear Filters', 'watu')?>" onclick="window.location='admin.php?page=watu_takings&exam_id=<?php echo $exam->ID;?>';"></div>

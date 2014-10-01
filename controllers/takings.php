@@ -90,6 +90,11 @@ function watu_takings() {
 			default: $filters[]=$wpdb->prepare(" points=%d ", $_GET['points']); break;
 		}
 	}
+	
+	// grade
+	if(!empty($_GET['grade_id'])) {
+		$filters[]=$wpdb->prepare(" grade_id=%d ", $_GET['grade_id']);
+	}
 		
 	// construct filter & join SQLs
 	if(sizeof($filters)) {
@@ -135,7 +140,7 @@ function watu_takings() {
 	$filters_url="dn=".@$_GET['dn']."&dnf=".@$_GET['dnf']."&email=".@$_GET['email']."&emailf=".
 		@$_GET['emailf']."&ip=".@$_GET['ip']."&ipf=".@$_GET['ipf']."&date=".@$_GET['date'].
 		"&datef=".@$_GET['datef']."&points=".@$_GET['points']."&pointsf=".@$_GET['pointsf'].
-		"&grade=".@$_GET['grade'];			
+		"&grade_id=".@$_GET['grade_id'];			
 		
 	$display_filters=(!sizeof($filters) and !sizeof($joins)) ? false : true;	
 	

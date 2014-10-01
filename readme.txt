@@ -90,11 +90,16 @@ Watu computes the number of points in total collected by the answers given by th
 
 Yes. It's even highly recommended for answers to questions that allow multuple answers. If you just assign 0 points to the wrong answers in such question the visitor could check all the checkboxes and collect all the points to that question.
 
-= How do I show the exam to the visitors of my blog? =
+= How do I show the quiz to the visitors of my blog? =
 
 You need to create a post and embed the exam code. The exam code is shown in the green text above the questions table in "Manage questions" page for that exam.
 
 **Please do not place more than one code in one post or page. Only one exam will be shown at a time. If you wish more exams to be displayed, please give links to them!**
+
+= How to translate the plugin interface in my language =
+
+You can use the standard WordPress way of translating plugins (via Poedit and .po / .mo files) or use plugin like Loco Translate.
+If using Poedit, your file names should start with "watu-". For example: watu-de_DE.po / watu-de_DE.mo. They should be placed in wp-content/languages/plugins folder.
 
 == Screenshots ==
 
@@ -104,7 +109,7 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 == Changelog ==
 
-= Changes in 2.4.7 =
+= Changes in 2.4.8 =
 - Added filter / search on the "view results" page
 - Added feature to andomize the answers to the questions. Works together or independent from the question randomization.
 - Added compatibility with WP QuickLaTeX
@@ -112,6 +117,7 @@ You need to create a post and embed the exam code. The exam code is shown in the
 - Made the quiz more user-friendly by auto-generating a demo quiz for the new users
 - Improvements to open end quesitons: now any special characters are handled and matching is case INSENSITIVE
 - Moved the grades management out of the main quiz form for better user interface, data integrity and rich text editor for the grade descriptions
+- Added "grade" filter in the "View results" page
 - Fixed number of wpautop() issues. Now the filter is applied manually only where it's needed
 - Fixed bug with calculating points on open-end question (the bug was caused by the latest "randomize answers" feature)
 
