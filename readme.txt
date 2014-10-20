@@ -109,7 +109,7 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 
 == Changelog ==
 
-= Changes in 2.4.8 =
+= Changes in 2.4.9 =
 - Added filter / search on the "view results" page
 - Added feature to andomize the answers to the questions. Works together or independent from the question randomization.
 - Added compatibility with WP QuickLaTeX
@@ -118,6 +118,7 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 - Improvements to open end quesitons: now any special characters are handled and matching is case INSENSITIVE
 - Moved the grades management out of the main quiz form for better user interface, data integrity and rich text editor for the grade descriptions
 - Added "grade" filter in the "View results" page
+- Added option to pull number of random questions from the quiz 
 - Fixed number of wpautop() issues. Now the filter is applied manually only where it's needed
 - Fixed bug with calculating points on open-end question (the bug was caused by the latest "randomize answers" feature)
 

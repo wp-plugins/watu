@@ -25,7 +25,8 @@
 			<input type='text' name='name' id="title" value='<?php echo stripslashes(@$dquiz->name); ?>' />
 		</div>
 		<div class="inside">
-			<p><input id="watuRandomize" type="checkbox" name="randomize" value="1" <?php if(!empty($dquiz->randomize)) echo 'checked'?>> <label for="watuRandomize"><?php _e("Randomize questions", 'watu');?></label></p>
+			<p><input id="watuRandomize" type="checkbox" name="randomize" value="1" <?php if(!empty($dquiz->randomize)) echo 'checked'?>> <label for="watuRandomize"><?php _e("Randomize questions", 'watu');?></label> <br> <?php _e('and pull random', 'watu')?>
+			<input type="text" name="pull_random" value="<?php echo intval(@$dquiz->pull_random)?>" size="4" onkeyup="if(this.value > 0) { jQuery('#watuRandomize').attr('checked', true);}"> <?php _e('questions from the quiz. Leave 0 to pull all the questions (default behavior).','watu')?></p>
 			
 			<p><input id="watuRandomize" type="checkbox" name="randomize_answers" value="1" <?php if(!empty($dquiz->randomize_answers)) echo 'checked'?>> <label for="watuRandomize"><?php _e("Randomize answers", 'watu');?></label></p>
 			
