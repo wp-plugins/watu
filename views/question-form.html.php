@@ -147,18 +147,15 @@ jQuery(document).ready(init);
 	</div>
 </div>
 
-<?php
-/*
 <div class="postbox">
-<h3 class="hndle"><span><?php e('Explanation') ?></span></h3>
+<h3 class="hndle"><span><?php _e('Explanation / feedback') ?></span></h3>
 <div class="inside">
 
-<textarea name="explanation" rows="5" cols="50"><?php echo stripslashes($question->explanation)?></textarea>
-<br />
-<p><?php e('You can use this field to explain the correct answer. This will be shown only at the end of the quiz when the correct answers will be made available.') ?></p>
+<?php wp_editor(stripslashes(@$question->feedback), 'feedback')?> 
+
+<p><?php _e('You can use this field to explain the correct answer. This will be shown only at the end of the quiz if you have selected the option to display the correct answers. This feedback option is a lot more flexible in WatuPRO.', 'watu') ?></p>
 </div>
 </div>
-*/ ?>
 </div>
 
 

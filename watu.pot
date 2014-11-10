@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.4.9\n"
+"Project-Id-Version: Watu 2.5\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2014-10-20 12:49:23+00:00\n"
+"POT-Creation-Date: 2014-11-10 13:54:37+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -74,7 +74,7 @@ msgstr ""
 msgid "View Results"
 msgstr ""
 
-#: controllers/exam.php:38 controllers/questions.php:77
+#: controllers/exam.php:38 controllers/questions.php:79
 msgid "Action"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Manage Grades"
 msgstr ""
 
-#: controllers/exam.php:82 controllers/questions.php:99
+#: controllers/exam.php:82 controllers/questions.php:101
 msgid "Edit"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgid ""
 "answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
 msgstr ""
 
-#: controllers/exam.php:83 controllers/questions.php:100 views/takings.php:64
+#: controllers/exam.php:83 controllers/questions.php:102 views/takings.php:64
 #: views/takings.php:74
 msgid "Delete"
 msgstr ""
@@ -134,51 +134,51 @@ msgstr ""
 msgid "Unrecognized quiz ID"
 msgstr ""
 
-#: controllers/questions.php:57
+#: controllers/questions.php:59
 msgid "Manage Questions in"
 msgstr ""
 
-#: controllers/questions.php:61 views/exam_form.php:13
+#: controllers/questions.php:63 views/exam_form.php:13
 #: views/question-form.html.php:5
 msgid "Back to quizzes"
 msgstr ""
 
-#: controllers/questions.php:61
+#: controllers/questions.php:63
 msgid "Edit this quiz"
 msgstr ""
 
-#: controllers/questions.php:62 views/exam_form.php:16
+#: controllers/questions.php:64 views/exam_form.php:16
 msgid "Manage Grades / Results"
 msgstr ""
 
-#: controllers/questions.php:69
+#: controllers/questions.php:71
 msgid "To add this exam to your blog, insert the code "
 msgstr ""
 
-#: controllers/questions.php:69
+#: controllers/questions.php:71
 msgid "into any post or page."
 msgstr ""
 
-#: controllers/questions.php:75 controllers/show_exam.php:201
+#: controllers/questions.php:77 controllers/show_exam.php:206
 #: views/question-form.html.php:2 views/question-form.html.php:107
 msgid "Question"
 msgstr ""
 
-#: controllers/questions.php:76
+#: controllers/questions.php:78
 msgid "Number Of Answers"
 msgstr ""
 
-#: controllers/questions.php:100
+#: controllers/questions.php:102
 msgid ""
 "You are about to delete this question. This will delete the answers to this "
 "question. Press 'OK' to delete and 'Cancel' to stop."
 msgstr ""
 
-#: controllers/questions.php:107
+#: controllers/questions.php:109
 msgid "No questiones found."
 msgstr ""
 
-#: controllers/questions.php:115
+#: controllers/questions.php:117
 msgid "Create New Question"
 msgstr ""
 
@@ -208,7 +208,7 @@ msgstr ""
 
 #: controllers/show_exam.php:45
 msgid ""
-"All the questions in the exam along with their answers are shown below. Your "
+"All the questions in the quiz along with their answers are shown below. Your "
 "answers are bolded. The correct answers have a green background while the "
 "incorrect ones have a red background."
 msgstr ""
@@ -217,63 +217,63 @@ msgstr ""
 msgid "Question was not answered"
 msgstr ""
 
-#: controllers/show_exam.php:91 models/exam.php:95
+#: controllers/show_exam.php:96 models/exam.php:95
 msgid "Failed"
 msgstr ""
 
-#: controllers/show_exam.php:91
+#: controllers/show_exam.php:96
 msgid "Just Passed"
 msgstr ""
 
-#: controllers/show_exam.php:93
+#: controllers/show_exam.php:98
 msgid "Satisfactory"
 msgstr ""
 
-#: controllers/show_exam.php:93
+#: controllers/show_exam.php:98
 msgid "Competent"
 msgstr ""
 
-#: controllers/show_exam.php:93
+#: controllers/show_exam.php:98
 msgid "Good"
 msgstr ""
 
-#: controllers/show_exam.php:93
+#: controllers/show_exam.php:98
 msgid "Very Good"
 msgstr ""
 
-#: controllers/show_exam.php:93
+#: controllers/show_exam.php:98
 msgid "Excellent"
 msgstr ""
 
-#: controllers/show_exam.php:93
+#: controllers/show_exam.php:98
 msgid "Unbeatable"
 msgstr ""
 
-#: controllers/show_exam.php:93
+#: controllers/show_exam.php:98
 msgid "Cheater"
 msgstr ""
 
-#: controllers/show_exam.php:100
+#: controllers/show_exam.php:105
 msgid "None"
 msgstr ""
 
-#: controllers/show_exam.php:191
+#: controllers/show_exam.php:196
 msgid "Loading"
 msgstr ""
 
-#: controllers/show_exam.php:198 watu.php:293
+#: controllers/show_exam.php:203 watu.php:294
 msgid "Show Answer"
 msgstr ""
 
-#: controllers/show_exam.php:201
+#: controllers/show_exam.php:206
 msgid "of"
 msgstr ""
 
-#: controllers/show_exam.php:202
+#: controllers/show_exam.php:207
 msgid "Next"
 msgstr ""
 
-#: controllers/show_exam.php:205
+#: controllers/show_exam.php:210
 msgid "Show Results"
 msgstr ""
 
@@ -548,7 +548,7 @@ msgstr ""
 msgid "The text entered in the description field."
 msgstr ""
 
-#: views/exam_form.php:86 views/question-form.html.php:171
+#: views/exam_form.php:86 views/question-form.html.php:168
 msgid "Save"
 msgstr ""
 
@@ -671,7 +671,18 @@ msgstr ""
 msgid "Add New Answer"
 msgstr ""
 
-#: views/question-form.html.php:173
+#: views/question-form.html.php:151
+msgid "Explanation / feedback"
+msgstr ""
+
+#: views/question-form.html.php:156
+msgid ""
+"You can use this field to explain the correct answer. This will be shown "
+"only at the end of the quiz if you have selected the option to display the "
+"correct answers. This feedback option is a lot more flexible in WatuPRO."
+msgstr ""
+
+#: views/question-form.html.php:170
 msgid "Go to Questions Page"
 msgstr ""
 
@@ -1042,7 +1053,7 @@ msgstr ""
 msgid "Your are not allowed to to perform this operation"
 msgstr ""
 
-#: watu.php:261
+#: watu.php:262
 msgid ""
 "<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href=\"tools."
 "php?page=watu_exams\">Quizzes page</a> to get started! If this is the first "
@@ -1051,10 +1062,10 @@ msgid ""
 "how things work.</p>"
 msgstr ""
 
-#: watu.php:291
+#: watu.php:292
 msgid "You have missed to answer a required question"
 msgstr ""
 
-#: watu.php:292
+#: watu.php:293
 msgid "You did not select any answer. Are you sure you want to continue?"
 msgstr ""

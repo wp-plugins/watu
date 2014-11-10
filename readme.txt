@@ -109,7 +109,8 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 
 == Changelog ==
 
-= Changes in 2.4.9 =
+= Changes in 2.5 =
+- Added optional answer explanation / feedback that can be shown along with the correct answers on the quiz 
 - Added filter / search on the "view results" page
 - Added feature to andomize the answers to the questions. Works together or independent from the question randomization.
 - Added compatibility with WP QuickLaTeX

@@ -42,7 +42,7 @@ if($questions) {
 if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	$achieved = $max_points = $num_correct = 0;
 	$result = '';
-	$result .= "<p>" . __('All the questions in the exam along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p>";
+	$result .= "<p>" . __('All the questions in the quiz along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p>";
 
 	// we should reorder the questions in the same way they came from POST because exam might be randomized	
 	$_exam = new WatuExam();
@@ -77,6 +77,11 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		if(($ques->answer_type == 'textarea' and empty($_POST["answer-" . $ques->ID][0])) 
 			or ($ques->answer_type != 'textarea' and empty($_POST["answer-" . $ques->ID])) ) 
 			{ $result .= "<p class='unanswered'>" . __('Question was not answered', 'watu') . "</p>";}
+			
+		// answer explanation?
+		if(!empty($ques->feedback)) {
+			$result .= "<div class='show-question-feedback'>".stripslashes($ques->feedback)."</div>";
+		}	
 
 		$result .= "</div>";
 	
