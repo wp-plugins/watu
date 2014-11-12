@@ -70,7 +70,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		// textareas
 		if($ques->answer_type=='textarea' and !empty($_POST["answer-" . $ques->ID][0])) {
 			if(!sizeof($all_answers)) $textarea_class = 'correct-answer';
-			$result .= wpautop("<li class='user-answer $textarea_class'><span class='answer'><!--WATUEMAIL".$class."WATUEMAIL-->".stripslashes($_POST["answer-" . $ques->ID][0])."</span></li>");
+			$result .= wpautop("<li class='user-answer $textarea_class'><span class='answer'><!--WATUEMAIL".$class."WATUEMAIL-->".esc_html(stripslashes($_POST["answer-" . $ques->ID][0]))."</span></li>");
 		}		
 		
 		$result .= "</ul>";
