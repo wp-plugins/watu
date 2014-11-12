@@ -15,7 +15,7 @@ function watu_questions() {
 				
 		} else {	
 			$sql = $wpdb->prepare("INSERT INTO ".WATU_QUESTIONS." (exam_id, question, answer_type, is_required, feedback) 
-			VALUES(%d, %s, %s, %d)", $_GET['quiz'], $_POST['content'], $_POST['answer_type'], 
+			VALUES(%d, %s, %s, %d, %s)", $_GET['quiz'], $_POST['content'], $_POST['answer_type'], 
 				@$_POST['is_required'], $_POST['feedback']);
 			$wpdb->query($sql);//Inserting the questions
 	
@@ -105,7 +105,7 @@ function watu_questions() {
 				}
 			} else {
 		?>
-			<tr style='background-color: <?php echo $bgcolor; ?>;'>
+			<tr style='background-color: <?php echo @$bgcolor; ?>;'>
 				<td colspan="4"><?php _e('No questiones found.', 'watu') ?></td>
 			</tr>
 		<?php

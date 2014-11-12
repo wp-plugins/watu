@@ -161,8 +161,8 @@ jQuery(document).ready(init);
 
 <p class="submit">
 <input type="hidden" name="quiz" value="<?php echo $_REQUEST['quiz']?>" />
-<input type="hidden" name="question" value="<?php echo stripslashes($_REQUEST['question'])?>" />
-<input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
+<input type="hidden" name="question" value="<?php echo stripslashes(@$_REQUEST['question'])?>" />
+<input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) @$user_ID ?>" />
 <input type="hidden" name="action" value="<?php echo $action ?>" />
 <span id="autosave"></span>
 <input type="submit" name="submit" value="<?php _e('Save', 'watu') ?>" style="font-weight: bold;" />
