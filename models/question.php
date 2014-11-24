@@ -59,4 +59,44 @@ class WatuQuestion {
 		
 		return $max_points;
 	} // end max_points
+	
+	// backward compatibility. In old versions sort order was not given
+	// so we'll make sure all questions have correct one when loading the page
+	static function fix_sort_order($questions) {
+		global $wpdb;
+		foreach($questions as $cnt=>$question) {
+			$cnt++;
+			if(@$question->sort_order!=$cnt) {
+				$wpdb->query("UPDATE ".WATU_QUESTIONS." SET sort_order=$cnt WHERE ID={$question->ID}");
+			}
+		}
+	}
+	
+	static function reorder($id, $exam_id, $dir) {
+		global $wpdb;
+			
+		// select question
+		$question=$wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_QUESTIONS." WHERE ID=%d", $id));
+		
+		if($dir=="up") {
+			$new_order=$question->sort_order-1;
+			if($new_order<0) $new_order=0;
+			
+			// shift others
+			$wpdb->query($wpdb->prepare("UPDATE ".WATU_QUESTIONS." SET sort_order=sort_order+1 
+			  WHERE ID!=%d AND sort_order=%d AND exam_id=%d", $id, $new_order, $exam_id));
+		}
+		
+		if($dir=="down") {
+			$new_order=$question->sort_order+1;			
+			
+			// shift others
+			$wpdb->query($wpdb->prepare("UPDATE ".WATU_QUESTIONS." SET sort_order=sort_order-1 
+			  WHERE ID!=%d AND sort_order=%d AND exam_id=%d", $id, $new_order, $exam_id));
+		}		
+			
+		// change this one
+		$wpdb->query($wpdb->prepare("UPDATE ".WATU_QUESTIONS." SET sort_order=%d WHERE ID=%d", 
+			$new_order, $id));
+	}
 }

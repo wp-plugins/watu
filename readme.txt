@@ -109,6 +109,9 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 
 == Changelog ==
 
+= Changes in 2.5.1 =
+- Option to reoder the questions. Of course this takes effect only when you have not chosen "Randomize questions" in the quiz settings.
+
 = Changes in 2.5 =
 - Added optional answer explanation / feedback that can be shown along with the correct answers on the quiz 
 - Added filter / search on the "view results" page

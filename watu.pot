@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.5\n"
+"Project-Id-Version: Watu 2.5.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2014-11-10 13:54:37+00:00\n"
+"POT-Creation-Date: 2014-11-24 15:53:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Manage Grades"
 msgstr ""
 
-#: controllers/exam.php:82 controllers/questions.php:101
+#: controllers/exam.php:82 controllers/questions.php:121
 msgid "Edit"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgid ""
 "answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
 msgstr ""
 
-#: controllers/exam.php:83 controllers/questions.php:102 views/takings.php:64
+#: controllers/exam.php:83 controllers/questions.php:122 views/takings.php:64
 #: views/takings.php:74
 msgid "Delete"
 msgstr ""
@@ -168,17 +168,25 @@ msgstr ""
 msgid "Number Of Answers"
 msgstr ""
 
-#: controllers/questions.php:102
+#: controllers/questions.php:112
+msgid "Move Up"
+msgstr ""
+
+#: controllers/questions.php:115
+msgid "Move Down"
+msgstr ""
+
+#: controllers/questions.php:122
 msgid ""
 "You are about to delete this question. This will delete the answers to this "
 "question. Press 'OK' to delete and 'Cancel' to stop."
 msgstr ""
 
-#: controllers/questions.php:109
+#: controllers/questions.php:129
 msgid "No questiones found."
 msgstr ""
 
-#: controllers/questions.php:117
+#: controllers/questions.php:137
 msgid "Create New Question"
 msgstr ""
 

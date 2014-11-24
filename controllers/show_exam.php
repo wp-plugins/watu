@@ -26,7 +26,7 @@ $answer_display = get_option('watu_show_answers');
 if(!isset($exam->show_answers) or $exam->show_answers == 100) $answer_display = $answer_display; // assign the default
 else $answer_display = $exam->show_answers;
 
-$order_sql = ($exam->randomize or $exam->pull_random) ? "ORDER BY RAND()" : "ORDER BY ID";
+$order_sql = ($exam->randomize or $exam->pull_random) ? "ORDER BY RAND()" : "ORDER BY sort_order, ID";
 $limit_sql = $exam->pull_random ? $wpdb->prepare("LIMIT %d", $exam->pull_random) : "";
 
 $questions = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".WATU_QUESTIONS." 

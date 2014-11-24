@@ -82,10 +82,21 @@ function watu_questions() {
 		
 			<tbody id="the-list">
 		<?php
+		// reorder questions
+		if(!empty($_GET['move'])) {
+			WatuQuestion::reorder($_GET['move'], $_GET['quiz'], $_GET['dir']);
+			watu_redirect("admin.php?page=watu_questions&quiz=".$_GET['quiz']);
+		}		
+		
+		$offset = 0; // for now initialize as 0
+		
 		// Retrieve the questions
 		$all_question = $wpdb->get_results("SELECT Q.ID,Q.question,(SELECT COUNT(*) FROM {$wpdb->prefix}watu_answer WHERE question_id=Q.ID) AS answer_count
 												FROM `{$wpdb->prefix}watu_question` AS Q
-												WHERE Q.exam_id=$_REQUEST[quiz] ORDER BY Q.ID");
+												WHERE Q.exam_id=$_REQUEST[quiz] ORDER BY Q.sort_order, Q.ID");
+												
+		if(empty($filter_sql)) WatuQuestion::fix_sort_order($all_question);		
+		$num_questions = sizeof($all_question);								
 		
 		if (count($all_question)) {
 			$bgcolor = '';			
@@ -95,7 +106,16 @@ function watu_questions() {
 				$question_count++;
 				print "<tr id='question-{$question->ID}' class='$class'>\n";
 				?>
-				<th scope="row" style="text-align: center;"><?php echo $question_count ?></th>
+				<td style="text-align: center;">
+				<div style="float:left;<?php if(!empty($_POST['filter_cat_id'])) echo 'display:none;'?>">
+				<?php if(($question_count+$offset)>1):?>
+					<a href="admin.php?page=watu_questions&quiz=<?php echo $_GET['quiz']?>&move=<?php echo $question->ID?>&dir=up"><img src="<?php echo  WATU_URL.'/img/arrow-up.png'?>" alt="<?php _e('Move Up', 'watu')?>" border="0"></a>
+				<?php else:?>&nbsp;<?php endif;?>
+				<?php if(($question_count+$offset) < $num_questions):?>	
+					<a href="admin.php?page=watu_questions&quiz=<?php echo $_GET['quiz']?>&move=<?php echo $question->ID?>&dir=down"><img src="<?php echo  WATU_URL.'/img/arrow-down.png'?>" alt="<?php _e('Move Down', 'watu')?>"></a>
+				<?php else:?>&nbsp;<?php endif;?>
+			</div>							
+				<?php echo $question_count ?></td>
 				<td><?php echo stripslashes($question->question) ?></td>
 				<td><?php echo $question->answer_count ?></td>
 				<td><a href='admin.php?page=watu_question&amp;question=<?php echo $question->ID?>&amp;action=edit&amp;quiz=<?php echo $_REQUEST['quiz']?>' class='edit'><?php _e('Edit', 'watu'); ?></a></td>
