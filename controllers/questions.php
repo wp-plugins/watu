@@ -14,9 +14,13 @@ function watu_questions() {
 			$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->prefix}watu_answer WHERE question_id=%d", $_REQUEST['question']));
 				
 		} else {	
-			$sql = $wpdb->prepare("INSERT INTO ".WATU_QUESTIONS." (exam_id, question, answer_type, is_required, feedback) 
-			VALUES(%d, %s, %s, %d, %s)", $_GET['quiz'], $_POST['content'], $_POST['answer_type'], 
-				@$_POST['is_required'], $_POST['feedback']);
+			// select max sort order in this quiz
+			$sort_order = $wpdb->get_var($wpdb->prepare("SELECT MAX(sort_order) FROM ".WATU_QUESTIONS." WHERE exam_id=%d", $_GET['quiz']));
+			$sort_order++;			
+			
+			$sql = $wpdb->prepare("INSERT INTO ".WATU_QUESTIONS." (exam_id, question, answer_type, is_required, feedback, sort_order) 
+			VALUES(%d, %s, %s, %d, %s, %d)", $_GET['quiz'], $_POST['content'], $_POST['answer_type'], 
+				@$_POST['is_required'], $_POST['feedback'], $sort_order);
 			$wpdb->query($sql);//Inserting the questions
 	
 			$_POST['question'] = $wpdb->insert_id;
