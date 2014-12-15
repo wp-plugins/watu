@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.5.1.1
+Version: 2.5.2
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -71,7 +71,7 @@ function watu_init() {
 	if(function_exists('quicklatex_parser')) add_filter( 'watu_content',  'quicklatex_parser', 7);
 	
 	$version = get_option('watu_version');
-	if($version != '2.42') watu_activate(true);
+	if($version != '2.45') watu_activate(true);
 	
 	add_action('admin_notices', 'watu_admin_notice');
 }
@@ -255,9 +255,16 @@ function watu_activate($update = false) {
 	
 	$demo_quiz_created = get_option('watu_demo_quiz_created');
 	if($demo_quiz_created != '1') WatuExam :: create_demo();
+	
+	// versions before 2.44 had the following text hard-coded. We need to make sure thta the quizzes which were showing results
+	// now have it in the "final screen"
+	if(!empty($version) and $version < 2.45) {
+		$answers_text = "<p>" . __('All the questions in the quiz along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p> %%ANSWERS%%";
+		$wpdb->query("UPDATE ".WATU_EXAMS." SET final_screen = CONCAT(final_screen, '$answers_text') WHERE show_answers=1");
+	}
 						
 	update_option( "watu_delete_db", '' );	
-	update_option( "watu_version", '2.42' );
+	update_option( "watu_version", '2.45' );
 	
 	update_option('watu_admin_notice', __('<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href="tools.php?page=watu_exams">Quizzes page</a> to get started! If this is the first time you have activated the plugin there will be a small demo quiz automatically created for you. Feel free to explore it to get better idea how things work.</p>', 'watu'));
 }

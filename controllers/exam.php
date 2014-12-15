@@ -113,7 +113,7 @@ function watu_exam() {
 				show_answers=%d, require_login=%d, notify_admin=%d, randomize_answers=%d,
 				pull_random=%d   
 				WHERE ID=%d", $_POST['name'], $_POST['description'], $_POST['content'], 
-				@$_POST['randomize'], @$_POST['single_page'], $_POST['show_answers'], 
+				@$_POST['randomize'], @$_POST['single_page'], @$_POST['show_answers'], 
 				@$_POST['require_login'], @$_POST['notify_admin'], @$_POST['randomize_answers'],
 				$_POST['pull_random'], $_POST['quiz']));
 			

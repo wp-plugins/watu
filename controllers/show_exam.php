@@ -42,8 +42,7 @@ if($questions) {
 if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	$achieved = $max_points = $num_correct = 0;
 	$result = '';
-	$result .= "<p>" . __('All the questions in the quiz along with their answers are shown below. Your answers are bolded. The correct answers have a green background while the incorrect ones have a red background.', 'watu') . "</p>";
-
+	
 	// we should reorder the questions in the same way they came from POST because exam might be randomized	
 	$_exam = new WatuExam();
 	$questions = $_exam->reorder_questions($questions, $_POST['question_id']);
@@ -133,18 +132,18 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 
 	// Show the results
 	$output = str_replace($replace_these, $with_these, wpautop(stripslashes($quiz_details->final_screen)));
-	$final_output = apply_filters(WATU_CONTENT_FILTER, $output); 
-	echo $final_output;
-	$results_output = '<hr />' . apply_filters(WATU_CONTENT_FILTER,$result);
-	if($answer_display == 1) echo $results_output;
+	if(strstr($output, '%%ANSWERS%%')) {		
+		$output = str_replace('%%ANSWERS%%', $result, $output);
+	}
+	$final_output = apply_filters(WATU_CONTENT_FILTER, $output);
 	
-	$snapshot = $final_output . $results_output;
+	echo $final_output;
 		
 	// update snapshot
-	$wpdb->query($wpdb->prepare("UPDATE ".WATU_TAKINGS." SET snapshot=%s WHERE ID=%d", $snapshot, $taking_id)); 
+	$wpdb->query($wpdb->prepare("UPDATE ".WATU_TAKINGS." SET snapshot=%s WHERE ID=%d", $final_output, $taking_id)); 
 	
 	// notify admin
-	if(!empty($exam->notify_admin)) watu_notify_admin($exam, $uid, $snapshot);
+	if(!empty($exam->notify_admin)) watu_notify_admin($exam, $uid, $final_output);
 	
 	do_action('watu_exam_submitted', $taking_id);
 	exit;// Exit due to ajax call

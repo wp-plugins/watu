@@ -3,7 +3,7 @@
 	
 	<p><?php _e("A lot more detailed reports, filters, exports, and other important features are available in", 'watu')?> <a href="http://calendarscripts.info/watupro" target="_blank">WatuPRO</a></p>
 	
-	<p><a href="admin.php?page=watu_exams"><?php _e('Back to exams list', 'watu')?></a>
+	<p><a href="admin.php?page=watu_exams"><?php _e('Back to quizzes list', 'watu')?></a>
 	<?php if($count):?>&nbsp;|&nbsp;
 	<a href="#" onclick="jQuery('#filterForm').toggle('slow');return false;"><?php _e('Filter/search these records', 'watu')?></a> 
 	&nbsp;|&nbsp;

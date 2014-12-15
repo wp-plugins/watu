@@ -109,8 +109,9 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 
 == Changelog ==
 
-= Changes in 2.5.1 =
+= Changes in 2.5.2 =
 - Option to reoder the questions. Of course this takes effect only when you have not chosen "Randomize questions" in the quiz settings.
+- Removed the hardcoded text "your answers are shown below" and the setting "display answers at the end of the quiz". Instead of this use the variable %%ANSWERS%% which gives far more flexibility.
 
 = Changes in 2.5 =
 - Added optional answer explanation / feedback that can be shown along with the correct answers on the quiz 
