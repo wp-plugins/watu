@@ -125,7 +125,7 @@ function watu_exam() {
 			notify_admin, randomize_answers, pull_random) 
 			VALUES(%s, %s, %s, NOW(), %d, %d, %d, %d, %d, %d, %d)", 
 			$_POST['name'], $_POST['description'], $_POST['content'], @$_POST['randomize'], @$_POST['single_page'], 
-			$_POST['show_answers'], @$_POST['require_login'], @$_POST['notify_admin'], 
+			@$_POST['show_answers'], @$_POST['require_login'], @$_POST['notify_admin'], 
 			@$_POST['randomize_answers'], $_POST['pull_random']));
 			$exam_id = $wpdb->insert_id;
 			if($exam_id == 0 ) $wp_redirect = 'tools.php?page=watu_exams&message=fail';
@@ -151,7 +151,7 @@ function watu_exam() {
 		$grades = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".WATU_GRADES." WHERE  exam_id=%d order by ID ", $_REQUEST['quiz']) );
 		$final_screen = stripslashes($dquiz->final_screen);
 	} else {
-		$final_screen = __("<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n\n<p>You scored %%POINTS%% points out of %%MAX-POINTS%% points total.</p>\n\n<p>Your performance have been rated as <b>%%RATING%%</b>.</p>\n\n<p>Your obtained grade is <b>%%GRADE-TITLE%%</b></p><p>%%GRADE-DESCRIPTION%%</p>", 'watu');
+		$final_screen = __("<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n\n<p>You scored %%POINTS%% points out of %%MAX-POINTS%% points total.</p>\n\n<p>Your performance has been rated as <b>%%RATING%%</b>.</p>\n\n<p>Your obtained grade is <b>%%GRADE-TITLE%%</b></p><p>%%GRADE-DESCRIPTION%%</p>\n\n<p>Your answers are shown below:<p>%%ANSWERS%%", 'watu');
 	}
 	
 	// see what is the show_answers to this exam

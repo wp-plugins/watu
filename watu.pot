@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.5.2\n"
+"Project-Id-Version: Watu 2.5.2.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2014-12-15 15:08:15+00:00\n"
+"POT-Creation-Date: 2014-12-20 17:06:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -124,10 +124,12 @@ msgid ""
 "\n"
 "<p>You scored %%POINTS%% points out of %%MAX-POINTS%% points total.</p>\n"
 "\n"
-"<p>Your performance have been rated as <b>%%RATING%%</b>.</p>\n"
+"<p>Your performance has been rated as <b>%%RATING%%</b>.</p>\n"
 "\n"
 "<p>Your obtained grade is <b>%%GRADE-TITLE%%</b></p><p>%%GRADE-DESCRIPTION%"
-"%</p>"
+"%</p>\n"
+"\n"
+"<p>Your answers are shown below:<p>%%ANSWERS%%"
 msgstr ""
 
 #: controllers/grades.php:7
@@ -1038,11 +1040,11 @@ msgid "Are you sure? This will delete ALL user results for this quiz!"
 msgstr ""
 
 #: watu.php:95 watu.php:98
-msgid "Manage Exams"
+msgid "Manage Quizzes"
 msgstr ""
 
 #: watu.php:95 watu.php:98
-msgid "Watu Exams"
+msgid "Watu Quizzes"
 msgstr ""
 
 #: watu.php:100
@@ -1079,27 +1081,4 @@ msgstr ""
 
 #: watu.php:300
 msgid "You did not select any answer. Are you sure you want to continue?"
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "Watu"
-msgstr ""
-
-#. Plugin URI of the plugin/theme
-msgid "http://calendarscripts.info/watu-wordpress.html"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid ""
-"Create exams and quizzes and display the result immediately after the user "
-"takes the exam. Watu for Wordpress is a light version of <a href=\"http://"
-"calendarscripts.info/watupro/\" target=\"_blank\">WatuPRO</a>. Check it if "
-"you want to run fully featured exams with data exports, student logins, "
-"timers, random questions and more. Free support and upgrades are available. "
-"Go to <a href=\"options-general.php?page=watu.php\">Watu Settings</a> or <a "
-"href=\"tools.php?page=watu_exams\">Manage Your Exams</a>"
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "Kiboko Labs"
 msgstr ""
