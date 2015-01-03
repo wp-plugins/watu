@@ -64,6 +64,7 @@
 	<p><strong><?php _e('Usable Variables:', 'watu') ?></strong></p>
 	<table>
 	<tr><th style="text-align:left;"><?php _e('Variable', 'watu') ?></th><th style="text-align:left;"><?php _e('Value', 'watu') ?></th></tr>
+	<tr><td>%%ANSWERS%%</td><td><?php _e('This will display the questions along with the answers that user gave to them marked as correct or incorrect.', 'watu') ?></td></tr>
 	<tr><td>%%POINTS%%</td><td><?php _e('The number of points collected. (The old %%SCORE%% tag also works)', 'watu') ?></td></tr>
 	<tr><td>%%MAX-POINTS%%</td><td><?php _e('Maximum number of points', 'watu') ?></td></tr>
 	<tr><td>%%GRADE%%</td><td><?php _e('Shows the achieved grade - title and description together. If you want to design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-DESCRIPTION%% for grade description', 'watu') ?>.</td></tr>
