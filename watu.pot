@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.5.3\n"
+"Project-Id-Version: Watu 2.5.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2015-01-19 13:47:11+00:00\n"
+"POT-Creation-Date: 2015-02-02 16:58:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -161,7 +161,7 @@ msgstr ""
 msgid "into any post or page."
 msgstr ""
 
-#: controllers/questions.php:81 controllers/show_exam.php:208
+#: controllers/questions.php:81 controllers/show_exam.php:235
 #: views/question-form.html.php:2 views/question-form.html.php:107
 msgid "Question"
 msgstr ""
@@ -260,23 +260,23 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: controllers/show_exam.php:198
+#: controllers/show_exam.php:225
 msgid "Loading"
 msgstr ""
 
-#: controllers/show_exam.php:205 watu.php:302
+#: controllers/show_exam.php:232 watu.php:302
 msgid "Show Answer"
 msgstr ""
 
-#: controllers/show_exam.php:208
+#: controllers/show_exam.php:235
 msgid "of"
 msgstr ""
 
-#: controllers/show_exam.php:209
+#: controllers/show_exam.php:236
 msgid "Next"
 msgstr ""
 
-#: controllers/show_exam.php:212
+#: controllers/show_exam.php:239
 msgid "Show Results"
 msgstr ""
 
@@ -568,7 +568,15 @@ msgstr ""
 msgid "The text entered in the description field."
 msgstr ""
 
-#: views/exam_form.php:88 views/question-form.html.php:168
+#: views/exam_form.php:78
+msgid "The average points earned by the other quiz participants."
+msgstr ""
+
+#: views/exam_form.php:79
+msgid "Shows the percentage of users collected less points on the quiz."
+msgstr ""
+
+#: views/exam_form.php:90 views/question-form.html.php:168
 msgid "Save"
 msgstr ""
 

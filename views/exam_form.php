@@ -75,6 +75,8 @@
 	<tr><td>%%RATING%%</td><td><?php _e("A rating of your performance - it could be 'Failed'(0-39%), 'Just Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and 'Unbeatable'(100%).", 'watu') ?> <?php printf(__('The rating can be changed only by <a href="%s" target="_blank">translating the plugin</a>. So we recommend you to use the grades instead. They are fully configurable right from this page.', 'watu'), 'http://blog.calendarscripts.info/how-to-translate-a-wordpress-plugin/')?></td></tr>
 	<tr><td>%%QUIZ_NAME%%</td><td><?php _e('The name of the quiz', 'watu') ?></td></tr>
 	<tr><td>%%DESCRIPTION%%</td><td><?php _e('The text entered in the description field.', 'watu') ?></td></tr>
+	<tr><td>%%AVG_POINTS%%</td><td><?php _e('The average points earned by the other quiz participants.', 'watu') ?></td></tr>
+	<tr><td>%%BETTER-THAN%%</td><td><?php _e('Shows the percentage of users collected less points on the quiz.', 'watu'); ?></td></tr>
 	</table>
 	</div>
 	</div>

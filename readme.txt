@@ -31,7 +31,7 @@ Watu for Wordpress is a light version of <a href="http://calendarscripts.info/wa
 
 **This plugin is mobile / touch - friendly.** The quizzes will work on mobile devices and phones. 
 
-**Please go to Tools -&gt; Manage Exams to start creating exams.**
+**Please go to Tools -&gt; Watu Quizzes to start creating quizzes and exams.**
 
 ### Features ###
 
@@ -109,10 +109,11 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 
 == Changelog ==
 
-= Changes in 2.5.3 =
+= Changes in 2.5.4 =
 - Option to reoder the questions. Of course this takes effect only when you have not chosen "Randomize questions" in the quiz settings.
 - Removed the hardcoded text "your answers are shown below" and the setting "display answers at the end of the quiz". Instead of this use the variable %%ANSWERS%% which gives far more flexibility.
 - Added option to not store takings in the database. Will be useful to save DB space when you have a quiz whose resutls you don't need to know.
+- Added two new variables - %%AVG-POINTS%% and %%BETTER-THAN%% to compare your results to others who completed the quiz
 
 = Changes in 2.5 =
 - Added optional answer explanation / feedback that can be shown along with the correct answers on the quiz 

@@ -118,11 +118,38 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		}
 	}
 	
+	####################### VARIOUS AVERAGE CALCULATIONS (think about placing them in function / method #######################
+	// calculate averages
+	$avg_points = $avg_percent = '';
+	if(strstr($exam->final_screen, '%%AVG-POINTS%%')) {
+		$all_point_rows = $wpdb->get_results($wpdb->prepare("SELECT points FROM ".WATU_TAKINGS." 
+			WHERE exam_id=%d", $exam->ID));
+		$all_points = 0;
+		foreach($all_point_rows as $r) $all_points += $r->points;	
+		$all_points += $achieved;			
+		$avg_points = round($all_points / ($wpdb->num_rows + 1), 1);
+	}
+	
+	// better than what %?
+	$better_than = '';
+	if(strstr($exam->final_screen, '%%BETTER-THAN%%')) {
+		// select total completed quizzes
+		$total_takings = $wpdb->get_var($wpdb->prepare("SELECT COUNT(ID) FROM ".WATU_TAKINGS."
+			WHERE exam_id=%d", $exam->ID));	
+		
+		$num_lower = $wpdb->get_var($wpdb->prepare("SELECT COUNT(ID) FROM ".WATU_TAKINGS."
+				WHERE exam_id=%d AND points < %f", $exam->ID, $achieved));
+		
+		$better_than = $total_takings ? round($num_lower * 100 / $total_takings) : 0;
+	}
+	####################### END VARIOUS AVERAGE CALCULATIONS #######################
+	
+	
 	$quiz_details = $wpdb->get_row($wpdb->prepare("SELECT name,final_screen, description FROM {$wpdb->prefix}watu_master WHERE ID=%d", $exam_id));
 
 	$quiz_details->final_screen = str_replace('%%TOTAL%%', '%%MAX-POINTS%%', $quiz_details->final_screen);
-	$replace_these	= array('%%SCORE%%', '%%MAX-POINTS%%', '%%PERCENTAGE%%', '%%GRADE%%', '%%RATING%%', '%%CORRECT%%', '%%WRONG_ANSWERS%%', '%%QUIZ_NAME%%',	'%%DESCRIPTION%%', '%%GRADE-TITLE%%', '%%GRADE-DESCRIPTION%%', '%%POINTS%%');
-	$with_these		= array($achieved,		 $max_points,	  $percent,			$grade,		 $rating,		$num_correct,					$num_questions-$num_correct,	   stripslashes($quiz_details->name), wpautop(stripslashes($quiz_details->description)), $gtitle, $gdescription, $achieved);
+	$replace_these	= array('%%SCORE%%', '%%MAX-POINTS%%', '%%PERCENTAGE%%', '%%GRADE%%', '%%RATING%%', '%%CORRECT%%', '%%WRONG_ANSWERS%%', '%%QUIZ_NAME%%',	'%%DESCRIPTION%%', '%%GRADE-TITLE%%', '%%GRADE-DESCRIPTION%%', '%%POINTS%%', '%%AVG-POINTS%%', '%%BETTER-THAN%%');
+	$with_these		= array($achieved,		 $max_points,	  $percent,			$grade,		 $rating,		$num_correct,					$num_questions-$num_correct,	   stripslashes($quiz_details->name), wpautop(stripslashes($quiz_details->description)), $gtitle, $gdescription, $achieved, $avg_points, $better_than);
 	
 	// insert taking
 	$uid = $user_ID ? $user_ID : 0;
