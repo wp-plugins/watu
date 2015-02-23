@@ -130,7 +130,7 @@ function watu_questions() {
 			} else {
 		?>
 			<tr style='background-color: <?php echo @$bgcolor; ?>;'>
-				<td colspan="4"><?php _e('No questiones found.', 'watu') ?></td>
+				<td colspan="4"><?php _e('No questions found.', 'watu') ?></td>
 			</tr>
 		<?php
 		}

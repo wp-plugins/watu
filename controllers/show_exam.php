@@ -232,10 +232,12 @@ if($answer_display == 2 and $single_page != 1) : ?>
 <input type="button" id="show-answer" value="<?php _e('Show Answer', 'watu') ?>"  /><br />
 <?php endif;
 if($single_page != 1 and $answer_display!=2): ?>
-<p><?php _e('Question', 'watu')?> <span id='numQ'>1</span> <?php _e('of', 'watu')?> <?php echo $num_questions;?></p>
-<input type="button" id="next-question" value="<?php _e('Next', 'watu') ?> &gt;"  /><br />
+	<p><?php _e('Question', 'watu')?> <span id='numQ'>1</span> <?php _e('of', 'watu')?> <?php echo $num_questions;?></p>
+	<?php if($exam->show_prev_button):?>
+		<input type="button" id="prev-question" value="&lt; <?php _e('Previous', 'watu') ?>" onclick="Watu.nextQuestion(event, 'prev');" style="display:none;" />
+	<?php endif;?>
+	<input type="button" id="next-question" value="<?php _e('Next', 'watu') ?> &gt;"  />
 <?php endif; ?>
-
 <input type="button" name="action" onclick="Watu.submitResult()" id="action-button" value="<?php _e('Show Results', 'watu') ?>"  />
 <input type="hidden" name="quiz_id" value="<?php echo  $exam_id ?>" />
 </form>

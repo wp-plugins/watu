@@ -46,21 +46,31 @@ Watu.checkAnswer = function(e) {
 	return true;
 }
 
-Watu.nextQuestion = function(e) {
-	if(!Watu.checkAnswer(e)) return;
+Watu.nextQuestion = function(e, dir) {
+	dir = dir || 'next'; // next or previous
+	if(dir == 'next' && !Watu.checkAnswer(e)) return;
 	
 	// change the displayed question number
 	var numQ = jQuery('#numQ').html();
-	numQ++;	
+	if(dir == 'next') numQ++;
+	else numQ--;	
 	jQuery('#numQ').html(numQ);
 
 	jQuery("#question-" + Watu.current_question).hide();
-	Watu.current_question++;
+	if(dir == 'next') Watu.current_question++;
+	else Watu.current_question--;
 	jQuery("#question-" + Watu.current_question).show();
 	
 	if(Watu.total_questions <= Watu.current_question) {
 		jQuery("#next-question").hide();
 		jQuery("#action-button").show();
+	}
+	else jQuery("#next-question").show();
+
+	// show / hide prev button if any
+	if(jQuery('#prev-question').length) {
+		if(Watu.current_question <= 1) jQuery('#prev-question').hide();
+		else jQuery('#prev-question').show();
 	}
 	
 	if(jQuery('body').scrollTop() > 250) {	

@@ -27,7 +27,7 @@ Creates exams and quizzes with unlimited number of questions and answers. Assign
 
 Create exams and quizzes and display the result immediately after the user takes the exam. You can assign grades and point levels for every grade in the exam / quiz. Then assign points to every answer to a question and Watu will figure out the grade based on the total number of points collected.
 
-Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">Watu PRO</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc.
+Watu for WordPress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">Watu PRO</a>. Check it if you want to run fully featured exams with data exports, student logins, categories etc.
 
 **This plugin is mobile / touch - friendly.** The quizzes will work on mobile devices and phones. 
 
@@ -109,11 +109,12 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 
 == Changelog ==
 
-= Changes in 2.5.4 =
+= Changes in 2.5.5 =
 - Option to reoder the questions. Of course this takes effect only when you have not chosen "Randomize questions" in the quiz settings.
 - Removed the hardcoded text "your answers are shown below" and the setting "display answers at the end of the quiz". Instead of this use the variable %%ANSWERS%% which gives far more flexibility.
 - Added option to not store takings in the database. Will be useful to save DB space when you have a quiz whose resutls you don't need to know.
 - Added two new variables - %%AVG-POINTS%% and %%BETTER-THAN%% to compare your results to others who completed the quiz
+- Added option to enable previous button
 
 = Changes in 2.5 =
 - Added optional answer explanation / feedback that can be shown along with the correct answers on the quiz 
