@@ -47,11 +47,12 @@ class WatuQuestion {
 				foreach($q_answers as $answer) {
 					if($answer->point > $max) $max = $answer->point;
 				} 
-				$max_points = $max;
+				
+				$max_points += $max;
 			break;
 			
 			case 'checkbox':
-				foreach($q_answers as $answer) {
+				foreach($q_answers as $answer) {				
 					if($answer->point > 0) $max_points += $answer->point;
 				}
 			break;

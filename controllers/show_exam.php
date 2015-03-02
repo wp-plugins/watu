@@ -32,12 +32,13 @@ $limit_sql = $exam->pull_random ? $wpdb->prepare("LIMIT %d", $exam->pull_random)
 $questions = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".WATU_QUESTIONS." 
 		WHERE exam_id=%d $order_sql $limit_sql", $exam_id));
 $num_questions = sizeof($questions);		
+
+$all_questions = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".WATU_QUESTIONS." WHERE exam_id=%d ", $exam_id));
 		
 if($questions) {
 	if(!isset($GLOBALS['watu_client_includes_loaded']) and !isset($_REQUEST['do']) ) {
 		$GLOBALS['watu_client_includes_loaded'] = true; // Make sure that this code is not loaded more than once.
 }
-
 
 if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	$achieved = $max_points = $num_correct = 0;
@@ -45,13 +46,12 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	
 	// we should reorder the questions in the same way they came from POST because exam might be randomized	
 	$_exam = new WatuExam();
-	$questions = $_exam->reorder_questions($questions, $_POST['question_id']);
+	$questions = $_exam->reorder_questions($all_questions, $_POST['question_id']);
 
 	foreach ($questions as $qct => $ques) {
 		$result .= "<div class='show-question'>";
 		$result .= "<div class='show-question-content'>". wpautop(stripslashes($ques->question), false) . "</div>";
 		$all_answers = $ques->answers;
-		
 		$correct = false;
 		$class = $textarea_class = 'answer';
 		$result .= "<ul>";

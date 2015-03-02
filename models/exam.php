@@ -5,7 +5,6 @@ class WatuExam {
 	function reorder_questions($questions, $orders) {
 		global $wpdb;
 		$new_questions = array();
-		
 		$qids = array(0);
 		foreach($questions as $question) $qids[] = $question->ID;		
 		
@@ -31,12 +30,11 @@ class WatuExam {
 				foreach($new_answers as $answer) {
 					if($question->ID == $answer->question_id) $question_answers[] = $answer;
 				}				
-				$question->answers = $question_answers;
-					
+				$question->answers = $question_answers;				
 				if($question->ID == $order) $new_questions[] = $question;
 			} // end foreach question
 		} // end foreach orders (means question IDs ordered as POST var)
-		
+	
 		return $new_questions;
 	}
 	
