@@ -79,7 +79,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 			
 		// answer explanation?
 		if(!empty($ques->feedback)) {
-			$result .= "<div class='show-question-feedback'>".stripslashes($ques->feedback)."</div>";
+			$result .= "<div class='show-question-feedback'>".wpautop(stripslashes($ques->feedback))."</div>";
 		}	
 
 		$result .= "</div>";
