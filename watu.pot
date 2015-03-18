@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.5.5\n"
+"Project-Id-Version: Watu 2.5.6\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2015-02-23 15:17:26+00:00\n"
+"POT-Creation-Date: 2015-03-18 13:25:20+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -118,7 +118,7 @@ msgstr ""
 msgid "our directory."
 msgstr ""
 
-#: controllers/exam.php:155
+#: controllers/exam.php:157
 msgid ""
 "<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n"
 "\n"
@@ -220,7 +220,7 @@ msgstr ""
 msgid "Question was not answered"
 msgstr ""
 
-#: controllers/show_exam.php:95 models/exam.php:95
+#: controllers/show_exam.php:95 models/exam.php:93
 msgid "Failed"
 msgstr ""
 
@@ -300,7 +300,7 @@ msgstr ""
 msgid "Guest"
 msgstr ""
 
-#: models/exam.php:54
+#: models/exam.php:52
 msgid ""
 "<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n"
 "\n"
@@ -310,61 +310,61 @@ msgid ""
 "%</p>"
 msgstr ""
 
-#: models/exam.php:58
+#: models/exam.php:56
 msgid "Demo Quiz"
 msgstr ""
 
-#: models/exam.php:58
+#: models/exam.php:56
 msgid ""
 "This quiz is automatically created to help you get started. It will be "
 "created only once."
 msgstr ""
 
-#: models/exam.php:64
+#: models/exam.php:62
 msgid "Select the correct answer:"
 msgstr ""
 
-#: models/exam.php:68
+#: models/exam.php:66
 msgid "The Earth is a star"
 msgstr ""
 
-#: models/exam.php:71
+#: models/exam.php:69
 msgid "The Sun is a planet"
 msgstr ""
 
-#: models/exam.php:74
+#: models/exam.php:72
 msgid "The Earth is a planet"
 msgstr ""
 
-#: models/exam.php:77
+#: models/exam.php:75
 msgid "Select all correct answers:"
 msgstr ""
 
-#: models/exam.php:81
+#: models/exam.php:79
 msgid "WordPress is open source software"
 msgstr ""
 
-#: models/exam.php:84
+#: models/exam.php:82
 msgid "There are no quiz plugins for WordPress"
 msgstr ""
 
-#: models/exam.php:87
+#: models/exam.php:85
 msgid "WordPress can be used for a lot more than blogging"
 msgstr ""
 
-#: models/exam.php:90
+#: models/exam.php:88
 msgid "Do you have any comments about this quiz?"
 msgstr ""
 
-#: models/exam.php:95
+#: models/exam.php:93
 msgid "Sorry, you could not collect enough points to pass this quiz"
 msgstr ""
 
-#: models/exam.php:98
+#: models/exam.php:96
 msgid "Passed"
 msgstr ""
 
-#: models/exam.php:98
+#: models/exam.php:96
 msgid "Congratulations, you passed!"
 msgstr ""
 
@@ -422,59 +422,66 @@ msgstr ""
 msgid "Quiz"
 msgstr ""
 
-#: views/exam_form.php:28 views/sidebar.php:7
+#: views/exam_form.php:29
+msgid ""
+"Automatically publish this quiz in new post once I hit the \"Save\" button. "
+"(The new post will be auto-generated with the quiz title used for post "
+"title.)"
+msgstr ""
+
+#: views/exam_form.php:31 views/sidebar.php:7
 msgid "Randomize questions"
 msgstr ""
 
-#: views/exam_form.php:28
+#: views/exam_form.php:31
 msgid "and pull random"
 msgstr ""
 
-#: views/exam_form.php:29
+#: views/exam_form.php:32
 msgid ""
 "questions from the quiz. Leave 0 to pull all the questions (default "
 "behavior)."
 msgstr ""
 
-#: views/exam_form.php:31
+#: views/exam_form.php:34
 msgid "Randomize answers"
 msgstr ""
 
-#: views/exam_form.php:33
+#: views/exam_form.php:36
 msgid ""
 "Note: randomization will not work well if you are caching the page where "
 "your quiz is published!"
 msgstr ""
 
-#: views/exam_form.php:35
+#: views/exam_form.php:38
 msgid "Show all questions on single page"
 msgstr ""
 
-#: views/exam_form.php:37
+#: views/exam_form.php:40
 msgid "Show 'previous question' button"
 msgstr ""
 
-#: views/exam_form.php:39
+#: views/exam_form.php:42
 msgid ""
 "Require user login (displays login and / or register link depending on your "
 "blog settings.)"
 msgstr ""
 
-#: views/exam_form.php:41
+#: views/exam_form.php:44
 msgid ""
 "Notify me when someone takes this quiz (the email goes to the address given "
 "in your WordPress Settings page)."
 msgstr ""
 
-#: views/exam_form.php:43
+#: views/exam_form.php:46
 msgid "Do not store user answers in the database to save DB space."
 msgstr ""
 
-#: views/exam_form.php:48
+#: views/exam_form.php:51
 msgid "Correct Answer Display"
 msgstr ""
 
-#: views/exam_form.php:50
+#: views/exam_form.php:53
 msgid ""
 "Show the answer of a question immediately after the user have selected an "
 "answer. (Will not work in single page mode and <b>is not secure</b> - use it "
@@ -482,101 +489,101 @@ msgid ""
 "WatuPRO.)"
 msgstr ""
 
-#: views/exam_form.php:51
+#: views/exam_form.php:54
 msgid ""
 "\"<b>Show answers at the end of the Quiz\" is now obsolete option.</b> "
 "Instead of using it, enter the %%ANSWERS%% variable where you want the "
 "results to appear."
 msgstr ""
 
-#: views/exam_form.php:56
+#: views/exam_form.php:59
 msgid "Description"
 msgstr ""
 
-#: views/exam_form.php:59
+#: views/exam_form.php:62
 msgid ""
 "If provided, description shows on top of the quiz. It can optionally be "
 "included in the final output as well."
 msgstr ""
 
-#: views/exam_form.php:64
+#: views/exam_form.php:67
 msgid "Final Screen"
 msgstr ""
 
-#: views/exam_form.php:68
+#: views/exam_form.php:71
 msgid "Usable Variables:"
 msgstr ""
 
-#: views/exam_form.php:70
+#: views/exam_form.php:73
 msgid "Variable"
 msgstr ""
 
-#: views/exam_form.php:70
+#: views/exam_form.php:73
 msgid "Value"
 msgstr ""
 
-#: views/exam_form.php:71
+#: views/exam_form.php:74
 msgid ""
 "This will display the questions along with the answers that user gave to "
 "them marked as correct or incorrect."
 msgstr ""
 
-#: views/exam_form.php:72
+#: views/exam_form.php:75
 msgid "The number of points collected. (The old %%SCORE%% tag also works)"
 msgstr ""
 
-#: views/exam_form.php:73
+#: views/exam_form.php:76
 msgid "Maximum number of points"
 msgstr ""
 
-#: views/exam_form.php:74
+#: views/exam_form.php:77
 msgid ""
 "Shows the achieved grade - title and description together. If you want to "
 "design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-"
 "DESCRIPTION%% for grade description"
 msgstr ""
 
-#: views/exam_form.php:75
+#: views/exam_form.php:78
 msgid ""
 "Number of correct answers. In multiple-select questions even one correct "
 "answer makes the question correct. In WatuPRO this is configurable"
 msgstr ""
 
-#: views/exam_form.php:76
+#: views/exam_form.php:79
 msgid "Number of answers you got wrong"
 msgstr ""
 
-#: views/exam_form.php:77
+#: views/exam_form.php:80
 msgid ""
 "A rating of your performance - it could be 'Failed'(0-39%), 'Just "
 "Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and "
 "'Unbeatable'(100%)."
 msgstr ""
 
-#: views/exam_form.php:77
+#: views/exam_form.php:80
 msgid ""
 "The rating can be changed only by <a href=\"%s\" target=\"_blank"
 "\">translating the plugin</a>. So we recommend you to use the grades "
 "instead. They are fully configurable right from this page."
 msgstr ""
 
-#: views/exam_form.php:78
+#: views/exam_form.php:81
 msgid "The name of the quiz"
 msgstr ""
 
-#: views/exam_form.php:79
+#: views/exam_form.php:82
 msgid "The text entered in the description field."
 msgstr ""
 
-#: views/exam_form.php:80
+#: views/exam_form.php:83
 msgid "The average points earned by the other quiz participants."
 msgstr ""
 
-#: views/exam_form.php:81
+#: views/exam_form.php:84
 msgid "Shows the percentage of users collected less points on the quiz."
 msgstr ""
 
-#: views/exam_form.php:92 views/question-form.html.php:168
+#: views/exam_form.php:95 views/question-form.html.php:168
 msgid "Save"
 msgstr ""
 
@@ -795,87 +802,95 @@ msgid "for user reports and user dashboard."
 msgstr ""
 
 #: views/sidebar.php:16
+msgid "Transfer all your data"
+msgstr ""
+
+#: views/sidebar.php:16
+msgid "from free to PRO with a single click."
+msgstr ""
+
+#: views/sidebar.php:17
 msgid "And a lot more - just come to see!"
 msgstr ""
 
-#: views/sidebar.php:19
+#: views/sidebar.php:20
 msgid "Just go ahead and"
 msgstr ""
 
-#: views/sidebar.php:19
+#: views/sidebar.php:20
 msgid "take the tour"
 msgstr ""
 
-#: views/sidebar.php:19
+#: views/sidebar.php:20
 msgid "or check the"
 msgstr ""
 
-#: views/sidebar.php:19
+#: views/sidebar.php:20
 msgid "online demo."
 msgstr ""
 
-#: views/sidebar.php:21
+#: views/sidebar.php:22
 msgid ""
 "Upgrading to PRO comes with <strong>60 days money-back guarantee</strong>, "
 "one year <strong>free upgrades</strong> and one year <strong>free support</"
 "strong>."
 msgstr ""
 
-#: views/sidebar.php:26
+#: views/sidebar.php:27
 msgid "Need Support?"
 msgstr ""
 
-#: views/sidebar.php:28
+#: views/sidebar.php:29
 msgid "Please ask your question in the"
 msgstr ""
 
-#: views/sidebar.php:28
+#: views/sidebar.php:29
 msgid "support forum at Wordpress."
 msgstr ""
 
-#: views/sidebar.php:30
+#: views/sidebar.php:31
 msgid ""
 "Use the forum only for issues concerning the free version. If you have a pre-"
 "sales question about Watu PRO please contact us"
 msgstr ""
 
-#: views/sidebar.php:30
+#: views/sidebar.php:31
 msgid "through our site"
 msgstr ""
 
-#: views/sidebar.php:30
+#: views/sidebar.php:31
 msgid "as well."
 msgstr ""
 
-#: views/sidebar.php:35
+#: views/sidebar.php:36
 msgid "Help To Spread The Word!"
 msgstr ""
 
-#: views/sidebar.php:37
+#: views/sidebar.php:38
 msgid "If you like this plugin you can do some of the following:"
 msgstr ""
 
-#: views/sidebar.php:40
+#: views/sidebar.php:41
 msgid "Rate it 5 starts at Wordpress.org"
 msgstr ""
 
-#: views/sidebar.php:41
+#: views/sidebar.php:42
 msgid "Let others know about it by blogging or posting"
 msgstr ""
 
-#: views/sidebar.php:41
+#: views/sidebar.php:42
 msgid "our home page"
 msgstr ""
 
-#: views/sidebar.php:41
+#: views/sidebar.php:42
 msgid "on social networks."
 msgstr ""
 
-#: views/sidebar.php:42
+#: views/sidebar.php:43
 msgid "Go PRO"
 msgstr ""
 
-#: views/sidebar.php:42
+#: views/sidebar.php:43
 msgid "to empower your site with extra benefits"
 msgstr ""
 

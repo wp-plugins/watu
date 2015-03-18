@@ -118,6 +118,7 @@ function watu_exam() {
 				$_POST['pull_random'], @$_POST['dont_store_data'], @$_POST['show_prev_button'], 
 				$_POST['quiz']));
 			
+			if(!empty($_POST['auto_publish'])) watu_auto_publish($exam_id);
 			$wp_redirect = 'tools.php?page=watu_exams&message=updated';
 		
 		} else {
@@ -129,6 +130,7 @@ function watu_exam() {
 			@$_POST['show_answers'], @$_POST['require_login'], @$_POST['notify_admin'], 
 			@$_POST['randomize_answers'], $_POST['pull_random'], @$_POST['dont_store_data'], @$_POST['show_prev_button']));
 			$exam_id = $wpdb->insert_id;
+			if(!empty($_POST['auto_publish'])) watu_auto_publish($exam_id);
 			if($exam_id == 0 ) $wp_redirect = 'tools.php?page=watu_exams&message=fail';
 			$wp_redirect = 'admin.php?page=watu_questions&message=new_quiz&quiz='.$exam_id;
 		}
@@ -159,5 +161,20 @@ function watu_exam() {
 	if(!isset($dquiz->show_answers) or $dquiz->show_answers == 100) $answer_display = $answer_display; // assign the default
 	else $answer_display = $dquiz->show_answers;
 	
+	if(!empty($_GET['quiz'])) {
+		$quiz_id = intval($_GET['quiz']);
+		$is_published = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[watu ".$quiz_id."]%' 
+				AND post_status='publish' AND post_title!=''");
+	} 
+	else $is_published = false;
+	
 	require(WATU_PATH."/views/exam_form.php");
+}
+
+// auto publish quiz in post
+// some data comes directly from the $_POST to save unnecessary DB query
+function watu_auto_publish($quiz_id) {	
+	$post = array('post_content' => '[WATU '.$quiz_id.']', 'post_name'=> $_POST['name'], 
+		'post_title'=>$_POST['name'], 'post_status'=>'publish');
+	wp_insert_post($post);
 }

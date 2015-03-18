@@ -25,6 +25,9 @@
 			<input type='text' name='name' id="title" value='<?php echo stripslashes(@$dquiz->name); ?>' />
 		</div>
 		<div class="inside">
+			<?php if(!$is_published):?>
+			 	<p><input type="checkbox" name="auto_publish" value="1"> <?php _e('Automatically publish this quiz in new post once I hit the "Save" button. (The new post will be auto-generated with the quiz title used for post title.)', 'watu')?></p>
+			 <?php endif;?>		
 			<p><input id="watuRandomize" type="checkbox" name="randomize" value="1" <?php if(!empty($dquiz->randomize)) echo 'checked'?>> <label for="watuRandomize"><?php _e("Randomize questions", 'watu');?></label> <br> <?php _e('and pull random', 'watu')?>
 			<input type="text" name="pull_random" value="<?php echo intval(@$dquiz->pull_random)?>" size="4" onkeyup="if(this.value > 0) { jQuery('#watuRandomize').attr('checked', true);}"> <?php _e('questions from the quiz. Leave 0 to pull all the questions (default behavior).','watu')?></p>
 			
