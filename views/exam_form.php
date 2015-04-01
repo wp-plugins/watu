@@ -39,11 +39,13 @@
 			
 			<p style="display:<?php echo empty($dquiz->single_page) ? 'block' : 'none';?>" id="watuPrevButton"><input id="watuPrev" type="checkbox" name="show_prev_button" value="1" <?php if(!empty($dquiz->show_prev_button)) echo 'checked'?>> <label for="watuPrev"><?php _e("Show 'previous question' button", 'watu');?></label></p>
 			
-			<p><input type="checkbox" name="require_login" value="1" <?php if(!empty($dquiz->require_login)) echo 'checked'?>> <label><?php _e('Require user login (displays login and / or register link depending on your blog settings.)', 'watu')?></label></p>
+			<p><input type="checkbox" name="require_login" value="1" <?php if(!empty($dquiz->require_login)) echo 'checked'?> id="watuReqLogin"> <label for="watuReqLogin"><?php _e('Require user login (displays login and / or register link depending on your blog settings.)', 'watu')?></label></p>
 			
-			<p><input type="checkbox" name="notify_admin" value="1" <?php if(!empty($dquiz->notify_admin)) echo 'checked'?>> <label><?php _e('Notify me when someone takes this quiz (the email goes to the address given in your WordPress Settings page).', 'watu')?></label></p>
+			<p><input type="checkbox" name="notify_admin" value="1" <?php if(!empty($dquiz->notify_admin)) echo 'checked'?> id="watuNotifyAdmin"> <label for="watuNotifyAdmin"><?php _e('Notify me when someone takes this quiz (the email goes to the address given in your WordPress Settings page).', 'watu')?></label></p>
 			
-			<p><input type="checkbox" name="dont_store_data" value="1" <?php if(!empty($dquiz->dont_store_data)) echo 'checked'?>> <label><?php _e('Do not store user answers in the database to save DB space.', 'watu')?></label></p>
+			<p><input type="checkbox" name="dont_store_data" value="1" <?php if(!empty($dquiz->dont_store_data)) echo 'checked'?> id="watuDontStoreData"> <label for="watuDontStoreData"><?php _e('Do not store user answers in the database to save DB space.', 'watu')?></label></p>
+			
+			<p><input type="checkbox" name="dont_display_question_numbers" value="1" <?php if(!empty($dquiz->dont_display_question_numbers)) echo 'checked'?> id="watuDontDisplayNumbers"> <label for="watuDontDisplayNumbers"><?php _e('Do not display question numbers.', 'watu')?></label></p>
 		</div>
 	</div>
 	

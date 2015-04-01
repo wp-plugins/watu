@@ -49,8 +49,11 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	$questions = $_exam->reorder_questions($all_questions, $_POST['question_id']);
 
 	foreach ($questions as $qct => $ques) {
+		$qnum = $qct+1;
+		$question_number = empty($exam->dont_display_question_numbers) ? "<span class='watu_num'>$qnum. </span>"  : '';
+		
 		$result .= "<div class='show-question'>";
-		$result .= "<div class='show-question-content'>". wpautop(stripslashes($ques->question), false) . "</div>";
+		$result .= "<div class='show-question-content'>". wpautop($question_number . stripslashes($ques->question), false) . "</div>";
 		$all_answers = $ques->answers;
 		$correct = false;
 		$class = $textarea_class = 'answer';
@@ -191,8 +194,11 @@ $question_ids = '';
 $output = $answer_class = '';
 $answers_orderby = empty($exam->randomize_answers) ? 'sort_order, ID' : 'RAND()';
 foreach ($questions as $qct => $ques) {
+	$qnum = $qct+1;
+	$question_number = empty($exam->dont_display_question_numbers) ? "<span class='watu_num'>$qnum. </span>"  : '';
+		
 	$output .= "<div class='watu-question' id='question-$question_count'>";
-	$output .= "<div class='question-content'>". wpautop(stripslashes($ques->question)) . "</div>";
+	$output .= "<div class='question-content'>". wpautop($question_number .  stripslashes($ques->question)) . "</div>";
 	$output .= "<input type='hidden' name='question_id[]' value='{$ques->ID}' />";
 	$question_ids .= $ques->ID.',';
 	$dans = $wpdb->get_results("SELECT ID,answer,correct FROM ".WATU_ANSWERS." 
