@@ -10,6 +10,7 @@ global $wpdb, $user_ID, $post;
 
 // select exam
 $exam = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_EXAMS." WHERE ID=%d", $exam_id));
+if(empty($exam->ID)) return __('Quiz not found.', 'watu');
 
 // requires login?
 if(!empty($exam->require_login) and !is_user_logged_in()) {

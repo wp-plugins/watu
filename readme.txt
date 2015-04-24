@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: exam, test, quiz, survey, wpmu, multisite, touch, mobile
 Requires at least: 3.3
-Tested up to: 4.1
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2 or later
 
