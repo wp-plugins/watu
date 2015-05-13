@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.5.7\n"
+"Project-Id-Version: Watu 2.5.8\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2015-04-01 13:43:52+00:00\n"
+"POT-Creation-Date: 2015-05-13 14:11:20+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Go to"
 msgstr ""
 
-#: controllers/exam.php:24 options.php:19 watu.php:113
+#: controllers/exam.php:24 options.php:19 watu.php:116
 msgid "Watu Settings"
 msgstr ""
 
@@ -83,11 +83,11 @@ msgid "Taken %d times"
 msgstr ""
 
 #: controllers/exam.php:80 views/exam_form.php:15 views/grades.html.php:5
-#: watu.php:99
+#: watu.php:101
 msgid "Manage Questions"
 msgstr ""
 
-#: controllers/exam.php:81 watu.php:101
+#: controllers/exam.php:81 watu.php:103
 msgid "Manage Grades"
 msgstr ""
 
@@ -161,7 +161,7 @@ msgstr ""
 msgid "into any post or page."
 msgstr ""
 
-#: controllers/questions.php:81 controllers/show_exam.php:241
+#: controllers/questions.php:81 controllers/show_exam.php:243
 #: views/question-form.html.php:2 views/question-form.html.php:107
 msgid "Question"
 msgstr ""
@@ -196,91 +196,95 @@ msgstr ""
 msgid "Please go to <a href='%s'>%s</a> to view the test"
 msgstr ""
 
-#: controllers/show_exam.php:16
-msgid "You need to be registered and logged in to take this %s."
-msgstr ""
-
-#: controllers/show_exam.php:16
-msgid "quiz"
+#: controllers/show_exam.php:13
+msgid "Quiz not found."
 msgstr ""
 
 #: controllers/show_exam.php:17
+msgid "You need to be registered and logged in to take this %s."
+msgstr ""
+
+#: controllers/show_exam.php:17
+msgid "quiz"
+msgstr ""
+
+#: controllers/show_exam.php:18
 msgid "Log in"
 msgstr ""
 
-#: controllers/show_exam.php:19
+#: controllers/show_exam.php:20
 msgid "or"
 msgstr ""
 
-#: controllers/show_exam.php:19
+#: controllers/show_exam.php:20
 msgid "Register"
 msgstr ""
 
-#: controllers/show_exam.php:81
+#: controllers/show_exam.php:82
 msgid "Question was not answered"
 msgstr ""
 
-#: controllers/show_exam.php:98 models/exam.php:93
+#: controllers/show_exam.php:99 models/exam.php:93
 msgid "Failed"
 msgstr ""
 
-#: controllers/show_exam.php:98
+#: controllers/show_exam.php:99
 msgid "Just Passed"
 msgstr ""
 
-#: controllers/show_exam.php:100
+#: controllers/show_exam.php:101
 msgid "Satisfactory"
 msgstr ""
 
-#: controllers/show_exam.php:100
+#: controllers/show_exam.php:101
 msgid "Competent"
 msgstr ""
 
-#: controllers/show_exam.php:100
+#: controllers/show_exam.php:101
 msgid "Good"
 msgstr ""
 
-#: controllers/show_exam.php:100
+#: controllers/show_exam.php:101
 msgid "Very Good"
 msgstr ""
 
-#: controllers/show_exam.php:100
+#: controllers/show_exam.php:101
 msgid "Excellent"
 msgstr ""
 
-#: controllers/show_exam.php:100
+#: controllers/show_exam.php:101
 msgid "Unbeatable"
 msgstr ""
 
-#: controllers/show_exam.php:100
+#: controllers/show_exam.php:101
 msgid "Cheater"
 msgstr ""
 
-#: controllers/show_exam.php:107
+#: controllers/show_exam.php:108
 msgid "None"
 msgstr ""
 
-#: controllers/show_exam.php:231
+#: controllers/show_exam.php:233
 msgid "Loading"
 msgstr ""
 
-#: controllers/show_exam.php:238 watu.php:309
+#: controllers/show_exam.php:240 watu.php:312
 msgid "Show Answer"
 msgstr ""
 
-#: controllers/show_exam.php:241
+#: controllers/show_exam.php:243
 msgid "of"
 msgstr ""
 
-#: controllers/show_exam.php:243
+#: controllers/show_exam.php:245
 msgid "Previous"
 msgstr ""
 
-#: controllers/show_exam.php:245
+#: controllers/show_exam.php:247
 msgid "Next"
 msgstr ""
 
-#: controllers/show_exam.php:247
+#: controllers/show_exam.php:249
 msgid "Show Results"
 msgstr ""
 
@@ -288,15 +292,15 @@ msgstr ""
 msgid "User or IP;Date;Points;Result/Grade"
 msgstr ""
 
-#: controllers/takings.php:167 watu.php:120
+#: controllers/takings.php:167 watu.php:123
 msgid "You do not have sufficient permissions to access this page"
 msgstr ""
 
-#: lib/functions.php:73
+#: lib/functions.php:76
 msgid "User results on \"%s\""
 msgstr ""
 
-#: lib/functions.php:74
+#: lib/functions.php:77
 msgid "Guest"
 msgstr ""
 
@@ -376,41 +380,45 @@ msgstr ""
 msgid "Manage Your Exams"
 msgstr ""
 
-#: options.php:29
+#: options.php:24
+msgid "Social Sharing Options"
+msgstr ""
+
+#: options.php:30
 msgid "Default Answer Type"
 msgstr ""
 
-#: options.php:36 views/question-form.html.php:123
+#: options.php:37 views/question-form.html.php:123
 msgid "Single Answer"
 msgstr ""
 
-#: options.php:38 views/question-form.html.php:125
+#: options.php:39 views/question-form.html.php:125
 msgid "Multiple Answers"
 msgstr ""
 
-#: options.php:42
+#: options.php:43
 msgid "Other settings"
 msgstr ""
 
-#: options.php:44
+#: options.php:45
 msgid ""
 "Use \"the_content\" instead of our custom content filter (do not select this "
 "unless adviced so)"
 msgstr ""
 
-#: options.php:49
+#: options.php:50
 msgid "Database Option"
 msgstr ""
 
-#: options.php:54
+#: options.php:55
 msgid "Delete stored Watu data when deinstalling the plugin."
 msgstr ""
 
-#: options.php:57
+#: options.php:58
 msgid "Please confirm by typing \"yes\" in the box:"
 msgstr ""
 
-#: options.php:65
+#: options.php:66
 msgid "Save Options"
 msgstr ""
 
@@ -725,6 +733,79 @@ msgstr ""
 msgid "Go to Questions Page"
 msgstr ""
 
+#: views/sharing-options.html.php:2
+msgid "Watu Social Sharing"
+msgstr ""
+
+#: views/sharing-options.html.php:4
+msgid "Back to Watu Options"
+msgstr ""
+
+#: views/sharing-options.html.php:6
+msgid ""
+"You can use the shortcode [watushare-buttons] to display Facebook share "
+"button on the \"Final screen\" on your quiz."
+msgstr ""
+
+#: views/sharing-options.html.php:7
+msgid ""
+"The social media buttons are provided by <a href=\"%s\" target=\"_blank"
+"\">Arbenting</a>. Feel free to replace them with other icons."
+msgstr ""
+
+#: views/sharing-options.html.php:10
+msgid "Facebook Sharing"
+msgstr ""
+
+#: views/sharing-options.html.php:12
+msgid "Your Facebook App ID:"
+msgstr ""
+
+#: views/sharing-options.html.php:12
+msgid "Get one here"
+msgstr ""
+
+#: views/sharing-options.html.php:13
+msgid "If you leave it empty, no Facebook share button will be generated."
+msgstr ""
+
+#: views/sharing-options.html.php:15
+msgid "Title:"
+msgstr ""
+
+#: views/sharing-options.html.php:16
+msgid "Text:"
+msgstr ""
+
+#: views/sharing-options.html.php:17
+msgid ""
+"You can use the variables {{{quiz-name}}}, {{{url}}}, {{{grade-title}}} and "
+"{{{grade-description}}}."
+msgstr ""
+
+#: views/sharing-options.html.php:19
+msgid ""
+"If you leave title and text empty, grade title and grade description will be "
+"used respectively."
+msgstr ""
+
+#: views/sharing-options.html.php:21
+msgid ""
+"IMPORTANT: Facebook needs to be able to access your site to retrieve the "
+"social sharing data. If the site is on localhost or behind a htaccess login "
+"box sharing will not work properly."
+msgstr ""
+
+#: views/sharing-options.html.php:23
+msgid ""
+"More social sharing options like Google Plus, LinkedIn, Twitter and Email "
+"are available in <a href=\"%s\" target=\"_blank\">WatuPRO</a>"
+msgstr ""
+
+#: views/sharing-options.html.php:25
+msgid "Save All Settings"
+msgstr ""
+
 #: views/sidebar.php:2
 msgid "Go PRO!"
 msgstr ""
@@ -806,95 +887,103 @@ msgid "for user reports and user dashboard."
 msgstr ""
 
 #: views/sidebar.php:16
-msgid "Transfer all your data"
+msgid "More social sharing"
 msgstr ""
 
 #: views/sidebar.php:16
-msgid "from free to PRO with a single click."
+msgid "options: Google+, LinkedIn, Twitter."
 msgstr ""
 
 #: views/sidebar.php:17
+msgid "Transfer all your data"
+msgstr ""
+
+#: views/sidebar.php:17
+msgid "from free to PRO with a single click."
+msgstr ""
+
+#: views/sidebar.php:18
 msgid "And a lot more - just come to see!"
 msgstr ""
 
-#: views/sidebar.php:20
+#: views/sidebar.php:21
 msgid "Just go ahead and"
 msgstr ""
 
-#: views/sidebar.php:20
+#: views/sidebar.php:21
 msgid "take the tour"
 msgstr ""
 
-#: views/sidebar.php:20
+#: views/sidebar.php:21
 msgid "or check the"
 msgstr ""
 
-#: views/sidebar.php:20
+#: views/sidebar.php:21
 msgid "online demo."
 msgstr ""
 
-#: views/sidebar.php:22
+#: views/sidebar.php:23
 msgid ""
 "Upgrading to PRO comes with <strong>60 days money-back guarantee</strong>, "
 "one year <strong>free upgrades</strong> and one year <strong>free support</"
 "strong>."
 msgstr ""
 
-#: views/sidebar.php:27
+#: views/sidebar.php:28
 msgid "Need Support?"
 msgstr ""
 
-#: views/sidebar.php:29
+#: views/sidebar.php:30
 msgid "Please ask your question in the"
 msgstr ""
 
-#: views/sidebar.php:29
+#: views/sidebar.php:30
 msgid "support forum at Wordpress."
 msgstr ""
 
-#: views/sidebar.php:31
+#: views/sidebar.php:32
 msgid ""
 "Use the forum only for issues concerning the free version. If you have a pre-"
 "sales question about Watu PRO please contact us"
 msgstr ""
 
-#: views/sidebar.php:31
+#: views/sidebar.php:32
 msgid "through our site"
 msgstr ""
 
-#: views/sidebar.php:31
+#: views/sidebar.php:32
 msgid "as well."
 msgstr ""
 
-#: views/sidebar.php:36
+#: views/sidebar.php:37
 msgid "Help To Spread The Word!"
 msgstr ""
 
-#: views/sidebar.php:38
+#: views/sidebar.php:39
 msgid "If you like this plugin you can do some of the following:"
 msgstr ""
 
-#: views/sidebar.php:41
+#: views/sidebar.php:42
 msgid "Rate it 5 starts at Wordpress.org"
 msgstr ""
 
-#: views/sidebar.php:42
+#: views/sidebar.php:43
 msgid "Let others know about it by blogging or posting"
 msgstr ""
 
-#: views/sidebar.php:42
+#: views/sidebar.php:43
 msgid "our home page"
 msgstr ""
 
-#: views/sidebar.php:42
+#: views/sidebar.php:43
 msgid "on social networks."
 msgstr ""
 
-#: views/sidebar.php:43
+#: views/sidebar.php:44
 msgid "Go PRO"
 msgstr ""
 
-#: views/sidebar.php:43
+#: views/sidebar.php:44
 msgid "to empower your site with extra benefits"
 msgstr ""
 
@@ -1076,34 +1165,38 @@ msgstr ""
 msgid "Are you sure? This will delete ALL user results for this quiz!"
 msgstr ""
 
-#: watu.php:95 watu.php:98
+#: watu.php:97 watu.php:100
 msgid "Manage Quizzes"
 msgstr ""
 
-#: watu.php:95 watu.php:98
+#: watu.php:97 watu.php:100
 msgid "Watu Quizzes"
 msgstr ""
 
-#: watu.php:100
+#: watu.php:102
 msgid "Add/Edit Question"
 msgstr ""
 
-#: watu.php:115
+#: watu.php:104
+msgid "Social Sharing"
+msgstr ""
+
+#: watu.php:118
 msgid "Exam submissions"
 msgstr ""
 
-#: watu.php:119
+#: watu.php:122
 msgid "Your are not allowed to to perform this operation"
 msgstr ""
 
-#: watu.php:265
+#: watu.php:268
 msgid ""
 "All the questions in the quiz along with their answers are shown below. Your "
 "answers are bolded. The correct answers have a green background while the "
 "incorrect ones have a red background."
 msgstr ""
 
-#: watu.php:277
+#: watu.php:280
 msgid ""
 "<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href=\"tools."
 "php?page=watu_exams\">Quizzes page</a> to get started! If this is the first "
@@ -1112,10 +1205,10 @@ msgid ""
 "how things work.</p>"
 msgstr ""
 
-#: watu.php:307
+#: watu.php:310
 msgid "You have missed to answer a required question"
 msgstr ""
 
-#: watu.php:308
+#: watu.php:311
 msgid "You did not select any answer. Are you sure you want to continue?"
 msgstr ""

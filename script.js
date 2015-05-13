@@ -157,6 +157,8 @@ Watu.submitResult = function() {
 		data[fieldName+'[]'] = ansvalues;
 	}
 	
+	data['post_id'] = Watu.post_id;
+	
 	jQuery('html, body').animate({
    		scrollTop: jQuery('#watu_quiz').offset().top - 50
    	}, 1000); 

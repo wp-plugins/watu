@@ -20,7 +20,8 @@ $delete_db = get_option('watu_delete_db');
 
 	<div class="postbox-container" style="width:73%;margin-right:2%;">	
 	
-	<p><?php _e('Go to', 'watu')?> <a href="tools.php?page=watu_exams"><?php _e('Manage Your Exams', 'watu')?></a></p>
+	<p><?php _e('Go to', 'watu')?> <a href="tools.php?page=watu_exams"><?php _e('Manage Your Exams', 'watu')?></a>
+	&nbsp;|&nbsp; <a href="admin.php?page=watu_social_sharing"><?php _e('Social Sharing Options', 'watu');?></a></p>
 	
 	<form name="post" action="" method="post" id="post">
 	<div>

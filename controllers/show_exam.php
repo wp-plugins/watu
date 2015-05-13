@@ -163,6 +163,7 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		$taking_id = $wpdb->insert_id;
 	}
 	else $taking_id = 0;	
+	$GLOBALS['watu_taking_id'] = $taking_id;
 
 	// Show the results
 	$output = str_replace($replace_these, $with_these, wpautop(stripslashes($quiz_details->final_screen)));
@@ -258,6 +259,7 @@ question_ids = "<?php print $question_ids ?>";
 exam_id = <?php print $exam_id ?>;
 Watu.exam_id = exam_id;
 Watu.qArr = question_ids.split(',');
+Watu.post_id = <?php echo $post->ID ?>;
 Watu.singlePage = '<?php echo $exam->single_page?>';
 watuURL = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
 });

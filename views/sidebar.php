@@ -13,6 +13,7 @@
 		<li><strong><?php _e('Copy exmas', 'watu')?></strong> <?php _e('and their questions into a new or existing exams.', 'watu')?></li>
 		<li><strong><?php _e('More question types', 'watu')?></strong> <?php _e('and more control on defining correctly answered questions.', 'watu')?></li>
 		<li><strong><?php _e('Shortcodes', 'watu')?></strong> <?php _e('for user reports and user dashboard.', 'watu')?></li>
+		<li><strong><?php _e('More social sharing', 'watu')?></strong> <?php _e('options: Google+, LinkedIn, Twitter.', 'watu')?></li>
 		<li><strong><?php _e('Transfer all your data', 'watu')?></strong> <?php _e('from free to PRO with a single click.', 'watu')?></li>
 		<li><?php _e('And a lot more - just come to see!', 'watu')?></li>
 	</ol>

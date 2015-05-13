@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.5.7.1
+Version: 2.5.8
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -30,6 +30,7 @@ include( WATU_PATH.'/controllers/questions.php');
 include( WATU_PATH.'/controllers/takings.php');
 include( WATU_PATH.'/controllers/ajax.php');
 include( WATU_PATH.'/controllers/grades.php');
+include( WATU_PATH.'/controllers/social-sharing.php');
 include( WATU_PATH.'/models/question.php');
 include( WATU_PATH.'/lib/functions.php');
 include( WATU_PATH."/models/exam.php");
@@ -45,6 +46,7 @@ function watu_init() {
 	
 	add_shortcode( 'WATU', 'watu_shortcode' );
 	add_shortcode( 'watu', 'watu_shortcode' );
+	add_shortcode( 'watushare-buttons', array('WatuSharing', 'display') );
 	
 	// table names as constants
 	define('WATU_EXAMS', $wpdb->prefix.'watu_master');	
@@ -99,6 +101,7 @@ function watu_add_menu_links() {
 	add_submenu_page(NULL, __('Manage Questions', 'watu'), __('Manage Questions', 'watu'), $view_level , 'watu_questions', 'watu_questions');
 	add_submenu_page(NULL, __('Add/Edit Question', 'watu'), __('Add/Edit Question', 'watu'), $view_level , 'watu_question', 'watu_question');
 	add_submenu_page(NULL, __('Manage Grades', 'watu'), __('Manage Grades', 'watu'), $view_level , 'watu_grades', 'watu_grades');
+	add_submenu_page(NULL, __('Social Sharing', 'watu'), __('Social Sharing', 'watu'), $view_level , 'watu_social_sharing', array('WatuSharing', 'options'));
 	
 	$code_pages = array('question_form.php');
 	foreach($code_pages as $code_page) {
