@@ -45,6 +45,7 @@ Watu for WordPress is a light version of <a href="http://calendarscripts.info/wa
 * Shows answers at the end of the quiz or immediately after selection
 * List of users who took exam along with their results
 * Ajax-based loading of the quiz results.
+* Facebook sharing
 * Mobile / touch - friendly
 * Notify admin when someone takes a quiz
 
