@@ -6,10 +6,15 @@ class WatuSharing {
 			update_option('watuproshare_facebook_appid', $_POST['facebook_appid']);
 			$linkedin_options = array("enabled" => @$_POST['linkedin_enabled'],  "msg"=>$_POST['linkedin_msg'], 'title' => $_POST['linkedin_title']);
 			update_option('watuproshare_linkedin', $linkedin_options);	
+			$twitter_options = array("use_twitter" => @$_POST['use_twitter'], "show_count" => @$_POST['show_count'],
+			 "via"=>$_POST['via'], "hashtag" => $_POST['hashtag'], 'large_button' => @$_POST['large_button'],
+			 "tweet"=>$_POST['tweet']);
+			update_option('watuproshare_twitter', $twitter_options);
 		}
 		
 		$appid = get_option('watuproshare_facebook_appid');	
 		$linkedin_options = get_option('watuproshare_linkedin');
+		$twitter_options = get_option('watuproshare_twitter');
 		include(WATU_PATH.'/views/sharing-options.html.php');
 	}	
 	
@@ -84,9 +89,33 @@ class WatuSharing {
 			}
 		}   // end searching for image
 		
+		$twitter_options = get_option('watuproshare_twitter');
+		
+		// prepare tweet text
+		if(!empty($twitter_options['use_twitter'])) {
+			$tweet = stripslashes($twitter_options['tweet']);
+			
+			if(empty($tweet)) {
+				$tweet = stripslashes($grade->gdescription);
+				if(empty($tweet)) $tweet = stripslashes($grade->gtitle);
+			}
+			else {
+				$tweet = str_replace('{{{grade-title}}}', stripslashes($grade->gtitle), $tweet);
+				$tweet = str_replace('{{{grade-description}}}', stripslashes($grade->gdescription), $tweet);
+				$tweet = str_replace('{{{quiz-name}}}', stripslashes($quiz_name), $tweet);
+			}
+			
+			$tweet = substr($tweet, 0, 140);
+		}
+		
+		
 		?>	
 		<div><?php if(!empty($appid)):?><a title="Share your results on Facebook" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=300')" href="https://www.facebook.com/dialog/feed?app_id=<?php echo $appid?>&amp;display=popup&amp;link=<?php echo urlencode(get_permalink($_POST['post_id']))?>&amp;name=<?php echo urlencode($linkedin_title)?>&amp;redirect_uri=<?php echo urlencode(get_permalink($_POST['post_id']))?>&amp;description=<?php echo urlencode($linkedin_msg)?><?php echo $picture_str?>" target="_blank"><img src="<?php echo WATU_URL.'/img/share/facebook.png'?>"></a>&nbsp;
-		<?php endif; // end if Facebook ?></div>
+		<?php endif; // end if Facebook 
+		 if(!empty($twitter_options['use_twitter'])):?>
+		 <a href="https://twitter.com/share" class="twitter-share-button watu-twitter-share-button" data-url="<?php echo get_permalink($_POST['post_id'])?>" data-via="<?php echo $twitter_options['via']?>" data-hashtags="<?php echo $twitter_options['hashtag']?>" data-text="<?php echo htmlentities($tweet)?>" <?php if(empty($twitter_options['show_count'])):?>data-count="none"<?php endif;?>>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	   <?php endif;?></div>
 		<?php 
 		$content = ob_get_clean();
 		return $content;

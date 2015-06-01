@@ -23,7 +23,9 @@ function watu_exams() {
 		
 		<p><?php _e('Go to', 'watu')?> <a href="options-general.php?page=watu.php"><?php _e('Watu Settings', 'watu')?></a>
 			&nbsp;|&nbsp;
-		<a href="admin.php?page=watu_exam&amp;action=new"><?php _e("Create New Quiz", 'watu')?></a></p>
+		<a href="admin.php?page=watu_exam&amp;action=new"><?php _e("Create New Quiz", 'watu')?></a>
+			&nbsp;|&nbsp;
+		<a href="admin.php?page=watu_social_sharing"><?php _e('Social Sharing Options', 'watu');?></a></p>
 		
 		<p><b><?php _e('To publish a quiz copy its shortcode and place it in a post or page. Use only one quiz shortcode in each post or page.','watu')?></b></p>
 			

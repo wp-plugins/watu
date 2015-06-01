@@ -3,7 +3,7 @@
 	
 	<p><a href="options-general.php?page=watu.php"><?php _e('Back to Watu Options','watu');?></a></p>
 	
-	<p><?php _e('You can use the shortcode [watushare-buttons] to display Facebook share button on the "Final screen" on your quiz.', 'watu')?></b></p>
+	<p><?php printf(__('You can use the shortcode %s to display Facebook share button on the "Final screen" on your quiz.', 'watu'), '<input type="text" value="[watushare-buttons]" onclick="this.select();" readonly="readonly" size="20">');?></b></p>
 	<p><?php printf(__('The social media buttons are provided by <a href="%s" target="_blank">Arbenting</a>. Feel free to replace them with other icons.', 'watu'), 'http://arbent.net/blog/social-media-circles-icon-set')?></p>
 	
 	<form method="post">
@@ -20,7 +20,22 @@
 			
 			<p><b><?php _e('IMPORTANT: Facebook needs to be able to access your site to retrieve the social sharing data. If the site is on localhost or behind a htaccess login box sharing will not work properly.', 'watu')?></b></p>
 			
-			<p><?php printf(__('More social sharing options like Google Plus, LinkedIn, Twitter and Email are available in <a href="%s" target="_blank">WatuPRO</a>', 'watu'), 'http://calendarscripts.info/watupro');?></p>
+			<h2><?php _e('Twitter Sharing Options:', 'watu')?></h2>	
+		
+		<p><?php _e('If you leave "Tweet text" empty the tweet text will be extracted from the grade description. If it is empty, the grade title will be used.', 'watu')?></p>
+		
+		<p><input type="checkbox" name="use_twitter" value="1" <?php if($twitter_options['use_twitter']) echo 'checked'?> onclick="jQuery('#twitterOptions').toggle();"> <?php _e('Show Tweet button', 'watu')?></p>
+		
+		<div id="twitterOptions" style="display:<?php echo empty($twitter_options['use_twitter']) ? 'none' : 'block'?>">
+			<p><input type="checkbox" name="show_count" value="1" <?php if(!empty($twitter_options['show_count'])) echo 'checked'?>> <?php _e('Show count', 'watu')?></p>
+			<p><?php _e('Via @', 'watu')?> <input type="text" name="via" value="<?php echo @$twitter_options['via']?>"></p>
+			<p><?php _e('Hashtag #', 'watu')?><input type="text" name="hashtag" value="<?php echo @$twitter_options['hashtag']?>"></p>
+			<p><?php _e('Tweet text (No more than 140 chars):', 'watu')?> <textarea name="tweet" maxlength="140" rows="3" cols="40"><?php echo stripslashes(@$twitter_options['tweet'])?></textarea>
+			<br> <?php _e('You can use the variables {{{quiz-name}}}, {{{grade-title}}} and {{{grade-description}}}.', 'watu')?></p>			
+		</div>	
+			
+			<p><?php printf(__('More social sharing options like Google Plus, LinkedIn, and Email are available in <a href="%s" target="_blank">WatuPRO</a>', 'watu'), 'http://calendarscripts.info/watupro');?></p>
+			
 		
 		<p><input type="submit" value="<?php _e('Save All Settings', 'watu')?>"></p>
 		<input type="hidden" name="ok" value="1">
