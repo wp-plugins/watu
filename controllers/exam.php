@@ -113,12 +113,13 @@ function watu_exam() {
 			$wpdb->query($wpdb->prepare("UPDATE ".WATU_EXAMS."
 				SET name=%s, description=%s,final_screen=%s, randomize=%d, single_page=%d, 
 				show_answers=%d, require_login=%d, notify_admin=%d, randomize_answers=%d,
-				pull_random=%d, dont_store_data=%d, show_prev_button=%d, dont_display_question_numbers=%d   
+				pull_random=%d, dont_store_data=%d, show_prev_button=%d, 
+				dont_display_question_numbers=%d, require_text_captcha=%d   
 				WHERE ID=%d", $_POST['name'], $_POST['description'], $_POST['content'], 
 				@$_POST['randomize'], @$_POST['single_page'], @$_POST['show_answers'], 
 				@$_POST['require_login'], @$_POST['notify_admin'], @$_POST['randomize_answers'],
 				$_POST['pull_random'], @$_POST['dont_store_data'], @$_POST['show_prev_button'], 
-				@$_POST['dont_display_question_numbers'], $_POST['quiz']));
+				@$_POST['dont_display_question_numbers'], @$_POST['require_text_captcha'], $_POST['quiz']));
 			
 			if(!empty($_POST['auto_publish'])) watu_auto_publish($exam_id);
 			$wp_redirect = 'tools.php?page=watu_exams&message=updated';
@@ -126,12 +127,13 @@ function watu_exam() {
 		} else {
 			$wpdb->query($wpdb->prepare("INSERT INTO ".WATU_EXAMS." 
 				(name, description, final_screen,  added_on, randomize, single_page, show_answers, require_login, 
-				notify_admin, randomize_answers, pull_random, dont_store_data, show_prev_button, dont_display_question_numbers) 
-				VALUES(%s, %s, %s, NOW(), %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", 
+				notify_admin, randomize_answers, pull_random, dont_store_data, show_prev_button, 
+				dont_display_question_numbers, require_text_captcha) 
+				VALUES(%s, %s, %s, NOW(), %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", 
 				$_POST['name'], $_POST['description'], $_POST['content'], @$_POST['randomize'], @$_POST['single_page'], 
 				@$_POST['show_answers'], @$_POST['require_login'], @$_POST['notify_admin'], 
 				@$_POST['randomize_answers'], $_POST['pull_random'], @$_POST['dont_store_data'], 
-				@$_POST['show_prev_button'], @$_POST['dont_display_question_numbers']));
+				@$_POST['show_prev_button'], @$_POST['dont_display_question_numbers'], @$_POST['require_text_captcha']));
 			$exam_id = $wpdb->insert_id;
 			if(!empty($_POST['auto_publish'])) watu_auto_publish($exam_id);
 			if($exam_id == 0 ) $wp_redirect = 'tools.php?page=watu_exams&message=fail';

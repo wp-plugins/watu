@@ -41,6 +41,17 @@ if($questions) {
 		$GLOBALS['watu_client_includes_loaded'] = true; // Make sure that this code is not loaded more than once.
 }
 
+// text captcha?
+if(!empty($exam->require_text_captcha)) {	
+	$text_captcha_html = WatuTextCaptcha :: generate();
+	$textcaptca_style = $exam->single_page==1?"":"style='display:none;'";
+	$text_captcha_html = "<div id='WatuTextCaptcha' $textcaptca_style>".$text_captcha_html."</div>";	
+	// verify captcha
+	if(!empty($_POST['do'])) {
+		if(!WatuTextCaptcha :: verify($_POST['watu_text_captcha_question'], $_POST['watu_text_captcha_answer'])) die('WATU_CAPTCHA:::'.__('Wrong answer to the verification question.', 'watu'));	
+	}
+}
+
 if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	$achieved = $max_points = $num_correct = 0;
 	$result = '';
@@ -234,6 +245,7 @@ $output .= "<br /><div class='question-content'><img src=\"".plugins_url('watu/l
 $output .= "</div>";
 echo apply_filters(WATU_CONTENT_FILTER,$output);
 $question_ids = preg_replace('/,$/', '', $question_ids );
+echo @$text_captcha_html;
 ?><br />
 <?php 
 if($answer_display == 2 and $single_page != 1) : ?>

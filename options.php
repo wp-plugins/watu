@@ -4,7 +4,7 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']) {
 	update_option( "watu_delete_db", @$_POST['delete_db'] );
 	update_option('watu_delete_db_confirm', $_POST['delete_db_confirm']);
 		
-	$options = array('answer_type', 'use_the_content');
+	$options = array('answer_type', 'use_the_content', 'text_captcha');
 	foreach($options as $opt) {
 		if(!empty($_POST[$opt])) update_option('watu_' . $opt, $_POST[$opt]);
 		else update_option('watu_' . $opt, 0);
@@ -13,6 +13,13 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']) {
 }
 $answer_display = get_option('watu_show_answers');
 $delete_db = get_option('watu_delete_db');
+
+$text_captcha = get_option('watu_text_captcha');
+// load 3 default questions in case nothing is loaded
+if(empty($text_captcha)) {
+	$text_captcha = __('What is the color of the snow? = white', 'watu').PHP_EOL.__('Is fire hot or cold? = hot', 'watu') 
+		.PHP_EOL. __('In which continent is Norway? = Europe', 'watu'); 
+}
 ?>
 <div class="wrap">
 
@@ -38,6 +45,16 @@ $delete_db = get_option('watu_delete_db');
 			&nbsp;&nbsp;&nbsp;
 			<label>&nbsp;<input type='radio' name='answer_type' <?php print $multi?> id="answer_type_c" value='checkbox' /> <?php _e('Multiple Answers', 'watu')?></label>
 			</div></div>
+			
+	
+	<div class="postbox wp-admin" style="padding:5px;">
+	<h3><?php _e('Question based captcha', 'watu')?></h3>
+	
+	<p><?php _e("You can use a simple text-based captcha. We have loaded 3 basic questions but you can edit them and load your own. Make sure to enter only one question per line and use = to separate question from answer.", 'watu')?></p>
+	
+	<p><textarea name="text_captcha" rows="10" cols="70"><?php echo stripslashes($text_captcha);?></textarea></p>
+	<div class="help"><?php _e('This question-based captcha can be enabled individually by selecting a checkbox in the quiz settings form. If you do not check the checkbox, the captcha question will not be generated.', 'watu');?></div>	
+</div>		
 	
 	<div class="postbox">
 		<h3 class="hndle">&nbsp;<span><?php _e('Other settings', 'watu') ?></span></h3>

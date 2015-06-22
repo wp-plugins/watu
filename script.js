@@ -64,8 +64,12 @@ Watu.nextQuestion = function(e, dir) {
 	if(Watu.total_questions <= Watu.current_question) {
 		jQuery("#next-question").hide();
 		jQuery("#action-button").show();
+		if(jQuery('#WatuTextCaptcha').length) jQuery('#WatuTextCaptcha').show();
 	}
-	else jQuery("#next-question").show();
+	else {
+		jQuery("#next-question").show();
+		if(jQuery('#WatuTextCaptcha').length) jQuery('#WatuTextCaptcha').hide();
+	}
 
 	// show / hide prev button if any
 	if(jQuery('#prev-question').length) {
@@ -121,6 +125,13 @@ Watu.submitResult = function() {
 	jQuery('#quiz-' + this.exam_id + ' .watu-answer-ids').each(function(index, value){
 		answer_ids.push(this.value);
 	});
+	
+	// if text captcha is there we have to make sure it's shown
+	if(jQuery('#WatuTextCaptcha').length && !jQuery('#WatuTextCaptcha').is(':visible')) {
+		alert(watu_i18n.complete_text_captcha);
+		jQuery('#WatuTextCaptcha').show();
+		return false;
+	}
  
 	var data = {action:'watu_submit', 'do': 'show_exam_result', quiz_id: exam_id, 
 	'question_id[]': Watu.qArr, 'answer_ids[]' : answer_ids };
@@ -159,11 +170,18 @@ Watu.submitResult = function() {
 	
 	data['post_id'] = Watu.post_id;
 	
+	// if question captcha is available, add to data
+	if(jQuery('#WatuTextCaptcha').length>0) {
+		jQuery('#quiz-'+Watu.exam_id).show();
+		data['watu_text_captcha_answer'] = jQuery('#quiz-' + Watu.exam_id + ' input[name=watu_text_captcha_answer]').val();
+		data['watu_text_captcha_question'] = jQuery('#quiz-' + Watu.exam_id + ' input[name=watu_text_captcha_question]').val();
+	}
+	
 	jQuery('html, body').animate({
    		scrollTop: jQuery('#watu_quiz').offset().top - 50
    	}, 1000); 
 	
-	jQuery('#watu_quiz').html("<p>Loading...</p>");
+	//jQuery('#watu_quiz').html("<p>Loading...</p>");
     
 	//var v=''; for(a in data) v+=data[a]+'\n'; alert(v);
 	try{
@@ -176,7 +194,18 @@ Watu.takingDetails = function(id, adminURL) {
 	tb_show("Taking Details", adminURL + "admin-ajax.php?action=watu_taking_details&id="+id, adminURL + "admin-ajax.php");
 }
 
-Watu.success = function(r){ jQuery('#watu_quiz').html(r);}
+Watu.success = function(r){
+	// first check for recaptcha error, if yes, do not replace the HTML
+	 // but display the error in alert and return false;
+	 if(r.indexOf('WATU_CAPTCHA:::')>-1) {
+	 		parts = r.split(":::");
+	 		alert(parts[1]);
+	 		jQuery("#action-button").val(watu_i18n.try_again);
+			jQuery("#action-button").removeAttr("disabled");
+	 		return false;
+	 } 
+	jQuery('#watu_quiz').html(r);
+}
 Watu.error = function(){ jQuery('#watu_quiz').html('Error Occured');}
 
 Watu.initWatu = function() {

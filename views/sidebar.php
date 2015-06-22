@@ -10,7 +10,7 @@
 		<li><strong><?php _e('Export results and import/export questions', 'watu')?></strong> <?php _e('from/to CSV file.', 'watu')?></li>
 		<li><strong><?php _e('Students login.', 'watu')?></strong> <?php _e('Registered users have a dashboard, can re-take exams etc.', 'watu')?></li>
 		<li><strong><?php _e('Questions and exam categories.', 'watu')?></strong> <?php _e('User groups with different access to them.', 'watu')?></li>
-		<li><strong><?php _e('Copy exmas', 'watu')?></strong> <?php _e('and their questions into a new or existing exams.', 'watu')?></li>
+		<li><strong><?php _e('Copy quizzes', 'watu')?></strong> <?php _e('and their questions into a new or existing quizzes.', 'watu')?></li>
 		<li><strong><?php _e('More question types', 'watu')?></strong> <?php _e('and more control on defining correctly answered questions.', 'watu')?></li>
 		<li><strong><?php _e('Shortcodes', 'watu')?></strong> <?php _e('for user reports and user dashboard.', 'watu')?></li>
 		<li><strong><?php _e('More social sharing', 'watu')?></strong> <?php _e('options: Google+, LinkedIn, Twitter.', 'watu')?></li>

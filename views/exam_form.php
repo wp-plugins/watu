@@ -46,6 +46,8 @@
 			<p><input type="checkbox" name="dont_store_data" value="1" <?php if(!empty($dquiz->dont_store_data)) echo 'checked'?> id="watuDontStoreData"> <label for="watuDontStoreData"><?php _e('Do not store user answers in the database to save DB space.', 'watu')?></label></p>
 			
 			<p><input type="checkbox" name="dont_display_question_numbers" value="1" <?php if(!empty($dquiz->dont_display_question_numbers)) echo 'checked'?> id="watuDontDisplayNumbers"> <label for="watuDontDisplayNumbers"><?php _e('Do not display question numbers.', 'watu')?></label></p>
+			
+			 <p><input type="checkbox" name="require_text_captcha" value="1" <?php if(!empty($dquiz->require_text_captcha)) echo "checked"?>> <?php _e('Require question based captcha to submit the quiz', 'watu');?></p>
 		</div>
 	</div>
 	

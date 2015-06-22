@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.5.9
+Version: 2.6
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -33,6 +33,7 @@ include( WATU_PATH.'/controllers/grades.php');
 include( WATU_PATH.'/controllers/social-sharing.php');
 include( WATU_PATH.'/models/question.php');
 include( WATU_PATH.'/lib/functions.php');
+include( WATU_PATH.'/lib/text-captcha.php');
 include( WATU_PATH."/models/exam.php");
 
 function watu_init() {
@@ -73,7 +74,7 @@ function watu_init() {
 	if(function_exists('quicklatex_parser')) add_filter( 'watu_content',  'quicklatex_parser', 7);
 	
 	$version = get_option('watu_version');
-	if($version != '2.49') watu_activate(true);
+	if($version != '2.5') watu_activate(true);
 	
 	add_action('admin_notices', 'watu_admin_notice');
 }
@@ -232,6 +233,7 @@ function watu_activate($update = false) {
 		array("name"=>"dont_store_data", "type"=>"TINYINT UNSIGNED NOT NULL DEFAULT 0"),
 		array("name"=>"show_prev_button", "type"=>"TINYINT UNSIGNED NOT NULL DEFAULT 0"),
 		array("name"=>"dont_display_question_numbers", "type"=>"TINYINT UNSIGNED NOT NULL DEFAULT 0"),
+		array("name"=>"require_text_captcha", "type"=>"TINYINT UNSIGNED NOT NULL DEFAULT 0"),
 	), WATU_EXAMS);	
 	
 	
@@ -275,7 +277,7 @@ function watu_activate($update = false) {
 	}
 						
 	update_option( "watu_delete_db", '' );	
-	update_option( "watu_version", '2.49' );
+	update_option( "watu_version", '2.5' );
 	
 	update_option('watu_admin_notice', __('<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href="tools.php?page=watu_exams">Quizzes page</a> to get started! If this is the first time you have activated the plugin there will be a small demo quiz automatically created for you. Feel free to explore it to get better idea how things work.</p>', 'watu'));
 }
@@ -309,7 +311,9 @@ function watu_vc_scripts() {
 		$translation_array = array(
 			'missed_required_question' => __('You have missed to answer a required question', 'watu'),
 			'nothing_selected' => __('You did not select any answer. Are you sure you want to continue?', 'watu'),
-			'show_answer' => __('Show Answer', 'watu')
+			'show_answer' => __('Show Answer', 'watu'),
+			'complete_text_captcha' => __('You need to answer the verification question', 'watu'),
+			'try_again' => __('Try again', 'watu'),
 			);	
 		wp_localize_script( 'watu-script', 'watu_i18n', $translation_array );	
 }
