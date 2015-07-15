@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.6\n"
+"Project-Id-Version: Watu 2.6.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2015-06-22 09:49:07+00:00\n"
+"POT-Creation-Date: 2015-07-15 12:12:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -122,7 +122,7 @@ msgstr ""
 msgid "our directory."
 msgstr ""
 
-#: controllers/exam.php:162
+#: controllers/exam.php:167
 msgid ""
 "<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n"
 "\n"
@@ -165,7 +165,7 @@ msgstr ""
 msgid "into any post or page."
 msgstr ""
 
-#: controllers/questions.php:81 controllers/show_exam.php:255
+#: controllers/questions.php:81 controllers/show_exam.php:264
 #: views/question-form.html.php:2 views/question-form.html.php:107
 msgid "Question"
 msgstr ""
@@ -272,27 +272,27 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: controllers/show_exam.php:244
+#: controllers/show_exam.php:253
 msgid "Loading"
 msgstr ""
 
-#: controllers/show_exam.php:252 watu.php:314
+#: controllers/show_exam.php:261 watu.php:315
 msgid "Show Answer"
 msgstr ""
 
-#: controllers/show_exam.php:255
+#: controllers/show_exam.php:264
 msgid "of"
 msgstr ""
 
-#: controllers/show_exam.php:257
+#: controllers/show_exam.php:266
 msgid "Previous"
 msgstr ""
 
-#: controllers/show_exam.php:259
+#: controllers/show_exam.php:268
 msgid "Next"
 msgstr ""
 
-#: controllers/show_exam.php:261
+#: controllers/show_exam.php:270
 msgid "Show Results"
 msgstr ""
 
@@ -561,79 +561,89 @@ msgid "Final Screen"
 msgstr ""
 
 #: views/exam_form.php:75
+msgid "Send different content to the notification email sent to admin."
+msgstr ""
+
+#: views/exam_form.php:79
+msgid ""
+"If you leave this empty, the contents from the \"Final screen\" will be sent "
+"by email as well."
+msgstr ""
+
+#: views/exam_form.php:82
 msgid "Usable Variables:"
 msgstr ""
 
-#: views/exam_form.php:77
+#: views/exam_form.php:84
 msgid "Variable"
 msgstr ""
 
-#: views/exam_form.php:77
+#: views/exam_form.php:84
 msgid "Value"
 msgstr ""
 
-#: views/exam_form.php:78
+#: views/exam_form.php:85
 msgid ""
 "This will display the questions along with the answers that user gave to "
 "them marked as correct or incorrect."
 msgstr ""
 
-#: views/exam_form.php:79
+#: views/exam_form.php:86
 msgid "The number of points collected. (The old %%SCORE%% tag also works)"
 msgstr ""
 
-#: views/exam_form.php:80
+#: views/exam_form.php:87
 msgid "Maximum number of points"
 msgstr ""
 
-#: views/exam_form.php:81
+#: views/exam_form.php:88
 msgid ""
 "Shows the achieved grade - title and description together. If you want to "
 "design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-"
 "DESCRIPTION%% for grade description"
 msgstr ""
 
-#: views/exam_form.php:82
+#: views/exam_form.php:89
 msgid ""
 "Number of correct answers. In multiple-select questions even one correct "
 "answer makes the question correct. In WatuPRO this is configurable"
 msgstr ""
 
-#: views/exam_form.php:83
+#: views/exam_form.php:90
 msgid "Number of answers you got wrong"
 msgstr ""
 
-#: views/exam_form.php:84
+#: views/exam_form.php:91
 msgid ""
 "A rating of your performance - it could be 'Failed'(0-39%), 'Just "
 "Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and "
 "'Unbeatable'(100%)."
 msgstr ""
 
-#: views/exam_form.php:84
+#: views/exam_form.php:91
 msgid ""
 "The rating can be changed only by <a href=\"%s\" target=\"_blank"
 "\">translating the plugin</a>. So we recommend you to use the grades "
 "instead. They are fully configurable right from this page."
 msgstr ""
 
-#: views/exam_form.php:85
+#: views/exam_form.php:92
 msgid "The name of the quiz"
 msgstr ""
 
-#: views/exam_form.php:86
+#: views/exam_form.php:93
 msgid "The text entered in the description field."
 msgstr ""
 
-#: views/exam_form.php:87
+#: views/exam_form.php:94
 msgid "The average points earned by the other quiz participants."
 msgstr ""
 
-#: views/exam_form.php:88
+#: views/exam_form.php:95
 msgid "Shows the percentage of users collected less points on the quiz."
 msgstr ""
 
-#: views/exam_form.php:99 views/question-form.html.php:168
+#: views/exam_form.php:106 views/question-form.html.php:168
 msgid "Save"
 msgstr ""
 
@@ -1263,14 +1273,14 @@ msgstr ""
 msgid "Your are not allowed to to perform this operation"
 msgstr ""
 
-#: watu.php:270
+#: watu.php:271
 msgid ""
 "All the questions in the quiz along with their answers are shown below. Your "
 "answers are bolded. The correct answers have a green background while the "
 "incorrect ones have a red background."
 msgstr ""
 
-#: watu.php:282
+#: watu.php:283
 msgid ""
 "<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href=\"tools."
 "php?page=watu_exams\">Quizzes page</a> to get started! If this is the first "
@@ -1279,18 +1289,18 @@ msgid ""
 "how things work.</p>"
 msgstr ""
 
-#: watu.php:312
+#: watu.php:313
 msgid "You have missed to answer a required question"
 msgstr ""
 
-#: watu.php:313
+#: watu.php:314
 msgid "You did not select any answer. Are you sure you want to continue?"
 msgstr ""
 
-#: watu.php:315
+#: watu.php:316
 msgid "You need to answer the verification question"
 msgstr ""
 
-#: watu.php:316
+#: watu.php:317
 msgid "Try again"
 msgstr ""

@@ -72,6 +72,13 @@
 	<div class="inside">
 	<?php wp_editor($final_screen, 'content'); ?>
 	
+	<p><input type="checkbox" value="1" name="different_email_output" <?php if(!empty($dquiz->email_output)) echo 'checked'?> onclick="this.checked ? jQuery('#watuEmailOutput').show() : jQuery('#watuEmailOutput').hide();"> <?php _e('Send different content to the notification email sent to admin.', 'watu');?></p>
+	
+	<div id="watuEmailOutput" style="display:<?php echo empty($dquiz->email_output) ? 'none' : 'block';?>">
+		<?php wp_editor(stripslashes(@$dquiz->email_output), 'email_output'); ?>
+		<p><?php _e('If you leave this empty, the contents from the "Final screen" will be sent by email as well.', 'watu');?></p>
+	</div>
+	
 	<p><strong><?php _e('Usable Variables:', 'watu') ?></strong></p>
 	<table>
 	<tr><th style="text-align:left;"><?php _e('Variable', 'watu') ?></th><th style="text-align:left;"><?php _e('Value', 'watu') ?></th></tr>

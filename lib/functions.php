@@ -79,6 +79,5 @@ function watu_notify_admin($exam, $uid, $output) {
 	$message = "Details of $user_data:<br><br>".$output;
 	
    wp_mail($admin_email, $subject, $message, $headers);
-   //echo $message;
-   // echo $message;
+   // echo $message;   
 }

@@ -110,6 +110,9 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 
 == Changelog ==
 
+= Changes in 2.6.1 =
+- You can now specify different content for the email sent to you when someone takes a quiz
+
 = Changes in 2.6 =
 - Added optional text-based "captcha" to prevent spam bot submissions on quizzes which do not require user login
 - Option to reoder the questions. Of course this takes effect only when you have not chosen "Randomize questions" in the quiz settings.

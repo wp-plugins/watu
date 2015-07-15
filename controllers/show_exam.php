@@ -188,8 +188,17 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 	// update snapshot
 	$wpdb->query($wpdb->prepare("UPDATE ".WATU_TAKINGS." SET snapshot=%s WHERE ID=%d", $final_output, $taking_id)); 
 	
-	// notify admin
-	if(!empty($exam->notify_admin)) watu_notify_admin($exam, $uid, $final_output);
+	// notify admin	
+	if(!empty($exam->email_output)) {
+		$email_output = wpautop(stripslashes($exam->email_output));
+		$email_output = str_replace($replace_these, $with_these, $email_output);
+		if(strstr($email_output, '%%ANSWERS%%')) {		
+			$email_output = str_replace('%%ANSWERS%%', $result, $email_output);
+		}
+		$email_output = apply_filters(WATU_CONTENT_FILTER, $email_output);
+	} 
+	else $email_output = $final_output;
+	if(!empty($exam->notify_admin)) watu_notify_admin($exam, $uid, $email_output);
 	
 	do_action('watu_exam_submitted', $taking_id);
 	exit;// Exit due to ajax call

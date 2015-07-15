@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.6
+Version: 2.6.1
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -74,7 +74,7 @@ function watu_init() {
 	if(function_exists('quicklatex_parser')) add_filter( 'watu_content',  'quicklatex_parser', 7);
 	
 	$version = get_option('watu_version');
-	if($version != '2.5') watu_activate(true);
+	if($version != '2.51') watu_activate(true);
 	
 	add_action('admin_notices', 'watu_admin_notice');
 }
@@ -234,6 +234,7 @@ function watu_activate($update = false) {
 		array("name"=>"show_prev_button", "type"=>"TINYINT UNSIGNED NOT NULL DEFAULT 0"),
 		array("name"=>"dont_display_question_numbers", "type"=>"TINYINT UNSIGNED NOT NULL DEFAULT 0"),
 		array("name"=>"require_text_captcha", "type"=>"TINYINT UNSIGNED NOT NULL DEFAULT 0"),
+		array("name"=>"email_output", "type"=>"TEXT"),
 	), WATU_EXAMS);	
 	
 	
@@ -277,7 +278,7 @@ function watu_activate($update = false) {
 	}
 						
 	update_option( "watu_delete_db", '' );	
-	update_option( "watu_version", '2.5' );
+	update_option( "watu_version", '2.51' );
 	
 	update_option('watu_admin_notice', __('<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href="tools.php?page=watu_exams">Quizzes page</a> to get started! If this is the first time you have activated the plugin there will be a small demo quiz automatically created for you. Feel free to explore it to get better idea how things work.</p>', 'watu'));
 }
