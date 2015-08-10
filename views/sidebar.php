@@ -29,7 +29,7 @@
 	
 	<p><?php _e('Please ask your question in the', 'watu')?> <a href="http://wordpress.org/support/plugin/watu" target="_blank"><?php _e('support forum at Wordpress.', 'watu')?></a></p>
 	
-	<p><?php _e("Use the forum only for issues concerning the free version. If you have a pre-sales question about Watu PRO please contact us", 'watu')?> <a href="http://calendarscripts.info/contact.html" target="_blank"><?php _e('through our site', 'watu')?></a> <?php _e('as well.', 'watu')?></p>
+	<p><?php _e("Use the forum only for issues concerning the free version. If you have a pre-sales question about Watu PRO please contact us", 'watu')?> <a href="http://calendarscripts.info/contact.html" target="_blank"><?php _e('through our site.', 'watu')?></a></p>
 </div>
 
 

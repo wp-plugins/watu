@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: exam, test, quiz, survey, wpmu, multisite, touch, mobile
 Requires at least: 3.3
-Tested up to: 4.2
+Tested up to: 4.3
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -110,8 +110,9 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 
 == Changelog ==
 
-= Changes in 2.6.1 =
+= Changes in 2.6.2 =
 - You can now specify different content for the email sent to you when someone takes a quiz
+- New option lets you to send email to user with their results. If user is not logged in this will generate a required field to enter email on the quiz page.
 
 = Changes in 2.6 =
 - Added optional text-based "captcha" to prevent spam bot submissions on quizzes which do not require user login

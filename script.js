@@ -136,6 +136,16 @@ Watu.submitResult = function() {
 	var data = {action:'watu_submit', 'do': 'show_exam_result', quiz_id: exam_id, 
 	'question_id[]': Watu.qArr, 'answer_ids[]' : answer_ids };
 	
+	if(jQuery('#watuTakerEmail').length) {
+		var emailVal = jQuery('#watuTakerEmail').val();
+		if(emailVal == '' || emailVal.indexOf('@') < 0 || emailVal.indexOf('.') < 1) {
+			alert(watu_i18n.email_required);
+			jQuery('#watuTakerEmail').focus();
+			return false;
+		} 
+		data['watu_taker_email'] = emailVal;
+	}
+	
 	for(x=0; x<Watu.qArr.length; x++) {
 		if(Watu.singlePage) {
 			 Watu.current_question = x+1;

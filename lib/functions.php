@@ -48,8 +48,8 @@ function watu_preg_escape($input) {
 		array('\^', '\.', '\|', '\(', '\)', '\[', '\]', '\*', '\+', '\?', '\{', '\}', '\$', '\/' ), $input);
 }
 
-// notify admin about taken quiz
-function watu_notify_admin($exam, $uid, $output) {
+// notify admin / user about taken quiz
+function watu_notify($exam, $uid, $output, $who = 'admin') {
 	global $user_email;
 	
 	$admin_email = get_option('admin_email');
@@ -73,11 +73,25 @@ function watu_notify_admin($exam, $uid, $output) {
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 	$headers .= 'From: '. $admin_email . "\r\n";
-	$subject = sprintf(__('User results on "%s"', 'watu'), $exam->name);	
-	$user_data = empty($uid) ? __('Guest', 'watupro') : $user_email;
 	
-	$message = "Details of $user_data:<br><br>".$output;
-	
-   wp_mail($admin_email, $subject, $message, $headers);
+	if($who == 'admin') {
+		$subject = sprintf(__('User results on "%s"', 'watu'), stripslashes($exam->name));	
+		$user_data = empty($uid) ? __('Guest', 'watupro') : $user_email;	
+		$message = "Details of $user_data:<br><br>".$output;	
+	   wp_mail($admin_email, $subject, $message, $headers);
+	}  
+	else {
+		// email user
+		if(empty($uid)) {			
+			$user_email = $_POST['watu_taker_email'];
+		}	
+		
+		if(empty($user_email)) return true;
+		
+		$subject = sprintf(__('Your results on "%s"', 'watu'), stripslashes($exam->name));	
+		$message = $output;	
+		
+		wp_mail($user_email, $subject, $message, $headers);
+	}
    // echo $message;   
 }

@@ -198,7 +198,8 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 		$email_output = apply_filters(WATU_CONTENT_FILTER, $email_output);
 	} 
 	else $email_output = $final_output;
-	if(!empty($exam->notify_admin)) watu_notify_admin($exam, $uid, $email_output);
+	if(!empty($exam->notify_admin)) watu_notify($exam, $uid, $email_output);
+	if(!empty($exam->notify_user)) watu_notify($exam, $uid, $email_output, 'user');
 	
 	do_action('watu_exam_submitted', $taking_id);
 	exit;// Exit due to ajax call
@@ -211,6 +212,10 @@ if(isset($_REQUEST['do']) and $_REQUEST['do']) { // Quiz Reuslts.
 <?php if(!empty($exam->description)):?><p><?php echo apply_filters(WATU_CONTENT_FILTER,wpautop(stripslashes($exam->description)));?></p><?php endif;?>
 <form action="" method="post" class="quiz-form" id="quiz-<?php echo $exam_id?>">
 <?php
+if(!empty($exam->notify_user) and empty($user_ID)):?>
+	<p class="watu_taker_email"><?php _e('Please enter your email:', 'watu')?> <input type="text" name="watu_taker_email" id="watuTakerEmail"></p>
+<?php
+endif; // end showing enter email field
 $question_count = 1;
 $question_ids = '';
 $output = $answer_class = '';
