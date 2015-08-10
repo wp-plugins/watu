@@ -307,7 +307,7 @@ function watu_vc_scripts() {
 			'watu-script',
 			WATU_URL.'script.js',
 			array(),
-			'2.3'
+			'2.3.1'
 		);
 		
 		$translation_array = array(
