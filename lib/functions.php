@@ -53,6 +53,13 @@ function watu_notify($exam, $uid, $output, $who = 'admin') {
 	global $user_email;
 	
 	$admin_email = get_option('admin_email');
+	$admin_emails = array();
+	
+	if(!empty($exam->notify_email)) {
+		$emails = explode(',', $exam->notify_email);
+		foreach($emails as $email) $admin_emails[] = trim($email);
+	}
+	else $admin_emails[] = $admin_email;
 	
 	// replace styles in the snapshot with the images
 	$correct_style=' style="padding-right:20px;background:url('.WATU_URL.'correct.png) no-repeat right top;" ';
@@ -78,7 +85,10 @@ function watu_notify($exam, $uid, $output, $who = 'admin') {
 		$subject = sprintf(__('User results on "%s"', 'watu'), stripslashes($exam->name));	
 		$user_data = empty($uid) ? __('Guest', 'watupro') : $user_email;	
 		$message = "Details of $user_data:<br><br>".$output;	
-	   wp_mail($admin_email, $subject, $message, $headers);
+		
+		foreach($admin_emails as $admin_email) {			
+			wp_mail($admin_email, $subject, $message, $headers);
+		}
 	}  
 	else {
 		// email user

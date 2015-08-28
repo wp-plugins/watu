@@ -41,7 +41,10 @@
 			
 			<p><input type="checkbox" name="require_login" value="1" <?php if(!empty($dquiz->require_login)) echo 'checked'?> id="watuReqLogin"> <label for="watuReqLogin"><?php _e('Require user login (displays login and / or register link depending on your blog settings.)', 'watu')?></label></p>
 			
-			<p><input type="checkbox" name="notify_admin" value="1" <?php if(!empty($dquiz->notify_admin)) echo 'checked'?> id="watuNotifyAdmin"> <label for="watuNotifyAdmin"><?php _e('Notify me when someone takes this quiz (the email goes to the address given in your WordPress Settings page).', 'watu')?></label></p>
+			<p><input type="checkbox" name="notify_admin" value="1" <?php if(!empty($dquiz->notify_admin)) echo 'checked'?> id="watuNotifyAdmin" onclick="this.checked ? jQuery('#notifyEmails').show() : jQuery('#notifyEmails').hide();"> <label for="watuNotifyAdmin"><?php _e('Notify me when someone takes this quiz (the email goes to the address given in your WordPress Settings page).', 'watu')?></label>
+			<div id="notifyEmails" style="display:<?php echo empty($dquiz->notify_admin) ? 'none' : 'block';?>;">
+				<label><?php _e('Email address(es) to notify:', 'watu');?></label> <input type="text" name="notify_email" size="30" value="<?php echo empty($dquiz->notify_email) ? get_option('admin_email') : $dquiz->notify_email;?>"> <?php _e('You can specify multiple email addresses separated with comma.', 'watu');?>
+			</div></p>
 			<p><input type="checkbox" name="notify_user" value="1" <?php if(!empty($dquiz->notify_user)) echo 'checked'?> id="watuNotifyUser"> <label for="watuNotifyUser"><?php _e('Send email to the quiz taker (if taker is non-logged in this will generate a required email field on the quiz page).', 'watu')?></label></p>
 			
 			<p><input type="checkbox" name="dont_store_data" value="1" <?php if(!empty($dquiz->dont_store_data)) echo 'checked'?> id="watuDontStoreData"> <label for="watuDontStoreData"><?php _e('Do not store user answers in the database to save DB space.', 'watu')?></label></p>
