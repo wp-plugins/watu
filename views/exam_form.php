@@ -39,7 +39,11 @@
 			
 			<p style="display:<?php echo empty($dquiz->single_page) ? 'block' : 'none';?>" id="watuPrevButton"><input id="watuPrev" type="checkbox" name="show_prev_button" value="1" <?php if(!empty($dquiz->show_prev_button)) echo 'checked'?>> <label for="watuPrev"><?php _e("Show 'previous question' button", 'watu');?></label></p>
 			
-			<p><input type="checkbox" name="require_login" value="1" <?php if(!empty($dquiz->require_login)) echo 'checked'?> id="watuReqLogin"> <label for="watuReqLogin"><?php _e('Require user login (displays login and / or register link depending on your blog settings.)', 'watu')?></label></p>
+			<p><input type="checkbox" name="require_login" value="1" <?php if(!empty($dquiz->require_login)) echo 'checked'?> id="watuReqLogin" onclick="this.checked ? jQuery('#watuTakeAgain').show() : jQuery('#watuTakeAgain').hide();"> <label for="watuReqLogin"><?php _e('Require user login (displays login and / or register link depending on your blog settings.)', 'watu')?></label></p>
+			
+			 <p id="watuTakeAgain" style="margin-left:50px;display:<?php echo empty($dquiz->require_login) ? 'none': 'block';?>"><input type="checkbox" name="take_again" value="1" <?php if(!empty($dquiz->take_again)) echo "checked"?> onclick="this.checked?jQuery('#timesToTake').show():jQuery('#timesToTake').hide();"> <?php printf(__('Allow users to submit the %s multiple times:', 'watu'), __('quiz', 'watu'))?> 
+	        		<div id='timesToTake' style="margin-left:50px;<?php if(empty($dquiz->take_again)) echo 'display:none;'?>">
+	        			<?php _e('Allow', 'watu')?> <input type="text" size="4" name="times_to_take" value="<?php echo @$dquiz->times_to_take?>"> <?php _e('times (For unlimited times enter 0) There is even more flexibility in WatuPRO.', 'watu')?></div></p>
 			
 			<p><input type="checkbox" name="notify_admin" value="1" <?php if(!empty($dquiz->notify_admin)) echo 'checked'?> id="watuNotifyAdmin" onclick="this.checked ? jQuery('#notifyEmails').show() : jQuery('#notifyEmails').hide();"> <label for="watuNotifyAdmin"><?php _e('Notify me when someone takes this quiz (the email goes to the address given in your WordPress Settings page).', 'watu')?></label>
 			<div id="notifyEmails" style="display:<?php echo empty($dquiz->notify_admin) ? 'none' : 'block';?>;">

@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.6.3
+Version: 2.6.4
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -74,7 +74,7 @@ function watu_init() {
 	if(function_exists('quicklatex_parser')) add_filter( 'watu_content',  'quicklatex_parser', 7);
 	
 	$version = get_option('watu_version');
-	if($version != '2.53') watu_activate(true);
+	if($version != '2.56') watu_activate(true);
 	
 	add_action('admin_notices', 'watu_admin_notice');
 }
@@ -237,6 +237,8 @@ function watu_activate($update = false) {
 		array("name"=>"email_output", "type"=>"TEXT"),
 		array("name"=>"notify_user", "type"=>"TINYINT NOT NULL DEFAULT 0"),
 		array("name"=>"notify_email", "type"=>"VARCHAR(255) NOT NULL DEFAULT ''"),
+		array("name"=>"take_again", "type"=>"TINYINT NOT NULL DEFAULT 0"),
+		array("name"=>"times_to_take", "type"=>"TINYINT NOT NULL DEFAULT 0"),
 	), WATU_EXAMS);	
 	
 	
@@ -278,9 +280,14 @@ function watu_activate($update = false) {
 	if(!empty($version) and $version < 2.49) {
 		$wpdb->query("UPDATE ".WATU_EXAMS." SET dont_display_question_numbers=1");
 	}
+	
+	// let's make all "require_login" quizzes created previously to have take_again=1 to avoid sudden change
+	if(!empty($version) and $version  < 2.56)  {
+		$wpdb->query("UPDATE ".WATU_MASTER." SET take_again=1 WHERE require_login=1");
+	}
 						
 	update_option( "watu_delete_db", '' );	
-	update_option( "watu_version", '2.53' );
+	update_option( "watu_version", '2.56' );
 	
 	update_option('watu_admin_notice', __('<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href="tools.php?page=watu_exams">Quizzes page</a> to get started! If this is the first time you have activated the plugin there will be a small demo quiz automatically created for you. Feel free to explore it to get better idea how things work.</p>', 'watu'));
 }

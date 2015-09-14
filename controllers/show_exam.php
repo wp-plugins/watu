@@ -23,6 +23,24 @@ if(!empty($exam->require_login) and !is_user_logged_in()) {
 	return false;
 }
 
+// can re-take?
+if(!empty($exam->require_login) and (empty($exam->take_again) or !empty($exam->times_to_take))) {
+	if(empty($exam->take_again)) {
+		printf(__("Sorry, you can take this %s only once!", 'watu'), __('quiz', 'watu'));
+		return false;
+	}
+	
+	// multiple times allowed, but number is specified
+	$cnt_takings=$wpdb->get_var($wpdb->prepare("SELECT COUNT(ID) FROM ".WATU_TAKINGS."
+				WHERE exam_id=%d AND user_id=%d", $exam->ID, $user_ID)); 
+	if($cnt_takings >= $exam->times_to_take) {
+		echo "<p><b>";
+		printf(__("Sorry, you can take this quiz only %d times.", 'watu'), $exam->times_to_take);
+		echo "</b></p>";
+		return false;
+	}			
+}
+
 $answer_display = get_option('watu_show_answers');
 if(!isset($exam->show_answers) or $exam->show_answers == 100) $answer_display = $answer_display; // assign the default
 else $answer_display = $exam->show_answers;

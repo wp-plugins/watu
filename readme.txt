@@ -110,7 +110,8 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 
 == Changelog ==
 
-= Changes in 2.6.3 =
+= Changes in 2.6.4 =
+- Added option to limit the number of logged in user attempts for quizzes that require login.
 - You can specify one or more email addresses that will receive user's results (instead of just using the admin email from your WP Settings page)
 - You can now specify different content for the email sent to you when someone takes a quiz
 - New option lets you to send email to user with their results. If user is not logged in this will generate a required field to enter email on the quiz page.
