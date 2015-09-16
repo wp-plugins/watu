@@ -168,7 +168,7 @@ function watu_exam() {
 		$grades = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".WATU_GRADES." WHERE  exam_id=%d order by ID ", $_REQUEST['quiz']) );
 		$final_screen = stripslashes($dquiz->final_screen);
 	} else {
-		$final_screen = __("<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n\n<p>You scored %%POINTS%% points out of %%MAX-POINTS%% points total.</p>\n\n<p>Your performance has been rated as <b>%%RATING%%</b>.</p>\n\n<p>Your obtained grade is <b>%%GRADE-TITLE%%</b></p><p>%%GRADE-DESCRIPTION%%</p>\n\n<p>Your answers are shown below:<p>%%ANSWERS%%", 'watu');
+		$final_screen = __("<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n\n<p>You scored %%POINTS%% points out of %%MAX-POINTS%% points total.</p>\n\n<p>Your obtained grade is <b>%%GRADE-TITLE%%</b></p><p>%%GRADE-DESCRIPTION%%</p>\n\n<p>Your answers are shown below:<p>%%ANSWERS%%", 'watu');
 	}
 	
 	// see what is the show_answers to this exam
