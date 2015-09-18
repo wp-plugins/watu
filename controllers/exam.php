@@ -136,7 +136,7 @@ function watu_exam() {
 				notify_admin, randomize_answers, pull_random, dont_store_data, show_prev_button, 
 				dont_display_question_numbers, require_text_captcha, email_output, notify_user, 
 				notify_email, take_again, times_to_take) 
-				VALUES(%s, %s, %s, NOW(), %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %s, %d, %s, %d)", 
+				VALUES(%s, %s, %s, NOW(), %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %s, %d, %s, %d, %d)", 
 				$_POST['name'], $_POST['description'], $_POST['content'], @$_POST['randomize'], @$_POST['single_page'], 
 				@$_POST['show_answers'], @$_POST['require_login'], @$_POST['notify_admin'], 
 				@$_POST['randomize_answers'], $_POST['pull_random'], @$_POST['dont_store_data'], 
