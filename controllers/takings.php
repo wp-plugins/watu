@@ -40,7 +40,7 @@ function watu_takings() {
 			default: $like=$_GET['dn']; break;			
 		}
 		
-		$joins[]=$wpdb->prepare(" display_name LIKE %s ", $like);
+		$joins[]= " display_name LIKE '$like' ";
 	}
 	
 	// email
@@ -106,10 +106,10 @@ function watu_takings() {
 			.implode(" AND ", $joins);
 	}
 	
-	$takings = $wpdb->get_results($wpdb->prepare("SELECT SQL_CALC_FOUND_ROWS tT.*, tU.user_login as user_login 
+	$takings = $wpdb->get_results("SELECT SQL_CALC_FOUND_ROWS tT.*, tU.user_login as user_login 
 		FROM ".WATU_TAKINGS." tT $join_sql
-		WHERE exam_id=%d $filter_sql 
-		ORDER BY $ob $dir $limit_sql", $exam->ID));
+		WHERE exam_id={$exam->ID} $filter_sql 
+		ORDER BY $ob $dir $limit_sql");
 			
 	$count=$wpdb->get_var("SELECT FOUND_ROWS()");	
 		
