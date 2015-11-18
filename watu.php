@@ -4,7 +4,7 @@ Plugin Name: Watu
 Plugin URI: http://calendarscripts.info/watu-wordpress.html
 Description: Create exams and quizzes and display the result immediately after the user takes the exam. Watu for Wordpress is a light version of <a href="http://calendarscripts.info/watupro/" target="_blank">WatuPRO</a>. Check it if you want to run fully featured exams with data exports, student logins, timers, random questions and more. Free support and upgrades are available. Go to <a href="options-general.php?page=watu.php">Watu Settings</a> or <a href="tools.php?page=watu_exams">Manage Your Exams</a> 
 
-Version: 2.6.4.4
+Version: 2.6.7
 Author: Kiboko Labs
 License: GPLv2 or later
 
@@ -74,7 +74,7 @@ function watu_init() {
 	if(function_exists('quicklatex_parser')) add_filter( 'watu_content',  'quicklatex_parser', 7);
 	
 	$version = get_option('watu_version');
-	if($version != '2.56') watu_activate(true);
+	if($version != '2.58') watu_activate(true);
 	
 	add_action('admin_notices', 'watu_admin_notice');
 }
@@ -136,6 +136,15 @@ function watu_shortcode( $attr ) {
 	if(!is_numeric($exam_id)) return $contents;
 	
 	watu_vc_scripts();
+	
+	// submitting without ajax?	
+	if(!empty($_POST['no_ajax']) and !empty($exam->no_ajax)) {		
+		require(WATU_PATH."/show_exam.php");
+		$contents = ob_get_clean();
+		$contents = apply_filters('watu_content', $contents);
+		return $contents;
+	}	
+	
 	ob_start();
 	include(WATU_PATH . '/controllers/show_exam.php');
 	$contents = ob_get_contents();
@@ -239,6 +248,7 @@ function watu_activate($update = false) {
 		array("name"=>"notify_email", "type"=>"VARCHAR(255) NOT NULL DEFAULT ''"),
 		array("name"=>"take_again", "type"=>"TINYINT NOT NULL DEFAULT 0"),
 		array("name"=>"times_to_take", "type"=>"TINYINT NOT NULL DEFAULT 0"),
+		array("name"=>"no_ajax", "type"=>"TINYINT NOT NULL DEFAULT 0"), /* don't use Ajax when submitting this quiz */
 	), WATU_EXAMS);	
 	
 	
@@ -255,8 +265,9 @@ function watu_activate($update = false) {
 	), WATU_QUESTIONS);	
 	
 	watu_add_db_fields(array(
-		array("name"=>"result", "type"=>"TEXT")	,
-		array("name"=>"snapshot", "type"=>"MEDIUMTEXT")
+		array("name"=>"result", "type"=>"TEXT"),
+		array("name"=>"snapshot", "type"=>"MEDIUMTEXT"),
+		array("name"=>"start_time", "type"=>"DATETIME")
 	), WATU_TAKINGS);			
 	
 	// let's change choice and answer fields to TEXT instead of VARCHAR - 2.1.3	
@@ -287,7 +298,7 @@ function watu_activate($update = false) {
 	}
 						
 	update_option( "watu_delete_db", '' );	
-	update_option( "watu_version", '2.56' );
+	update_option( "watu_version", '2.58' );
 	
 	update_option('watu_admin_notice', __('<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href="tools.php?page=watu_exams">Quizzes page</a> to get started! If this is the first time you have activated the plugin there will be a small demo quiz automatically created for you. Feel free to explore it to get better idea how things work.</p>', 'watu'));
 }

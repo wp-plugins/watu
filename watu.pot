@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Watu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Watu 2.6.4.1\n"
+"Project-Id-Version: Watu 2.6.7\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/watu\n"
-"POT-Creation-Date: 2015-09-16 12:08:50+00:00\n"
+"POT-Creation-Date: 2015-11-18 16:16:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,105 +24,7 @@ msgstr ""
 msgid "Test deleted"
 msgstr ""
 
-#: controllers/exam.php:18
-msgid "Manage %s"
-msgstr ""
-
-#: controllers/exam.php:18
-msgid "Quizzes"
-msgstr ""
-
-#: controllers/exam.php:22
-msgid "Watu for Wordpress is a light version of"
-msgstr ""
-
-#: controllers/exam.php:24 options.php:30
-msgid "Go to"
-msgstr ""
-
-#: controllers/exam.php:24 options.php:26 watu.php:117
-msgid "Watu Settings"
-msgstr ""
-
-#: controllers/exam.php:26 controllers/exam.php:96
-msgid "Create New Quiz"
-msgstr ""
-
-#: controllers/exam.php:28 options.php:31
-msgid "Social Sharing Options"
-msgstr ""
-
-#: controllers/exam.php:30
-msgid ""
-"To publish a quiz copy its shortcode and place it in a post or page. Use "
-"only one quiz shortcode in each post or page."
-msgstr ""
-
-#: controllers/exam.php:35
-msgid "ID"
-msgstr ""
-
-#: controllers/exam.php:36
-msgid "Title"
-msgstr ""
-
-#: controllers/exam.php:37
-msgid "Shortcode"
-msgstr ""
-
-#: controllers/exam.php:38
-msgid "No. Questions"
-msgstr ""
-
-#: controllers/exam.php:39
-msgid "View Results"
-msgstr ""
-
-#: controllers/exam.php:40 controllers/questions.php:83
-msgid "Action"
-msgstr ""
-
-#: controllers/exam.php:81
-msgid "Taken %d times"
-msgstr ""
-
-#: controllers/exam.php:82 views/exam_form.php:15 views/grades.html.php:5
-#: watu.php:102
-msgid "Manage Questions"
-msgstr ""
-
-#: controllers/exam.php:83 watu.php:104
-msgid "Manage Grades"
-msgstr ""
-
-#: controllers/exam.php:84 controllers/questions.php:125
-msgid "Edit"
-msgstr ""
-
-#: controllers/exam.php:85
-msgid ""
-"You are about to delete this quiz? This will delete all the questions and "
-"answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
-msgstr ""
-
-#: controllers/exam.php:85 controllers/questions.php:126 views/takings.php:64
-#: views/takings.php:74
-msgid "Delete"
-msgstr ""
-
-#: controllers/exam.php:90
-msgid "No Quizzes found."
-msgstr ""
-
-#: controllers/exam.php:98
-msgid "Get free traffic to your quizzes by submitting them to"
-msgstr ""
-
-#: controllers/exam.php:98
-msgid "our directory."
-msgstr ""
-
-#: controllers/exam.php:171
+#: controllers/exam.php:106
 msgid ""
 "<p>Congratulations - you have completed %%QUIZ_NAME%%.</p>\n"
 "\n"
@@ -138,62 +40,6 @@ msgstr ""
 msgid "Unrecognized quiz ID"
 msgstr ""
 
-#: controllers/questions.php:63
-msgid "Manage Questions in"
-msgstr ""
-
-#: controllers/questions.php:67 views/exam_form.php:13
-#: views/question-form.html.php:5
-msgid "Back to quizzes"
-msgstr ""
-
-#: controllers/questions.php:67
-msgid "Edit this quiz"
-msgstr ""
-
-#: controllers/questions.php:68 views/exam_form.php:16
-msgid "Manage Grades / Results"
-msgstr ""
-
-#: controllers/questions.php:75
-msgid "To add this exam to your blog, insert the code "
-msgstr ""
-
-#: controllers/questions.php:75
-msgid "into any post or page."
-msgstr ""
-
-#: controllers/questions.php:81 controllers/show_exam.php:287
-#: views/question-form.html.php:2 views/question-form.html.php:107
-msgid "Question"
-msgstr ""
-
-#: controllers/questions.php:82
-msgid "Number Of Answers"
-msgstr ""
-
-#: controllers/questions.php:116
-msgid "Move Up"
-msgstr ""
-
-#: controllers/questions.php:119
-msgid "Move Down"
-msgstr ""
-
-#: controllers/questions.php:126
-msgid ""
-"You are about to delete this question. This will delete the answers to this "
-"question. Press 'OK' to delete and 'Cancel' to stop."
-msgstr ""
-
-#: controllers/questions.php:133
-msgid "No questions found."
-msgstr ""
-
-#: controllers/questions.php:141
-msgid "Create New Question"
-msgstr ""
-
 #: controllers/show_exam.php:5
 msgid "Please go to <a href='%s'>%s</a> to view the test"
 msgstr ""
@@ -206,7 +52,7 @@ msgstr ""
 msgid "You need to be registered and logged in to take this %s."
 msgstr ""
 
-#: controllers/show_exam.php:17 controllers/show_exam.php:29
+#: controllers/show_exam.php:17 controllers/show_exam.php:32
 #: views/exam_form.php:44
 msgid "quiz"
 msgstr ""
@@ -223,88 +69,60 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-#: controllers/show_exam.php:29
+#: controllers/show_exam.php:32
 msgid "Sorry, you can take this %s only once!"
 msgstr ""
 
-#: controllers/show_exam.php:38
+#: controllers/show_exam.php:39
 msgid "Sorry, you can take this quiz only %d times."
 msgstr ""
 
-#: controllers/show_exam.php:69
+#: controllers/show_exam.php:70
 msgid "Wrong answer to the verification question."
 msgstr ""
 
-#: controllers/show_exam.php:111
+#: controllers/show_exam.php:112
 msgid "Question was not answered"
 msgstr ""
 
-#: controllers/show_exam.php:128 models/exam.php:93
+#: controllers/show_exam.php:129 models/exam.php:93
 msgid "Failed"
 msgstr ""
 
-#: controllers/show_exam.php:128
+#: controllers/show_exam.php:129
 msgid "Just Passed"
 msgstr ""
 
-#: controllers/show_exam.php:130
+#: controllers/show_exam.php:131
 msgid "Satisfactory"
 msgstr ""
 
-#: controllers/show_exam.php:130
+#: controllers/show_exam.php:131
 msgid "Competent"
 msgstr ""
 
-#: controllers/show_exam.php:130
+#: controllers/show_exam.php:131
 msgid "Good"
 msgstr ""
 
-#: controllers/show_exam.php:130
+#: controllers/show_exam.php:131
 msgid "Very Good"
 msgstr ""
 
-#: controllers/show_exam.php:130
+#: controllers/show_exam.php:131
 msgid "Excellent"
 msgstr ""
 
-#: controllers/show_exam.php:130
+#: controllers/show_exam.php:131
 msgid "Unbeatable"
 msgstr ""
 
-#: controllers/show_exam.php:130
+#: controllers/show_exam.php:131
 msgid "Cheater"
 msgstr ""
 
-#: controllers/show_exam.php:137
+#: controllers/show_exam.php:138
 msgid "None"
-msgstr ""
-
-#: controllers/show_exam.php:234
-msgid "Please enter your email:"
-msgstr ""
-
-#: controllers/show_exam.php:276
-msgid "Loading"
-msgstr ""
-
-#: controllers/show_exam.php:284 watu.php:324
-msgid "Show Answer"
-msgstr ""
-
-#: controllers/show_exam.php:287
-msgid "of"
-msgstr ""
-
-#: controllers/show_exam.php:289
-msgid "Previous"
-msgstr ""
-
-#: controllers/show_exam.php:291
-msgid "Next"
-msgstr ""
-
-#: controllers/show_exam.php:293
-msgid "Show Results"
 msgstr ""
 
 #: controllers/takings.php:121
@@ -315,15 +133,15 @@ msgstr ""
 msgid "You do not have sufficient permissions to access this page"
 msgstr ""
 
-#: lib/functions.php:85
+#: lib/functions.php:92
 msgid "User results on \"%s\""
 msgstr ""
 
-#: lib/functions.php:86
+#: lib/functions.php:93
 msgid "Guest"
 msgstr ""
 
-#: lib/functions.php:101
+#: lib/functions.php:108
 msgid "Your results on \"%s\""
 msgstr ""
 
@@ -395,80 +213,34 @@ msgstr ""
 msgid "Congratulations, you passed!"
 msgstr ""
 
-#: options.php:12
+#: options.php:13
 msgid "Options updated"
 msgstr ""
 
-#: options.php:20
+#: options.php:30
 msgid "What is the color of the snow? = white"
 msgstr ""
 
-#: options.php:20
+#: options.php:30
 msgid "Is fire hot or cold? = hot"
 msgstr ""
 
-#: options.php:21
+#: options.php:31
 msgid "In which continent is Norway? = Europe"
 msgstr ""
 
-#: options.php:30
-msgid "Manage Your Exams"
+#: views/exam_form.php:13 views/question-form.html.php:5
+#: views/questions.html.php:6
+msgid "Back to quizzes"
 msgstr ""
 
-#: options.php:37
-msgid "Default Answer Type"
+#: views/exam_form.php:15 views/exams.html.php:43 views/grades.html.php:5
+#: watu.php:102
+msgid "Manage Questions"
 msgstr ""
 
-#: options.php:44 views/question-form.html.php:123
-msgid "Single Answer"
-msgstr ""
-
-#: options.php:46 views/question-form.html.php:125
-msgid "Multiple Answers"
-msgstr ""
-
-#: options.php:51
-msgid "Question based captcha"
-msgstr ""
-
-#: options.php:53
-msgid ""
-"You can use a simple text-based captcha. We have loaded 3 basic questions "
-"but you can edit them and load your own. Make sure to enter only one "
-"question per line and use = to separate question from answer."
-msgstr ""
-
-#: options.php:56
-msgid ""
-"This question-based captcha can be enabled individually by selecting a "
-"checkbox in the quiz settings form. If you do not check the checkbox, the "
-"captcha question will not be generated."
-msgstr ""
-
-#: options.php:60
-msgid "Other settings"
-msgstr ""
-
-#: options.php:62
-msgid ""
-"Use \"the_content\" instead of our custom content filter (do not select this "
-"unless adviced so)"
-msgstr ""
-
-#: options.php:67
-msgid "Database Option"
-msgstr ""
-
-#: options.php:72
-msgid "Delete stored Watu data when deinstalling the plugin."
-msgstr ""
-
-#: options.php:75
-msgid "Please confirm by typing \"yes\" in the box:"
-msgstr ""
-
-#: options.php:83
-msgid "Save Options"
+#: views/exam_form.php:16 views/questions.html.php:7
+msgid "Manage Grades / Results"
 msgstr ""
 
 #: views/exam_form.php:23
@@ -604,7 +376,7 @@ msgid "Final Screen"
 msgstr ""
 
 #: views/exam_form.php:83
-msgid "Send different content to the notification email sent to admin."
+msgid "Send different content to the notification email sent to user / admin."
 msgstr ""
 
 #: views/exam_form.php:87
@@ -613,81 +385,183 @@ msgid ""
 "by email as well."
 msgstr ""
 
-#: views/exam_form.php:90
+#: views/exam_form.php:88
+msgid ""
+"By default this content is used for both the email sent to user, and the "
+"email sent to admin. You can however use the %s tag to make the email "
+"contents different. The content before the %s tag will be sent to the user "
+"(if the corresponding checkbox is checked) and the content after the %s tag "
+"- to the admin."
+msgstr ""
+
+#: views/exam_form.php:91
 msgid "Usable Variables:"
 msgstr ""
 
-#: views/exam_form.php:92
+#: views/exam_form.php:93
 msgid "Variable"
 msgstr ""
 
-#: views/exam_form.php:92
+#: views/exam_form.php:93
 msgid "Value"
 msgstr ""
 
-#: views/exam_form.php:93
+#: views/exam_form.php:94
 msgid ""
 "This will display the questions along with the answers that user gave to "
 "them marked as correct or incorrect."
 msgstr ""
 
-#: views/exam_form.php:94
+#: views/exam_form.php:95
 msgid "The number of points collected. (The old %%SCORE%% tag also works)"
 msgstr ""
 
-#: views/exam_form.php:95
+#: views/exam_form.php:96
 msgid "Maximum number of points"
 msgstr ""
 
-#: views/exam_form.php:96
+#: views/exam_form.php:97
 msgid ""
 "Shows the achieved grade - title and description together. If you want to "
 "design this better, you can use %%GRADE-TITLE%% for grade title and %%GRADE-"
 "DESCRIPTION%% for grade description"
 msgstr ""
 
-#: views/exam_form.php:97
+#: views/exam_form.php:98
 msgid ""
 "Number of correct answers. In multiple-select questions even one correct "
 "answer makes the question correct. In WatuPRO this is configurable"
 msgstr ""
 
-#: views/exam_form.php:98
+#: views/exam_form.php:99
 msgid "Number of answers you got wrong"
 msgstr ""
 
-#: views/exam_form.php:99
+#: views/exam_form.php:100
 msgid ""
 "A rating of your performance - it could be 'Failed'(0-39%), 'Just "
 "Passed'(40%-50%), 'Satisfactory', 'Competent', 'Good', 'Excellent' and "
 "'Unbeatable'(100%)."
 msgstr ""
 
-#: views/exam_form.php:99
+#: views/exam_form.php:100
 msgid ""
 "The rating can be changed only by <a href=\"%s\" target=\"_blank"
 "\">translating the plugin</a>. So we recommend you to use the grades "
 "instead. They are fully configurable right from this page."
 msgstr ""
 
-#: views/exam_form.php:100
+#: views/exam_form.php:101
 msgid "The name of the quiz"
 msgstr ""
 
-#: views/exam_form.php:101
+#: views/exam_form.php:102
 msgid "The text entered in the description field."
 msgstr ""
 
-#: views/exam_form.php:102
+#: views/exam_form.php:103
 msgid "The average points earned by the other quiz participants."
 msgstr ""
 
-#: views/exam_form.php:103
+#: views/exam_form.php:104
 msgid "Shows the percentage of users collected less points on the quiz."
 msgstr ""
 
-#: views/exam_form.php:114 views/question-form.html.php:168
+#: views/exam_form.php:115 views/question-form.html.php:168
 msgid "Save"
+msgstr ""
+
+#: views/exams.html.php:2
+msgid "Manage %s"
+msgstr ""
+
+#: views/exams.html.php:2
+msgid "Quizzes"
+msgstr ""
+
+#: views/exams.html.php:6
+msgid "Watu for Wordpress is a light version of"
+msgstr ""
+
+#: views/exams.html.php:8 views/options.html.php:7
+msgid "Go to"
+msgstr ""
+
+#: views/exams.html.php:8 views/options.html.php:3 watu.php:117
+msgid "Watu Settings"
+msgstr ""
+
+#: views/exams.html.php:10 views/exams.html.php:57
+msgid "Create New Quiz"
+msgstr ""
+
+#: views/exams.html.php:12 views/options.html.php:8
+msgid "Social Sharing Options"
+msgstr ""
+
+#: views/exams.html.php:14
+msgid ""
+"To publish a quiz copy its shortcode and place it in a post or page. Use "
+"only one quiz shortcode in each post or page."
+msgstr ""
+
+#: views/exams.html.php:19
+msgid "ID"
+msgstr ""
+
+#: views/exams.html.php:20
+msgid "Title"
+msgstr ""
+
+#: views/exams.html.php:21
+msgid "Shortcode"
+msgstr ""
+
+#: views/exams.html.php:22
+msgid "No. Questions"
+msgstr ""
+
+#: views/exams.html.php:23
+msgid "View Results"
+msgstr ""
+
+#: views/exams.html.php:24 views/questions.html.php:22
+msgid "Action"
+msgstr ""
+
+#: views/exams.html.php:42
+msgid "Taken %d times"
+msgstr ""
+
+#: views/exams.html.php:44 watu.php:104
+msgid "Manage Grades"
+msgstr ""
+
+#: views/exams.html.php:45 views/questions.html.php:50
+msgid "Edit"
+msgstr ""
+
+#: views/exams.html.php:46
+msgid ""
+"You are about to delete this quiz? This will delete all the questions and "
+"answers within this quiz. Press 'OK' to delete and 'Cancel' to stop."
+msgstr ""
+
+#: views/exams.html.php:46 views/questions.html.php:51 views/takings.php:64
+#: views/takings.php:74
+msgid "Delete"
+msgstr ""
+
+#: views/exams.html.php:51
+msgid "No Quizzes found."
+msgstr ""
+
+#: views/exams.html.php:59
+msgid "Get free traffic to your quizzes by submitting them to"
+msgstr ""
+
+#: views/exams.html.php:59
+msgid "our directory."
 msgstr ""
 
 #: views/grades.html.php:3
@@ -752,6 +626,96 @@ msgstr ""
 
 #: views/grades.html.php:63 views/takings.php:98
 msgid "Are you sure?"
+msgstr ""
+
+#: views/options.html.php:7
+msgid "Manage Your Exams"
+msgstr ""
+
+#: views/options.html.php:14
+msgid "Default Answer Type"
+msgstr ""
+
+#: views/options.html.php:21 views/question-form.html.php:123
+msgid "Single Answer"
+msgstr ""
+
+#: views/options.html.php:23 views/question-form.html.php:125
+msgid "Multiple Answers"
+msgstr ""
+
+#: views/options.html.php:28
+msgid "Question based captcha"
+msgstr ""
+
+#: views/options.html.php:30
+msgid ""
+"You can use a simple text-based captcha. We have loaded 3 basic questions "
+"but you can edit them and load your own. Make sure to enter only one "
+"question per line and use = to separate question from answer."
+msgstr ""
+
+#: views/options.html.php:33
+msgid ""
+"This question-based captcha can be enabled individually by selecting a "
+"checkbox in the quiz settings form. If you do not check the checkbox, the "
+"captcha question will not be generated."
+msgstr ""
+
+#: views/options.html.php:37
+msgid "Other settings"
+msgstr ""
+
+#: views/options.html.php:39
+msgid ""
+"Use \"the_content\" instead of our custom content filter (do not select this "
+"unless adviced so)"
+msgstr ""
+
+#: views/options.html.php:44
+msgid "Database Option"
+msgstr ""
+
+#: views/options.html.php:49
+msgid "Delete stored Watu data when deinstalling the plugin."
+msgstr ""
+
+#: views/options.html.php:52
+msgid "Please confirm by typing \"yes\" in the box:"
+msgstr ""
+
+#: views/options.html.php:60
+msgid "Save Options"
+msgstr ""
+
+#: views/options.html.php:71
+msgid "Ajax in quizzes"
+msgstr ""
+
+#: views/options.html.php:73
+msgid ""
+"Here you can select quizzes which will be submitted by regular post submit "
+"rather than using Ajax. You may want to do this mostly for the following "
+"reason:"
+msgstr ""
+
+#: views/options.html.php:76
+msgid ""
+"To embed in the \"Final screen\" content from plugins that do not normally "
+"work well in Ajax mode."
+msgstr ""
+
+#: views/options.html.php:79
+msgid "The selected quizzes will NOT use Ajax when users submit them."
+msgstr ""
+
+#: views/options.html.php:89
+msgid "Save Ajax Related Settings"
+msgstr ""
+
+#: views/question-form.html.php:2 views/question-form.html.php:107
+#: views/questions.html.php:20 views/show_exam.html.php:59
+msgid "Question"
 msgstr ""
 
 #: views/question-form.html.php:4
@@ -822,6 +786,48 @@ msgstr ""
 
 #: views/question-form.html.php:170
 msgid "Go to Questions Page"
+msgstr ""
+
+#: views/questions.html.php:2
+msgid "Manage Questions in"
+msgstr ""
+
+#: views/questions.html.php:6
+msgid "Edit this quiz"
+msgstr ""
+
+#: views/questions.html.php:14
+msgid "To add this exam to your blog, insert the code "
+msgstr ""
+
+#: views/questions.html.php:14
+msgid "into any post or page."
+msgstr ""
+
+#: views/questions.html.php:21
+msgid "Number Of Answers"
+msgstr ""
+
+#: views/questions.html.php:41
+msgid "Move Up"
+msgstr ""
+
+#: views/questions.html.php:44
+msgid "Move Down"
+msgstr ""
+
+#: views/questions.html.php:51
+msgid ""
+"You are about to delete this question. This will delete the answers to this "
+"question. Press 'OK' to delete and 'Cancel' to stop."
+msgstr ""
+
+#: views/questions.html.php:58
+msgid "No questions found."
+msgstr ""
+
+#: views/questions.html.php:66
+msgid "Create New Question"
 msgstr ""
 
 #: views/sharing-options.html.php:2
@@ -931,6 +937,38 @@ msgstr ""
 
 #: views/sharing-options.html.php:40
 msgid "Save All Settings"
+msgstr ""
+
+#: views/show_exam.html.php:6
+msgid "Please enter your email:"
+msgstr ""
+
+#: views/show_exam.html.php:48
+msgid "Loading"
+msgstr ""
+
+#: views/show_exam.html.php:56 watu.php:334
+msgid "Show Answer"
+msgstr ""
+
+#: views/show_exam.html.php:59
+msgid "of"
+msgstr ""
+
+#: views/show_exam.html.php:61
+msgid "Previous"
+msgstr ""
+
+#: views/show_exam.html.php:63
+msgid "Next"
+msgstr ""
+
+#: views/show_exam.html.php:65
+msgid "Show Results"
+msgstr ""
+
+#: views/show_exam.html.php:67
+msgid "Submit"
 msgstr ""
 
 #: views/sidebar.php:2
@@ -1312,14 +1350,14 @@ msgstr ""
 msgid "Your are not allowed to to perform this operation"
 msgstr ""
 
-#: watu.php:275
+#: watu.php:285
 msgid ""
 "All the questions in the quiz along with their answers are shown below. Your "
 "answers are bolded. The correct answers have a green background while the "
 "incorrect ones have a red background."
 msgstr ""
 
-#: watu.php:292
+#: watu.php:302
 msgid ""
 "<h2>Thank you for activating Watu!</h2> <p>Please go to your <a href=\"tools."
 "php?page=watu_exams\">Quizzes page</a> to get started! If this is the first "
@@ -1328,22 +1366,22 @@ msgid ""
 "how things work.</p>"
 msgstr ""
 
-#: watu.php:322
+#: watu.php:332
 msgid "You have missed to answer a required question"
 msgstr ""
 
-#: watu.php:323
+#: watu.php:333
 msgid "You did not select any answer. Are you sure you want to continue?"
 msgstr ""
 
-#: watu.php:325
+#: watu.php:335
 msgid "You need to answer the verification question"
 msgstr ""
 
-#: watu.php:326
+#: watu.php:336
 msgid "Try again"
 msgstr ""
 
-#: watu.php:327
+#: watu.php:337
 msgid "Valid email address is required."
 msgstr ""

@@ -61,6 +61,13 @@ function watu_notify($exam, $uid, $output, $who = 'admin') {
 	}
 	else $admin_emails[] = $admin_email;
 	
+	// different output for user / admin?
+	if(strstr($output, '{{{split}}}')) {
+		$parts = explode('{{{split}}}', $output);
+		if($who == 'admin') $output = $parts[1];
+		else $output = $parts[0];
+	} 
+	
 	// replace styles in the snapshot with the images
 	$correct_style=' style="padding-right:20px;background:url('.WATU_URL.'correct.png) no-repeat right top;" ';
 	$wrong_style=' style="padding-right:20px;background:url('.WATU_URL.'wrong.png) no-repeat right top;" ';
@@ -80,7 +87,7 @@ function watu_notify($exam, $uid, $output, $who = 'admin') {
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 	$headers .= 'From: '. $admin_email . "\r\n";
-	
+		
 	if($who == 'admin') {
 		$subject = sprintf(__('User results on "%s"', 'watu'), stripslashes($exam->name));	
 		$user_data = empty($uid) ? __('Guest', 'watupro') : $user_email;	
@@ -104,4 +111,4 @@ function watu_notify($exam, $uid, $output, $who = 'admin') {
 		wp_mail($user_email, $subject, $message, $headers);
 	}
    // echo $message;   
-}
+} // end watu_notify

@@ -80,11 +80,12 @@
 	<div class="inside">
 	<?php wp_editor($final_screen, 'content'); ?>
 	
-	<p><input type="checkbox" value="1" name="different_email_output" <?php if(!empty($dquiz->email_output)) echo 'checked'?> onclick="this.checked ? jQuery('#watuEmailOutput').show() : jQuery('#watuEmailOutput').hide();"> <?php _e('Send different content to the notification email sent to admin.', 'watu');?></p>
+	<p><input type="checkbox" value="1" name="different_email_output" <?php if(!empty($dquiz->email_output)) echo 'checked'?> onclick="this.checked ? jQuery('#watuEmailOutput').show() : jQuery('#watuEmailOutput').hide();"> <?php _e('Send different content to the notification email sent to user / admin.', 'watu');?></p>
 	
 	<div id="watuEmailOutput" style="display:<?php echo empty($dquiz->email_output) ? 'none' : 'block';?>">
 		<?php wp_editor(stripslashes(@$dquiz->email_output), 'email_output'); ?>
 		<p><?php _e('If you leave this empty, the contents from the "Final screen" will be sent by email as well.', 'watu');?></p>
+		<p><?php printf(__('By default this content is used for both the email sent to user, and the email sent to admin. You can however use the %s tag to make the email contents different. The content before the %s tag will be sent to the user (if the corresponding checkbox is checked) and the content after the %s tag - to the admin.', 'watu'), '{{{split}}}', '{{{split}}}', '{{{split}}}')?></p>
 	</div>
 	
 	<p><strong><?php _e('Usable Variables:', 'watu') ?></strong></p>

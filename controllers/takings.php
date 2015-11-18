@@ -146,8 +146,8 @@ function watu_takings() {
 	
 	wp_enqueue_script('thickbox',null,array('jquery'));
 	wp_enqueue_style('thickbox.css', '/'.WPINC.'/js/thickbox/thickbox.css', null, '1.0');
-		
-	require(WATU_PATH."/views/takings.php");	
+	if(@file_exists(get_stylesheet_directory().'/watu/takings.php')) include get_stylesheet_directory().'/watu/takings.php';
+	else include(WATU_PATH . '/views/takings.php');
 }
 
 // display taking details by ajax
@@ -170,6 +170,7 @@ function watu_taking_details() {
 	// select exam
 	$exam=$wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_EXAMS." WHERE id=%d", $taking->exam_id));
 				
-	require(WATU_PATH. '/views/taking_details.html.php');   
+	if(@file_exists(get_stylesheet_directory().'/watu/taking_details.html.php')) include get_stylesheet_directory().'/watu/taking_details.html.php';
+	else include(WATU_PATH . '/views/taking_details.html.php');  			
 	exit;			
 }

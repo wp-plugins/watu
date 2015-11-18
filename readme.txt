@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: exam, test, quiz, survey, wpmu, multisite, touch, mobile
 Requires at least: 3.3
-Tested up to: 4.3
+Tested up to: 4.3.1
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -48,6 +48,10 @@ Watu for WordPress is a light version of <a href="http://calendarscripts.info/wa
 * Facebook sharing
 * Mobile / touch - friendly
 * Notify admin when someone takes a quiz
+
+### Attention  WordPress Network (Multi Site) Users ###
+
+When activating the plugin do it as blog admin and not as network admin.
 
 ### Online Demo ###
 
@@ -97,10 +101,22 @@ You need to create a post and embed the exam code. The exam code is shown in the
 
 **Please do not place more than one code in one post or page. Only one exam will be shown at a time. If you wish more exams to be displayed, please give links to them!**
 
+= How does it handle user accounts? =
+
+Watu uses the WordPress user registration / login system. So if you want to allow users to register for quizzes simply select "Require user login" in the Edit Quiz page and make sure "Anyone can register" is selected in your WordPress Settings page.
+
+= Is it compatible with BuddyPress or membership plugins? =
+
+Since it uses the standard WordPress user login system, it is compatible with BuddyPress and all membership plugins that we know about. Of course, some odd membership plugin that uses its own user login system might be incompatible with Watu.
+
 = How to translate the plugin interface in my language =
 
 You can use the standard WordPress way of translating plugins (via Poedit and .po / .mo files) or use plugin like Loco Translate.
 If using Poedit, your file names should start with "watu-". For example: watu-de_DE.po / watu-de_DE.mo. They should be placed in wp-content/languages/plugins folder.
+
+= Can I override the templates / views without modifying the plugin code? (For advanced users) =
+
+Yes. You can create a folder called "watu" under your active WP theme folder. Then create a copy of the view file you want to modify, keep the original name, and place it in the "watu" folder there. (Do not create "views" folder). Then the copy of the template will be used instead of the original one.
 
 == Screenshots ==
 
@@ -110,11 +126,14 @@ If using Poedit, your file names should start with "watu-". For example: watu-de
 
 == Changelog ==
 
-= Changes in 2.6.4 =
+= Changes in 2.6.7 =
 - Added option to limit the number of logged in user attempts for quizzes that require login.
 - You can specify one or more email addresses that will receive user's results (instead of just using the admin email from your WP Settings page)
 - You can now specify different content for the email sent to you when someone takes a quiz
 - New option lets you to send email to user with their results. If user is not logged in this will generate a required field to enter email on the quiz page.
+- You can specify different email contents of the email sent to user than the contents of the email sent to admin
+- All views /  templates can now be overriden by placing their copy under a folder called "watu" in your theme folder.
+- Added option to switch off Ajax submitting for certain quizzes. This is useful if you are embedding javascript via shortcodes from other plugins in the final screen of the quiz as some javascripts won't work when loaded by Ajax.
 
 = Changes in 2.6 =
 - Added optional text-based "captcha" to prevent spam bot submissions on quizzes which do not require user login

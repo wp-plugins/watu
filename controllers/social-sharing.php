@@ -15,7 +15,8 @@ class WatuSharing {
 		$appid = get_option('watuproshare_facebook_appid');	
 		$linkedin_options = get_option('watuproshare_linkedin');
 		$twitter_options = get_option('watuproshare_twitter');
-		include(WATU_PATH.'/views/sharing-options.html.php');
+		if(@file_exists(get_stylesheet_directory().'/watu/sharing-options.html.php')) include get_stylesheet_directory().'/watu/sharing-options.html.php';
+		else include(WATU_PATH . '/views/sharing-options.html.php');  
 	}	
 	
 	// display the social sharing buttons
@@ -34,7 +35,7 @@ class WatuSharing {
 		// select quiz name
 		$quiz_name = $wpdb->get_var($wpdb->prepare("SELECT tE.name FROM ".WATU_EXAMS." tE
 			JOIN ".WATU_TAKINGS." tT ON tE.ID = tT.exam_id 
-			WHERE tT.id = %d", $taking_id));
+			WHERE tT.ID = %d", $taking_id));
 			
 		// keep linkedin vars always because they are also used in Facebook
 		$linkedin = get_option('watuproshare_linkedin');

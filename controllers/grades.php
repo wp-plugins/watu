@@ -26,5 +26,6 @@ function watu_grades() {
    
    // select grades
    $grades = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".WATU_GRADES." WHERE exam_id=%d ORDER BY gto DESC", $quiz->ID));
-   include(WATU_PATH."/views/grades.html.php");
+   if(@file_exists(get_stylesheet_directory().'/watu/grades.html.php')) include get_stylesheet_directory().'/watu/grades.html.php';
+	else include(WATU_PATH . '/views/grades.html.php');  
 } // end manage grades

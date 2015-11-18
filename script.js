@@ -120,7 +120,7 @@ Watu.showAnswer = function(e) {
 	}
 }
 
-Watu.submitResult = function() {
+Watu.submitResult = function(e) {
 	var answer_ids = [];
 	jQuery('#quiz-' + this.exam_id + ' .watu-answer-ids').each(function(index, value){
 		answer_ids.push(this.value);
@@ -180,6 +180,9 @@ Watu.submitResult = function() {
 	
 	data['post_id'] = Watu.post_id;
 	
+	// no ajax? In this case only return true to allow submitting the form	
+	if(e && e.no_ajax && e.no_ajax.value == 1) return true;	
+	
 	// if question captcha is available, add to data
 	if(jQuery('#WatuTextCaptcha').length>0) {
 		jQuery('#quiz-'+Watu.exam_id).show();
@@ -194,9 +197,12 @@ Watu.submitResult = function() {
 	//jQuery('#watu_quiz').html("<p>Loading...</p>");
     
 	//var v=''; for(a in data) v+=data[a]+'\n'; alert(v);
-	try{
-	jQuery.ajax({ type: 'POST', url: watuURL, data: data, success: Watu.success, error: Watu.error  });
-	}catch(e){ alert(e)}
+	// don't do ajax call if no_ajax
+	if(!e || !e.no_ajax || e.no_ajax.value != 1) {
+		try{
+			jQuery.ajax({ type: 'POST', url: watuURL, data: data, success: Watu.success, error: Watu.error  });
+		} catch(e) { alert(e) }
+	}
 }
 
 Watu.takingDetails = function(id, adminURL) {
