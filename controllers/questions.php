@@ -4,30 +4,38 @@ function watu_questions() {
 	
 	$action = 'new';
 	if(!empty($_GET['action']) and $_GET['action'] == 'edit') $action = 'edit';
+	$quiz_id = intval($_GET['quiz']);
 	
-	if(isset($_REQUEST['submit'])) {
+	if(isset($_REQUEST['submit']) and check_admin_referer('watu_questions')) {
+		$content = $_POST['content'];		
+		$answer_type = $_POST['answer_type'];
+		$is_required = empty($_POST['is_required']) ? 0 : 1;
+		$feedback = $_POST['feedback'];
+		
 		if($action == 'edit'){ //Update goes here
+			$question_id = intval($_POST['question']);
+			
 			$wpdb->query($wpdb->prepare("UPDATE ".WATU_QUESTIONS." 
 			SET question=%s, answer_type=%s, is_required=%d, feedback=%s 
-			WHERE ID=%d", $_POST['content'], $_POST['answer_type'], @$_POST['is_required'], 
-			$_POST['feedback'], $_POST['question']));
-			$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->prefix}watu_answer WHERE question_id=%d", $_REQUEST['question']));
+			WHERE ID=%d", $content, $answer_type, $is_required, 
+			$feedback, $question_id));
+			$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->prefix}watu_answer WHERE question_id=%d", $question_id));
 				
 		} else {	
 			// select max sort order in this quiz
-			$sort_order = $wpdb->get_var($wpdb->prepare("SELECT MAX(sort_order) FROM ".WATU_QUESTIONS." WHERE exam_id=%d", $_GET['quiz']));
+			$sort_order = $wpdb->get_var($wpdb->prepare("SELECT MAX(sort_order) FROM ".WATU_QUESTIONS." WHERE exam_id=%d", $quiz_id));
 			$sort_order++;			
 			
 			$sql = $wpdb->prepare("INSERT INTO ".WATU_QUESTIONS." (exam_id, question, answer_type, is_required, feedback, sort_order) 
-			VALUES(%d, %s, %s, %d, %s, %d)", $_GET['quiz'], $_POST['content'], $_POST['answer_type'], 
-				@$_POST['is_required'], $_POST['feedback'], $sort_order);
+			VALUES(%d, %s, %s, %d, %s, %d)", $quiz_id, $content, $answer_type, 
+				$is_required, $feedback, $sort_order);
 			$wpdb->query($sql);//Inserting the questions
 	
 			$_POST['question'] = $wpdb->insert_id;
 			$action='edit';
 		}
 		
-		$question_id = $_POST['question'];
+		$question_id = intval($_POST['question']);
 		if($question_id>0) {
 			// the $counter will skip over empty answers, $sort_order_counter will track the provided answers order.
 			$counter = 1;
@@ -56,7 +64,7 @@ function watu_questions() {
 		$wpdb->query($wpdb->prepare("DELETE FROM ".WATU_ANSWERS." WHERE question_id=%d", $_GET['question']));
 		$wpdb->query($wpdb->prepare("DELETE FROM ".WATU_QUESTIONS." WHERE ID=%d", $_GET['question']));		
 	}
-	$exam_name = stripslashes($wpdb->get_var($wpdb->prepare("SELECT name FROM {$wpdb->prefix}watu_master WHERE ID=%d", $_REQUEST['quiz'])));
+	$exam_name = stripslashes($wpdb->get_var($wpdb->prepare("SELECT name FROM ".WATU_EXAMS." WHERE ID=%d", $quiz_id)));
 	
 	// reorder questions
 		if(!empty($_GET['move'])) {
@@ -69,7 +77,7 @@ function watu_questions() {
 		// Retrieve the questions
 		$all_question = $wpdb->get_results("SELECT Q.ID,Q.question,(SELECT COUNT(*) FROM {$wpdb->prefix}watu_answer WHERE question_id=Q.ID) AS answer_count
 												FROM `{$wpdb->prefix}watu_question` AS Q
-												WHERE Q.exam_id=$_REQUEST[quiz] ORDER BY Q.sort_order, Q.ID");
+												WHERE Q.exam_id=$quiz_id ORDER BY Q.sort_order, Q.ID");
 												
 		if(empty($filter_sql)) WatuQuestion::fix_sort_order($all_question);		
 		$num_questions = sizeof($all_question);	
@@ -83,13 +91,14 @@ function watu_question() {
 	
 	$action = 'new';
 	if($_REQUEST['action'] == 'edit') $action = 'edit';
+	$question_id = intval(@$_GET['question']);
 	
 	$all_answers = array();
 	
-	if(!empty($_GET['question'])) {
-		$question= $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}watu_question WHERE ID=%d", $_GET['question']));
+	if(!empty($question_id)) {
+		$question= $wpdb->get_row($wpdb->prepare("SELECT * FROM ".WATU_QUESTIONS." WHERE ID=%d", $question_id));
 		$all_answers = $wpdb->get_results($wpdb->prepare("SELECT answer, correct, point FROM {$wpdb->prefix}watu_answer 
-			WHERE question_id=%d ORDER BY sort_order", $_GET['question']));	
+			WHERE question_id=%d ORDER BY sort_order", $question_id));	
 	}
 	
 	$ans_type = $action =='new'? get_option('watu_answer_type'): $question->answer_type;

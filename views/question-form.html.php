@@ -169,6 +169,7 @@ jQuery(document).ready(init);
 </p>
 <a href="admin.php?page=watu_questions&amp;quiz=<?php echo $_REQUEST['quiz']?>"><?php _e("Go to Questions Page", 'watu') ?></a>
 </div>
+<?php wp_nonce_field('watu_questions'); ?>
 </form>
 
 </div>

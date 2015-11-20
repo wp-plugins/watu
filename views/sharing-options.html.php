@@ -39,5 +39,6 @@
 		
 		<p><input type="submit" value="<?php _e('Save All Settings', 'watu')?>"></p>
 		<input type="hidden" name="ok" value="1">
+		<?php wp_nonce_field('watu_social_sharing'); ?>
 	</form>
 </div>

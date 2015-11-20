@@ -2,13 +2,21 @@
 class WatuSharing {
 	static function options() {
 		global $wpdb;
-		if(!empty($_POST['ok'])) {
-			update_option('watuproshare_facebook_appid', $_POST['facebook_appid']);
-			$linkedin_options = array("enabled" => @$_POST['linkedin_enabled'],  "msg"=>$_POST['linkedin_msg'], 'title' => $_POST['linkedin_title']);
+		if(!empty($_POST['ok']) and check_admin_referer('watu_social_sharing')) {
+			$fb_app_id = sanitize_text_field($_POST['facebook_appid']);
+			$linkedin_enabled = empty($_POST['linkedin_enabled']) ? 0 : 1;
+			$linkedin_title = sanitize_text_field($_POST['linkedin_title']);
+			$use_twitter = empty($_POST['use_twitter']) ? 0 : 1;
+			$show_count = empty($_POST['show_count']) ? 0 : 1;
+			$via = sanitize_text_field($_POST['via']);			
+			$hashtag = sanitize_text_field($_POST['hashtag']);
+			
+			update_option('watuproshare_facebook_appid', $fb_app_id);
+			$linkedin_options = array("enabled" => $linkedin_enabled,  "msg"=>esc_sql($_POST['linkedin_msg']), 'title' => $linkedin_title);
 			update_option('watuproshare_linkedin', $linkedin_options);	
-			$twitter_options = array("use_twitter" => @$_POST['use_twitter'], "show_count" => @$_POST['show_count'],
-			 "via"=>$_POST['via'], "hashtag" => $_POST['hashtag'], 'large_button' => @$_POST['large_button'],
-			 "tweet"=>$_POST['tweet']);
+			$twitter_options = array("use_twitter" => $use_twitter, "show_count" => $show_count,
+			 "via"=>$_POST['via'], "hashtag" => $_POST['hashtag'], 'large_button' => '',
+			 "tweet"=>esc_sql($_POST['tweet']));
 			update_option('watuproshare_twitter', $twitter_options);
 		}
 		
