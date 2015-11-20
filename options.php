@@ -1,24 +1,29 @@
 <?php
 global $wpdb;
-if(isset($_REQUEST['submit']) and $_REQUEST['submit']) {
+if(!empty($_REQUEST['submit']) and check_admin_referer('watu_options')) {
+	$delete_db = empty($_POST['delete_db']) ? 0 : 1;
+	$delete_db_confirm = (empty($_POST['delete_db_confirm']) or $_POST['delete_db_confirm']!= 'yes') ? '' : 'yes';
+	$answer_type = ($_POST['answer_type'] == 'radio') ? 'radio' : 'checkbox';
+	$use_the_content = empty($_POST['use_the_content']) ? 1 : 0; 
 	
-	update_option( "watu_delete_db", @$_POST['delete_db'] );
-	update_option('watu_delete_db_confirm', $_POST['delete_db_confirm']);
+	update_option( "watu_delete_db", $delete_db );
+	update_option('watu_delete_db_confirm', $delete_db_confirm);
+	update_option('watu_answer_type', $answer_type);
+	update_option('watu_use_the_content', $use_the_content);
+	update_option('watu_text_captcha', $_POST['text_captcha']);
 		
-	$options = array('answer_type', 'use_the_content', 'text_captcha');
-	foreach($options as $opt) {
-		if(!empty($_POST[$opt])) update_option('watu_' . $opt, $_POST[$opt]);
-		else update_option('watu_' . $opt, 0);
-	}
 	print '<div id="message" class="updated fade"><p>' . __('Options updated', 'watu') . '</p></div>';	
 }
 
 // save no_ajax
-if(!empty($_POST['save_ajax_settings'])) {
+if(!empty($_POST['save_ajax_settings']) and check_admin_referer('watu_ajax_options')) {
 	$ids = empty($_POST['no_ajax']) ? array(0) : $_POST['no_ajax'];
+	// make sure IDs contains only exam IDs
+	$id_sql = implode(', ', $ids);
+	if(!preg_match("/^\d(?:,\d)*$/", $id_sql)) $id_sql = "0";
 	
-	$wpdb->query("UPDATE ".WATU_EXAMS." SET no_ajax=1 WHERE ID IN (".implode(', ', $ids).")");
-	$wpdb->query("UPDATE ".WATU_EXAMS." SET no_ajax=0 WHERE ID NOT IN (".implode(', ', $ids).")");
+	$wpdb->query("UPDATE ".WATU_EXAMS." SET no_ajax=1 WHERE ID IN (".$id_sql.")");
+	$wpdb->query("UPDATE ".WATU_EXAMS." SET no_ajax=0 WHERE ID NOT IN (".$id_sql.")");
 }
 
 $answer_display = get_option('watu_show_answers');

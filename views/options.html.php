@@ -62,6 +62,7 @@
 	
 	</div>
 </div>
+<?php wp_nonce_field('watu_options'); ?>
 	</form>
 	
 	
@@ -88,6 +89,7 @@
 										
 					<p><input type="submit" name="save_ajax_settings" value="<?php _e('Save Ajax Related Settings', 'watupro')?>" class="button-primary"></p>
 				</div>
+				<?php wp_nonce_field('watu_ajax_options'); ?>
 				</form>
 			</div>	
 		</div>
