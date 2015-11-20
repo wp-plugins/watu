@@ -179,6 +179,7 @@ Watu.submitResult = function(e) {
 	}
 	
 	data['post_id'] = Watu.post_id;
+	data['start_time'] = jQuery('#watuStartTime').val();
 	
 	// no ajax? In this case only return true to allow submitting the form	
 	if(e && e.no_ajax && e.no_ajax.value == 1) return true;	

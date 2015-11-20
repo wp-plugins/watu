@@ -126,7 +126,7 @@ Yes. You can create a folder called "watu" under your active WP theme folder. Th
 
 == Changelog ==
 
-= Changes in 2.6.7 =
+= Changes in 2.6.8 =
 - Added option to limit the number of logged in user attempts for quizzes that require login.
 - You can specify one or more email addresses that will receive user's results (instead of just using the admin email from your WP Settings page)
 - You can now specify different content for the email sent to you when someone takes a quiz
@@ -134,6 +134,7 @@ Yes. You can create a folder called "watu" under your active WP theme folder. Th
 - You can specify different email contents of the email sent to user than the contents of the email sent to admin
 - All views /  templates can now be overriden by placing their copy under a folder called "watu" in your theme folder.
 - Added option to switch off Ajax submitting for certain quizzes. This is useful if you are embedding javascript via shortcodes from other plugins in the final screen of the quiz as some javascripts won't work when loaded by Ajax.
+- Fixed security exploit
 
 = Changes in 2.6 =
 - Added optional text-based "captcha" to prevent spam bot submissions on quizzes which do not require user login

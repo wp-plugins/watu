@@ -71,7 +71,7 @@ if($single_page != 1 and $answer_display!=2): ?>
 <input type="hidden" name="post_id" value="<?php echo $post->ID?>">
 <?php endif; // end if(!empty($exam->no_ajax))?>
 <input type="hidden" name="quiz_id" value="<?php echo $exam_id ?>" />
-<input type="hidden" name="start_time" value="<?php echo current_time('mysql'); ?>" />
+<input type="hidden" id="watuStartTime" name="start_time" value="<?php echo current_time('mysql'); ?>" />
 </form>
 </div>
 <script type="text/javascript">

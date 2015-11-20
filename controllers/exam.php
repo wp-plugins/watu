@@ -7,9 +7,9 @@ function watu_exams() {
 	if( isset($_REQUEST['grade']) )  print '<div id="message" class="updated fade"><p>' . $_REQUEST['grade']. '</p></div>';
 	
 	if(!empty($_GET['action']) and $_GET['action'] == 'delete') {
-		$wpdb->get_results("DELETE FROM ".WATU_EXAMS." WHERE ID='$_REQUEST[quiz]'");
-		$wpdb->get_results("DELETE FROM ".WATU_ANSWERS." WHERE question_id IN (SELECT ID FROM ".WATU_QUESTIONS." WHERE exam_id='$_REQUEST[quiz]')");
-		$wpdb->get_results("DELETE FROM ".WATU_QUESTIONS." WHERE exam_id='$_REQUEST[quiz]'");
+		$wpdb->get_results($wpdb->prepare("DELETE FROM ".WATU_EXAMS." WHERE ID=%d", $_REQUEST['quiz']));
+		$wpdb->get_results($wpdb->prepare("DELETE FROM ".WATU_ANSWERS." WHERE question_id IN (SELECT ID FROM ".WATU_QUESTIONS." WHERE exam_id=%d", $_REQUEST['quiz']));
+		$wpdb->get_results($wpdb->prepare("DELETE FROM ".WATU_QUESTIONS." WHERE exam_id=%d", $_REQUEST['quiz']));
 		print '<div id="message" class="updated fade"><p>' . __('Test deleted', 'watu') . '</p></div>';
 	}
 	
