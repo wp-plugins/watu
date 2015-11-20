@@ -12,6 +12,7 @@
 				<p><label><?php _e('Grade Title:', 'watu')?></label> <input type='text' name='gtitle' size="30" /><br /><label><?php _e('Description (optional):', 'watu')?></label><br /><?php wp_editor('', 'gdesc')?><br /><label><?php _e('From points:', 'watu')?> <input type='text' class='numeric' name='gfrom' size="4" /></label><label><?php _e('To points:', 'watu')?> <input type='text' class='numeric' name='gto' size="4" /></label>
 				<input type="submit" name="add" value="<?php _e('Save new grade', 'watu')?>"></p>
 			</div>
+			<?php wp_nonce_field('watu_grades'); ?>
 		</form>
 		
 		<?php if(sizeof($grades)):?>
@@ -26,6 +27,7 @@
 			</div>
 			<input type="hidden" name="id" value="<?php echo $grade->ID?>">
 			<input type="hidden" name="del" value="0">
+			<?php wp_nonce_field('watu_grades'); ?>
 		</form>
 			<?php endforeach;?>
 		<?php endif;?>

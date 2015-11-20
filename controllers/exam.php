@@ -1,15 +1,19 @@
 <?php
 function watu_exams() {
 	global $wpdb;
+	$quiz_id = intval(@$_REQUEST['quiz']);
 	
 	if( isset($_REQUEST['message']) && $_REQUEST['message'] == 'updated') print '<div id="message" class="updated fade"><p>' . __('Test updated', 'watu') . '</p></div>';
 	if(isset($_REQUEST['message']) && $_REQUEST['message'] == 'fail') print '<div id="message" class="updated error"><p>' . __('Error occured', 'watu') . '</p></div>';
-	if( isset($_REQUEST['grade']) )  print '<div id="message" class="updated fade"><p>' . $_REQUEST['grade']. '</p></div>';
+	if( isset($_REQUEST['grade']) )  {
+		$_REQUEST['grade'] = esc_html($_REQUEST['grade']);
+		print '<div id="message" class="updated fade"><p>' . $_REQUEST['grade']. '</p></div>';
+	}
 	
 	if(!empty($_GET['action']) and $_GET['action'] == 'delete') {
-		$wpdb->get_results($wpdb->prepare("DELETE FROM ".WATU_EXAMS." WHERE ID=%d", $_REQUEST['quiz']));
-		$wpdb->get_results($wpdb->prepare("DELETE FROM ".WATU_ANSWERS." WHERE question_id IN (SELECT ID FROM ".WATU_QUESTIONS." WHERE exam_id=%d", $_REQUEST['quiz']));
-		$wpdb->get_results($wpdb->prepare("DELETE FROM ".WATU_QUESTIONS." WHERE exam_id=%d", $_REQUEST['quiz']));
+		$wpdb->get_results($wpdb->prepare("DELETE FROM ".WATU_EXAMS." WHERE ID=%d", $quiz_id));
+		$wpdb->get_results($wpdb->prepare("DELETE FROM ".WATU_ANSWERS." WHERE question_id IN (SELECT ID FROM ".WATU_QUESTIONS." WHERE exam_id=%d", $quiz_id));
+		$wpdb->get_results($wpdb->prepare("DELETE FROM ".WATU_QUESTIONS." WHERE exam_id=%d", $quiz_id));
 		print '<div id="message" class="updated fade"><p>' . __('Test deleted', 'watu') . '</p></div>';
 	}
 	
@@ -42,10 +46,30 @@ function watu_exam() {
 	global $wpdb, $user_ID;
 	$answer_display = get_option('watu_show_answers');
 	
-	if(isset($_POST['submit'])) {
+	if(isset($_POST['submit']) and check_admin_referer('watu_create_edit_quiz')) {
 		// use email output?
-		$_POST['email_output'] = empty($_POST['different_email_output']) ? '' : $_POST['email_output'];		
+		$_POST['email_output'] = empty($_POST['different_email_output']) ? '' : $_POST['email_output'];	
 		
+		$name = sanitize_text_field($_POST['name']);	
+		$randomize = empty($_POST['randomize']) ? 0 : 1;
+		$single_page = empty($_POST['single_page']) ? 0 : 1;
+		$show_answers = empty($_POST['show_answers']) ? 0 : 1;
+		$require_login = empty($_POST['require_login']) ? 0 : 1;
+		$notify_admin = empty($_POST['notify_admin']) ? 0 : 1;
+		$randomize_answers = empty($_POST['randomize_answers']) ? 0 : 1;
+		$pull_random = empty($_POST['pull_random']) ? 0 : 1;
+		$dont_store_data = empty($_POST['dont_store_data']) ? 0 : 1;
+		$show_prev_button = empty($_POST['show_prev_button']) ? 0 : 1;
+		$dont_display_question_numbers = empty($_POST['dont_display_question_numbers']) ? 0 : 1;
+		$require_text_captcha = empty($_POST['require_text_captcha']) ? 0 : 1;
+		$notify_user = empty($_POST['notify_user']) ? 0 : 1;
+		$notify_email = empty($_POST['notify_email']) ? 0 : 1;
+		$take_again = empty($_POST['take_again']) ? 0 : 1;
+		$times_to_take = intval($_POST['times_to_take']);
+		$quiz_id = intval($_POST['quiz']);
+		$description = $_POST['description'];
+		$content = $_POST['content'];
+				
 		if($_REQUEST['action'] == 'edit') { //Update goes here
 			$exam_id = $_REQUEST['quiz'];
 			$wpdb->query($wpdb->prepare("UPDATE ".WATU_EXAMS."
@@ -54,13 +78,13 @@ function watu_exam() {
 				pull_random=%d, dont_store_data=%d, show_prev_button=%d, 
 				dont_display_question_numbers=%d, require_text_captcha=%d, email_output=%s,
 				notify_user=%d, notify_email=%s, take_again=%d, times_to_take=%d   
-				WHERE ID=%d", $_POST['name'], $_POST['description'], $_POST['content'], 
-				@$_POST['randomize'], @$_POST['single_page'], @$_POST['show_answers'], 
-				@$_POST['require_login'], @$_POST['notify_admin'], @$_POST['randomize_answers'],
-				$_POST['pull_random'], @$_POST['dont_store_data'], @$_POST['show_prev_button'], 
-				@$_POST['dont_display_question_numbers'], @$_POST['require_text_captcha'], 
-				$_POST['email_output'], @$_POST['notify_user'], $_POST['notify_email'], 
-				@$_POST['take_again'], $_POST['times_to_take'], $_POST['quiz']));
+				WHERE ID=%d", $name, $description, $content, 
+				$randomize, $single_page, $show_answers, 
+				$require_login, $notify_admin, $randomize_answers,
+				$pull_random, $dont_store_data, $show_prev_button, 
+				$dont_display_question_numbers, $require_text_captcha, 
+				$_POST['email_output'], $notify_user, $notify_email, 
+				$take_again, $times_to_take, $quiz_id));
 			
 			if(!empty($_POST['auto_publish'])) watu_auto_publish($exam_id);
 			$wp_redirect = 'tools.php?page=watu_exams&message=updated';
@@ -72,12 +96,12 @@ function watu_exam() {
 				dont_display_question_numbers, require_text_captcha, email_output, notify_user, 
 				notify_email, take_again, times_to_take) 
 				VALUES(%s, %s, %s, NOW(), %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %s, %d, %s, %d, %d)", 
-				$_POST['name'], $_POST['description'], $_POST['content'], @$_POST['randomize'], @$_POST['single_page'], 
-				@$_POST['show_answers'], @$_POST['require_login'], @$_POST['notify_admin'], 
-				@$_POST['randomize_answers'], $_POST['pull_random'], @$_POST['dont_store_data'], 
-				@$_POST['show_prev_button'], @$_POST['dont_display_question_numbers'], 
-				@$_POST['require_text_captcha'], $_POST['email_output'], @$_POST['notify_user'], 
-				$_POST['notify_email'], @$_POST['take_again'], $_POST['times_to_take']));
+				$name, $description, $content, $randomize, $single_page, 
+				$show_answers, $require_login, $notify_admin, 
+				$randomize_answers, $pull_random, $dont_store_data, 
+				$show_prev_button, $dont_display_question_numbers, 
+				$require_text_captcha, $email_output, $notify_user, 
+				$notify_email, $take_again, $times_to_take));
 			$exam_id = $wpdb->insert_id;
 			if(!empty($_POST['auto_publish'])) watu_auto_publish($exam_id);
 			if($exam_id == 0 ) $wp_redirect = 'tools.php?page=watu_exams&message=fail';
